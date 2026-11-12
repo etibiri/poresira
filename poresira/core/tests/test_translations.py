@@ -6,7 +6,7 @@ from pathlib import Path
 from django.conf import settings
 
 TRANSLATION_CALL = re.compile(
-    r"""(?:\b_|gettext_lazy|trans|gettext)\(?\s*(["'])((?:(?!\1).)+)\1""", re.DOTALL
+    r"""(?:\b_\(|\bgettext(?:_lazy)?\(|\btrans\s)\s*(["'])((?:(?!\1).)+)\1""", re.DOTALL
 )
 PO_FILE = Path(settings.BASE_DIR) / "locale" / "fr" / "LC_MESSAGES" / "django.po"
 

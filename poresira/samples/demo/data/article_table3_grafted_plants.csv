@@ -1,0 +1,51 @@
+locality,sample,symptoms_ipomoea_batatas,symptoms_ipomoea_setosa
+Bama,BFA44,A,A
+Di,BFA383,A,A
+Douna,BFA1055,A,A
+Bagré,BFA340,A,I
+Matourkou,BFA1486,A,Vc
+Bama,BFA49,Cp,A
+Sikorola,BFA96,Vc,"Vc, Vn"
+Sokouraba,BFA160,C,A
+Tiébélé,BFA199,"Ld, Vc, Lc","Ld, B"
+Yoro,BFA428,"Ld, Vc, Lc","Vn, Np, C"
+Mahon,BFA173,"Vc, Lc","Vc, Lc"
+Sokouraba,BFA169,"Vc, C","Vc, Ld, Vn"
+Samogohiri,BFA148,"Vc, Cp","I, Ld, C"
+Bagré,BFA79,"Vc, Ld, B","Np, Cp, Ld"
+Bama,BFA40,Vc,"Vc, Ld"
+Yoro,BFA412,"Vc, C, P","C, Ld"
+Bamako,BFA1208,"Lc, Cp","Lc, S"
+Di,BFA384,"Vc, Ld","Vc, Lc"
+Bama,BFA69,C,"C, Ld"
+Guénon,BFA307,"Lc, Cp, I",Lc
+Banfora,BFA1092,"I, Vc","Vc, I"
+Batié,BFA1163,Vc,"I, Vn"
+Boura,BFA1284,S,"Ld, S"
+Di,BFA381,"Vc, Cp","C, Np"
+Farakoba,BFA1473,"Vc, Ld","I, C"
+Sikorola,BFA87,"Vc, Np",Vc
+Kalwatenga,BFA489,C,A
+Ouargaye,BFA1388,Lc,A
+Sanké,BFA523,Vc,"Vc, B"
+Sao,BFA1308,C,"Vc, B"
+Bama,BFA50,"Vc, Cp","Lc, Cp"
+Bama,BFA62,Vc,Lc
+Bonsrima,BFA321,Cp,A
+Boura,BFA1282,S,"Cp, Ld"
+Boura,BFA1286,Cp,Vn
+Dano,BFA1298,C,C
+Guénon,BFA311,Cp,"Vn, Cp"
+Sourou,BFA917,C,"Cp, Ld"
+Tiébélé,BFA289,Cp,A
+Tiébélé,BFA306,"C, Lc",Lc
+Bagré,BFA338,C,"Lc, Cp"
+Bama,BFA55,"Lc, Cp, Ld","C, Np, Ld"
+Bonsrima,BFA322,"C, Lc",S
+Di,BFA388,Cp,S
+Kotoura,BFA774,"C, Lc","Lc, Cp, Np"
+Louanga,BFA366,Lc,Lc
+Mahon,BFA174,"C, Lc",A
+Nakalbo,BFA372,Lc,S
+Pampangou,BFA496,Cp,C
+Tiébélé,BFA193,Lc,C
