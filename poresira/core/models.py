@@ -6,6 +6,7 @@ from django.db import models
 from django.db.models.functions import Now
 from django.utils.translation import gettext_lazy as _
 
+from .identifiers import next_identifier
 from .uuid7 import uuid7
 from .voiding import VoidableModel, VoidableQuerySet
 
@@ -15,6 +16,26 @@ class UUIDPrimaryKeyModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class HumanIdentifiedModel(models.Model):
+    """Abstract base: a human-readable identifier such as ``WBF-S26-00123-K``, set on creation.
+
+    Subclasses return their object type letters from ``identifier_type_code``.
+    """
+
+    identifier = models.CharField(max_length=32, unique=True, editable=False)
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if self._state.adding and not self.identifier:
+            self.identifier = next_identifier(self.identifier_type_code())
+        super().save(*args, **kwargs)
+
+    def identifier_type_code(self) -> str:
+        raise NotImplementedError
 
 
 class GlobalRole(models.TextChoices):

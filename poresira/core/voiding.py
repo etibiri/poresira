@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 """Void instead of delete: domain records are never hard-deleted."""
 
-import pghistory
 import pgtrigger
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+
+from .reason import with_reason
 
 
 class HardDeleteForbiddenError(Exception):
@@ -66,7 +67,7 @@ class VoidableModel(models.Model):
         self.voided_at = timezone.now()
         self.voided_by = user
         self.void_reason = reason
-        with pghistory.context(reason=reason):
+        with with_reason(reason):
             self.save(update_fields=["voided_at", "voided_by", "void_reason"])
 
     def delete(self, *args, **kwargs):
