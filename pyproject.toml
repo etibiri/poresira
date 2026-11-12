@@ -57,7 +57,7 @@ ignore = ["RUF012"]
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
 python_files = ["test_*.py"]
-addopts = "--reuse-db"
+addopts = "--reuse-db --ds=config.settings.test"
 filterwarnings = ["ignore:No directory at:UserWarning"]
 
 [tool.coverage.run]

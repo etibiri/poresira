@@ -13,3 +13,4 @@ media/
 backups/
 *.sqlite3
 *.mo
+*.swp

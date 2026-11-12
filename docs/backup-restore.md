@@ -23,7 +23,8 @@ Files older than `BACKUP_KEEP_DAYS` (default 30) are removed after each backup.
 | `labo`, `plateforme` | The `backup` service dumps every `BACKUP_INTERVAL_HOURS` (default 24). |
 | any, including `poste` | `docker compose run --rm backup /scripts/backup.sh` |
 
-Set `BACKUP_DIR` to a folder on another disk or on the NAS; a backup stored next to the
+Create the folder yourself first (`mkdir backups`), otherwise Docker creates it owned by root and
+you cannot delete old backups without `sudo`. Set `BACKUP_DIR` to a folder on another disk or on the NAS; a backup stored next to the
 database does not survive a disk failure. Set `BACKUP_OWNER` to your `uid:gid` so the files
 belong to you on the host.
 

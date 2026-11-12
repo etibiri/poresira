@@ -1,0 +1,147 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UV_FROZEN: "1"  # fail if uv.lock is out of date instead of silently updating it
+
+# Actions are pinned to commit SHAs; the trailing comment gives the release.
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      - run: uv sync
+      - name: ruff lint
+        run: uv run ruff check .
+      - name: ruff format
+        run: uv run ruff format --check .
+      - name: pre-commit hooks (SPDX headers, whitespace, YAML)
+        run: uv run pre-commit run --all-files --show-diff-on-failure
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: ci-superuser
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      POSTGRES_DB: postgres
+      POSTGRES_HOST: localhost
+      POSTGRES_USER: poresira_owner
+      POSTGRES_PASSWORD: ci-owner
+      POSTGRES_APP_USER: poresira_app
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      - name: Install gettext (compiles the French catalogue)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends gettext
+      - run: uv sync
+      - name: Create the database roles used in production
+        env:
+          PGPASSWORD: ci-superuser
+        run: |
+          psql -h localhost -U postgres -v ON_ERROR_STOP=1 \
+            -c "CREATE ROLE poresira_app LOGIN PASSWORD 'ci-app'" \
+            -c "CREATE ROLE poresira_owner LOGIN CREATEDB PASSWORD 'ci-owner'" \
+            -c "GRANT poresira_app TO poresira_owner"
+      - name: No model change without a migration
+        env:
+          DJANGO_SETTINGS_MODULE: config.settings.test
+        run: uv run python manage.py makemigrations --check --dry-run
+      - name: Tests with coverage
+        run: >-
+          uv run pytest
+          --cov=poresira --cov-report=term-missing --cov-report=xml --cov-fail-under=85
+      - name: Coverage summary
+        if: always()
+        run: |
+          if [ -f coverage.xml ]; then
+            uv run coverage report --format=markdown >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: coverage-xml
+          path: coverage.xml
+          if-no-files-found: ignore
+
+  docker:
+    name: docker (${{ matrix.profile }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [poste, labo, plateforme]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Configure
+        run: |
+          cp .env.example .env
+          sed -i 's/change-me/CiPassw0rd/g' .env
+          sed -i "s/^COMPOSE_PROFILES=.*/COMPOSE_PROFILES=${{ matrix.profile }}/" .env
+          sed -i "s/^PORESIRA_VERSION=.*/PORESIRA_VERSION=$(git describe --tags --always)/" .env
+          sed -i "s/^BACKUP_OWNER=.*/BACKUP_OWNER=$(id -u):$(id -g)/" .env
+      - name: Build the image and start the profile
+        run: docker compose up -d --build
+      - name: Wait for the health endpoint
+        run: |
+          for _ in $(seq 1 40); do
+            if curl -fsS http://localhost:8000/health/; then exit 0; fi
+            sleep 3
+          done
+          echo "Health endpoint never became ready" >&2
+          exit 1
+      - name: Audit chain verifies
+        run: docker compose exec -T web python manage.py verify_audit_chain
+      - name: Backup and restore round trip
+        run: |
+          docker compose exec -T web python manage.py shell -c \
+            "from poresira.core.models import Project; Project.objects.create(code='ci-1', name='CI project')"
+          docker compose run --rm backup /scripts/backup.sh
+          sh scripts/restore.sh --yes "$(find backups -name 'poresira-*.dump' | sort | tail -1)"
+          docker compose exec -T web python manage.py shell -c \
+            "from poresira.core.models import Project; assert Project.objects.filter(code='ci-1').exists()"
+      - name: Service logs
+        if: failure()
+        run: docker compose logs --no-color
+      - name: Tear down
+        if: always()
+        run: docker compose down -v
+
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      - run: uv sync --only-group docs
+      - name: Build the documentation
+        env:
+          NO_MKDOCS_2_WARNING: "1"
+        run: uv run mkdocs build --strict
