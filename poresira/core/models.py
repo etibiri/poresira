@@ -48,6 +48,23 @@ class ProjectQuerySet(VoidableQuerySet):
             return self
         return self.filter(memberships__user=user, memberships__voided_at__isnull=True)
 
+    def editable_by(self, user) -> "ProjectQuerySet":
+        """Projects the user may write to: administrators everywhere, others as lead or contributor.
+
+        The global guest role never writes, whatever the project membership says.
+        """
+        if not user.is_authenticated:
+            return self.none()
+        if user.sees_all_projects:
+            return self.active()
+        if user.role == GlobalRole.GUEST:
+            return self.none()
+        return self.active().filter(
+            memberships__user=user,
+            memberships__voided_at__isnull=True,
+            memberships__role__in=[ProjectRole.LEAD, ProjectRole.CONTRIBUTOR],
+        )
+
 
 @pghistory.track(
     pghistory.InsertEvent(),

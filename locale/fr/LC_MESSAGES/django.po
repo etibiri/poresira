@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 15:08+0000\n"
+"POT-Creation-Date: 2026-11-12 18:40+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -14,6 +14,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: poresira/core/audit.py
+msgid "A reason is required for this change."
+msgstr "Un motif est obligatoire pour cette modification."
+
 #: poresira/core/history.py
 msgid "Created"
 msgstr "Créé"
@@ -21,6 +25,14 @@ msgstr "Créé"
 #: poresira/core/history.py
 msgid "Modified"
 msgstr "Modifié"
+
+#: poresira/core/history.py
+msgid "Project"
+msgstr "Projet"
+
+#: poresira/core/history.py
+msgid "Membership"
+msgstr "Appartenance"
 
 #: poresira/core/history.py poresira/core/templates/core/project_list.html
 msgid "Code"
@@ -45,14 +57,6 @@ msgstr "Annulé le"
 #: poresira/core/history.py
 msgid "Void reason"
 msgstr "Motif d'annulation"
-
-#: poresira/core/history.py
-msgid "Project"
-msgstr "Projet"
-
-#: poresira/core/history.py
-msgid "Membership"
-msgstr "Appartenance"
 
 #: poresira/core/models.py
 msgid "Administrator"

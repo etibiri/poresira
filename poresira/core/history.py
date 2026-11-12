@@ -1,32 +1,23 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-"""Build a readable history for a project from the audit event tables."""
+"""Readable history built from pghistory event tables, for any audited model."""
 
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass, field
 from datetime import datetime
 
+from django.db.models import QuerySet
 from django.utils.translation import gettext_lazy as _
 
 from .models import Project, ProjectEvent, ProjectMembershipEvent, User
 
-PROJECT_FIELDS = ("code", "name", "description", "voided_at", "void_reason")
-MEMBERSHIP_FIELDS = ("role", "voided_at", "void_reason")
 EVENT_LABELS = {"insert": _("Created"), "update": _("Modified")}
-FIELD_LABELS = {
-    "code": _("Code"),
-    "name": _("Name"),
-    "description": _("Description"),
-    "role": _("Role"),
-    "voided_at": _("Voided at"),
-    "void_reason": _("Void reason"),
-}
-PROJECT_LABEL = _("Project")
-MEMBERSHIP_LABEL = _("Membership")
 MAX_ENTRIES = 200
 
 
 @dataclass
 class HistoryEntry:
     occurred_at: datetime
+    event_id: int
     action: str
     subject: str
     changes: list[tuple[str, object, object]] = field(default_factory=list)
@@ -36,26 +27,44 @@ class HistoryEntry:
     reason: str = ""
 
 
-def _changes(field_names, previous_event, event) -> list[tuple[str, object, object]]:
-    changes = []
-    for field_name in field_names:
-        old_value = getattr(previous_event, field_name) if previous_event else None
-        new_value = getattr(event, field_name)
-        if old_value != new_value:
-            changes.append((str(FIELD_LABELS[field_name]), old_value, new_value))
-    return changes
+@dataclass(frozen=True)
+class HistorySource:
+    """Event rows of one audited model, and how to show them.
+
+    ``events`` must be ordered by ``pgh_created_at, pgh_id``. ``labels`` overrides the field
+    labels, which otherwise come from the event model's ``verbose_name``.
+    """
+
+    events: QuerySet
+    field_names: tuple[str, ...]
+    subject_for: Callable[[object], str]
+    labels: dict[str, str] = field(default_factory=dict)
 
 
-def _entries_for(events, field_names, subject_for) -> list[HistoryEntry]:
+def _field_label(source: HistorySource, field_name: str) -> str:
+    if field_name in source.labels:
+        return str(source.labels[field_name])
+    return str(source.events.model._meta.get_field(field_name).verbose_name).capitalize()
+
+
+def _entries_for(source: HistorySource) -> list[HistoryEntry]:
     entries, previous_by_object = [], {}
-    for event in events:
+    for event in source.events.select_related("pgh_context"):
+        previous_event = previous_by_object.get(event.pgh_obj_id)
+        changes = [
+            (_field_label(source, field_name), getattr(previous_event, field_name, None), new_value)
+            for field_name in source.field_names
+            if (new_value := getattr(event, field_name))
+            != (getattr(previous_event, field_name) if previous_event else None)
+        ]
         metadata = event.pgh_context.metadata if event.pgh_context else {}
         entries.append(
             HistoryEntry(
                 occurred_at=event.pgh_created_at,
+                event_id=event.pgh_id,
                 action=str(EVENT_LABELS.get(event.pgh_label, event.pgh_label)),
-                subject=subject_for(event),
-                changes=_changes(field_names, previous_by_object.get(event.pgh_obj_id), event),
+                subject=source.subject_for(event),
+                changes=changes,
                 user=metadata.get("user"),
                 ip_address=metadata.get("ip_address") or "",
                 request_id=metadata.get("request_id") or "",
@@ -66,30 +75,54 @@ def _entries_for(events, field_names, subject_for) -> list[HistoryEntry]:
     return entries
 
 
-def project_history(project: Project) -> list[HistoryEntry]:
-    """Newest first, project edits and membership changes together."""
-    project_events = (
-        ProjectEvent.objects.filter(pgh_obj=project)
-        .select_related("pgh_context")
-        .order_by("pgh_created_at", "pgh_id")
-    )
-    membership_events = (
-        ProjectMembershipEvent.objects.filter(project=project)
-        .select_related("pgh_context", "user")
-        .order_by("pgh_created_at", "pgh_id")
-    )
-    entries = _entries_for(
-        project_events, PROJECT_FIELDS, lambda event: str(PROJECT_LABEL)
-    ) + _entries_for(
-        membership_events,
-        MEMBERSHIP_FIELDS,
-        lambda event: f"{MEMBERSHIP_LABEL}: {event.user}",
-    )
-    entries.sort(key=lambda entry: entry.occurred_at, reverse=True)
-    entries = entries[:MAX_ENTRIES]
+def build_history(sources: Iterable[HistorySource], limit: int = MAX_ENTRIES) -> list[HistoryEntry]:
+    """Newest first, all sources merged, with users resolved in one query.
+
+    Events of one transaction share a timestamp, so the event id orders them within a source.
+    """
+    entries = [entry for source in sources for entry in _entries_for(source)]
+    entries.sort(key=lambda entry: (entry.occurred_at, entry.event_id), reverse=True)
+    entries = entries[:limit]
 
     user_ids = {entry.user for entry in entries if entry.user}
     users_by_id = {str(user.pk): user for user in User.objects.filter(pk__in=user_ids)}
     for entry in entries:
         entry.user = users_by_id.get(entry.user)
     return entries
+
+
+PROJECT_LABEL = _("Project")
+MEMBERSHIP_LABEL = _("Membership")
+VOID_FIELDS = ("voided_at", "void_reason")
+PROJECT_LABELS = {
+    "code": _("Code"),
+    "name": _("Name"),
+    "description": _("Description"),
+    "role": _("Role"),
+    "voided_at": _("Voided at"),
+    "void_reason": _("Void reason"),
+}
+
+
+def project_history(project: Project) -> list[HistoryEntry]:
+    """Project edits and membership changes together."""
+    return build_history(
+        [
+            HistorySource(
+                events=ProjectEvent.objects.filter(pgh_obj=project).order_by(
+                    "pgh_created_at", "pgh_id"
+                ),
+                field_names=("code", "name", "description", *VOID_FIELDS),
+                subject_for=lambda event: str(PROJECT_LABEL),
+                labels=PROJECT_LABELS,
+            ),
+            HistorySource(
+                events=ProjectMembershipEvent.objects.filter(project=project)
+                .select_related("user")
+                .order_by("pgh_created_at", "pgh_id"),
+                field_names=("role", *VOID_FIELDS),
+                subject_for=lambda event: f"{MEMBERSHIP_LABEL}: {event.user}",
+                labels=PROJECT_LABELS,
+            ),
+        ]
+    )

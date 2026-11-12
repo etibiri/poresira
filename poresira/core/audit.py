@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 from dataclasses import dataclass
 
+import pghistory
 from django.db import connection
+from django.utils.translation import gettext_lazy as _
 
 from .models import AuditChainLink
 
@@ -28,3 +30,11 @@ def verify_audit_chain() -> AuditChainReport:
         head_hash=last_link.row_hash if last_link else "",
         problems=problems,
     )
+
+
+def with_reason(reason: str):
+    """Context manager attaching a mandatory reason to every audit entry written inside it."""
+    reason = reason.strip()
+    if not reason:
+        raise ValueError(_("A reason is required for this change."))
+    return pghistory.context(reason=reason)
