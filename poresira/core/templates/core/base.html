@@ -1,0 +1,57 @@
+{% load i18n static %}{% get_current_language as CURRENT_LANGUAGE %}{% get_available_languages as AVAILABLE_LANGUAGES %}<!doctype html>
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+<html lang="{{ CURRENT_LANGUAGE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>[x-cloak] { display: none !important; }</style>
+  <title>{% block title %}PoreSira{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}">
+  <script src="{% static 'vendor/htmx.min.js' %}" defer></script>
+  <script src="{% static 'vendor/alpine.min.js' %}" defer></script>
+  <script src="{% static 'vendor/bootstrap.bundle.min.js' %}" defer></script>
+</head>
+<body class="d-flex flex-column min-vh-100" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'project-list' %}">PoreSira</a>
+      <ul class="navbar-nav me-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'project-list' %}">{% trans "Projects" %}</a></li>
+        {% endif %}
+      </ul>
+      <form method="post" action="{% url 'set-language' %}" class="d-flex gap-1 me-3">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        {% for code, name in AVAILABLE_LANGUAGES %}
+        <button type="submit" name="language" value="{{ code }}"
+                class="btn btn-sm {% if code == CURRENT_LANGUAGE %}btn-light{% else %}btn-outline-light{% endif %}"
+                title="{{ name }}" {% if code == CURRENT_LANGUAGE %}aria-current="true"{% endif %}>{{ code|upper }}</button>
+        {% endfor %}
+      </form>
+      {% if user.is_authenticated %}
+      <form method="post" action="{% url 'logout' %}" class="d-flex align-items-center gap-2">
+        {% csrf_token %}
+        <span class="navbar-text">{{ user.get_username }}</span>
+        <button type="submit" class="btn btn-sm btn-outline-light">{% trans "Log out" %}</button>
+      </form>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main class="container my-4 flex-grow-1">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="border-top py-3 bg-light">
+    <div class="container small text-muted d-flex flex-wrap gap-3">
+      <span>PoreSira {{ poresira_version }}</span>
+      <span>{% trans "Licensed under AGPL-3.0-or-later" %}</span>
+      <a href="{{ source_url }}" rel="noopener">{% trans "Source" %}</a>
+    </div>
+  </footer>
+</body>
+</html>

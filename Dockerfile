@@ -10,6 +10,10 @@ ENV UV_COMPILE_BYTECODE=1 \
 
 WORKDIR /app
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gettext \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project
 
@@ -19,7 +23,8 @@ ARG PORESIRA_VERSION=dev
 ENV PORESIRA_VERSION=${PORESIRA_VERSION} \
     DJANGO_SETTINGS_MODULE=config.settings.prod
 
-RUN DJANGO_SECRET_KEY=build-only python manage.py collectstatic --noinput \
+RUN DJANGO_SECRET_KEY=build-only python manage.py compilemessages \
+    && DJANGO_SECRET_KEY=build-only python manage.py collectstatic --noinput \
     && useradd --system --no-create-home poresira
 USER poresira
 

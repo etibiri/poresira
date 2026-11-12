@@ -2,6 +2,7 @@
 import re
 
 from django.conf import settings
+from django.utils import translation
 from pghistory.middleware import HistoryMiddleware
 
 from .uuid7 import uuid7
@@ -46,3 +47,32 @@ class AuditContextMiddleware(HistoryMiddleware):
         if reason := supplied_reason(request):
             context["reason"] = reason
         return context
+
+
+class UserLanguageMiddleware:
+    """Pick the interface language: user preference, then cookie, then the site default.
+
+    Replaces Django's LocaleMiddleware on purpose: the browser's Accept-Language
+    must not override PORESIRA_DEFAULT_LANGUAGE.
+    """
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        language = self.chosen_language(request)
+        translation.activate(language)
+        request.LANGUAGE_CODE = language
+        response = self.get_response(request)
+        response.headers.setdefault("Content-Language", language)
+        return response
+
+    @staticmethod
+    def chosen_language(request) -> str:
+        available = {code for code, _name in settings.LANGUAGES}
+        candidates = (
+            getattr(request.user, "language", ""),
+            request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME, ""),
+            settings.LANGUAGE_CODE,
+        )
+        return next((code for code in candidates if code in available), "en")

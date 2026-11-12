@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "History" %} · {{ project.code }}{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'project-list' %}">{% trans "Projects" %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ project.code }}</li>
+  </ol>
+</nav>
+<h1 class="h3 mb-3">{{ project.name }} <small class="text-muted">{% trans "History" %}</small></h1>
+<ul class="list-group">
+  {% for entry in entries %}
+  <li class="list-group-item" x-data="{ open: false }">
+    <div class="d-flex justify-content-between flex-wrap gap-2">
+      <div>
+        <strong>{{ entry.action }}</strong> · {{ entry.subject }}
+        {% if entry.user %}<span class="text-muted">{% blocktrans with username=entry.user.get_username %}by {{ username }}{% endblocktrans %}</span>{% endif %}
+      </div>
+      <time class="text-muted" datetime="{{ entry.occurred_at.isoformat }}">{{ entry.occurred_at|date:"DATETIME_FORMAT" }}</time>
+    </div>
+    {% if entry.reason %}<div class="mt-1"><span class="badge text-bg-secondary">{% trans "Reason" %}</span> {{ entry.reason }}</div>{% endif %}
+    <button type="button" class="btn btn-link btn-sm p-0 mt-1" @click="open = !open" x-text="open ? '{% trans "Hide details" %}' : '{% trans "Show details" %}'"></button>
+    <div x-show="open" x-cloak class="mt-2 small">
+      {% if entry.changes %}
+      <table class="table table-sm mb-2">
+        <thead><tr><th>{% trans "Field" %}</th><th>{% trans "Before" %}</th><th>{% trans "After" %}</th></tr></thead>
+        <tbody>
+          {% for label, old_value, new_value in entry.changes %}
+          <tr><td>{{ label }}</td><td>{{ old_value|default_if_none:"—" }}</td><td>{{ new_value|default_if_none:"—" }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      <div class="text-muted">
+        {% trans "IP address" %}: {{ entry.ip_address|default:"—" }} · {% trans "Request" %}: <code>{{ entry.request_id|default:"—" }}</code>
+      </div>
+    </div>
+  </li>
+  {% empty %}
+  <li class="list-group-item text-muted">{% trans "No history yet." %}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

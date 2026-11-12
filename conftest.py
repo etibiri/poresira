@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+import pytest
 from django.conf import settings
+from django.core.management import call_command
 from django.db import connections
 from django.db.models.signals import pre_migrate
 from django.dispatch import receiver
@@ -25,3 +27,9 @@ def grant_default_privileges_to_app_role(sender, using, **kwargs):
             "ALTER DEFAULT PRIVILEGES IN SCHEMA public "
             f'GRANT USAGE, SELECT ON SEQUENCES TO "{role}"'
         )
+
+
+@pytest.fixture(scope="session", autouse=True)
+def compiled_translations():
+    """The .mo files are build artefacts; compile them so French strings can be tested."""
+    call_command("compilemessages", verbosity=0)

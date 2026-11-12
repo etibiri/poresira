@@ -1,0 +1,179 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# French translation of PoreSira.
+msgid ""
+msgstr ""
+"Project-Id-Version: PoreSira\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-12 15:08+0000\n"
+"PO-Revision-Date: 2026-11-12 15:08+0000\n"
+"Last-Translator: Ezechiel B. Tibiri\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: poresira/core/history.py
+msgid "Created"
+msgstr "Créé"
+
+#: poresira/core/history.py
+msgid "Modified"
+msgstr "Modifié"
+
+#: poresira/core/history.py poresira/core/templates/core/project_list.html
+msgid "Code"
+msgstr "Code"
+
+#: poresira/core/history.py poresira/core/templates/core/project_list.html
+msgid "Name"
+msgstr "Nom"
+
+#: poresira/core/history.py
+msgid "Description"
+msgstr "Description"
+
+#: poresira/core/history.py
+msgid "Role"
+msgstr "Rôle"
+
+#: poresira/core/history.py
+msgid "Voided at"
+msgstr "Annulé le"
+
+#: poresira/core/history.py
+msgid "Void reason"
+msgstr "Motif d'annulation"
+
+#: poresira/core/history.py
+msgid "Project"
+msgstr "Projet"
+
+#: poresira/core/history.py
+msgid "Membership"
+msgstr "Appartenance"
+
+#: poresira/core/models.py
+msgid "Administrator"
+msgstr "Administrateur"
+
+#: poresira/core/models.py
+msgid "Platform manager"
+msgstr "Responsable de plateforme"
+
+#: poresira/core/models.py
+msgid "Technician"
+msgstr "Technicien"
+
+#: poresira/core/models.py
+msgid "Bioinformatician"
+msgstr "Bio-informaticien"
+
+#: poresira/core/models.py
+msgid "Project lead"
+msgstr "Responsable de projet"
+
+#: poresira/core/models.py
+msgid "Guest"
+msgstr "Invité"
+
+#: poresira/core/models.py
+msgid "Interface language. Empty means the site default."
+msgstr "Langue de l'interface. Vide : langue par défaut du site."
+
+#: poresira/core/models.py
+msgid "Lead"
+msgstr "Responsable"
+
+#: poresira/core/models.py
+msgid "Contributor"
+msgstr "Contributeur"
+
+#: poresira/core/models.py
+msgid "Viewer"
+msgstr "Lecteur"
+
+#: poresira/core/templates/core/_project_rows.html
+#: poresira/core/templates/core/project_history.html
+msgid "History"
+msgstr "Historique"
+
+#: poresira/core/templates/core/_project_rows.html
+msgid "No projects to show."
+msgstr "Aucun projet à afficher."
+
+#: poresira/core/templates/core/base.html
+#: poresira/core/templates/core/project_history.html
+#: poresira/core/templates/core/project_list.html
+msgid "Projects"
+msgstr "Projets"
+
+#: poresira/core/templates/core/base.html
+msgid "Log out"
+msgstr "Se déconnecter"
+
+#: poresira/core/templates/core/base.html
+msgid "Licensed under AGPL-3.0-or-later"
+msgstr "Sous licence AGPL-3.0-or-later"
+
+#: poresira/core/templates/core/base.html
+msgid "Source"
+msgstr "Source"
+
+#: poresira/core/templates/core/project_history.html
+#, python-format
+msgid "by %(username)s"
+msgstr "par %(username)s"
+
+#: poresira/core/templates/core/project_history.html
+msgid "Reason"
+msgstr "Motif"
+
+#: poresira/core/templates/core/project_history.html
+msgid "Hide details"
+msgstr "Masquer les détails"
+
+#: poresira/core/templates/core/project_history.html
+msgid "Show details"
+msgstr "Afficher les détails"
+
+#: poresira/core/templates/core/project_history.html
+msgid "Field"
+msgstr "Champ"
+
+#: poresira/core/templates/core/project_history.html
+msgid "Before"
+msgstr "Avant"
+
+#: poresira/core/templates/core/project_history.html
+msgid "After"
+msgstr "Après"
+
+#: poresira/core/templates/core/project_history.html
+msgid "IP address"
+msgstr "Adresse IP"
+
+#: poresira/core/templates/core/project_history.html
+msgid "Request"
+msgstr "Requête"
+
+#: poresira/core/templates/core/project_history.html
+msgid "No history yet."
+msgstr "Aucun historique pour le moment."
+
+#: poresira/core/templates/core/project_list.html
+msgid "Filter by code or name"
+msgstr "Filtrer par code ou nom"
+
+#: poresira/core/templates/registration/login.html
+msgid "Log in"
+msgstr "Se connecter"
+
+#: poresira/core/voiding.py
+msgid "A reason is required to void a record."
+msgstr "Un motif est obligatoire pour annuler un enregistrement."
+
+#: poresira/core/voiding.py
+msgid "This record is already voided."
+msgstr "Cet enregistrement est déjà annulé."

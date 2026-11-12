@@ -1,0 +1,10 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% for project in projects %}
+<tr>
+  <td><code>{{ project.code }}</code></td>
+  <td>{{ project.name }}</td>
+  <td class="text-end"><a href="{% url 'project-history' project.pk %}">{% trans "History" %}</a></td>
+</tr>
+{% empty %}
+<tr><td colspan="3" class="text-muted">{% trans "No projects to show." %}</td></tr>
+{% endfor %}
