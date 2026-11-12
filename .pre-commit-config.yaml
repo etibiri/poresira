@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.4
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: end-of-file-fixer
+        exclude: ^LICENSE$
+      - id: trailing-whitespace
+        exclude: ^LICENSE$
+      - id: check-yaml
+      - id: check-added-large-files
+  - repo: local
+    hooks:
+      - id: check-spdx
+        name: SPDX license header
+        entry: python scripts/check_spdx.py
+        language: system
+        types_or: [python, yaml, toml]
+        exclude: ^uv\.lock$
