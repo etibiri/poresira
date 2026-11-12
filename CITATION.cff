@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+cff-version: 1.2.0
+message: "If you use PoreSira in your work, please cite it as below."
+type: software
+title: "PoreSira"
+abstract: >-
+  Open-source laboratory information management system that traces every biological
+  sample from field collection to public data deposition: samples, PCR, Oxford Nanopore
+  sequencing, data files, compute jobs and ENA/SRA submission.
+authors:
+  - family-names: Tibiri
+    given-names: Ezechiel B.
+    email: ezechiel.tibiri@wave-center.org
+    affiliation: "INERA/CNRST, WAVE Research Burkina Faso"
+repository-code: "https://github.com/etibiri/poresira"
+license: AGPL-3.0-or-later
+version: 0.1.0.dev0
+keywords:
+  - LIMS
+  - sample traceability
+  - Oxford Nanopore
+  - sequencing
+  - Django

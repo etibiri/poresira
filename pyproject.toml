@@ -19,6 +19,10 @@ dependencies = [
     "packaging>=26.3",
 ]
 
+[project.urls]
+Source = "https://github.com/etibiri/poresira"
+Issues = "https://github.com/etibiri/poresira/issues"
+
 [dependency-groups]
 dev = [
     "pytest>=8.0",

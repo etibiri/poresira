@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+site_name: PoreSira
+site_description: Open-source LIMS tracing biological samples from field collection to public data deposition.
+repo_url: https://github.com/etibiri/poresira
+edit_uri: edit/main/docs/
+theme:
+  name: material
+  font: false  # no Google Fonts: documentation must also work offline
+  features:
+    - navigation.sections
+    - content.code.copy
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Configuration: configuration.md
+  - Architecture: architecture.md
+  - Backup and restore: backup-restore.md
+  - Maintainers:
+      - CLA Assistant setup: cla-assistant-setup.md
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
