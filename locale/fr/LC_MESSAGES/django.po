@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 18:40+0000\n"
+"POT-Creation-Date: 2026-11-12 18:48+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -13,10 +13,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#: poresira/core/audit.py
-msgid "A reason is required for this change."
-msgstr "Un motif est obligatoire pour cette modification."
 
 #: poresira/core/history.py
 msgid "Created"
@@ -97,6 +93,10 @@ msgstr "Contributeur"
 #: poresira/core/models.py
 msgid "Viewer"
 msgstr "Lecteur"
+
+#: poresira/core/reason.py
+msgid "A reason is required for this change."
+msgstr "Un motif est obligatoire pour cette modification."
 
 #: poresira/core/templates/core/_project_rows.html
 #: poresira/core/templates/core/project_history.html
@@ -181,3 +181,271 @@ msgstr "Un motif est obligatoire pour annuler un enregistrement."
 #: poresira/core/voiding.py
 msgid "This record is already voided."
 msgstr "Cet enregistrement est déjà annulé."
+
+#: poresira/samples/models/collection.py poresira/samples/models/sample.py
+msgid "project"
+msgstr "projet"
+
+#: poresira/samples/models/collection.py
+msgid "collection date"
+msgstr "date de collecte"
+
+#: poresira/samples/models/collection.py
+msgid "country"
+msgstr "pays"
+
+#: poresira/samples/models/collection.py
+msgid "region"
+msgstr "région"
+
+#: poresira/samples/models/collection.py
+msgid "province"
+msgstr "province"
+
+#: poresira/samples/models/collection.py
+msgid "locality"
+msgstr "localité"
+
+#: poresira/samples/models/collection.py
+msgid "farm or field"
+msgstr "ferme ou champ"
+
+#: poresira/samples/models/collection.py
+msgid "latitude"
+msgstr "latitude"
+
+#: poresira/samples/models/collection.py
+msgid "longitude"
+msgstr "longitude"
+
+#: poresira/samples/models/collection.py
+msgid "collector"
+msgstr "collecteur"
+
+#: poresira/samples/models/collection.py poresira/samples/models/qc.py
+#: poresira/samples/models/sample.py poresira/samples/models/storage.py
+msgid "notes"
+msgstr "notes"
+
+#: poresira/samples/models/qc.py
+msgid "NanoDrop"
+msgstr "NanoDrop"
+
+#: poresira/samples/models/qc.py
+msgid "Qubit"
+msgstr "Qubit"
+
+#: poresira/samples/models/qc.py
+msgid "Qubit RNA IQ"
+msgstr "Qubit RNA IQ"
+
+#: poresira/samples/models/qc.py
+msgid "Gel electrophoresis"
+msgstr "Électrophorèse sur gel"
+
+#: poresira/samples/models/qc.py
+msgid "Other"
+msgstr "Autre"
+
+#: poresira/samples/models/qc.py
+msgid "Passed"
+msgstr "Conforme"
+
+#: poresira/samples/models/qc.py
+msgid "Failed"
+msgstr "Non conforme"
+
+#: poresira/samples/models/qc.py
+msgid "Not assessed"
+msgstr "Non évalué"
+
+#: poresira/samples/models/qc.py
+msgid "sample"
+msgstr "échantillon"
+
+#: poresira/samples/models/qc.py
+msgid "method"
+msgstr "méthode"
+
+#: poresira/samples/models/qc.py
+msgid "measured at"
+msgstr "mesuré le"
+
+#: poresira/samples/models/qc.py
+msgid "measured by"
+msgstr "mesuré par"
+
+#: poresira/samples/models/qc.py poresira/samples/models/sample.py
+msgid "concentration (ng/µL)"
+msgstr "concentration (ng/µL)"
+
+#: poresira/samples/models/qc.py
+msgid "A260/280"
+msgstr "A260/280"
+
+#: poresira/samples/models/qc.py
+msgid "A260/230"
+msgstr "A260/230"
+
+#: poresira/samples/models/qc.py
+msgid "integrity number"
+msgstr "indice d'intégrité"
+
+#: poresira/samples/models/qc.py
+msgid "RNA integrity score such as RIN, RQN or the Qubit IQ value."
+msgstr "Score d'intégrité de l'ARN : RIN, RQN ou valeur IQ de Qubit."
+
+#: poresira/samples/models/qc.py
+msgid "outcome"
+msgstr "résultat"
+
+#: poresira/samples/models/sample.py
+msgid "Field sample"
+msgstr "Échantillon de terrain"
+
+#: poresira/samples/models/sample.py
+msgid "Living plant"
+msgstr "Plante vivante"
+
+#: poresira/samples/models/sample.py
+msgid "DNA extract"
+msgstr "Extrait d'ADN"
+
+#: poresira/samples/models/sample.py
+msgid "RNA extract"
+msgstr "Extrait d'ARN"
+
+#: poresira/samples/models/sample.py
+msgid "Amplification product"
+msgstr "Produit d'amplification"
+
+#: poresira/samples/models/sample.py
+msgid "Registered"
+msgstr "Enregistré"
+
+#: poresira/samples/models/sample.py
+msgid "Stored"
+msgstr "Stocké"
+
+#: poresira/samples/models/sample.py
+msgid "In process"
+msgstr "En traitement"
+
+#: poresira/samples/models/sample.py
+msgid "Consumed"
+msgstr "Consommé"
+
+#: poresira/samples/models/sample.py
+msgid "Discarded"
+msgstr "Éliminé"
+
+#: poresira/samples/models/sample.py
+msgid "collection event"
+msgstr "événement de collecte"
+
+#: poresira/samples/models/sample.py poresira/samples/models/storage.py
+msgid "parent"
+msgstr "parent"
+
+#: poresira/samples/models/sample.py poresira/samples/models/storage.py
+msgid "type"
+msgstr "type"
+
+#: poresira/samples/models/sample.py
+msgid "label"
+msgstr "étiquette"
+
+#: poresira/samples/models/sample.py
+msgid "The laboratory's own sample name, for example BFA266."
+msgstr "Nom d'échantillon propre au laboratoire, par exemple BFA266."
+
+#: poresira/samples/models/sample.py
+msgid "host species"
+msgstr "espèce hôte"
+
+#: poresira/samples/models/sample.py
+msgid "host NCBI taxon ID"
+msgstr "identifiant de taxon NCBI de l'hôte"
+
+#: poresira/samples/models/sample.py
+msgid "host variety"
+msgstr "variété de l'hôte"
+
+#: poresira/samples/models/sample.py
+msgid "symptom score"
+msgstr "score de symptômes"
+
+#: poresira/samples/models/sample.py
+msgid ""
+"Symptom severity on the 1 to 9 scale of the International Potato Center."
+msgstr ""
+"Gravité des symptômes sur l'échelle de 1 à 9 du Centre international de la "
+"pomme de terre."
+
+#: poresira/samples/models/sample.py
+msgid "symptoms"
+msgstr "symptômes"
+
+#: poresira/samples/models/sample.py
+msgid "status"
+msgstr "statut"
+
+#: poresira/samples/models/sample.py
+msgid "barcode"
+msgstr "code-barres"
+
+#: poresira/samples/models/sample.py
+msgid "storage location"
+msgstr "emplacement de stockage"
+
+#: poresira/samples/models/sample.py
+msgid "position"
+msgstr "position"
+
+#: poresira/samples/models/sample.py
+msgid "volume (µL)"
+msgstr "volume (µL)"
+
+#: poresira/samples/models/storage.py
+msgid "Room"
+msgstr "Pièce"
+
+#: poresira/samples/models/storage.py
+msgid "Freezer"
+msgstr "Congélateur"
+
+#: poresira/samples/models/storage.py
+msgid "Refrigerator"
+msgstr "Réfrigérateur"
+
+#: poresira/samples/models/storage.py
+msgid "Cabinet"
+msgstr "Armoire"
+
+#: poresira/samples/models/storage.py
+msgid "Shelf"
+msgstr "Étagère"
+
+#: poresira/samples/models/storage.py
+msgid "Rack"
+msgstr "Portoir"
+
+#: poresira/samples/models/storage.py
+msgid "Box"
+msgstr "Boîte"
+
+#: poresira/samples/models/storage.py
+msgid "name"
+msgstr "nom"
+
+#: poresira/samples/models/storage.py
+msgid "nominal temperature (°C)"
+msgstr "température nominale (°C)"
+
+#: poresira/samples/models/storage.py
+msgid "grid rows"
+msgstr "lignes de la grille"
+
+#: poresira/samples/models/storage.py
+msgid "grid columns"
+msgstr "colonnes de la grille"
