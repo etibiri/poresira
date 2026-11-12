@@ -50,3 +50,23 @@ def with_reason(reason: str):
             active_context.metadata.pop("reason", None)
         else:
             active_context.metadata["reason"] = previous_reason
+
+
+@contextmanager
+def acting_as(user):
+    """Record ``user`` in the audit context when none is set, for work done outside a request."""
+    active_context = getattr(pghistory.runtime._tracker, "value", None)
+    if active_context is None:
+        with pghistory.context(user=str(user.pk)):
+            yield
+        _clear_session_context()
+        return
+
+    already_set = "user" in active_context.metadata
+    if not already_set:
+        active_context.metadata["user"] = str(user.pk)
+    try:
+        yield
+    finally:
+        if not already_set:
+            active_context.metadata.pop("user", None)
