@@ -6,9 +6,14 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from poresira.core.models import HumanIdentifiedModel, Project, UUIDPrimaryKeyModel
-from poresira.core.voiding import VoidableModel
+from poresira.core.voiding import VoidableModel, VoidableQuerySet
 
 COLLECTION_EVENT_TYPE_CODE = "C"
+
+
+class CollectionEventQuerySet(VoidableQuerySet):
+    def visible_to(self, user) -> "CollectionEventQuerySet":
+        return self.filter(project__in=Project.objects.visible_to(user).values("pk"))
 
 
 @pghistory.track(
@@ -51,6 +56,8 @@ class CollectionEvent(UUIDPrimaryKeyModel, HumanIdentifiedModel, VoidableModel):
     notes = models.TextField(_("notes"), blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = CollectionEventQuerySet.as_manager()
 
     class Meta(VoidableModel.Meta):
         ordering = ["-collected_on", "identifier"]

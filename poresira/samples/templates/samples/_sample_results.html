@@ -1,0 +1,33 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+<table class="table table-hover align-middle">
+  <thead>
+    <tr>
+      <th>{% trans "Identifier" %}</th><th>{% trans "Label" %}</th><th>{% trans "Type" %}</th>
+      <th>{% trans "Project" %}</th><th>{% trans "Status" %}</th><th>{% trans "Storage location" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sample in samples %}
+    <tr{% if sample.is_voided %} class="text-muted"{% endif %}>
+      <td><a href="{% url 'samples:sample-detail' sample.pk %}"><code>{{ sample.identifier }}</code></a>
+        {% if sample.is_voided %}<span class="badge text-bg-secondary">{% trans "Voided" %}</span>{% endif %}</td>
+      <td>{{ sample.label }}</td>
+      <td>{{ sample.get_kind_display }}</td>
+      <td>{{ sample.project.code }}</td>
+      <td>{{ sample.get_status_display }}</td>
+      <td>{% if sample.storage_location %}{{ sample.storage_location.name }}{% if sample.position %} · {{ sample.position }}{% endif %}{% else %}—{% endif %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" class="text-muted">{% trans "No samples to show." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if is_paginated %}
+<nav aria-label="{% trans 'Pages' %}" class="d-flex justify-content-between align-items-center">
+  <span class="text-muted small">{% blocktrans with number=page_obj.number total=page_obj.paginator.num_pages count=page_obj.paginator.count %}Page {{ number }} of {{ total }} ({{ count }} samples){% endblocktrans %}</span>
+  <div>
+    {% if page_obj.has_previous %}<a class="btn btn-sm btn-outline-secondary" href="?{{ query_string }}&page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>{% endif %}
+    {% if page_obj.has_next %}<a class="btn btn-sm btn-outline-secondary" href="?{{ query_string }}&page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>{% endif %}
+  </div>
+</nav>
+{% endif %}

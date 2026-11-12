@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 from pathlib import Path
 
+from django.contrib.messages import constants as message_levels
+
 from config.env import env_bool, env_list, env_str
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -111,3 +113,5 @@ PORESIRA_VERSION = env_str("PORESIRA_VERSION", "dev")
 DATABASE_APP_ROLE = env_str("POSTGRES_APP_USER", "poresira_app")
 # Only enable behind a reverse proxy that overwrites X-Forwarded-For.
 PORESIRA_TRUST_X_FORWARDED_FOR = env_bool("PORESIRA_TRUST_X_FORWARDED_FOR", False)
+
+MESSAGE_TAGS = {message_levels.ERROR: "danger"}

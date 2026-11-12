@@ -1,0 +1,97 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{{ sample.identifier }} · PoreSira{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'samples:sample-list' %}">{% trans "Samples" %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ sample.identifier }}</li>
+  </ol>
+</nav>
+
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+  <h1 class="h3 mb-0"><code>{{ sample.identifier }}</code> {{ sample.label }}
+    <span class="badge text-bg-primary">{{ sample.get_kind_display }}</span>
+    <span class="badge text-bg-light border">{{ sample.get_status_display }}</span></h1>
+  {% if can_edit %}
+  <div class="btn-group">
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'samples:sample-derive' sample.pk %}">{% trans "Derive" %}</a>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'samples:sample-move' sample.pk %}">{% trans "Move" %}</a>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'samples:sample-change' sample.pk %}">{% trans "Status and quantities" %}</a>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'samples:sample-qc' sample.pk %}">{% trans "Measure" %}</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'samples:sample-edit' sample.pk %}">{% trans "Edit" %}</a>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'samples:sample-void' sample.pk %}">{% trans "Void" %}</a>
+  </div>
+  {% endif %}
+</div>
+
+{% if sample.is_voided %}
+<div class="alert alert-secondary">
+  {% blocktrans with date=sample.voided_at|date:"DATETIME_FORMAT" %}Voided on {{ date }}.{% endblocktrans %}
+  <strong>{% trans "Reason" %}:</strong> {{ sample.void_reason }}
+</div>
+{% endif %}
+
+<div class="row g-4">
+  <div class="col-lg-6">
+    <h2 class="h5">{% trans "Details" %}</h2>
+    <dl class="row small">
+      <dt class="col-sm-5">{% trans "Project" %}</dt>
+      <dd class="col-sm-7">{{ sample.project.code }} · {{ sample.project.name }}</dd>
+      <dt class="col-sm-5">{% trans "Collection event" %}</dt>
+      <dd class="col-sm-7"><a href="{% url 'samples:event-detail' sample.collection_event_id %}">{{ sample.collection_event }}</a></dd>
+      <dt class="col-sm-5">{% trans "Storage location" %}</dt>
+      <dd class="col-sm-7">{% if sample.storage_location %}{{ sample.storage_location.name }}{% if sample.position %} · {{ sample.position }}{% endif %}{% else %}—{% endif %}</dd>
+      <dt class="col-sm-5">{% trans "Barcode" %}</dt><dd class="col-sm-7">{{ sample.barcode|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Concentration (ng/µL)" %}</dt><dd class="col-sm-7">{{ sample.concentration_ng_ul|default_if_none:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Volume (µL)" %}</dt><dd class="col-sm-7">{{ sample.volume_ul|default_if_none:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Host species" %}</dt><dd class="col-sm-7">{{ sample.host_taxon|default:"—" }}{% if sample.host_variety %} ({{ sample.host_variety }}){% endif %}</dd>
+      <dt class="col-sm-5">{% trans "Symptom score" %}</dt><dd class="col-sm-7">{{ sample.symptom_score|default_if_none:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Symptoms" %}</dt><dd class="col-sm-7">{{ sample.symptom_notes|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Notes" %}</dt><dd class="col-sm-7">{{ sample.notes|default:"—" }}</dd>
+    </dl>
+  </div>
+
+  <div class="col-lg-6">
+    <h2 class="h5">{% trans "Lineage" %}</h2>
+    <ul class="list-unstyled small">
+      {% for node in family %}
+      <li style="padding-left: {% widthratio node.depth 1 20 %}px"{% if node.sample.pk == sample.pk %} class="fw-bold"{% endif %}>
+        {% if node.sample.pk == sample.pk %}▶{% endif %}
+        <a href="{% url 'samples:sample-detail' node.sample.pk %}"><code>{{ node.sample.identifier }}</code></a>
+        {{ node.sample.get_kind_display }} {{ node.sample.label }}
+        {% if node.sample.is_voided %}<span class="badge text-bg-secondary">{% trans "Voided" %}</span>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<h2 class="h5 mt-4">{% trans "Measurements" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr>
+    <th>{% trans "Measured at" %}</th><th>{% trans "Method" %}</th><th>{% trans "Concentration (ng/µL)" %}</th>
+    <th>{% trans "A260/280" %}</th><th>{% trans "A260/230" %}</th><th>{% trans "Integrity number" %}</th>
+    <th>{% trans "Outcome" %}</th><th></th>
+  </tr></thead>
+  <tbody>
+    {% for measurement in measurements %}
+    <tr{% if measurement.is_voided %} class="text-muted text-decoration-line-through"{% endif %}>
+      <td>{{ measurement.measured_at|date:"DATETIME_FORMAT" }}</td>
+      <td>{{ measurement.get_method_display }}</td>
+      <td>{{ measurement.concentration_ng_ul|default_if_none:"—" }}</td>
+      <td>{{ measurement.a260_280|default_if_none:"—" }}</td>
+      <td>{{ measurement.a260_230|default_if_none:"—" }}</td>
+      <td>{{ measurement.integrity_number|default_if_none:"—" }}</td>
+      <td>{{ measurement.get_outcome_display }}</td>
+      <td class="text-end">{% if can_edit and not measurement.is_voided %}<a href="{% url 'samples:qc-void' measurement.pk %}">{% trans "Void" %}</a>{% endif %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="8" class="text-muted">{% trans "No measurements yet." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 class="h5 mt-4">{% trans "History" %}</h2>
+{% include "core/_history.html" %}
+{% endblock %}

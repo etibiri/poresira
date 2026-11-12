@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 19:01+0000\n"
+"POT-Creation-Date: 2026-11-12 22:13+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -22,7 +22,11 @@ msgstr "Créé"
 msgid "Modified"
 msgstr "Modifié"
 
-#: poresira/core/history.py
+#: poresira/core/history.py poresira/samples/forms.py
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_list.html
+#: poresira/samples/templates/samples/sample_detail.html
 msgid "Project"
 msgstr "Projet"
 
@@ -98,8 +102,60 @@ msgstr "Lecteur"
 msgid "A reason is required for this change."
 msgstr "Un motif est obligatoire pour cette modification."
 
+#: poresira/core/templates/core/_history.html
+#, python-format
+msgid "by %(username)s"
+msgstr "par %(username)s"
+
+#: poresira/core/templates/core/_history.html poresira/samples/forms.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Reason"
+msgstr "Motif"
+
+#: poresira/core/templates/core/_history.html
+msgid "Hide details"
+msgstr "Masquer les détails"
+
+#: poresira/core/templates/core/_history.html
+msgid "Show details"
+msgstr "Afficher les détails"
+
+#: poresira/core/templates/core/_history.html
+msgid "Field"
+msgstr "Champ"
+
+#: poresira/core/templates/core/_history.html
+msgid "Before"
+msgstr "Avant"
+
+#: poresira/core/templates/core/_history.html
+msgid "After"
+msgstr "Après"
+
+#: poresira/core/templates/core/_history.html
+msgid "IP address"
+msgstr "Adresse IP"
+
+#: poresira/core/templates/core/_history.html
+msgid "Request"
+msgstr "Requête"
+
+#: poresira/core/templates/core/_history.html
+msgid "No history yet."
+msgstr "Aucun historique pour le moment."
+
+#: poresira/core/templates/core/_project_rows.html
+#: poresira/core/templates/core/base.html
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_list.html
+#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_list.html
+msgid "Samples"
+msgstr "Échantillons"
+
 #: poresira/core/templates/core/_project_rows.html
 #: poresira/core/templates/core/project_history.html
+#: poresira/samples/templates/samples/sample_detail.html
 msgid "History"
 msgstr "Historique"
 
@@ -114,6 +170,17 @@ msgid "Projects"
 msgstr "Projets"
 
 #: poresira/core/templates/core/base.html
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_list.html
+msgid "Collection events"
+msgstr "Événements de collecte"
+
+#: poresira/core/templates/core/base.html
+#: poresira/samples/templates/samples/storage_tree.html
+msgid "Storage"
+msgstr "Stockage"
+
+#: poresira/core/templates/core/base.html
 msgid "Log out"
 msgstr "Se déconnecter"
 
@@ -124,47 +191,6 @@ msgstr "Sous licence AGPL-3.0-or-later"
 #: poresira/core/templates/core/base.html
 msgid "Source"
 msgstr "Source"
-
-#: poresira/core/templates/core/project_history.html
-#, python-format
-msgid "by %(username)s"
-msgstr "par %(username)s"
-
-#: poresira/core/templates/core/project_history.html
-msgid "Reason"
-msgstr "Motif"
-
-#: poresira/core/templates/core/project_history.html
-msgid "Hide details"
-msgstr "Masquer les détails"
-
-#: poresira/core/templates/core/project_history.html
-msgid "Show details"
-msgstr "Afficher les détails"
-
-#: poresira/core/templates/core/project_history.html
-msgid "Field"
-msgstr "Champ"
-
-#: poresira/core/templates/core/project_history.html
-msgid "Before"
-msgstr "Avant"
-
-#: poresira/core/templates/core/project_history.html
-msgid "After"
-msgstr "Après"
-
-#: poresira/core/templates/core/project_history.html
-msgid "IP address"
-msgstr "Adresse IP"
-
-#: poresira/core/templates/core/project_history.html
-msgid "Request"
-msgstr "Requête"
-
-#: poresira/core/templates/core/project_history.html
-msgid "No history yet."
-msgstr "Aucun historique pour le moment."
 
 #: poresira/core/templates/core/project_list.html
 msgid "Filter by code or name"
@@ -181,6 +207,110 @@ msgstr "Un motif est obligatoire pour annuler un enregistrement."
 #: poresira/core/voiding.py
 msgid "This record is already voided."
 msgstr "Cet enregistrement est déjà annulé."
+
+#: poresira/samples/forms.py
+msgid "Search"
+msgstr "Recherche"
+
+#: poresira/samples/forms.py
+msgid "Identifier or label"
+msgstr "Identifiant ou étiquette"
+
+#: poresira/samples/forms.py
+msgid "All"
+msgstr "Tous"
+
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Type"
+msgstr "Type"
+
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Status"
+msgstr "Statut"
+
+#: poresira/samples/forms.py
+msgid "Show voided"
+msgstr "Afficher les annulés"
+
+#: poresira/samples/forms.py
+msgid "Recorded in the audit log."
+msgstr "Enregistré dans le journal d'audit."
+
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Storage location"
+msgstr "Emplacement de stockage"
+
+#: poresira/samples/forms.py
+msgid "Not in storage"
+msgstr "Hors stockage"
+
+#: poresira/samples/forms.py
+msgid "Position"
+msgstr "Position"
+
+#: poresira/samples/forms.py
+msgid "Grid position such as A1, for boxes with a grid."
+msgstr "Position dans la grille, comme A1, pour les boîtes à grille."
+
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Barcode"
+msgstr "Code-barres"
+
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Concentration (ng/µL)"
+msgstr "Concentration (ng/µL)"
+
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Volume (µL)"
+msgstr "Volume (µL)"
+
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Method"
+msgstr "Méthode"
+
+#: poresira/samples/forms.py poresira/samples/models/qc.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "A260/280"
+msgstr "A260/280"
+
+#: poresira/samples/forms.py poresira/samples/models/qc.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "A260/230"
+msgstr "A260/230"
+
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Integrity number"
+msgstr "Indice d'intégrité"
+
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Outcome"
+msgstr "Résultat"
+
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Notes"
+msgstr "Notes"
+
+#: poresira/samples/forms.py
+msgid "Also set this concentration on the sample"
+msgstr "Appliquer aussi cette concentration à l'échantillon"
+
+#: poresira/samples/forms.py
+msgid "Parent"
+msgstr "Parent"
 
 #: poresira/samples/models/collection.py poresira/samples/models/sample.py
 msgid "project"
@@ -278,14 +408,6 @@ msgstr "mesuré par"
 #: poresira/samples/models/qc.py poresira/samples/models/sample.py
 msgid "concentration (ng/µL)"
 msgstr "concentration (ng/µL)"
-
-#: poresira/samples/models/qc.py
-msgid "A260/280"
-msgstr "A260/280"
-
-#: poresira/samples/models/qc.py
-msgid "A260/230"
-msgstr "A260/230"
 
 #: poresira/samples/models/qc.py
 msgid "integrity number"
@@ -524,3 +646,261 @@ msgstr "Annulez d'abord les échantillons de cet événement de collecte."
 msgid "This location still contains active locations or samples."
 msgstr ""
 "Cet emplacement contient encore des emplacements ou des échantillons actifs."
+
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_list.html
+msgid "Identifier"
+msgstr "Identifiant"
+
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Label"
+msgstr "Étiquette"
+
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Voided"
+msgstr "Annulé"
+
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+msgid "No samples to show."
+msgstr "Aucun échantillon à afficher."
+
+#: poresira/samples/templates/samples/_sample_results.html
+msgid "Pages"
+msgstr "Pages"
+
+#: poresira/samples/templates/samples/_sample_results.html
+#, python-format
+msgid "Page %(number)s of %(total)s (%(count)s samples)"
+msgstr "Page %(number)s sur %(total)s (%(count)s échantillons)"
+
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_list.html
+msgid "Previous"
+msgstr "Précédent"
+
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_list.html
+msgid "Next"
+msgstr "Suivant"
+
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/views.py
+msgid "Register a field sample"
+msgstr "Enregistrer un échantillon de terrain"
+
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_list.html
+msgid "Collection date"
+msgstr "Date de collecte"
+
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Country"
+msgstr "Pays"
+
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Region"
+msgstr "Région"
+
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_list.html
+msgid "Province"
+msgstr "Province"
+
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_list.html
+msgid "Locality"
+msgstr "Localité"
+
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Farm or field"
+msgstr "Ferme ou champ"
+
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Latitude"
+msgstr "Latitude"
+
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Longitude"
+msgstr "Longitude"
+
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Collector"
+msgstr "Collecteur"
+
+#: poresira/samples/templates/samples/event_list.html poresira/samples/views.py
+msgid "New collection event"
+msgstr "Nouvel événement de collecte"
+
+#: poresira/samples/templates/samples/event_list.html
+msgid "No collection events to show."
+msgstr "Aucun événement de collecte à afficher."
+
+#: poresira/samples/templates/samples/form.html
+msgid "Cancel"
+msgstr "Annuler"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Derive"
+msgstr "Dériver"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Move"
+msgstr "Déplacer"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Status and quantities"
+msgstr "Statut et quantités"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Measure"
+msgstr "Mesurer"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Edit"
+msgstr "Modifier"
+
+#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/views.py
+msgid "Void"
+msgstr "Annuler"
+
+#: poresira/samples/templates/samples/sample_detail.html
+#, python-format
+msgid "Voided on %(date)s."
+msgstr "Annulé le %(date)s."
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Details"
+msgstr "Détails"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Collection event"
+msgstr "Événement de collecte"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Host species"
+msgstr "Espèce hôte"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Symptom score"
+msgstr "Score de symptômes"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Symptoms"
+msgstr "Symptômes"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Lineage"
+msgstr "Lignée"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Measurements"
+msgstr "Mesures"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Measured at"
+msgstr "Mesuré le"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "No measurements yet."
+msgstr "Aucune mesure pour le moment."
+
+#: poresira/samples/templates/samples/sample_list.html
+msgid "Filter"
+msgstr "Filtrer"
+
+#: poresira/samples/templates/samples/storage_tree.html
+#: poresira/samples/views.py
+msgid "New storage location"
+msgstr "Nouvel emplacement de stockage"
+
+#: poresira/samples/templates/samples/storage_tree.html
+#, python-format
+msgid "%(counter)s sample"
+msgid_plural "%(counter)s samples"
+msgstr[0] "%(counter)s échantillon"
+msgstr[1] "%(counter)s échantillons"
+
+#: poresira/samples/templates/samples/storage_tree.html
+msgid "No storage locations yet."
+msgstr "Aucun emplacement de stockage pour le moment."
+
+#: poresira/samples/views.py
+msgid "Save"
+msgstr "Enregistrer"
+
+#: poresira/samples/views.py
+msgid "Sample"
+msgstr "Échantillon"
+
+#: poresira/samples/views.py
+msgid "Edit description"
+msgstr "Modifier la description"
+
+#: poresira/samples/views.py
+msgid "Sample updated."
+msgstr "Échantillon mis à jour."
+
+#: poresira/samples/views.py
+msgid "Derive a sample"
+msgstr "Dériver un échantillon"
+
+#: poresira/samples/views.py
+msgid "Create"
+msgstr "Créer"
+
+#: poresira/samples/views.py
+msgid "Derived sample created."
+msgstr "Échantillon dérivé créé."
+
+#: poresira/samples/views.py
+msgid "Move sample"
+msgstr "Déplacer l'échantillon"
+
+#: poresira/samples/views.py
+msgid "Sample moved."
+msgstr "Échantillon déplacé."
+
+#: poresira/samples/views.py
+msgid "Change status, barcode or quantities"
+msgstr "Modifier le statut, le code-barres ou les quantités"
+
+#: poresira/samples/views.py
+msgid "Record a measurement"
+msgstr "Enregistrer une mesure"
+
+#: poresira/samples/views.py
+msgid "Measurement recorded."
+msgstr "Mesure enregistrée."
+
+#: poresira/samples/views.py
+msgid "Void sample"
+msgstr "Annuler l'échantillon"
+
+#: poresira/samples/views.py
+msgid "Sample voided."
+msgstr "Échantillon annulé."
+
+#: poresira/samples/views.py
+msgid "Void measurement"
+msgstr "Annuler la mesure"
+
+#: poresira/samples/views.py
+msgid "Measurement voided."
+msgstr "Mesure annulée."
+
+#: poresira/samples/views.py
+msgid "Collection event created."
+msgstr "Événement de collecte créé."
+
+#: poresira/samples/views.py
+msgid "Field sample registered."
+msgstr "Échantillon de terrain enregistré."
+
+#: poresira/samples/views.py
+msgid "Storage location created."
+msgstr "Emplacement de stockage créé."

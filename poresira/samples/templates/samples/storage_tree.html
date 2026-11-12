@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Storage" %} · PoreSira{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">{% trans "Storage" %}</h1>
+  {% if can_manage %}<a class="btn btn-primary btn-sm" href="{% url 'samples:storage-create' %}">{% trans "New storage location" %}</a>{% endif %}
+</div>
+<ul class="list-unstyled">
+  {% for location, depth in nodes %}
+  <li style="padding-left: {% widthratio depth 1 24 %}px">
+    <strong>{{ location.name }}</strong>
+    <span class="text-muted small">{{ location.get_kind_display }}{% if location.nominal_temperature_c is not None %} · {{ location.nominal_temperature_c }} °C{% endif %}{% if location.grid_rows %} · {{ location.grid_rows }} × {{ location.grid_columns }}{% endif %}</span>
+    {% if location.sample_count %}<span class="badge text-bg-light border">{% blocktrans count counter=location.sample_count %}{{ counter }} sample{% plural %}{{ counter }} samples{% endblocktrans %}</span>{% endif %}
+  </li>
+  {% empty %}
+  <li class="text-muted">{% trans "No storage locations yet." %}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

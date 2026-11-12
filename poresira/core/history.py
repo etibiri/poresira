@@ -44,7 +44,8 @@ class HistorySource:
 def _field_label(source: HistorySource, field_name: str) -> str:
     if field_name in source.labels:
         return str(source.labels[field_name])
-    return str(source.events.model._meta.get_field(field_name).verbose_name).capitalize()
+    verbose_name = str(source.events.model._meta.get_field(field_name).verbose_name)
+    return verbose_name[:1].upper() + verbose_name[1:]
 
 
 def _entries_for(source: HistorySource) -> list[HistoryEntry]:

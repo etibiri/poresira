@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Samples" %} · PoreSira{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Samples" %}</h1>
+<form method="get" class="row g-2 align-items-end mb-3"
+      hx-get="{% url 'samples:sample-list' %}" hx-target="#sample-results" hx-push-url="true"
+      hx-trigger="input changed delay:300ms, change">
+  <div class="col-md-3">{{ filter_form.q.label_tag }}{{ filter_form.q }}</div>
+  <div class="col-md-3">{{ filter_form.project.label_tag }}{{ filter_form.project }}</div>
+  <div class="col-md-2">{{ filter_form.kind.label_tag }}{{ filter_form.kind }}</div>
+  <div class="col-md-2">{{ filter_form.status.label_tag }}{{ filter_form.status }}</div>
+  <div class="col-md-2">
+    <div class="form-check">{{ filter_form.include_voided }}
+      <label class="form-check-label" for="{{ filter_form.include_voided.id_for_label }}">{{ filter_form.include_voided.label }}</label>
+    </div>
+    <noscript><button type="submit" class="btn btn-sm btn-primary mt-1">{% trans "Filter" %}</button></noscript>
+  </div>
+</form>
+<div id="sample-results">{% include "samples/_sample_results.html" %}</div>
+{% endblock %}

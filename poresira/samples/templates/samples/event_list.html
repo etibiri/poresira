@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Collection events" %} · PoreSira{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">{% trans "Collection events" %}</h1>
+  <a class="btn btn-primary btn-sm" href="{% url 'samples:event-create' %}">{% trans "New collection event" %}</a>
+</div>
+<table class="table table-hover align-middle">
+  <thead><tr>
+    <th>{% trans "Identifier" %}</th><th>{% trans "Collection date" %}</th><th>{% trans "Province" %}</th>
+    <th>{% trans "Locality" %}</th><th>{% trans "Project" %}</th><th>{% trans "Samples" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for event in events %}
+    <tr>
+      <td><a href="{% url 'samples:event-detail' event.pk %}"><code>{{ event.identifier }}</code></a></td>
+      <td>{{ event.collected_on|date:"SHORT_DATE_FORMAT"|default:"—" }}</td>
+      <td>{{ event.province|default:"—" }}</td><td>{{ event.locality|default:"—" }}</td>
+      <td>{{ event.project.code }}</td><td>{{ event.sample_count }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" class="text-muted">{% trans "No collection events to show." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if is_paginated %}
+<div class="d-flex justify-content-end gap-2">
+  {% if page_obj.has_previous %}<a class="btn btn-sm btn-outline-secondary" href="?page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>{% endif %}
+  {% if page_obj.has_next %}<a class="btn btn-sm btn-outline-secondary" href="?page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}
