@@ -17,6 +17,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "pgtrigger",
+    "pghistory",
     "poresira.core",
     "poresira.samples",
     "poresira.pcr",
@@ -34,6 +36,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "poresira.core.middleware.AuditContextMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -98,3 +101,8 @@ CELERY_TASK_ALWAYS_EAGER = env_bool("CELERY_TASK_ALWAYS_EAGER", False)
 PORESIRA_SITE_PREFIX = env_str("PORESIRA_SITE_PREFIX", "WBF")
 PORESIRA_SOURCE_URL = env_str("PORESIRA_SOURCE_URL", "https://github.com/etibiri/poresira")
 PORESIRA_VERSION = env_str("PORESIRA_VERSION", "dev")
+
+# Role the application connects as; migrations strip its write access to audit tables.
+DATABASE_APP_ROLE = env_str("POSTGRES_APP_USER", "poresira_app")
+# Only enable behind a reverse proxy that overwrites X-Forwarded-For.
+PORESIRA_TRUST_X_FORWARDED_FOR = env_bool("PORESIRA_TRUST_X_FORWARDED_FOR", False)

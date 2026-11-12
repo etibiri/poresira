@@ -46,8 +46,9 @@ select = ["E", "F", "W", "I", "N", "UP", "B", "DJ", "S", "C4", "SIM", "RUF"]
 ignore = ["RUF012"]
 
 [tool.ruff.lint.per-file-ignores]
-"**/tests/**" = ["S101", "S105", "S106"]
+"**/tests/**" = ["S101", "S105", "S106", "S608"]
 "**/migrations/**" = ["E501", "RUF012"]
+"poresira/core/audit_migrations.py" = ["S608"]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"

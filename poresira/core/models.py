@@ -1,10 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+import pghistory
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models.functions import Now
 from django.utils.translation import gettext_lazy as _
 
 from .uuid7 import uuid7
+from .voiding import VoidableModel, VoidableQuerySet
 
 
 class UUIDPrimaryKeyModel(models.Model):
@@ -37,16 +40,20 @@ class User(UUIDPrimaryKeyModel, AbstractUser):  # noqa: DJ008 (inherits __str__)
         return self.is_superuser or self.role == GlobalRole.ADMINISTRATOR
 
 
-class ProjectQuerySet(models.QuerySet):
+class ProjectQuerySet(VoidableQuerySet):
     def visible_to(self, user) -> "ProjectQuerySet":
         if not user.is_authenticated:
             return self.none()
         if user.sees_all_projects:
             return self
-        return self.filter(memberships__user=user)
+        return self.filter(memberships__user=user, memberships__voided_at__isnull=True)
 
 
-class Project(UUIDPrimaryKeyModel):
+@pghistory.track(
+    pghistory.InsertEvent(),
+    pghistory.UpdateEvent(condition=pghistory.AnyChange(exclude_auto=True)),
+)
+class Project(UUIDPrimaryKeyModel, VoidableModel):
     code = models.SlugField(max_length=32, unique=True)
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
@@ -55,7 +62,7 @@ class Project(UUIDPrimaryKeyModel):
 
     objects = ProjectQuerySet.as_manager()
 
-    class Meta:
+    class Meta(VoidableModel.Meta):
         ordering = ["code"]
 
     def __str__(self) -> str:
@@ -68,7 +75,11 @@ class ProjectRole(models.TextChoices):
     VIEWER = "viewer", _("Viewer")
 
 
-class ProjectMembership(UUIDPrimaryKeyModel):
+@pghistory.track(
+    pghistory.InsertEvent(),
+    pghistory.UpdateEvent(condition=pghistory.AnyChange(exclude_auto=True)),
+)
+class ProjectMembership(UUIDPrimaryKeyModel, VoidableModel):
     project = models.ForeignKey(Project, on_delete=models.PROTECT, related_name="memberships")
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="project_memberships"
@@ -76,12 +87,32 @@ class ProjectMembership(UUIDPrimaryKeyModel):
     role = models.CharField(max_length=16, choices=ProjectRole.choices, default=ProjectRole.VIEWER)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
+    class Meta(VoidableModel.Meta):
         constraints = [
+            *VoidableModel.Meta.constraints,
             models.UniqueConstraint(
-                fields=["project", "user"], name="unique_membership_per_project"
+                fields=["project", "user"],
+                condition=models.Q(voided_at__isnull=True),
+                name="unique_active_membership_per_project",
             ),
         ]
 
     def __str__(self) -> str:
         return f"{self.user} in {self.project} ({self.role})"
+
+
+class AuditChainLink(models.Model):
+    """One link per audit event, written only by a database trigger (see audit_migrations)."""
+
+    seq = models.BigAutoField(primary_key=True)
+    event_table = models.CharField(max_length=63)
+    event_id = models.BigIntegerField()
+    previous_hash = models.CharField(max_length=64, blank=True)
+    row_hash = models.CharField(max_length=64)
+    created_at = models.DateTimeField(db_default=Now())
+
+    class Meta:
+        ordering = ["seq"]
+
+    def __str__(self) -> str:
+        return f"{self.seq} {self.event_table}#{self.event_id}"
