@@ -1,5 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# Run with: docker compose --profile <poste|labo|plateforme> up -d
+# Pick a profile with COMPOSE_PROFILES in .env, or on the command line:
+#   docker compose --profile poste up -d       single computer
+#   docker compose --profile labo up -d        lab server, adds unattended backups
+#   docker compose --profile plateforme up -d  adds the Slurm agent queue worker
+x-all-profiles: &all-profiles [poste, labo, plateforme]
+
 x-django-env: &django-env
   env_file: .env
   environment: &django-environment
@@ -14,15 +19,21 @@ x-django-service: &django-service
     args:
       PORESIRA_VERSION: ${PORESIRA_VERSION:-dev}
   image: poresira:${PORESIRA_VERSION:-dev}
+  profiles: *all-profiles
   depends_on:
     db:
       condition: service_healthy
     redis:
       condition: service_healthy
 
+x-app-role: &app-role
+  POSTGRES_USER: ${POSTGRES_APP_USER:-poresira_app}
+  POSTGRES_PASSWORD: ${POSTGRES_APP_PASSWORD}
+
 services:
   db:
     image: postgres:16-alpine
+    profiles: *all-profiles
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-poresira}
@@ -34,6 +45,7 @@ services:
       POSTGRES_APP_PASSWORD: ${POSTGRES_APP_PASSWORD:?set in .env}
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./docker/postgres:/opt/poresira:ro
       - ./docker/postgres/init-roles.sh:/docker-entrypoint-initdb.d/init-roles.sh:ro
     ports:
       - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
@@ -46,6 +58,7 @@ services:
   redis:
     # 7.2 is the last BSD-3-Clause release of Redis.
     image: redis:7.2-alpine
+    profiles: *all-profiles
     restart: unless-stopped
     volumes:
       - redis-data:/data
@@ -69,27 +82,58 @@ services:
   web:
     <<: [*django-env, *django-service]
     environment:
-      <<: *django-environment
-      POSTGRES_USER: ${POSTGRES_APP_USER:-poresira_app}
-      POSTGRES_PASSWORD: ${POSTGRES_APP_PASSWORD}
+      <<: [*django-environment, *app-role]
     restart: unless-stopped
     depends_on:
       migrate:
         condition: service_completed_successfully
     ports:
-      - "${PORESIRA_PORT:-8000}:8000"
+      # Loopback by default; set PORESIRA_BIND_ADDRESS=0.0.0.0 to serve the lab network.
+      - "${PORESIRA_BIND_ADDRESS:-127.0.0.1}:${PORESIRA_PORT:-8000}:8000"
 
   worker:
     <<: [*django-env, *django-service]
     environment:
-      <<: *django-environment
-      POSTGRES_USER: ${POSTGRES_APP_USER:-poresira_app}
-      POSTGRES_PASSWORD: ${POSTGRES_APP_PASSWORD}
+      <<: [*django-environment, *app-role]
     restart: unless-stopped
     depends_on:
       migrate:
         condition: service_completed_successfully
-    command: ["celery", "-A", "config", "worker", "--loglevel", "info"]
+    command: ["celery", "-A", "config", "worker", "--queues", "celery", "--loglevel", "info"]
+
+  backup:
+    image: postgres:16-alpine
+    profiles: [labo, plateforme]
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: ${POSTGRES_DB:-poresira}
+      <<: *app-role
+      BACKUP_KEEP_DAYS: ${BACKUP_KEEP_DAYS:-30}
+      BACKUP_OWNER: ${BACKUP_OWNER:-}
+    volumes:
+      - ./scripts:/scripts:ro
+      - ${BACKUP_DIR:-./backups}:/backups
+    # One-off backup in any profile: docker compose run --rm backup /scripts/backup.sh
+    command:
+      - sh
+      - -c
+      - 'while true; do /scripts/backup.sh || echo "backup failed" >&2; sleep $$((${BACKUP_INTERVAL_HOURS:-24} * 3600)); done'
+
+  slurm-agent:
+    # Placeholder: consumes the "slurm" queue. Submission to Slurm arrives with the computing app.
+    <<: [*django-env, *django-service]
+    profiles: [plateforme]
+    environment:
+      <<: [*django-environment, *app-role]
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    command: ["celery", "-A", "config", "worker", "--queues", "slurm", "--hostname", "slurm@%h", "--loglevel", "info"]
 
 volumes:
   db-data:
