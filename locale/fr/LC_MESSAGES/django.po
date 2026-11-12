@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 18:48+0000\n"
+"POT-Creation-Date: 2026-11-12 19:01+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -449,3 +449,78 @@ msgstr "lignes de la grille"
 #: poresira/samples/models/storage.py
 msgid "grid columns"
 msgstr "colonnes de la grille"
+
+#: poresira/samples/services.py
+msgid "A voided sample cannot be used as a parent."
+msgstr "Un échantillon annulé ne peut pas servir de parent."
+
+#: poresira/samples/services.py
+#, python-format
+msgid "A %(parent_kind)s cannot give a %(kind)s."
+msgstr "Un(e) %(parent_kind)s ne peut pas donner un(e) %(kind)s."
+
+#: poresira/samples/services.py
+msgid "A position needs a storage location."
+msgstr "Une position nécessite un emplacement de stockage."
+
+#: poresira/samples/services.py
+#, python-format
+msgid "%(location)s has no grid of positions."
+msgstr "%(location)s n'a pas de grille de positions."
+
+#: poresira/samples/services.py
+#, python-format
+msgid "%(position)s is not a position such as A1."
+msgstr "%(position)s n'est pas une position du type A1."
+
+#: poresira/samples/services.py
+#, python-format
+msgid ""
+"%(position)s is outside the %(rows)s x %(columns)s grid of %(location)s."
+msgstr ""
+"%(position)s est en dehors de la grille %(rows)s x %(columns)s de "
+"%(location)s."
+
+#: poresira/samples/services.py
+msgid "A voided sample cannot be moved."
+msgstr "Un échantillon annulé ne peut pas être déplacé."
+
+#: poresira/samples/services.py
+msgid "A voided storage location cannot be used."
+msgstr "Un emplacement de stockage annulé ne peut pas être utilisé."
+
+#: poresira/samples/services.py
+#, python-format
+msgid "Position %(position)s of %(location)s already holds %(sample)s."
+msgstr "La position %(position)s de %(location)s contient déjà %(sample)s."
+
+#: poresira/samples/services.py
+#, python-format
+msgid "Position %(position)s of %(location)s was just taken."
+msgstr "La position %(position)s de %(location)s vient d'être prise."
+
+#: poresira/samples/services.py
+msgid "A voided sample cannot be changed."
+msgstr "Un échantillon annulé ne peut pas être modifié."
+
+#: poresira/samples/services.py
+#, python-format
+msgid "Concentration from %(method)s measurement of %(date)s"
+msgstr "Concentration issue de la mesure %(method)s du %(date)s"
+
+#: poresira/samples/services.py
+msgid "A grid has at most 26 rows (A to Z)."
+msgstr "Une grille a au plus 26 lignes (A à Z)."
+
+#: poresira/samples/services.py
+msgid "Void the derivatives of this sample first."
+msgstr "Annulez d'abord les dérivés de cet échantillon."
+
+#: poresira/samples/services.py
+msgid "Void the samples of this collection event first."
+msgstr "Annulez d'abord les échantillons de cet événement de collecte."
+
+#: poresira/samples/services.py
+msgid "This location still contains active locations or samples."
+msgstr ""
+"Cet emplacement contient encore des emplacements ou des échantillons actifs."
