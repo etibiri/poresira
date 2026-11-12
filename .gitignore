@@ -14,3 +14,7 @@ backups/
 *.sqlite3
 *.mo
 *.swp
+
+# Source articles and private data are never published (MkDocs would copy docs/*.pdf into the site)
+docs/*.pdf
+private-data/
