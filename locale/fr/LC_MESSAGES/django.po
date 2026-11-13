@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 07:19+0000\n"
+"POT-Creation-Date: 2026-11-13 08:01+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -208,6 +208,281 @@ msgstr "Un motif est obligatoire pour annuler un enregistrement."
 msgid "This record is already voided."
 msgstr "Cet enregistrement est déjà annulé."
 
+#: poresira/pcr/models/reference.py
+msgid "Forward"
+msgstr "Sens"
+
+#: poresira/pcr/models/reference.py
+msgid "Reverse"
+msgstr "Antisens"
+
+#: poresira/pcr/models/reference.py poresira/samples/models/storage.py
+msgid "name"
+msgstr "nom"
+
+#: poresira/pcr/models/reference.py
+msgid "sequence (5' to 3')"
+msgstr "séquence (5' vers 3')"
+
+#: poresira/pcr/models/reference.py
+msgid "Use upper-case IUPAC DNA letters only."
+msgstr "Utilisez uniquement des lettres IUPAC de l'ADN, en majuscules."
+
+#: poresira/pcr/models/reference.py
+msgid "direction"
+msgstr "sens"
+
+#: poresira/pcr/models/reference.py
+msgid "target"
+msgstr "cible"
+
+#: poresira/pcr/models/reference.py
+msgid "reference"
+msgstr "référence"
+
+#: poresira/pcr/models/reference.py poresira/pcr/models/run.py
+#: poresira/samples/models/collection.py poresira/samples/models/qc.py
+#: poresira/samples/models/sample.py poresira/samples/models/sequence.py
+#: poresira/samples/models/storage.py
+msgid "notes"
+msgstr "notes"
+
+#: poresira/pcr/models/reference.py
+msgid "number of cycles"
+msgstr "nombre de cycles"
+
+#: poresira/pcr/models/reference.py
+msgid "Initial"
+msgstr "Initiale"
+
+#: poresira/pcr/models/reference.py
+msgid "Cycle"
+msgstr "Cycle"
+
+#: poresira/pcr/models/reference.py
+msgid "Final"
+msgstr "Finale"
+
+#: poresira/pcr/models/reference.py
+msgid "program"
+msgstr "programme"
+
+#: poresira/pcr/models/reference.py
+msgid "order"
+msgstr "ordre"
+
+#: poresira/pcr/models/reference.py
+msgid "stage"
+msgstr "phase"
+
+#: poresira/pcr/models/reference.py poresira/samples/models/sample.py
+msgid "label"
+msgstr "étiquette"
+
+#: poresira/pcr/models/reference.py
+msgid "temperature (°C)"
+msgstr "température (°C)"
+
+#: poresira/pcr/models/reference.py
+msgid "duration (s)"
+msgstr "durée (s)"
+
+#: poresira/pcr/models/reference.py
+msgid "polymerase"
+msgstr "polymérase"
+
+#: poresira/pcr/models/reference.py
+msgid "reaction volume (µL)"
+msgstr "volume de réaction (µL)"
+
+#: poresira/pcr/models/reference.py
+msgid "master mix"
+msgstr "mélange réactionnel"
+
+#: poresira/pcr/models/reference.py
+msgid "ingredient"
+msgstr "ingrédient"
+
+#: poresira/pcr/models/reference.py
+msgid "concentration"
+msgstr "concentration"
+
+#: poresira/pcr/models/reference.py
+msgid "As written, e.g. 10 µM."
+msgstr "Telle qu'écrite, par exemple 10 µM."
+
+#: poresira/pcr/models/reference.py
+msgid "volume per reaction (µL)"
+msgstr "volume par réaction (µL)"
+
+#: poresira/pcr/models/reference.py
+msgid "forward primer"
+msgstr "amorce sens"
+
+#: poresira/pcr/models/reference.py
+msgid "reverse primer"
+msgstr "amorce antisens"
+
+#: poresira/pcr/models/reference.py
+msgid "cycling program"
+msgstr "programme de cycles"
+
+#: poresira/pcr/models/reference.py
+msgid "reverse transcription"
+msgstr "transcription inverse"
+
+#: poresira/pcr/models/reference.py
+msgid "The template is RNA that is reverse-transcribed first (RT-PCR)."
+msgstr "La matrice est de l'ARN rétrotranscrit d'abord (RT-PCR)."
+
+#: poresira/pcr/models/reference.py
+msgid "expected amplicon (bp)"
+msgstr "amplicon attendu (pb)"
+
+#: poresira/pcr/models/run.py
+msgid "96-well plate"
+msgstr "Plaque 96 puits"
+
+#: poresira/pcr/models/run.py
+msgid "PCR tubes"
+msgstr "Tubes PCR"
+
+#: poresira/pcr/models/run.py
+msgid "Planned"
+msgstr "Planifié"
+
+#: poresira/pcr/models/run.py
+msgid "Performed"
+msgstr "Réalisé"
+
+#: poresira/pcr/models/run.py
+msgid "Closed"
+msgstr "Clos"
+
+#: poresira/pcr/models/run.py poresira/samples/views.py
+msgid "Sample"
+msgstr "Échantillon"
+
+#: poresira/pcr/models/run.py
+msgid "Positive control"
+msgstr "Témoin positif"
+
+#: poresira/pcr/models/run.py
+msgid "No-template control"
+msgstr "Témoin sans matrice"
+
+#: poresira/pcr/models/run.py
+msgid "Extraction blank"
+msgstr "Blanc d'extraction"
+
+#: poresira/pcr/models/run.py
+msgid "Pending"
+msgstr "En attente"
+
+#: poresira/pcr/models/run.py
+msgid "Positive"
+msgstr "Positif"
+
+#: poresira/pcr/models/run.py
+msgid "Negative"
+msgstr "Négatif"
+
+#: poresira/pcr/models/run.py
+msgid "Inconclusive"
+msgstr "Non concluant"
+
+#: poresira/pcr/models/run.py poresira/samples/models/collection.py
+#: poresira/samples/models/sample.py
+msgid "project"
+msgstr "projet"
+
+#: poresira/pcr/models/run.py
+msgid "assay"
+msgstr "test"
+
+#: poresira/pcr/models/run.py
+msgid "container"
+msgstr "support"
+
+#: poresira/pcr/models/run.py
+msgid "number of tubes"
+msgstr "nombre de tubes"
+
+#: poresira/pcr/models/run.py
+msgid "Only for PCR tubes."
+msgstr "Seulement pour les tubes PCR."
+
+#: poresira/pcr/models/run.py poresira/samples/models/sample.py
+msgid "status"
+msgstr "statut"
+
+#: poresira/pcr/models/run.py
+msgid "date"
+msgstr "date"
+
+#: poresira/pcr/models/run.py
+msgid "performed by"
+msgstr "réalisé par"
+
+#: poresira/pcr/models/run.py
+msgid "thermocycler"
+msgstr "thermocycleur"
+
+#: poresira/pcr/models/run.py
+msgid "master mix lot"
+msgstr "lot du mélange réactionnel"
+
+#: poresira/pcr/models/run.py
+msgid "polymerase lot"
+msgstr "lot de polymérase"
+
+#: poresira/pcr/models/run.py
+msgid "reconstructed from a publication"
+msgstr "reconstitué d'après une publication"
+
+#: poresira/pcr/models/run.py
+msgid ""
+"Results come from a published table; date, layout and controls are unknown."
+msgstr ""
+"Les résultats viennent d'un tableau publié ; la date, la disposition et les "
+"témoins sont inconnus."
+
+#: poresira/pcr/models/run.py
+msgid "run"
+msgstr "passage"
+
+#: poresira/pcr/models/run.py poresira/samples/models/sample.py
+msgid "position"
+msgstr "position"
+
+#: poresira/pcr/models/run.py
+msgid "role"
+msgstr "rôle"
+
+#: poresira/pcr/models/run.py
+msgid "template"
+msgstr "matrice"
+
+#: poresira/pcr/models/run.py
+msgid "template volume (µL)"
+msgstr "volume de matrice (µL)"
+
+#: poresira/pcr/models/run.py
+msgid "result"
+msgstr "résultat"
+
+#: poresira/pcr/models/run.py
+msgid "Ct"
+msgstr "Ct"
+
+#: poresira/pcr/models/run.py
+msgid "qPCR only."
+msgstr "qPCR seulement."
+
+#: poresira/pcr/models/run.py
+msgid "band size on gel (bp)"
+msgstr "taille de bande sur gel (pb)"
+
 #: poresira/samples/forms.py
 msgid "Search"
 msgstr "Recherche"
@@ -312,10 +587,6 @@ msgstr "Appliquer aussi cette concentration à l'échantillon"
 msgid "Parent"
 msgstr "Parent"
 
-#: poresira/samples/models/collection.py poresira/samples/models/sample.py
-msgid "project"
-msgstr "projet"
-
 #: poresira/samples/models/collection.py
 msgid "collection date"
 msgstr "date de collecte"
@@ -351,12 +622,6 @@ msgstr "longitude"
 #: poresira/samples/models/collection.py
 msgid "collector"
 msgstr "collecteur"
-
-#: poresira/samples/models/collection.py poresira/samples/models/qc.py
-#: poresira/samples/models/sample.py poresira/samples/models/sequence.py
-#: poresira/samples/models/storage.py
-msgid "notes"
-msgstr "notes"
 
 #: poresira/samples/models/qc.py
 msgid "NanoDrop"
@@ -475,10 +740,6 @@ msgid "type"
 msgstr "type"
 
 #: poresira/samples/models/sample.py
-msgid "label"
-msgstr "étiquette"
-
-#: poresira/samples/models/sample.py
 msgid "The laboratory's own sample name, for example BFA266."
 msgstr "Nom d'échantillon propre au laboratoire, par exemple BFA266."
 
@@ -510,20 +771,12 @@ msgid "symptoms"
 msgstr "symptômes"
 
 #: poresira/samples/models/sample.py
-msgid "status"
-msgstr "statut"
-
-#: poresira/samples/models/sample.py
 msgid "barcode"
 msgstr "code-barres"
 
 #: poresira/samples/models/sample.py
 msgid "storage location"
 msgstr "emplacement de stockage"
-
-#: poresira/samples/models/sample.py
-msgid "position"
-msgstr "position"
 
 #: poresira/samples/models/sample.py
 msgid "volume (µL)"
@@ -605,10 +858,6 @@ msgstr "Portoir"
 #: poresira/samples/models/storage.py
 msgid "Box"
 msgstr "Boîte"
-
-#: poresira/samples/models/storage.py
-msgid "name"
-msgstr "nom"
 
 #: poresira/samples/models/storage.py
 msgid "nominal temperature (°C)"
@@ -906,10 +1155,6 @@ msgstr "Aucun emplacement de stockage pour le moment."
 #: poresira/samples/views.py
 msgid "Save"
 msgstr "Enregistrer"
-
-#: poresira/samples/views.py
-msgid "Sample"
-msgstr "Échantillon"
 
 #: poresira/samples/views.py
 msgid "Edit description"

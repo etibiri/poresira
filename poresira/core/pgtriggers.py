@@ -25,9 +25,16 @@ class RequireReason(pgtrigger.Trigger):
     when = pgtrigger.Before
     operation = pgtrigger.Update
 
-    def __init__(self, *, fields: list[str], name: str = "require_reason"):
+    def __init__(
+        self,
+        *,
+        fields: list[str] | None = None,
+        condition: pgtrigger.Condition | None = None,
+        name: str = "require_reason",
+    ):
+        """Give ``fields`` (any change) or a custom ``condition`` for when a reason is needed."""
         super().__init__(
             name=name,
-            condition=pgtrigger.AnyChange(*fields),
+            condition=condition or pgtrigger.AnyChange(*fields),
             func=pgtrigger.Func(REASON_REQUIRED_SQL),
         )
