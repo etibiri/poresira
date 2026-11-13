@@ -31,7 +31,7 @@ All notable changes are listed here. The format follows
 - `import_field_samples` (all-or-nothing CSV import) and `load_demo_data`, which builds a demo
   project from the 66 BioSamples of PRJNA1460897 and Table 3 of Tibiri et al. 2020.
 - `SequenceRecord`: GenBank accessions linked to the sample that was sequenced, with BioSample and
-  BioProject; the demo project links the 24 genomes PV947737-PV947760.
+  BioProject; the demo project links 54 published sequences (viral genomes and satellites) of two studies.
 - `with_reason` and `acting_as` helpers for audited changes made outside a request.
 - Complete French translation of the new screens.
 - AGPL-3.0-or-later license, CLA, contribution guide, code of conduct, citation file.

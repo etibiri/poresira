@@ -1,0 +1,55 @@
+accession,version,organism,isolate,length_bp,topology,mol_type,assembly_method,biosample_accession,biosample_isolate,match,match_note,publication
+PV405574,1,Cotton leaf curl Gezira alphasatellite,BFA351,1353,circular,genomic DNA,Flye v. 2.9.3,SAMN57660711,Bag_BFA351,inferred,"Matched to the BioSample by sample number, date and coordinates: GenBank gives no locality prefix.",10.3390/v17091222
+PV405575,1,Cotton leaf curl Gezira alphasatellite,BFA407,1353,circular,genomic DNA,Flye v. 2.9.3,SAMN57660714,Di_BFA407,inferred,"Matched to the BioSample by sample number, date and coordinates: GenBank gives no locality prefix.",10.3390/v17091222
+PV405576,1,Cotton leaf curl Gezira alphasatellite,BFA662,1353,circular,genomic DNA,Flye v. 2.9.3,SAMN57660721,Kan_BFA662,inferred,"Matched to the BioSample by sample number, date and coordinates: GenBank gives no locality prefix.",10.3390/v17091222
+PV405577,1,Cotton leaf curl Gezira betasatellite,BFA1094,1348,circular,genomic DNA,Flye v. 2.9.3,SAMN57660698,Ban_BFA1094,inferred,"Matched to the BioSample by sample number and coordinates: GenBank gives 2016-08-18, the BioSample 2016-08-16.",10.3390/v17091222
+PV405578,1,Cotton leaf curl Gezira betasatellite,BFA362,1348,circular,genomic DNA,Flye v. 2.9.3,SAMN57660683,Bag_BFA362,inferred,"Matched to the BioSample by sample number, date and coordinates: GenBank gives no locality prefix.",10.3390/v17091222
+PV405579,1,Cotton leaf curl Gezira betasatellite,BFA942,1333,circular,genomic DNA,Flye v. 2.9.3,SAMN57660697,Sam_BFA942,inferred,"Matched to the BioSample by sample number, date and coordinates: GenBank gives no locality prefix.",10.3390/v17091222
+PV405580,1,Pepper yellow vein Mali virus,BFA942,2781,circular,genomic DNA,Flye v. 2.9.3,SAMN57660697,Sam_BFA942,inferred,"Matched to the BioSample by sample number, date and coordinates: GenBank gives no locality prefix.",10.3390/v17091222
+PV947677,1,Sweet potato leaf curl deltasatellite,Leo_BFA445,709,circular,genomic DNA,Flye v. 2.9.5,SAMN57660685,Leo_BFA445,exact,,10.3389/fmicb.2026.1722370
+PV947678,1,Sweet potato leaf curl deltasatellite,Kol_BFA851,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660694,Kol_BFA851,exact,,10.3389/fmicb.2026.1722370
+PV947679,1,Sweet potato leaf curl deltasatellite,Tie_BFA310,708,circular,genomic DNA,Flye v. 2.9.5,SAMN57660680,Tie_BFA310,exact,,10.3389/fmicb.2026.1722370
+PV947680,1,Sweet potato leaf curl deltasatellite,Tie_BFA313,706,circular,genomic DNA,Flye v. 2.9.5,SAMN57660681,Tie_BFA313,exact,,10.3389/fmicb.2026.1722370
+PV947681,1,Sweet potato leaf curl deltasatellite,Kan_BFA773,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660692,Kan_BFA773,exact,,10.3389/fmicb.2026.1722370
+PV947682,1,Sweet potato leaf curl deltasatellite,Sam_BFA608,708,circular,genomic DNA,Flye v. 2.9.5,SAMN57660687,Sam_BFA608,exact,,10.3389/fmicb.2026.1722370
+PV947683,1,Sweet potato leaf curl deltasatellite,Sam_BFA880,705,circular,genomic DNA,Flye v. 2.9.5,SAMN57660695,Sam_BFA880,exact,,10.3389/fmicb.2026.1722370
+PV947684,1,Sweet potato leaf curl deltasatellite,Tie_BFA223,705,circular,genomic DNA,Flye v. 2.9.5,SAMN57660701,Tie_BFA223,exact,,10.3389/fmicb.2026.1722370
+PV947685,1,Sweet potato leaf curl deltasatellite,Di_BFA407,705,circular,genomic DNA,Flye v. 2.9.5,SAMN57660714,Di_BFA407,exact,,10.3389/fmicb.2026.1722370
+PV947686,1,Sweet potato leaf curl deltasatellite,Kan_BFA692,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660723,Kan_BFA692,exact,,10.3389/fmicb.2026.1722370
+PV947687,1,Sweet potato leaf curl deltasatellite,Yon_BFA1368,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660727,Yon_BFA1368,exact,,10.3389/fmicb.2026.1722370
+PV947688,1,Sweet potato leaf curl deltasatellite,Kan_BFA638,706,circular,genomic DNA,Flye v. 2.9.5,SAMN57660718,Kan_BFA638,exact,,10.3389/fmicb.2026.1722370
+PV947689,1,Sweet potato leaf curl deltasatellite,Kan_BFA684,719,circular,genomic DNA,Flye v. 2.9.5,SAMN57660722,Kan_BFA684,exact,,10.3389/fmicb.2026.1722370
+PV947690,1,Sweet potato leaf curl deltasatellite,Dou_BFA1047,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660725,Dou_BFA1047,exact,,10.3389/fmicb.2026.1722370
+PV947691,1,Sweet potato leaf curl deltasatellite,Tie_BFA255,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660703,Tie_BFA255,exact,,10.3389/fmicb.2026.1722370
+PV947692,1,Sweet potato leaf curl deltasatellite,Kan_BFA662,705,circular,genomic DNA,Flye v. 2.9.5,SAMN57660721,Kan_BFA662,exact,,10.3389/fmicb.2026.1722370
+PV947693,1,Sweet potato leaf curl deltasatellite,Tie_BFA224,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660702,Tie_BFA224,exact,,10.3389/fmicb.2026.1722370
+PV947694,1,Sweet potato leaf curl deltasatellite,Tie_BFA301,715,circular,genomic DNA,Flye v. 2.9.5,SAMN57660705,Tie_BFA301,exact,,10.3389/fmicb.2026.1722370
+PV947695,1,Sweet potato leaf curl deltasatellite,Di_BFA386,706,circular,genomic DNA,Flye v. 2.9.5,SAMN57660713,Di_BFA386,exact,,10.3389/fmicb.2026.1722370
+PV947696,1,Sweet potato leaf curl deltasatellite,Kan_BFA651,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660720,Kan_BFA651,exact,,10.3389/fmicb.2026.1722370
+PV947697,1,Sweet potato leaf curl deltasatellite,Dia_BFA496,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660717,Dia_BFA496,exact,,10.3389/fmicb.2026.1722370
+PV947698,1,Sweet potato leaf curl deltasatellite,Sam_BFA150,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660700,Sam_BFA150,exact,,10.3389/fmicb.2026.1722370
+PV947699,1,Sweet potato leaf curl deltasatellite,Bag_BFA355,707,circular,genomic DNA,Flye v. 2.9.5,SAMN57660712,Bag_BFA355,exact,,10.3389/fmicb.2026.1722370
+PV947737,1,Sweet potato leaf curl virus,Kan_BFA160,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660677,Kan_BFA160,exact,,10.3389/fmicb.2026.1722370
+PV947738,1,Sweet potato leaf curl virus,Kan_BFA638,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660718,Kan_BFA638,exact,,10.3389/fmicb.2026.1722370
+PV947739,1,Sweet potato leaf curl virus,Kan_BFA641,2827,circular,genomic DNA,Flye v. 2.9.5,SAMN57660689,Kan_BFA641,exact,,10.3389/fmicb.2026.1722370
+PV947740,1,Sweet potato leaf curl virus,Kan_BFA662,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660721,Kan_BFA662,exact,,10.3389/fmicb.2026.1722370
+PV947741,1,Sweet potato leaf curl virus,Kan_BFA692,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660723,Kan_BFA692,exact,,10.3389/fmicb.2026.1722370
+PV947742,1,Sweet potato leaf curl virus,Kan_BFA758,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660691,Kan_BFA758,exact,,10.3389/fmicb.2026.1722370
+PV947743,1,Sweet potato leaf curl virus,Kan_BFA773,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660692,Kan_BFA773,exact,,10.3389/fmicb.2026.1722370
+PV947744,1,Sweet potato leaf curl virus,Leo_BFA440,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660715,Leo_BFA440,exact,,10.3389/fmicb.2026.1722370
+PV947745,1,Sweet potato leaf curl virus,Sam_BFA150,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660700,Sam_BFA150,exact,,10.3389/fmicb.2026.1722370
+PV947746,1,Sweet potato leaf curl virus,Sam_BFA608,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660687,Sam_BFA608,exact,,10.3389/fmicb.2026.1722370
+PV947747,1,Sweet potato leaf curl virus,Sam_BFA622,2804,circular,genomic DNA,Flye v. 2.9.5,SAMN57660688,Sam_BFA622,exact,,10.3389/fmicb.2026.1722370
+PV947748,1,Sweet potato leaf curl virus,Tie_BFA224,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660702,Tie_BFA224,exact,,10.3389/fmicb.2026.1722370
+PV947749,1,Sweet potato leaf curl virus,Tie_BFA255,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660703,Tie_BFA255,exact,,10.3389/fmicb.2026.1722370
+PV947750,1,Sweet potato leaf curl virus,Tie_BFA266,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660678,Tie_BFA266,exact,,10.3389/fmicb.2026.1722370
+PV947751,1,Sweet potato leaf curl virus,Tie_BFA301,2827,circular,genomic DNA,Flye v. 2.9.5,SAMN57660705,Tie_BFA301,exact,,10.3389/fmicb.2026.1722370
+PV947752,1,Sweet potato leaf curl virus,Tie_BFA308,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660706,Tie_BFA308,exact,,10.3389/fmicb.2026.1722370
+PV947753,1,Sweet potato leaf curl virus,Tie_BFA310,2825,circular,genomic DNA,Flye v. 2.9.5,SAMN57660680,Tie_BFA310,exact,,10.3389/fmicb.2026.1722370
+PV947754,1,Sweet potato leaf curl virus,Tie_BFA313,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660681,Tie_BFA313,exact,,10.3389/fmicb.2026.1722370
+PV947755,1,Sweet potato leaf curl virus,Tie_BFA314,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660682,Tie_BFA314,exact,,10.3389/fmicb.2026.1722370
+PV947756,1,Sweet potato leaf curl virus,Tie_BFA316,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660728,Tie_BFA316,exact,,10.3389/fmicb.2026.1722370
+PV947757,1,Sweet potato feathery mottle virus,Tie_E1,10816,linear,genomic RNA,Flye v. 2.9.5,SAMN57660729,Tieb_E1_BFA297,inferred,"Matched to the BioSample by sample number, date and coordinates: the isolate name differs from the BioSample name.",10.3389/fmicb.2026.1722370
+PV947758,1,Sweet potato feathery mottle virus,Tie_E3,10797,linear,genomic RNA,Flye v. 2.9.5,SAMN57660731,Tieb_E3_BFA265,inferred,"Matched to the BioSample by sample number, date and coordinates: the isolate name differs from the BioSample name.",10.3389/fmicb.2026.1722370
+PV947759,1,Sweet potato feathery mottle virus,Heere_E1,10816,linear,genomic RNA,Flye v. 2.9.5,SAMN57660732,Heere_E1_BFA728,inferred,"Matched to the BioSample by sample number, date and coordinates: the isolate name differs from the BioSample name.",10.3389/fmicb.2026.1722370
+PV947760,1,Sweet potato feathery mottle virus,Heere_E2,10769,linear,genomic RNA,Flye v. 2.9.5,SAMN57660733,Heere_E2_BFA880,inferred,"Matched to the BioSample by sample number, date and coordinates: the isolate name differs from the BioSample name.",10.3389/fmicb.2026.1722370

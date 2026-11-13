@@ -97,9 +97,10 @@ docker compose exec web python manage.py load_demo_data --allow-production --pas
 
 Builds the project `DEMO-SPBF` from two published studies of sweetpotato virus diseases in
 Burkina Faso: the 66 BioSamples of BioProject PRJNA1460897 and Table 3 of Tibiri et al. 2020
-(*Plant Pathology*, CC BY 4.0). The 24 viral genomes of Front Microbiol 2026 (GenBank PV947737-PV947760: 20 SPLCV, 4 SPFMV) are linked to their samples. It creates about 290 samples with their lineage, a storage tree
+(*Plant Pathology*, CC BY 4.0). It creates about 290 samples with their lineage, a storage tree
 and four accounts (`demo_platform`, `demo_lead`, `demo_technician`, `demo_viewer`).
-`--synthetic-volume N` adds the project `DEMO-SYNTHETIC` with random samples (seed 2026) to
+The 54 GenBank sequences of the two companion studies (Front Microbiol 2026 and Viruses 2025)
+are linked to their samples. `--synthetic-volume N` adds the project `DEMO-SYNTHETIC` with random samples (seed 2026) to
 test performance. The command refuses to run when `DEBUG` is off unless `--allow-production`
 is given, because the accounts it creates use a known password.
 

@@ -50,14 +50,27 @@ kept as written.
   published; provinces are filled only when a locality matches a BioSample locality ignoring
   accents.
 
-## `genomes_PV947737-PV947760.csv`
+## `sequences_PRJNA1460897.csv`
 
-The 24 complete viral genomes of the same study, from the GenBank flat files of accessions
-PV947737 to PV947760 (retrieved 2026-11-13): 20 sweet potato leaf curl virus (circular DNA, from
-the rolling circle products) and 4 sweet potato feathery mottle virus (RNA, from greenhouse plants).
-GenBank records carry no BioSample link, so the match is made on the isolate name. The 20 SPLCV
-isolates equal a BioSample isolate exactly, with identical date and coordinates. The 4 SPFMV
-isolates (`Tie_E1`, `Tie_E3`, `Heere_E1`, `Heere_E2`) are named differently from their BioSample
-(`Tieb_E1_BFA297`, `Tieb_E3_BFA265`, `Heere_E1_BFA728`, `Heere_E2_BFA880`); they are matched on
-the E number, the 2025-05-17 date and the Kamboinse coordinates, and marked `inferred`. Please
-confirm these four.
+The 54 complete sequences deposited in GenBank for these samples, from the GenBank flat files
+(retrieved 2026-11-13), with the publication each one belongs to:
+
+| Accessions | Content | Publication |
+|---|---|---|
+| PV947737-PV947756 | 20 sweet potato leaf curl virus (circular DNA) | Front Microbiol 2026, doi:10.3389/fmicb.2026.1722370 |
+| PV947757-PV947760 | 4 sweet potato feathery mottle virus (RNA) | same |
+| PV947677-PV947699 | 23 sweet potato leaf curl deltasatellite | same (GenBank cites it) |
+| PV405574-PV405580 | pepper yellow vein Mali virus, 3 CLCuGe alphasatellites, 3 betasatellites | Viruses 2025, doi:10.3390/v17091222 |
+
+GenBank records carry no BioSample link, so the match is made on the isolate name, date and
+coordinates (column `match`, with `match_note` where it is not exact):
+
+- 43 records equal a BioSample isolate exactly, with identical date and coordinates.
+- 7 records of the Viruses paper have no locality prefix (`BFA942`); each has a single BioSample
+  with that number, the same date and the same coordinates, except `BFA1094`: GenBank gives
+  2016-08-18 and the BioSample `Ban_BFA1094` 2016-08-16.
+- 4 SPFMV records (`Tie_E1`, `Tie_E3`, `Heere_E1`, `Heere_E2`) are named differently from their
+  BioSample (`Tieb_E1_BFA297`, `Tieb_E3_BFA265`, `Heere_E1_BFA728`, `Heere_E2_BFA880`) and are
+  matched on the E number, the 2025-05-17 date and the Kamboinse coordinates.
+
+Every inferred match is flagged in the notes of the sequence record and should be confirmed.

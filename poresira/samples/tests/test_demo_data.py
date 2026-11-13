@@ -92,17 +92,38 @@ class TestLoading:
         assert kind_count(SampleKind.FIELD_SAMPLE) == 109
         assert kind_count(SampleKind.LIVING_PLANT) == 50 + 13
 
-    def test_the_24_genomes_are_linked_to_their_sequenced_material(self, loaded_demo):
+    def test_the_54_published_sequences_are_linked_to_their_sequenced_material(self, loaded_demo):
         records = SequenceRecord.objects.select_related("sample")
 
-        assert records.count() == 24
-        assert loaded_demo.counts["sequences"] == 24
-        dna = records.filter(organism="Sweet potato leaf curl virus")
+        assert records.count() == 54
+        assert loaded_demo.counts["sequences"] == 54
         rna = records.filter(organism="Sweet potato feathery mottle virus")
-        assert dna.count() == 20
-        assert {r.sample.kind for r in dna} == {SampleKind.AMPLIFICATION_PRODUCT}
         assert rna.count() == 4
         assert {r.sample.kind for r in rna} == {SampleKind.RNA_EXTRACT}
+        dna = records.exclude(pk__in=rna)
+        assert dna.count() == 50  # 20 SPLCV, 23 deltasatellites, 7 from the MDPI paper
+        assert {r.sample.kind for r in dna} == {SampleKind.AMPLIFICATION_PRODUCT}
+
+    def test_one_sample_can_carry_several_sequences(self, loaded_demo):
+        sample = Sample.objects.get(kind=SampleKind.AMPLIFICATION_PRODUCT, label="Kan_BFA662")
+
+        accessions = set(sample.sequence_records.values_list("accession", flat=True))
+
+        assert accessions == {"PV947740", "PV947692", "PV405576"}  # SPLCV, deltasatellite, alpha
+
+    def test_both_studies_are_cited(self, loaded_demo):
+        notes = SequenceRecord.objects.get(accession="PV405580").notes
+        assert "10.3390/v17091222" in notes
+        assert (
+            "10.3389/fmicb.2026.1722370" in SequenceRecord.objects.get(accession="PV947692").notes
+        )
+
+    def test_a_date_that_disagrees_with_the_biosample_is_flagged(self, loaded_demo):
+        record = SequenceRecord.objects.get(accession="PV405577")
+
+        assert record.sample.label == "Ban_BFA1094"
+        assert "2016-08-18" in record.notes
+        assert "2016-08-16" in record.notes
 
     def test_a_genome_reaches_its_biosample_through_the_lineage(self, loaded_demo):
         record = SequenceRecord.objects.get(accession="PV947737")
@@ -116,7 +137,7 @@ class TestLoading:
         record = SequenceRecord.objects.get(accession="PV947757")
 
         assert record.sample.label == "Tieb_E1_BFA297"
-        assert "differs from the BioSample name" in record.notes
+        assert "isolate name differs from the BioSample name" in record.notes
         assert "differs" not in SequenceRecord.objects.get(accession="PV947737").notes
 
     def test_every_derivative_traces_back_to_a_field_sample(self, loaded_demo):

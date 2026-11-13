@@ -350,12 +350,12 @@ def _load_real_data(users: dict[str, User], project: Project, plan: _Plan) -> di
 
 
 def _link_genomes(users: dict[str, User], project: Project) -> int:
-    """Attach each published genome to the sequenced material: the RCA product for DNA viruses,
+    """Attach each published sequence to the sequenced material: the RCA product for DNA viruses,
     the RNA extract for RNA viruses. Samples are found by label, which is the BioSample isolate."""
     technician = users["demo_technician"]
     kinds = {"genomic DNA": SampleKind.AMPLIFICATION_PRODUCT, "genomic RNA": SampleKind.RNA_EXTRACT}
     created = 0
-    for row in _read("genomes_PV947737-PV947760.csv"):
+    for row in _read("sequences_PRJNA1460897.csv"):
         sample = Sample.objects.get(
             project=project,
             kind=kinds[row["mol_type"]],
@@ -364,12 +364,9 @@ def _link_genomes(users: dict[str, User], project: Project) -> int:
         )
         if sample.sequence_records.filter(accession=row["accession"]).exists():
             continue
-        note = f"Isolate {row['isolate']} in GenBank."
-        if row["match"] == "inferred":
-            note += (
-                " Linked to the BioSample by sample number, date and coordinates: the isolate "
-                "name differs from the BioSample name."
-            )
+        note = f"Isolate {row['isolate']} in GenBank. Published in doi:{row['publication']}."
+        if row["match_note"]:
+            note += " " + row["match_note"]
         services.record_sequence(
             user=technician,
             sample=sample,
