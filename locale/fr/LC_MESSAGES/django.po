@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 09:40+0000\n"
+"POT-Creation-Date: 2026-11-13 11:56+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -263,11 +263,9 @@ msgid "Position"
 msgstr "Position"
 
 #: poresira/pcr/forms.py
-msgid ""
-"Well such as A1, or tube number; empty takes the next free one."
+msgid "Well such as A1, or tube number; empty takes the next free one."
 msgstr ""
-"Puits comme A1, ou numéro du tube ; vide prend la première position "
-"libre."
+"Puits comme A1, ou numéro du tube ; vide prend la première position libre."
 
 #: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
 msgid "Template (µL)"
@@ -294,11 +292,9 @@ msgid "A control has no template sample."
 msgstr "Un témoin n'a pas d'échantillon comme matrice."
 
 #: poresira/pcr/forms.py
-msgid ""
-"Required once the run is closed; recorded in the audit log."
+msgid "Required once the run is closed; recorded in the audit log."
 msgstr ""
-"Obligatoire une fois le passage clos ; enregistré dans le journal "
-"d'audit."
+"Obligatoire une fois le passage clos ; enregistré dans le journal d'audit."
 
 #: poresira/pcr/models/reference.py
 msgid "Forward"
@@ -309,6 +305,7 @@ msgid "Reverse"
 msgstr "Antisens"
 
 #: poresira/pcr/models/reference.py poresira/samples/models/storage.py
+#: poresira/sequencing/models/reference.py poresira/sequencing/models/run.py
 msgid "name"
 msgstr "nom"
 
@@ -328,14 +325,15 @@ msgstr "sens"
 msgid "target"
 msgstr "cible"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py poresira/sequencing/models/reference.py
 msgid "reference"
 msgstr "référence"
 
 #: poresira/pcr/models/reference.py poresira/pcr/models/run.py
 #: poresira/samples/models/collection.py poresira/samples/models/qc.py
 #: poresira/samples/models/sample.py poresira/samples/models/sequence.py
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/run.py
 msgid "notes"
 msgstr "notes"
 
@@ -439,7 +437,7 @@ msgstr "Plaque 96 puits"
 msgid "PCR tubes"
 msgstr "Tubes PCR"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py poresira/sequencing/models/run.py
 msgid "Planned"
 msgstr "Planifié"
 
@@ -484,7 +482,7 @@ msgid "Inconclusive"
 msgstr "Non concluant"
 
 #: poresira/pcr/models/run.py poresira/samples/models/collection.py
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py poresira/sequencing/models/run.py
 msgid "project"
 msgstr "projet"
 
@@ -505,6 +503,7 @@ msgid "Only for PCR tubes."
 msgstr "Seulement pour les tubes PCR."
 
 #: poresira/pcr/models/run.py poresira/samples/models/sample.py
+#: poresira/sequencing/models/run.py
 msgid "status"
 msgstr "statut"
 
@@ -512,7 +511,7 @@ msgstr "statut"
 msgid "date"
 msgstr "date"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py poresira/sequencing/models/run.py
 msgid "performed by"
 msgstr "réalisé par"
 
@@ -528,7 +527,7 @@ msgstr "lot du mélange réactionnel"
 msgid "polymerase lot"
 msgstr "lot de polymérase"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py poresira/sequencing/models/run.py
 msgid "reconstructed from a publication"
 msgstr "reconstitué d'après une publication"
 
@@ -539,7 +538,7 @@ msgstr ""
 "Les résultats viennent d'un tableau publié ; la date, la disposition et les "
 "témoins sont inconnus."
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py poresira/sequencing/models/run.py
 msgid "run"
 msgstr "passage"
 
@@ -926,7 +925,7 @@ msgstr[0] "%(total)s réaction, %(positives)s positive."
 msgstr[1] "%(total)s réactions, %(positives)s positives."
 
 #: poresira/pcr/templates/pcr/run_detail.html poresira/samples/models/qc.py
-#: poresira/samples/models/sequence.py
+#: poresira/samples/models/sequence.py poresira/sequencing/models/run.py
 msgid "sample"
 msgstr "échantillon"
 
@@ -1226,7 +1225,7 @@ msgstr "Qubit RNA IQ"
 msgid "Gel electrophoresis"
 msgstr "Électrophorèse sur gel"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py poresira/sequencing/models/reference.py
 msgid "Other"
 msgstr "Autre"
 
@@ -1319,6 +1318,7 @@ msgid "parent"
 msgstr "parent"
 
 #: poresira/samples/models/sample.py poresira/samples/models/storage.py
+#: poresira/sequencing/models/run.py
 msgid "type"
 msgstr "type"
 
@@ -1353,7 +1353,7 @@ msgstr ""
 msgid "symptoms"
 msgstr "symptômes"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py poresira/sequencing/models/run.py
 msgid "barcode"
 msgstr "code-barres"
 
@@ -1762,3 +1762,174 @@ msgstr "Échantillon de terrain enregistré."
 #: poresira/samples/views.py
 msgid "Storage location created."
 msgstr "Emplacement de stockage créé."
+
+#: poresira/sequencing/models/reference.py
+msgid "Oxford Nanopore"
+msgstr "Oxford Nanopore"
+
+#: poresira/sequencing/models/reference.py
+msgid "Native barcoding"
+msgstr "Code-barres natif"
+
+#: poresira/sequencing/models/reference.py
+msgid "Rapid barcoding"
+msgstr "Code-barres rapide"
+
+#: poresira/sequencing/models/reference.py
+msgid "cDNA-PCR barcoding"
+msgstr "Code-barres ADNc-PCR"
+
+#: poresira/sequencing/models/reference.py
+msgid "Ligation (no barcodes)"
+msgstr "Ligation (sans code-barres)"
+
+#: poresira/sequencing/models/reference.py
+msgid "platform"
+msgstr "plateforme"
+
+#: poresira/sequencing/models/reference.py
+msgid "kit code"
+msgstr "code du kit"
+
+#: poresira/sequencing/models/reference.py
+msgid "chemistry"
+msgstr "chimie"
+
+#: poresira/sequencing/models/reference.py
+msgid "number of barcodes"
+msgstr "nombre de codes-barres"
+
+#: poresira/sequencing/models/reference.py
+msgid "Empty for a kit without barcodes."
+msgstr "Vide pour un kit sans code-barres."
+
+#: poresira/sequencing/models/reference.py
+msgid "product code"
+msgstr "code produit"
+
+#: poresira/sequencing/models/reference.py
+msgid "pore type"
+msgstr "type de pore"
+
+#: poresira/sequencing/models/reference.py
+msgid "model"
+msgstr "modèle"
+
+#: poresira/sequencing/models/reference.py
+msgid "serial number"
+msgstr "numéro de série"
+
+#: poresira/sequencing/models/run.py
+msgid "Draft"
+msgstr "Brouillon"
+
+#: poresira/sequencing/models/run.py
+msgid "Sealed"
+msgstr "Scellée"
+
+#: poresira/sequencing/models/run.py
+msgid "Running"
+msgstr "En cours"
+
+#: poresira/sequencing/models/run.py
+msgid "Completed"
+msgstr "Terminé"
+
+#: poresira/sequencing/models/run.py
+msgid "Aborted"
+msgstr "Abandonné"
+
+#: poresira/sequencing/models/run.py
+msgid "kit"
+msgstr "kit"
+
+#: poresira/sequencing/models/run.py
+msgid "date prepared"
+msgstr "date de préparation"
+
+#: poresira/sequencing/models/run.py
+msgid "prepared by"
+msgstr "préparé par"
+
+#: poresira/sequencing/models/run.py
+msgid ""
+"Barcodes and date come from a publication and may be unknown."
+msgstr ""
+"Les codes-barres et la date viennent d'une publication et peuvent être "
+"inconnus."
+
+#: poresira/sequencing/models/run.py
+msgid "library"
+msgstr "bibliothèque"
+
+#: poresira/sequencing/models/run.py
+msgid "input (ng)"
+msgstr "quantité engagée (ng)"
+
+#: poresira/sequencing/models/run.py
+msgid "flow cell ID"
+msgstr "identifiant de la cellule de flux"
+
+#: poresira/sequencing/models/run.py
+msgid "active pores at check"
+msgstr "pores actifs au contrôle"
+
+#: poresira/sequencing/models/run.py
+msgid "flow cell"
+msgstr "cellule de flux"
+
+#: poresira/sequencing/models/run.py
+msgid "instrument"
+msgstr "appareil"
+
+#: poresira/sequencing/models/run.py
+msgid "run ID"
+msgstr "identifiant du passage"
+
+#: poresira/sequencing/models/run.py
+msgid "The identifier given by the sequencer software."
+msgstr "L'identifiant donné par le logiciel du séquenceur."
+
+#: poresira/sequencing/models/run.py
+msgid "start date"
+msgstr "date de début"
+
+#: poresira/sequencing/models/run.py
+msgid "acquisition software"
+msgstr "logiciel d'acquisition"
+
+#: poresira/sequencing/models/run.py
+msgid "basecaller"
+msgstr "logiciel d'appel de bases"
+
+#: poresira/sequencing/models/run.py
+msgid "basecaller version"
+msgstr "version du logiciel d'appel de bases"
+
+#: poresira/sequencing/models/run.py
+msgid "basecalling model"
+msgstr "modèle d'appel de bases"
+
+#: poresira/sequencing/models/run.py
+msgid "reads"
+msgstr "lectures"
+
+#: poresira/sequencing/models/run.py
+msgid "bases"
+msgstr "bases"
+
+#: poresira/sequencing/models/run.py
+msgid "Details come from a publication and may be unknown."
+msgstr "Les détails viennent d'une publication et peuvent être inconnus."
+
+#: poresira/sequencing/models/run.py
+msgid "member"
+msgstr "membre"
+
+#: poresira/sequencing/models/run.py
+msgid "read N50 (bp)"
+msgstr "N50 des lectures (pb)"
+
+#: poresira/sequencing/models/run.py
+msgid "mean quality (Q)"
+msgstr "qualité moyenne (Q)"

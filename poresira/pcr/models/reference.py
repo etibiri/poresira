@@ -12,17 +12,10 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from poresira.core.models import UUIDPrimaryKeyModel
+from poresira.core.tracking import tracked
 from poresira.core.voiding import VoidableModel
 
 IUPAC_DNA = r"^[ACGTRYSWKMBDHVN]+$"
-
-
-def tracked():
-    """Fresh event definitions for each model: pghistory binds them to the model it decorates."""
-    return (
-        pghistory.InsertEvent(),
-        pghistory.UpdateEvent(condition=pghistory.AnyChange(exclude_auto=True)),
-    )
 
 
 class PrimerDirection(models.TextChoices):
