@@ -26,8 +26,8 @@ Table 3 of Tibiri et al. 2020, *Plant Pathology* 69(6):1003-1017
 ([10.1111/ppa.13190](https://doi.org/10.1111/ppa.13190)), open access under the Creative Commons
 Attribution licence (CC BY 4.0): the 50 sweetpotato samples indexed by grafting onto
 *Ipomoea setosa*. Only the locality, sample number and the symptom codes observed on the sweetpotato
-and on the grafted *I. setosa* are kept here; the serological and molecular results of that table
-belong to the PCR phase and will be added then. Transcribed by hand from the published table,
+and on the grafted *I. setosa* are kept here; its molecular results are in `article_table3_pcr_results.csv`
+(below); the serological (NCM-ELISA) results are not loaded. Transcribed by hand from the published table,
 with two typographical normalisations (`VC, B` written `Vc, B`, a trailing comma removed).
 
 Symptom codes: A asymptomatic, B blistering, C chlorosis, Cp chlorotic points, I interveinal
@@ -76,3 +76,30 @@ coordinates (column `match`, with `match_note` where it is not exact):
   confirmed this match (column `match` = `confirmed`).
 
 The other inferred matches (the 7 without prefix) are flagged in the notes of the sequence record.
+
+## `article_table3_pcr_results.csv`
+
+The RT-PCR and PCR columns of Table 3 of Tibiri et al. 2020 for the same 50 samples: SPFMV, SPCSV
+and SPLCV, `positive` or `negative`, transcribed by hand from the published table (25, 21 and 19
+positive samples; the three samples marked as triple infections are positive for all three).
+The NCM-ELISA columns are not included.
+
+The loader builds three runs from it, one per assay (SPFMV and SPCSV RT-PCR, SPLCV PCR), each
+with 50 reactions whose template is the field sample (the paper reports results per sample, not
+per extract). The runs are marked as reconstructed from a publication: the paper gives no run
+date, plate layout, controls, Ct or band sizes, so none is recorded and the runs are never
+judged valid or invalid. Wells follow the order of the table.
+
+The primers and cycling programs are those of section 2.3 of the paper (Prasanth and Hegde 2008,
+Qin et al. 2014, Li et al. 2004), with the paper's reported amplicon sizes (about 945, 774 and
+792 nucleotides). Details the paper leaves to be checked:
+
+- The paper lists `CP1A` before `CP1S` and `SPG1` before `SPG2`. Their orientation was checked by
+  aligning them to the GenBank genomes PV947757 (SPFMV) and PV947737 (SPLCV): `CP1S` and `SPG1`
+  match the genome strand (forward), `CP1A` and `SPG2` its complement (reverse). `CP-F` starts
+  with a start codon and `CP-R` ends with a stop codon, so they are forward and reverse.
+- The paper assigns `CP1A`/`CP1S` to SPFMV and `CP-F`/`CP-R` to SPCSV; the author confirmed it.
+- The SPLCV program prints a denaturation of 90 °C for 40 s; it is kept as published (94 °C is
+  the usual value).
+- Only the SPLCV reaction mix is given in full. For the two RT-PCR assays the paper gives the
+  polymerase, the primer concentration and the cDNA volume, which are in the assay notes.

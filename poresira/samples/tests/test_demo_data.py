@@ -10,6 +10,8 @@ from django.db import transaction
 
 from poresira.core.audit import verify_audit_chain
 from poresira.core.models import Project, User
+from poresira.pcr.models import Assay, PcrReaction, PcrRun, Primer, Result, RunStatus
+from poresira.pcr.services import Validity, assess_run
 from poresira.samples.demo import loader
 from poresira.samples.lineage import ancestors, family_tree
 from poresira.samples.models import (
@@ -81,6 +83,76 @@ class TestParsing:
         assert loader.expand_symptoms("Vc, Lc") == "Vein-clearing, leaf curling"
         assert loader.expand_symptoms("A") == "Asymptomatic"
         assert loader.expand_symptoms("Vc, C, P") == "Vein-clearing, chlorosis, P"
+
+
+class TestPcrData:
+    def test_table_3_pcr_results_are_complete_and_reproduce_the_published_counts(self):
+        rows = loader._read("article_table3_pcr_results.csv")
+
+        assert len(rows) == 50
+        positives = {
+            column: sum(row[column] == "positive" for row in rows)
+            for column in ("pcr_spfmv", "pcr_spcsv", "pcr_splcv")
+        }
+        assert positives == {"pcr_spfmv": 25, "pcr_spcsv": 21, "pcr_splcv": 19}
+        triple = [r for r in rows if r["sample"] in ("BFA173", "BFA169", "BFA148")]
+        assert all(r["pcr_spfmv"] == r["pcr_spcsv"] == r["pcr_splcv"] == "positive" for r in triple)
+
+    def test_the_primers_are_those_of_the_paper_with_the_orientation_checked(self, loaded_demo):
+        sequences = {p.name: (p.sequence, p.direction) for p in Primer.objects.all()}
+
+        assert sequences["CP-F"] == ("ATGGCTGATAGCACTAAAGTCGA", "forward")
+        assert sequences["CP-R"] == ("TCAACAGTGAAGACCTGTTCCAG", "reverse")
+        assert sequences["CP1S"][1] == "forward"
+        assert sequences["CP1A"][1] == "reverse"
+        assert sequences["SPG1"] == ("CCCCKGTGCGWRAATCCAT", "forward")
+        assert sequences["SPG2"][1] == "reverse"
+
+    def test_each_assay_carries_its_published_protocol(self, loaded_demo):
+        spfmv = Assay.objects.get(name="SPFMV CP RT-PCR")
+        splcv = Assay.objects.get(name="SPLCV CP PCR")
+
+        assert spfmv.reverse_transcription
+        assert not splcv.reverse_transcription
+        assert [str(s.temperature_c) for s in spfmv.cycling_program.steps.all()] == [
+            "94.0",
+            "94.0",
+            "56.3",
+            "72.0",
+            "72.0",
+        ]
+        assert splcv.cycling_program.cycles == 30
+        assert splcv.master_mix.components.count() == 6
+
+    def test_three_reconstructed_runs_hold_the_150_published_results(self, loaded_demo):
+        runs = PcrRun.objects.all()
+
+        assert runs.count() == 3
+        assert all(r.reconstructed and r.status == RunStatus.CLOSED for r in runs)
+        assert all(r.performed_on is None and r.reactions.count() == 50 for r in runs)
+        assert all(assess_run(r).state == Validity.NOT_ASSESSED for r in runs)
+        assert loaded_demo.counts["PCR reactions"] == 150
+        positives = PcrReaction.objects.filter(result=Result.POSITIVE)
+        assert positives.filter(run__assay__name="SPFMV CP RT-PCR").count() == 25
+        assert positives.filter(run__assay__name="SPCSV CP RT-PCR").count() == 21
+        assert positives.filter(run__assay__name="SPLCV CP PCR").count() == 19
+
+    def test_a_sample_shows_its_three_results(self, loaded_demo):
+        sample = Sample.objects.get(kind=SampleKind.FIELD_SAMPLE, label="Sam_BFA148")
+
+        results = {r.run.assay.name: r.result for r in sample.pcr_reactions.all()}
+
+        assert results == {
+            "SPFMV CP RT-PCR": "positive",
+            "SPCSV CP RT-PCR": "positive",
+            "SPLCV CP PCR": "positive",
+        }
+
+    def test_samples_without_a_biosample_are_tested_under_their_table_number(self, loaded_demo):
+        sample = Sample.objects.get(kind=SampleKind.FIELD_SAMPLE, label="BFA44")
+
+        assert sample.pcr_reactions.count() == 3
+        assert {r.result for r in sample.pcr_reactions.all()} == {"negative"}
 
 
 class TestLoading:

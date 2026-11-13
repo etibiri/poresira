@@ -15,7 +15,9 @@ from django.db import transaction
 
 from poresira.core.models import GlobalRole, Project, ProjectMembership, ProjectRole, User
 from poresira.core.reason import acting_as
+from poresira.pcr.models import PcrReaction
 from poresira.samples import services
+from poresira.samples.demo.pcr import load_pcr_demo
 from poresira.samples.importing import import_field_samples
 from poresira.samples.models import Sample, SampleKind, SequenceRecord, StorageLocationKind
 
@@ -385,6 +387,20 @@ def _link_genomes(users: dict[str, User], project: Project) -> int:
     return created
 
 
+def _table3_field_samples(project: Project, plan: _Plan) -> dict[str, Sample]:
+    """The field sample of each Table 3 sample: named after its BioSample, or by its number."""
+    isolate_of = {number: isolate for isolate, number in plan.table3_match.items()}
+    return {
+        number: Sample.objects.get(
+            project=project,
+            kind=SampleKind.FIELD_SAMPLE,
+            label=isolate_of.get(number, number),
+            voided_at__isnull=True,
+        )
+        for number in plan.table3
+    }
+
+
 def _load_synthetic(users: dict[str, User], count: int) -> None:
     technician = users["demo_technician"]
     project = _create_project(
@@ -428,6 +444,7 @@ def _counts(project: Project) -> dict[str, int]:
     for kind in SampleKind:
         counts[f"{kind.label}s"] = samples.filter(kind=kind).count()
     counts["sequences"] = SequenceRecord.objects.filter(sample__project=project).count()
+    counts["PCR reactions"] = PcrReaction.objects.filter(run__project=project).count()
     return counts
 
 
@@ -447,6 +464,7 @@ def load_demo_data(*, password: str | None = None, synthetic_volume: int = 0) ->
         _load_real_data(users, project, _make_plan())
     else:
         summary.already_loaded = True
+    load_pcr_demo(users, project, _table3_field_samples(project, _make_plan()))
     _link_genomes(users, project)  # also completes a database loaded before genomes existed
     summary.counts = _counts(project)
     if synthetic_volume and not Project.objects.filter(code=SYNTHETIC_PROJECT_CODE).exists():
