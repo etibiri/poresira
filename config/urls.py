@@ -6,4 +6,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("poresira.core.urls")),
     path("", include("poresira.samples.urls")),
+    path("", include("poresira.pcr.urls")),
 ]

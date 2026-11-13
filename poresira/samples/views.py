@@ -179,6 +179,10 @@ class SampleDetailView(SampleMixin, LoginRequiredMixin, TemplateView):
             family=family_tree(sample),
             measurements=sample.qc_measurements.select_related("measured_by"),
             sequences=sample.sequence_records.active(),
+            pcr_reactions=sample.pcr_reactions.active()
+            .filter(run__voided_at__isnull=True)
+            .select_related("run__assay")
+            .order_by("run__identifier", "position"),
             entries=history,
             **kwargs,
         )

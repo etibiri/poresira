@@ -1,0 +1,15 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% with reaction=cell.reaction %}
+{% if reaction %}
+<a href="{% if can_enter_results %}{% url 'pcr:reaction-result' reaction.pk %}{% else %}#r-{{ reaction.pk }}{% endif %}"
+   class="d-block rounded text-decoration-none small py-1
+     {% if reaction.result == 'positive' %}text-bg-success{% elif reaction.result == 'negative' %}text-bg-secondary{% elif reaction.result == 'inconclusive' %}text-bg-warning{% else %}bg-light border text-dark{% endif %}"
+   title="{{ cell.position }} · {{ reaction.get_role_display }}{% if reaction.sample %} · {{ reaction.sample.label }}{% endif %} · {{ reaction.get_result_display }}">
+  {% if reaction.role == 'positive_control' %}+{% elif reaction.role == 'negative_control' %}−{% elif reaction.role == 'extraction_blank' %}B{% else %}●{% endif %}
+</a>
+{% elif can_add %}
+<a href="{% url 'pcr:reaction-add' run.pk %}?position={{ cell.position }}" class="d-block rounded border text-decoration-none text-muted small py-1" title="{{ cell.position }}">·</a>
+{% else %}
+<span class="d-block rounded border text-muted small py-1" title="{{ cell.position }}">·</span>
+{% endif %}
+{% endwith %}

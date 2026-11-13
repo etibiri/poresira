@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Assays" %} · PoreSira{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Assays" %}</h1>
+<table class="table table-sm align-middle">
+  <thead><tr>
+    <th>{% trans "Name" %}</th><th>{% trans "Target" %}</th><th>{% trans "Forward primer" %}</th><th>{% trans "Reverse primer" %}</th>
+    <th>{% trans "Cycling program" %}</th><th>{% trans "Master mix" %}</th><th>{% trans "RT" %}</th><th>{% trans "Amplicon (bp)" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for assay in assays %}
+    <tr>
+      <td>{{ assay.name }}</td><td>{{ assay.target }}</td>
+      <td>{{ assay.forward_primer.name }}</td><td>{{ assay.reverse_primer.name }}</td>
+      <td>{{ assay.cycling_program.name }}</td><td>{{ assay.master_mix.name|default:"—" }}</td>
+      <td>{% if assay.reverse_transcription %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</td>
+      <td>{{ assay.expected_amplicon_bp|default_if_none:"—" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="8" class="text-muted">{% trans "No assays yet." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'pcr:run-list' %}">{% trans "PCR runs" %}</a>
+{% endblock %}

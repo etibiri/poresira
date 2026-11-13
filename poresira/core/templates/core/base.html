@@ -21,6 +21,7 @@
         <li class="nav-item"><a class="nav-link" href="{% url 'samples:sample-list' %}">{% trans "Samples" %}</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'samples:event-list' %}">{% trans "Collection events" %}</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'samples:storage-tree' %}">{% trans "Storage" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'pcr:run-list' %}">{% trans "PCR" %}</a></li>
         {% endif %}
       </ul>
       <form method="post" action="{% url 'set-language' %}" class="d-flex gap-1 me-3">

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 08:07+0000\n"
+"POT-Creation-Date: 2026-11-13 09:40+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -22,7 +22,9 @@ msgstr "Créé"
 msgid "Modified"
 msgstr "Modifié"
 
-#: poresira/core/history.py poresira/samples/forms.py
+#: poresira/core/history.py poresira/pcr/forms.py
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_list.html poresira/samples/forms.py
 #: poresira/samples/templates/samples/_sample_results.html
 #: poresira/samples/templates/samples/event_detail.html
 #: poresira/samples/templates/samples/event_list.html
@@ -39,6 +41,8 @@ msgid "Code"
 msgstr "Code"
 
 #: poresira/core/history.py poresira/core/templates/core/project_list.html
+#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/primer_list.html
 msgid "Name"
 msgstr "Nom"
 
@@ -46,7 +50,8 @@ msgstr "Nom"
 msgid "Description"
 msgstr "Description"
 
-#: poresira/core/history.py
+#: poresira/core/history.py poresira/pcr/forms.py
+#: poresira/pcr/templates/pcr/run_detail.html
 msgid "Role"
 msgstr "Rôle"
 
@@ -107,7 +112,8 @@ msgstr "Un motif est obligatoire pour cette modification."
 msgid "by %(username)s"
 msgstr "par %(username)s"
 
-#: poresira/core/templates/core/_history.html poresira/samples/forms.py
+#: poresira/core/templates/core/_history.html poresira/pcr/forms.py
+#: poresira/pcr/templates/pcr/run_detail.html poresira/samples/forms.py
 #: poresira/samples/templates/samples/sample_detail.html
 msgid "Reason"
 msgstr "Motif"
@@ -155,6 +161,7 @@ msgstr "Échantillons"
 
 #: poresira/core/templates/core/_project_rows.html
 #: poresira/core/templates/core/project_history.html
+#: poresira/pcr/templates/pcr/run_detail.html
 #: poresira/samples/templates/samples/sample_detail.html
 msgid "History"
 msgstr "Historique"
@@ -179,6 +186,10 @@ msgstr "Événements de collecte"
 #: poresira/samples/templates/samples/storage_tree.html
 msgid "Storage"
 msgstr "Stockage"
+
+#: poresira/core/templates/core/base.html
+msgid "PCR"
+msgstr "PCR"
 
 #: poresira/core/templates/core/base.html
 msgid "Log out"
@@ -207,6 +218,87 @@ msgstr "Un motif est obligatoire pour annuler un enregistrement."
 #: poresira/core/voiding.py
 msgid "This record is already voided."
 msgstr "Cet enregistrement est déjà annulé."
+
+#: poresira/pcr/forms.py poresira/samples/forms.py
+msgid "All"
+msgstr "Tous"
+
+#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Assay"
+msgstr "Test"
+
+#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Status"
+msgstr "Statut"
+
+#: poresira/pcr/forms.py poresira/samples/forms.py
+msgid "Show voided"
+msgstr "Afficher les annulés"
+
+#: poresira/pcr/forms.py
+msgid "Only for PCR tubes: from 1 to 96."
+msgstr "Seulement pour les tubes PCR : de 1 à 96."
+
+#: poresira/pcr/forms.py
+msgid "Give the number of tubes."
+msgstr "Indiquez le nombre de tubes."
+
+#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
+msgid "Template"
+msgstr "Matrice"
+
+#: poresira/pcr/forms.py
+msgid "Identifier or label of the sample; empty for a control."
+msgstr "Identifiant ou étiquette de l'échantillon ; vide pour un témoin."
+
+#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Position"
+msgstr "Position"
+
+#: poresira/pcr/forms.py
+msgid ""
+"Well such as A1, or tube number; empty takes the next free one."
+msgstr ""
+"Puits comme A1, ou numéro du tube ; vide prend la première position "
+"libre."
+
+#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
+msgid "Template (µL)"
+msgstr "Matrice (µL)"
+
+#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
+#: poresira/samples/forms.py
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Notes"
+msgstr "Notes"
+
+#: poresira/pcr/forms.py
+#, python-format
+msgid "No single sample of this project matches “%(text)s”."
+msgstr "Aucun échantillon unique de ce projet ne correspond à « %(text)s »."
+
+#: poresira/pcr/forms.py
+msgid "A sample reaction needs a template."
+msgstr "Une réaction d'échantillon a besoin d'une matrice."
+
+#: poresira/pcr/forms.py
+msgid "A control has no template sample."
+msgstr "Un témoin n'a pas d'échantillon comme matrice."
+
+#: poresira/pcr/forms.py
+msgid ""
+"Required once the run is closed; recorded in the audit log."
+msgstr ""
+"Obligatoire une fois le passage clos ; enregistré dans le journal "
+"d'audit."
 
 #: poresira/pcr/models/reference.py
 msgid "Forward"
@@ -375,19 +467,19 @@ msgstr "Témoin sans matrice"
 msgid "Extraction blank"
 msgstr "Blanc d'extraction"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py poresira/pcr/templates/pcr/run_detail.html
 msgid "Pending"
 msgstr "En attente"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py poresira/pcr/templates/pcr/run_detail.html
 msgid "Positive"
 msgstr "Positif"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py poresira/pcr/templates/pcr/run_detail.html
 msgid "Negative"
 msgstr "Négatif"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py poresira/pcr/templates/pcr/run_detail.html
 msgid "Inconclusive"
 msgstr "Non concluant"
 
@@ -471,7 +563,8 @@ msgstr "volume de matrice (µL)"
 msgid "result"
 msgstr "résultat"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py poresira/pcr/templates/pcr/run_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
 msgid "Ct"
 msgstr "Ct"
 
@@ -484,8 +577,7 @@ msgid "band size on gel (bp)"
 msgstr "taille de bande sur gel (pb)"
 
 #: poresira/pcr/services.py
-msgid ""
-"Steps must go from the initial steps to the cycle to the final steps."
+msgid "Steps must go from the initial steps to the cycle to the final steps."
 msgstr ""
 "Les étapes doivent aller des étapes initiales au cycle puis aux étapes "
 "finales."
@@ -507,11 +599,10 @@ msgid "This primer is not a reverse primer."
 msgstr "Cette amorce n'est pas une amorce antisens."
 
 #: poresira/pcr/services.py
-msgid ""
-"A voided primer, program or master mix cannot be used."
+msgid "A voided primer, program or master mix cannot be used."
 msgstr ""
-"Une amorce, un programme ou un mélange réactionnel annulé ne peut pas "
-"être utilisé."
+"Une amorce, un programme ou un mélange réactionnel annulé ne peut pas être "
+"utilisé."
 
 #: poresira/pcr/services.py
 #, python-format
@@ -549,11 +640,10 @@ msgid "The template must belong to the project of the run."
 msgstr "La matrice doit appartenir au projet du passage."
 
 #: poresira/pcr/services.py
-msgid ""
-"A living plant cannot be a template; use an extract of it."
+msgid "A living plant cannot be a template; use an extract of it."
 msgstr ""
-"Une plante vivante ne peut pas servir de matrice ; utilisez un extrait "
-"de cette plante."
+"Une plante vivante ne peut pas servir de matrice ; utilisez un extrait de "
+"cette plante."
 
 #: poresira/pcr/services.py
 msgid "This sample is used up or discarded."
@@ -570,8 +660,7 @@ msgid "Position %(position)s of this run is already used."
 msgstr "La position %(position)s de ce passage est déjà utilisée."
 
 #: poresira/pcr/services.py
-msgid ""
-"Add at least one reaction before marking the run as performed."
+msgid "Add at least one reaction before marking the run as performed."
 msgstr ""
 "Ajoutez au moins une réaction avant de marquer le passage comme réalisé."
 
@@ -637,6 +726,374 @@ msgstr "Un test actif utilise encore cet enregistrement."
 msgid "Void the runs of this assay first."
 msgstr "Annulez d'abord les passages de ce test."
 
+#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/run_list.html
+msgid "Assays"
+msgstr "Tests"
+
+#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/primer_list.html
+msgid "Target"
+msgstr "Cible"
+
+#: poresira/pcr/templates/pcr/assay_list.html
+msgid "Forward primer"
+msgstr "Amorce sens"
+
+#: poresira/pcr/templates/pcr/assay_list.html
+msgid "Reverse primer"
+msgstr "Amorce antisens"
+
+#: poresira/pcr/templates/pcr/assay_list.html
+msgid "Cycling program"
+msgstr "Programme de cycles"
+
+#: poresira/pcr/templates/pcr/assay_list.html
+msgid "Master mix"
+msgstr "Mélange réactionnel"
+
+#: poresira/pcr/templates/pcr/assay_list.html
+msgid "RT"
+msgstr "RT"
+
+#: poresira/pcr/templates/pcr/assay_list.html
+msgid "Amplicon (bp)"
+msgstr "Amplicon (pb)"
+
+#: poresira/pcr/templates/pcr/assay_list.html
+msgid "Yes"
+msgstr "Oui"
+
+#: poresira/pcr/templates/pcr/assay_list.html
+msgid "No"
+msgstr "Non"
+
+#: poresira/pcr/templates/pcr/assay_list.html
+msgid "No assays yet."
+msgstr "Aucun test pour le moment."
+
+#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/primer_list.html
+#: poresira/pcr/templates/pcr/program_list.html
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_list.html
+msgid "PCR runs"
+msgstr "Passages PCR"
+
+#: poresira/pcr/templates/pcr/primer_list.html
+#: poresira/pcr/templates/pcr/run_list.html
+msgid "Primers"
+msgstr "Amorces"
+
+#: poresira/pcr/templates/pcr/primer_list.html
+msgid "Sequence (5'→3')"
+msgstr "Séquence (5'→3')"
+
+#: poresira/pcr/templates/pcr/primer_list.html
+msgid "Length"
+msgstr "Longueur"
+
+#: poresira/pcr/templates/pcr/primer_list.html
+msgid "Direction"
+msgstr "Sens"
+
+#: poresira/pcr/templates/pcr/primer_list.html
+msgid "Reference"
+msgstr "Référence"
+
+#: poresira/pcr/templates/pcr/primer_list.html
+msgid "No primers yet."
+msgstr "Aucune amorce pour le moment."
+
+#: poresira/pcr/templates/pcr/program_list.html
+#: poresira/pcr/templates/pcr/run_list.html
+msgid "Cycling programs"
+msgstr "Programmes de cycles"
+
+#: poresira/pcr/templates/pcr/program_list.html
+#, python-format
+msgid "%(cycles)s cycles"
+msgstr "%(cycles)s cycles"
+
+#: poresira/pcr/templates/pcr/program_list.html
+msgid "Stage"
+msgstr "Phase"
+
+#: poresira/pcr/templates/pcr/program_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+msgid "Label"
+msgstr "Étiquette"
+
+#: poresira/pcr/templates/pcr/program_list.html
+msgid "Temperature (°C)"
+msgstr "Température (°C)"
+
+#: poresira/pcr/templates/pcr/program_list.html
+msgid "Duration (s)"
+msgstr "Durée (s)"
+
+#: poresira/pcr/templates/pcr/program_list.html
+msgid "No programs yet."
+msgstr "Aucun programme pour le moment."
+
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Reconstructed"
+msgstr "Reconstitué"
+
+#: poresira/pcr/templates/pcr/run_detail.html poresira/pcr/views.py
+msgid "Add a reaction"
+msgstr "Ajouter une réaction"
+
+#: poresira/pcr/templates/pcr/run_detail.html poresira/pcr/views.py
+msgid "Mark as performed"
+msgstr "Marquer comme réalisé"
+
+#: poresira/pcr/templates/pcr/run_detail.html poresira/pcr/views.py
+msgid "Close"
+msgstr "Clore"
+
+#: poresira/pcr/templates/pcr/run_detail.html poresira/pcr/views.py
+msgid "Reopen"
+msgstr "Rouvrir"
+
+#: poresira/pcr/templates/pcr/run_detail.html poresira/pcr/views.py
+#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/views.py
+msgid "Void"
+msgstr "Annuler"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+#, python-format
+msgid "Voided on %(date)s."
+msgstr "Annulé le %(date)s."
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "Controls valid: the results can be trusted."
+msgstr "Témoins valides : les résultats sont fiables."
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "Controls failed: the run is invalid."
+msgstr "Témoins en échec : le passage est invalide."
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "Validity not assessed."
+msgstr "Validité non évaluée."
+
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Details"
+msgstr "Détails"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_list.html
+msgid "Container"
+msgstr "Support"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_list.html
+msgid "Date"
+msgstr "Date"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "Performed by"
+msgstr "Réalisé par"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "Thermocycler"
+msgstr "Thermocycleur"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "Master mix lot"
+msgstr "Lot du mélange réactionnel"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "Polymerase lot"
+msgstr "Lot de polymérase"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "Summary"
+msgstr "Résumé"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+#, python-format
+msgid "%(total)s reaction, %(positives)s positive."
+msgid_plural "%(total)s reactions, %(positives)s positive."
+msgstr[0] "%(total)s réaction, %(positives)s positive."
+msgstr[1] "%(total)s réactions, %(positives)s positives."
+
+#: poresira/pcr/templates/pcr/run_detail.html poresira/samples/models/qc.py
+#: poresira/samples/models/sequence.py
+msgid "sample"
+msgstr "échantillon"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "positive control"
+msgstr "témoin positif"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "no-template control"
+msgstr "témoin sans matrice"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "extraction blank"
+msgstr "blanc d'extraction"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "Tubes"
+msgstr "Tubes"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "Plate"
+msgstr "Plaque"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_list.html
+msgid "Reactions"
+msgstr "Réactions"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Result"
+msgstr "Résultat"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Band (bp)"
+msgstr "Bande (pb)"
+
+#: poresira/pcr/templates/pcr/run_detail.html
+msgid "No reactions yet."
+msgstr "Aucune réaction pour le moment."
+
+#: poresira/pcr/templates/pcr/run_list.html
+msgid "New run"
+msgstr "Nouveau passage"
+
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/sample_list.html
+msgid "Filter"
+msgstr "Filtrer"
+
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_list.html
+msgid "Identifier"
+msgstr "Identifiant"
+
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Voided"
+msgstr "Annulé"
+
+#: poresira/pcr/templates/pcr/run_list.html
+msgid "No runs to show."
+msgstr "Aucun passage à afficher."
+
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+msgid "Pages"
+msgstr "Pages"
+
+#: poresira/pcr/templates/pcr/run_list.html
+#, python-format
+msgid "Page %(number)s of %(total)s (%(count)s runs)"
+msgstr "Page %(number)s sur %(total)s (%(count)s passages)"
+
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_list.html
+msgid "Previous"
+msgstr "Précédent"
+
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_list.html
+msgid "Next"
+msgstr "Suivant"
+
+#: poresira/pcr/views.py poresira/samples/templates/samples/sample_detail.html
+msgid "Run"
+msgstr "Passage"
+
+#: poresira/pcr/views.py
+#, python-format
+msgid "Reaction %(position)s"
+msgstr "Réaction %(position)s"
+
+#: poresira/pcr/views.py
+msgid "New PCR run"
+msgstr "Nouveau passage PCR"
+
+#: poresira/pcr/views.py poresira/samples/views.py
+msgid "Create"
+msgstr "Créer"
+
+#: poresira/pcr/views.py
+msgid "PCR run planned."
+msgstr "Passage PCR planifié."
+
+#: poresira/pcr/views.py
+msgid "Add"
+msgstr "Ajouter"
+
+#: poresira/pcr/views.py
+msgid "Reaction added."
+msgstr "Réaction ajoutée."
+
+#: poresira/pcr/views.py
+msgid "Mark the run as performed"
+msgstr "Marquer le passage comme réalisé"
+
+#: poresira/pcr/views.py
+msgid "Run marked as performed."
+msgstr "Passage marqué comme réalisé."
+
+#: poresira/pcr/views.py
+msgid "Close the run"
+msgstr "Clore le passage"
+
+#: poresira/pcr/views.py
+msgid "Run closed."
+msgstr "Passage clos."
+
+#: poresira/pcr/views.py
+msgid "Reopen the run"
+msgstr "Rouvrir le passage"
+
+#: poresira/pcr/views.py
+msgid "Run reopened."
+msgstr "Passage rouvert."
+
+#: poresira/pcr/views.py
+msgid "Void run"
+msgstr "Annuler le passage"
+
+#: poresira/pcr/views.py
+msgid "Run voided."
+msgstr "Passage annulé."
+
+#: poresira/pcr/views.py
+msgid "Enter a result"
+msgstr "Saisir un résultat"
+
+#: poresira/pcr/views.py
+msgid "Result saved."
+msgstr "Résultat enregistré."
+
+#: poresira/pcr/views.py
+msgid "Void reaction"
+msgstr "Annuler la réaction"
+
+#: poresira/pcr/views.py
+msgid "Reaction voided."
+msgstr "Réaction annulée."
+
 #: poresira/samples/forms.py
 msgid "Search"
 msgstr "Recherche"
@@ -646,24 +1103,10 @@ msgid "Identifier or label"
 msgstr "Identifiant ou étiquette"
 
 #: poresira/samples/forms.py
-msgid "All"
-msgstr "Tous"
-
-#: poresira/samples/forms.py
 #: poresira/samples/templates/samples/_sample_results.html
 #: poresira/samples/templates/samples/event_detail.html
 msgid "Type"
 msgstr "Type"
-
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
-msgid "Status"
-msgstr "Statut"
-
-#: poresira/samples/forms.py
-msgid "Show voided"
-msgstr "Afficher les annulés"
 
 #: poresira/samples/forms.py
 msgid "Recorded in the audit log."
@@ -678,10 +1121,6 @@ msgstr "Emplacement de stockage"
 #: poresira/samples/forms.py
 msgid "Not in storage"
 msgstr "Hors stockage"
-
-#: poresira/samples/forms.py
-msgid "Position"
-msgstr "Position"
 
 #: poresira/samples/forms.py
 msgid "Grid position such as A1, for boxes with a grid."
@@ -726,12 +1165,6 @@ msgstr "Indice d'intégrité"
 #: poresira/samples/templates/samples/sample_detail.html
 msgid "Outcome"
 msgstr "Résultat"
-
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-msgid "Notes"
-msgstr "Notes"
 
 #: poresira/samples/forms.py
 msgid "Also set this concentration on the sample"
@@ -808,10 +1241,6 @@ msgstr "Non conforme"
 #: poresira/samples/models/qc.py
 msgid "Not assessed"
 msgstr "Non évalué"
-
-#: poresira/samples/models/qc.py poresira/samples/models/sequence.py
-msgid "sample"
-msgstr "échantillon"
 
 #: poresira/samples/models/qc.py
 msgid "method"
@@ -1110,43 +1539,13 @@ msgstr ""
 
 #: poresira/samples/templates/samples/_sample_results.html
 #: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/event_list.html
-msgid "Identifier"
-msgstr "Identifiant"
-
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
-msgid "Label"
-msgstr "Étiquette"
-
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/sample_detail.html
-msgid "Voided"
-msgstr "Annulé"
-
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
 msgid "No samples to show."
 msgstr "Aucun échantillon à afficher."
-
-#: poresira/samples/templates/samples/_sample_results.html
-msgid "Pages"
-msgstr "Pages"
 
 #: poresira/samples/templates/samples/_sample_results.html
 #, python-format
 msgid "Page %(number)s of %(total)s (%(count)s samples)"
 msgstr "Page %(number)s sur %(total)s (%(count)s échantillons)"
-
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_list.html
-msgid "Previous"
-msgstr "Précédent"
-
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_list.html
-msgid "Next"
-msgstr "Suivant"
 
 #: poresira/samples/templates/samples/event_detail.html
 #: poresira/samples/views.py
@@ -1225,20 +1624,6 @@ msgid "Edit"
 msgstr "Modifier"
 
 #: poresira/samples/templates/samples/sample_detail.html
-#: poresira/samples/views.py
-msgid "Void"
-msgstr "Annuler"
-
-#: poresira/samples/templates/samples/sample_detail.html
-#, python-format
-msgid "Voided on %(date)s."
-msgstr "Annulé le %(date)s."
-
-#: poresira/samples/templates/samples/sample_detail.html
-msgid "Details"
-msgstr "Détails"
-
-#: poresira/samples/templates/samples/sample_detail.html
 msgid "Collection event"
 msgstr "Événement de collecte"
 
@@ -1290,9 +1675,9 @@ msgstr "Longueur (pb)"
 msgid "Topology"
 msgstr "Topologie"
 
-#: poresira/samples/templates/samples/sample_list.html
-msgid "Filter"
-msgstr "Filtrer"
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "PCR results"
+msgstr "Résultats PCR"
 
 #: poresira/samples/templates/samples/storage_tree.html
 #: poresira/samples/views.py
@@ -1325,10 +1710,6 @@ msgstr "Échantillon mis à jour."
 #: poresira/samples/views.py
 msgid "Derive a sample"
 msgstr "Dériver un échantillon"
-
-#: poresira/samples/views.py
-msgid "Create"
-msgstr "Créer"
 
 #: poresira/samples/views.py
 msgid "Derived sample created."

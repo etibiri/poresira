@@ -113,6 +113,29 @@
 </table>
 {% endif %}
 
+{% if pcr_reactions %}
+<h2 class="h5 mt-4">{% trans "PCR results" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr>
+    <th>{% trans "Run" %}</th><th>{% trans "Assay" %}</th><th>{% trans "Position" %}</th>
+    <th>{% trans "Result" %}</th><th>{% trans "Ct" %}</th><th>{% trans "Band (bp)" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for reaction in pcr_reactions %}
+    <tr>
+      <td><a href="{% url 'pcr:run-detail' reaction.run_id %}"><code>{{ reaction.run.identifier }}</code></a>
+        {% if reaction.run.reconstructed %}<span class="badge text-bg-info">{% trans "Reconstructed" %}</span>{% endif %}</td>
+      <td>{{ reaction.run.assay.name }}</td>
+      <td>{{ reaction.position }}</td>
+      <td>{{ reaction.get_result_display }}</td>
+      <td>{{ reaction.ct|default_if_none:"—" }}</td>
+      <td>{{ reaction.band_size_bp|default_if_none:"—" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
 <h2 class="h5 mt-4">{% trans "History" %}</h2>
 {% include "core/_history.html" %}
 {% endblock %}

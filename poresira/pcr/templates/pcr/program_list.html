@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Cycling programs" %} · PoreSira{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Cycling programs" %}</h1>
+{% for program in programs %}
+<div class="card mb-3"><div class="card-body">
+  <h2 class="h6">{{ program.name }} <span class="text-muted small">{% blocktrans with cycles=program.cycles %}{{ cycles }} cycles{% endblocktrans %}</span></h2>
+  <table class="table table-sm mb-0">
+    <thead><tr><th>#</th><th>{% trans "Stage" %}</th><th>{% trans "Label" %}</th><th>{% trans "Temperature (°C)" %}</th><th>{% trans "Duration (s)" %}</th></tr></thead>
+    <tbody>
+      {% for step in program.steps.all %}
+      <tr><td>{{ step.order }}</td><td>{{ step.get_stage_display }}</td><td>{{ step.label|default:"—" }}</td><td>{{ step.temperature_c|floatformat:"-1" }}</td><td>{{ step.duration_seconds }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if program.reference %}<p class="small text-muted mt-2 mb-0">{{ program.reference }}</p>{% endif %}
+</div></div>
+{% empty %}
+<p class="text-muted">{% trans "No programs yet." %}</p>
+{% endfor %}
+<a href="{% url 'pcr:run-list' %}">{% trans "PCR runs" %}</a>
+{% endblock %}

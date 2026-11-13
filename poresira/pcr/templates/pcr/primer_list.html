@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Primers" %} · PoreSira{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Primers" %}</h1>
+<table class="table table-sm align-middle">
+  <thead><tr>
+    <th>{% trans "Name" %}</th><th>{% trans "Sequence (5'→3')" %}</th><th>{% trans "Length" %}</th>
+    <th>{% trans "Direction" %}</th><th>{% trans "Target" %}</th><th>{% trans "Reference" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for primer in primers %}
+    <tr>
+      <td>{{ primer.name }}</td><td><code>{{ primer.sequence }}</code></td><td>{{ primer.length }}</td>
+      <td>{{ primer.get_direction_display }}</td><td>{{ primer.target|default:"—" }}</td><td>{{ primer.reference|default:"—" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" class="text-muted">{% trans "No primers yet." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'pcr:run-list' %}">{% trans "PCR runs" %}</a>
+{% endblock %}
