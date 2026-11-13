@@ -89,13 +89,23 @@ MEMBER_RULES_SQL = """
     RETURN NEW;
 """
 
-# A run uses a sealed library of its own project, on a free flow cell.
+# A run uses a sealed library of its own project. A single-use flow cell (Flongle) has one run.
 RUN_RULES_SQL = """
     IF NOT EXISTS (
         SELECT 1 FROM sequencing_library
         WHERE id = NEW.library_id AND project_id = NEW.project_id AND status = 'sealed'
     ) THEN
         RAISE EXCEPTION 'A run needs a sealed library of its own project'
+            USING ERRCODE = 'check_violation';
+    END IF;
+    IF EXISTS (
+        SELECT 1 FROM sequencing_flowcell f JOIN sequencing_flowcelltype t ON t.id = f.type_id
+        WHERE f.id = NEW.flow_cell_id AND NOT t.reusable
+    ) AND EXISTS (
+        SELECT 1 FROM sequencing_sequencingrun
+        WHERE flow_cell_id = NEW.flow_cell_id AND voided_at IS NULL AND status <> 'aborted'
+    ) THEN
+        RAISE EXCEPTION 'A single-use flow cell serves only one run'
             USING ERRCODE = 'check_violation';
     END IF;
     RETURN NEW;
@@ -294,6 +304,14 @@ class SequencingRun(UUIDPrimaryKeyModel, HumanIdentifiedModel, VoidableModel):
         related_name="runs",
         verbose_name=_("instrument"),
     )
+    pores_at_start = models.PositiveIntegerField(
+        _("active pores at start"),
+        null=True,
+        blank=True,
+        help_text=_(
+            "Counted at the check before this run; a reused flow cell has fewer each time."
+        ),
+    )
     run_id = models.CharField(
         _("run ID"),
         max_length=64,
@@ -335,8 +353,8 @@ class SequencingRun(UUIDPrimaryKeyModel, HumanIdentifiedModel, VoidableModel):
             *VoidableModel.Meta.constraints,
             models.UniqueConstraint(
                 fields=["flow_cell"],
-                condition=models.Q(voided_at__isnull=True),
-                name="one_active_run_per_flow_cell",
+                condition=models.Q(voided_at__isnull=True, status__in=["planned", "running"]),
+                name="one_run_in_progress_per_flow_cell",
             ),
             models.UniqueConstraint(
                 fields=["run_id"],

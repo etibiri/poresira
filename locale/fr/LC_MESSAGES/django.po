@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 12:01+0000\n"
+"POT-Creation-Date: 2026-11-13 12:09+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -1777,15 +1777,13 @@ msgstr "Un kit sans codes-barres n'a pas de nombre de codes-barres."
 
 #: poresira/sequencing/adapters.py
 #, python-format
-msgid ""
-"%(value)s is not a barcode (use a number such as 7, NB07 or barcode07)."
+msgid "%(value)s is not a barcode (use a number such as 7, NB07 or barcode07)."
 msgstr ""
 "%(value)s n'est pas un code-barres (utilisez un nombre comme 7, NB07 ou "
 "barcode07)."
 
 #: poresira/sequencing/adapters.py
-msgid ""
-"A flow cell ID has 5 to 20 letters and digits, such as PAW12345."
+msgid "A flow cell ID has 5 to 20 letters and digits, such as PAW12345."
 msgstr ""
 "Un identifiant de cellule de flux compte de 5 à 20 lettres et chiffres, "
 "comme PAW12345."
@@ -1837,6 +1835,18 @@ msgstr "code produit"
 #: poresira/sequencing/models/reference.py
 msgid "pore type"
 msgstr "type de pore"
+
+#: poresira/sequencing/models/reference.py
+msgid "reusable"
+msgstr "réutilisable"
+
+#: poresira/sequencing/models/reference.py
+msgid ""
+"A reusable flow cell can be washed and loaded again (MinION, "
+"PromethION)."
+msgstr ""
+"Une cellule de flux réutilisable peut être lavée et rechargée (MinION, "
+"PromethION)."
 
 #: poresira/sequencing/models/reference.py
 msgid "model"
@@ -1907,6 +1917,18 @@ msgstr "cellule de flux"
 #: poresira/sequencing/models/run.py
 msgid "instrument"
 msgstr "appareil"
+
+#: poresira/sequencing/models/run.py
+msgid "active pores at start"
+msgstr "pores actifs au début"
+
+#: poresira/sequencing/models/run.py
+msgid ""
+"Counted at the check before this run; a reused flow cell has fewer each "
+"time."
+msgstr ""
+"Comptés au contrôle avant ce passage ; une cellule réutilisée en a moins"
+" à chaque fois."
 
 #: poresira/sequencing/models/run.py
 msgid "run ID"
@@ -1992,7 +2014,9 @@ msgstr "L'échantillon doit appartenir au projet de la bibliothèque."
 #: poresira/sequencing/services.py
 msgid ""
 "Only DNA extracts, RNA extracts and amplification products are sequenced."
-msgstr"Seuls les extraits d'ADN, les extraits d'ARN et les produits d'amplification sont séquencés."
+msgstr ""
+"Seuls les extraits d'ADN, les extraits d'ARN et les produits d'amplification "
+"sont séquencés."
 
 #: poresira/sequencing/services.py
 msgid "A barcode is required."
@@ -2021,12 +2045,16 @@ msgid "Add at least one sample before sealing the library."
 msgstr "Ajoutez au moins un échantillon avant de sceller la bibliothèque."
 
 #: poresira/sequencing/services.py
-msgid "A voided flow cell cannot be used."
-msgstr "Une cellule de flux annulée ne peut pas être utilisée."
+msgid "This flow cell already has a run in progress."
+msgstr "Cette cellule de flux a déjà un passage en cours."
 
 #: poresira/sequencing/services.py
-msgid "This flow cell already has a run."
-msgstr "Cette cellule de flux a déjà un passage."
+msgid "This flow cell is single-use and has already been used."
+msgstr "Cette cellule de flux est à usage unique et a déjà servi."
+
+#: poresira/sequencing/services.py
+msgid "A voided flow cell cannot be used."
+msgstr "Une cellule de flux annulée ne peut pas être utilisée."
 
 #: poresira/sequencing/services.py
 msgid "A voided instrument cannot be used."
@@ -2063,6 +2091,10 @@ msgstr "Indiquez le logiciel d'appel de bases et sa version."
 #: poresira/sequencing/services.py
 msgid "The reads of the samples exceed the reads of the run."
 msgstr "Les lectures des échantillons dépassent celles du passage."
+
+#: poresira/sequencing/services.py
+msgid "This flow cell has another run in progress."
+msgstr "Cette cellule de flux a un autre passage en cours."
 
 #: poresira/sequencing/services.py
 msgid "Void the members of this library first."

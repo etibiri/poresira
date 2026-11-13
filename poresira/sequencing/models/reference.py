@@ -81,6 +81,11 @@ class FlowCellType(UUIDPrimaryKeyModel, VoidableModel):
     code = models.CharField(_("product code"), max_length=40)
     name = models.CharField(_("name"), max_length=150)
     pore = models.CharField(_("pore type"), max_length=40, blank=True)
+    reusable = models.BooleanField(
+        _("reusable"),
+        default=True,
+        help_text=_("A reusable flow cell can be washed and loaded again (MinION, PromethION)."),
+    )
     notes = models.TextField(_("notes"), blank=True)
 
     class Meta(VoidableModel.Meta):

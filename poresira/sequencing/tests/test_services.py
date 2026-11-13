@@ -236,7 +236,7 @@ class TestRuns:
         run = services.plan_run(user=editor, library=sealed, flow_cell=FlowCellFactory())
 
         assert run.status == RunStatus.PLANNED
-        with pytest.raises(ValidationError, match="already has a run"):
+        with pytest.raises(ValidationError, match="run in progress"):
             services.plan_run(user=editor, library=sealed, flow_cell=run.flow_cell)
 
     def test_a_flow_cell_can_serve_again_once_its_run_is_voided(self, sealed, editor):
@@ -244,6 +244,36 @@ class TestRuns:
         services.void_record(user=editor, record=run, reason="Never loaded")
 
         assert services.plan_run(user=editor, library=sealed, flow_cell=run.flow_cell)
+
+    def test_a_reusable_flow_cell_is_washed_and_loaded_again(self, sealed, editor, project):
+        cell = FlowCellFactory()
+        first = services.plan_run(user=editor, library=sealed, flow_cell=cell, pores_at_start=9000)
+        services.start_run(user=editor, run=first, started_on=date(2025, 3, 1))
+        services.complete_run(
+            user=editor, run=first, basecaller="Dorado", basecaller_version="0.9.0"
+        )
+        other = services.create_library(user=editor, project=project, kit=LibraryKitFactory())
+        services.add_member(user=editor, library=other, sample=product(project), barcode=1)
+        services.seal_library(user=editor, library=other)
+
+        second = services.plan_run(user=editor, library=other, flow_cell=cell, pores_at_start=4000)
+
+        assert [r.pores_at_start for r in cell.runs.order_by("pores_at_start")] == [4000, 9000]
+        with pytest.raises(services.RunStateError, match="another run in progress"):
+            services.reopen_run(user=editor, run=first, reason="Wrong version")
+        assert second.status == RunStatus.PLANNED
+
+    def test_a_single_use_flow_cell_serves_once(self, sealed, editor, project):
+        cell = FlowCellFactory(type=FlowCellTypeFactory(reusable=False))
+        run = services.plan_run(user=editor, library=sealed, flow_cell=cell)
+        services.start_run(user=editor, run=run, started_on=date(2025, 3, 1))
+        services.complete_run(user=editor, run=run, basecaller="Dorado", basecaller_version="0.9.0")
+        other = services.create_library(user=editor, project=project, kit=LibraryKitFactory())
+        services.add_member(user=editor, library=other, sample=product(project), barcode=1)
+        services.seal_library(user=editor, library=other)
+
+        with pytest.raises(ValidationError, match="single-use"):
+            services.plan_run(user=editor, library=other, flow_cell=cell)
 
     def test_starting_needs_a_date_unless_reconstructed(self, sealed, editor):
         run = services.plan_run(user=editor, library=sealed, flow_cell=FlowCellFactory())

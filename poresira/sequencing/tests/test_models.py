@@ -20,6 +20,7 @@ from poresira.sequencing.models import (
 from poresira.sequencing.tests.factories import (
     BarcodeResultFactory,
     FlowCellFactory,
+    FlowCellTypeFactory,
     InstrumentFactory,
     LibraryFactory,
     LibraryKitFactory,
@@ -158,7 +159,7 @@ class TestFlowCellAndRun:
             lambda: SequencingRunFactory(library=sealed, project=LibraryFactory().project),
         )
 
-    def test_a_flow_cell_serves_one_active_run(self):
+    def test_a_flow_cell_carries_one_run_at_a_time(self):
         run = SequencingRunFactory()
 
         refuses(
@@ -167,6 +168,24 @@ class TestFlowCellAndRun:
         )
         run.void(user=UserFactory(), reason="Aborted before loading")
         assert SequencingRunFactory(library=run.library, flow_cell=run.flow_cell)
+
+    def test_a_reusable_flow_cell_serves_again_after_its_run_ends(self):
+        run = SequencingRunFactory(status=RunStatus.COMPLETED)
+
+        second = SequencingRunFactory(library=run.library, flow_cell=run.flow_cell)
+        assert second.flow_cell_id == run.flow_cell_id
+
+    def test_a_single_use_flow_cell_serves_one_run_unless_it_was_aborted(self):
+        cell = FlowCellFactory(type=FlowCellTypeFactory(reusable=False))
+        first = SequencingRunFactory(flow_cell=cell, status=RunStatus.COMPLETED)
+
+        refuses(
+            DatabaseError,
+            lambda: SequencingRunFactory(library=first.library, flow_cell=cell),
+        )
+        with with_reason("Data lost"):
+            SequencingRun.objects.filter(pk=first.pk).update(status=RunStatus.ABORTED)
+        assert SequencingRunFactory(library=first.library, flow_cell=cell)
 
     def test_the_sequencer_run_id_is_unique_when_given(self):
         run = SequencingRunFactory(run_id="a1b2c3")

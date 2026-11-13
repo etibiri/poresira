@@ -37,6 +37,7 @@ LIBRARY_ATTRIBUTES = {"name", "prepared_on", "prepared_by", "reconstructed", "no
 MEMBER_ATTRIBUTES = {"input_ng", "notes"}
 RUN_ATTRIBUTES = {
     "instrument",
+    "pores_at_start",
     "run_id",
     "started_on",
     "performed_by",
@@ -135,7 +136,7 @@ def create_library_kit(
 @transaction.atomic
 def create_flow_cell_type(*, user, code: str, name: str, **attributes) -> FlowCellType:
     _require_reference_manager(user)
-    _reject_unknown(attributes, {"platform", "pore", "notes"})
+    _reject_unknown(attributes, {"platform", "pore", "reusable", "notes"})
     cell_type = FlowCellType(code=code.strip().upper(), name=name, **attributes)
     with acting_as(user):
         _save_new(cell_type)
@@ -269,6 +270,17 @@ def seal_library(*, user, library: Library) -> Library:
 # --- Runs -------------------------------------------------------------------------------------
 
 
+def _check_flow_cell_free(flow_cell: FlowCell) -> None:
+    """A flow cell carries one run at a time; only a reusable one may carry several in turn."""
+    runs = flow_cell.runs.active()
+    if runs.filter(status__in=[RunStatus.PLANNED, RunStatus.RUNNING]).exists():
+        raise ValidationError({"flow_cell": _("This flow cell already has a run in progress.")})
+    if not flow_cell.type.reusable and runs.exclude(status=RunStatus.ABORTED).exists():
+        raise ValidationError(
+            {"flow_cell": _("This flow cell is single-use and has already been used.")}
+        )
+
+
 @transaction.atomic
 def plan_run(*, user, library: Library, flow_cell: FlowCell, **attributes) -> SequencingRun:
     _require_editor(user, library.project)
@@ -276,8 +288,7 @@ def plan_run(*, user, library: Library, flow_cell: FlowCell, **attributes) -> Se
     _require_library_state(library, LibraryStatus.SEALED)
     if flow_cell.is_voided:
         raise ValidationError({"flow_cell": _("A voided flow cell cannot be used.")})
-    if flow_cell.runs.active().exists():
-        raise ValidationError({"flow_cell": _("This flow cell already has a run.")})
+    _check_flow_cell_free(flow_cell)
     instrument = attributes.get("instrument")
     if instrument is not None and instrument.is_voided:
         raise ValidationError({"instrument": _("A voided instrument cannot be used.")})
@@ -393,6 +404,12 @@ def complete_run(*, user, run: SequencingRun, **attributes) -> SequencingRun:
 def reopen_run(*, user, run: SequencingRun, reason: str) -> SequencingRun:
     _require_editor(user, run.project)
     _require_run_state(run, RunStatus.COMPLETED)
+    if (
+        run.flow_cell.runs.active()
+        .filter(status__in=[RunStatus.PLANNED, RunStatus.RUNNING])
+        .exists()
+    ):
+        raise RunStateError(_("This flow cell has another run in progress."))
     with acting_as(user), with_reason(reason):
         run.status = RunStatus.RUNNING
         run.save()
