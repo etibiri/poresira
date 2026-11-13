@@ -137,7 +137,8 @@ class TestLoading:
         record = SequenceRecord.objects.get(accession="PV947757")
 
         assert record.sample.label == "Tieb_E1_BFA297"
-        assert "isolate name differs from the BioSample name" in record.notes
+        assert "isolate name differs" in record.notes
+        assert "confirmed by the submitting author" in record.notes
         assert "differs" not in SequenceRecord.objects.get(accession="PV947737").notes
 
     def test_every_derivative_traces_back_to_a_field_sample(self, loaded_demo):

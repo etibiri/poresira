@@ -71,6 +71,7 @@ coordinates (column `match`, with `match_note` where it is not exact):
   2016-08-18 and the BioSample `Ban_BFA1094` 2016-08-16.
 - 4 SPFMV records (`Tie_E1`, `Tie_E3`, `Heere_E1`, `Heere_E2`) are named differently from their
   BioSample (`Tieb_E1_BFA297`, `Tieb_E3_BFA265`, `Heere_E1_BFA728`, `Heere_E2_BFA880`) and are
-  matched on the E number, the 2025-05-17 date and the Kamboinse coordinates.
+  matched on the E number, the 2025-05-17 date and the Kamboinse coordinates; the submitting author
+  confirmed this match (column `match` = `confirmed`).
 
-Every inferred match is flagged in the notes of the sequence record and should be confirmed.
+The other inferred matches (the 7 without prefix) are flagged in the notes of the sequence record.
