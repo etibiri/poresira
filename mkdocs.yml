@@ -14,6 +14,7 @@ nav:
   - Installation: installation.md
   - Configuration: configuration.md
   - Architecture: architecture.md
+  - Samples: samples.md
   - Backup and restore: backup-restore.md
   - Maintainers:
       - CLA Assistant setup: cla-assistant-setup.md

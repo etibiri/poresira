@@ -22,4 +22,14 @@ All notable changes are listed here. The format follows
   project history, English and French, per-user language, AGPL source link and version
   in the footer, `/health/` endpoint.
 - Docker Compose profiles `poste`, `labo` and `plateforme`; backup and restore scripts.
+- `samples` app: collection events, samples with five kinds and lineage (field sample, living
+  plant, DNA, RNA, amplification product), hierarchical storage locations with grid positions,
+  immutable QC measurements. Critical changes (quantity, status, barcode, location, position)
+  require a reason enforced by a database trigger; one active sample per position.
+- Sample web interface: filtered list (HTMX), detail page with family tree, QC and audit history,
+  forms to derive, move, change, measure and void; collection events; storage tree.
+- `import_field_samples` (all-or-nothing CSV import) and `load_demo_data`, which builds a demo
+  project from the 66 BioSamples of PRJNA1460897 and Table 3 of Tibiri et al. 2020.
+- `with_reason` and `acting_as` helpers for audited changes made outside a request.
+- Complete French translation of the new screens.
 - AGPL-3.0-or-later license, CLA, contribution guide, code of conduct, citation file.

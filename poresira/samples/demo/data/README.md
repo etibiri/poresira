@@ -12,7 +12,7 @@ E-utilities, columns `accession`, `isolate`, `collection_date`, `geo_loc_name`, 
 unchanged. NCBI metadata is public domain.
 
 - 53 records are field samples collected in 2016 (the samples whose rolling circle amplification
-  worked, see Name et al. 2026).
+  worked, see the Frontiers in Microbiology 2026 study, PMID 41716274).
 - 13 records were collected in 2024-2025 from plants in the INERA greenhouse at Kamboinsé
   (the fresh leaves used for the RNA virome in the same study).
 

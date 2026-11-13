@@ -10,7 +10,7 @@ application itself.
 | App | Role | Status |
 |---|---|---|
 | `core` | users, projects and memberships, roles, identifiers, audit | implemented |
-| `samples` | collection events, samples, derivatives, lineage, storage locations, QC | planned |
+| `samples` | collection events, samples, derivatives, lineage, storage locations, QC (see [Samples](samples.md)) | implemented |
 | `pcr` | primers, master mixes, plates, cycling programs, results | planned |
 | `sequencing` | libraries, pools, flow cells, runs; one adapter per platform | planned |
 | `storage` | file registry and storage backends | planned |
@@ -70,6 +70,16 @@ ORM write on a tracked model
 Add `pghistory.track(...)` to the model, then use `attach_audit_chain` and
 `restrict_audit_tables` from `poresira/core/audit_migrations.py` in a migration for its event
 table.
+
+## Business rules in the database
+
+Rules that protect traceability live in PostgreSQL, not only in Python: `RequireReason`
+triggers (`poresira.core.pgtriggers`) reject a change to a critical field unless the audit
+context carries a reason, `ReadOnly` triggers freeze identity fields, and partial unique
+constraints keep labels, barcodes and storage positions unique. Code outside a request sets the
+reason and the actor with `with_reason` and `acting_as` (`poresira.core.reason`); web forms
+supply the reason through the audit middleware. Views never write to models directly: they call
+the functions in each app's `services.py`, which check permissions and rules.
 
 ## Void instead of delete
 
