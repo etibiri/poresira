@@ -5,6 +5,7 @@ from django.core.management import call_command
 from django.db import connections
 from django.db.models.signals import pre_migrate
 from django.dispatch import receiver
+from django.utils import translation
 
 
 @receiver(pre_migrate)
@@ -33,3 +34,11 @@ def grant_default_privileges_to_app_role(sender, using, **kwargs):
 def compiled_translations():
     """The .mo files are build artefacts; compile them so French strings can be tested."""
     call_command("compilemessages", verbosity=0)
+
+
+@pytest.fixture(autouse=True)
+def english_by_default():
+    """A test that switches language (the language form, translation checks) must not leak it."""
+    translation.activate(settings.LANGUAGE_CODE)
+    yield
+    translation.deactivate()

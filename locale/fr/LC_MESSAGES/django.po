@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 11:56+0000\n"
+"POT-Creation-Date: 2026-11-13 12:01+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -621,11 +621,11 @@ msgstr "Toutes les positions de ce passage sont déjà utilisées."
 msgid "A voided assay cannot be used."
 msgstr "Un test annulé ne peut pas être utilisé."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py poresira/sequencing/services.py
 msgid "A voided run cannot be changed."
 msgstr "Un passage annulé ne peut pas être modifié."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py poresira/sequencing/services.py
 #, python-format
 msgid "This run is %(status)s: the change is not possible."
 msgstr "Ce passage est « %(status)s » : le changement est impossible."
@@ -644,7 +644,7 @@ msgstr ""
 "Une plante vivante ne peut pas servir de matrice ; utilisez un extrait de "
 "cette plante."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py poresira/sequencing/services.py
 msgid "This sample is used up or discarded."
 msgstr "Cet échantillon est épuisé ou éliminé."
 
@@ -1529,6 +1529,10 @@ msgid "Void the PCR reactions of this sample first."
 msgstr "Annulez d'abord les réactions PCR de cet échantillon."
 
 #: poresira/samples/services.py
+msgid "Remove this sample from its sequencing libraries first."
+msgstr "Retirez d'abord cet échantillon de ses bibliothèques de séquençage."
+
+#: poresira/samples/services.py
 msgid "Void the samples of this collection event first."
 msgstr "Annulez d'abord les échantillons de cet événement de collecte."
 
@@ -1763,6 +1767,29 @@ msgstr "Échantillon de terrain enregistré."
 msgid "Storage location created."
 msgstr "Emplacement de stockage créé."
 
+#: poresira/sequencing/adapters.py
+msgid "A barcoding kit needs its barcode count."
+msgstr "Un kit à codes-barres a besoin de son nombre de codes-barres."
+
+#: poresira/sequencing/adapters.py
+msgid "A kit without barcodes has no barcode count."
+msgstr "Un kit sans codes-barres n'a pas de nombre de codes-barres."
+
+#: poresira/sequencing/adapters.py
+#, python-format
+msgid ""
+"%(value)s is not a barcode (use a number such as 7, NB07 or barcode07)."
+msgstr ""
+"%(value)s n'est pas un code-barres (utilisez un nombre comme 7, NB07 ou "
+"barcode07)."
+
+#: poresira/sequencing/adapters.py
+msgid ""
+"A flow cell ID has 5 to 20 letters and digits, such as PAW12345."
+msgstr ""
+"Un identifiant de cellule de flux compte de 5 à 20 lettres et chiffres, "
+"comme PAW12345."
+
 #: poresira/sequencing/models/reference.py
 msgid "Oxford Nanopore"
 msgstr "Oxford Nanopore"
@@ -1852,8 +1879,7 @@ msgid "prepared by"
 msgstr "préparé par"
 
 #: poresira/sequencing/models/run.py
-msgid ""
-"Barcodes and date come from a publication and may be unknown."
+msgid "Barcodes and date come from a publication and may be unknown."
 msgstr ""
 "Les codes-barres et la date viennent d'une publication et peuvent être "
 "inconnus."
@@ -1933,3 +1959,143 @@ msgstr "N50 des lectures (pb)"
 #: poresira/sequencing/models/run.py
 msgid "mean quality (Q)"
 msgstr "qualité moyenne (Q)"
+
+#: poresira/sequencing/services.py
+msgid "A voided library cannot be changed."
+msgstr "Une bibliothèque annulée ne peut pas être modifiée."
+
+#: poresira/sequencing/services.py
+#, python-format
+msgid "This library is %(status)s: the change is not possible."
+msgstr "Cette bibliothèque est « %(status)s » : le changement est impossible."
+
+#: poresira/sequencing/services.py
+msgid "A voided flow cell type cannot be used."
+msgstr "Un type de cellule de flux annulé ne peut pas être utilisé."
+
+#: poresira/sequencing/services.py
+msgid "A voided kit cannot be used."
+msgstr "Un kit annulé ne peut pas être utilisé."
+
+#: poresira/sequencing/services.py
+msgid "A library cannot be prepared in the future."
+msgstr "Une bibliothèque ne peut pas être préparée dans le futur."
+
+#: poresira/sequencing/services.py
+msgid "A voided sample cannot be sequenced."
+msgstr "Un échantillon annulé ne peut pas être séquencé."
+
+#: poresira/sequencing/services.py
+msgid "The sample must belong to the project of the library."
+msgstr "L'échantillon doit appartenir au projet de la bibliothèque."
+
+#: poresira/sequencing/services.py
+msgid ""
+"Only DNA extracts, RNA extracts and amplification products are sequenced."
+msgstr"Seuls les extraits d'ADN, les extraits d'ARN et les produits d'amplification sont séquencés."
+
+#: poresira/sequencing/services.py
+msgid "A barcode is required."
+msgstr "Un code-barres est obligatoire."
+
+#: poresira/sequencing/services.py
+msgid "This kit has no barcodes."
+msgstr "Ce kit n'a pas de codes-barres."
+
+#: poresira/sequencing/services.py
+#, python-format
+msgid "Barcode %(number)s is outside the kit (1 to %(count)s)."
+msgstr "Le code-barres %(number)s est hors du kit (1 à %(count)s)."
+
+#: poresira/sequencing/services.py
+#, python-format
+msgid "Barcode %(number)s is already used in this library."
+msgstr "Le code-barres %(number)s est déjà utilisé dans cette bibliothèque."
+
+#: poresira/sequencing/services.py
+msgid "This sample is already in the library."
+msgstr "Cet échantillon est déjà dans la bibliothèque."
+
+#: poresira/sequencing/services.py
+msgid "Add at least one sample before sealing the library."
+msgstr "Ajoutez au moins un échantillon avant de sceller la bibliothèque."
+
+#: poresira/sequencing/services.py
+msgid "A voided flow cell cannot be used."
+msgstr "Une cellule de flux annulée ne peut pas être utilisée."
+
+#: poresira/sequencing/services.py
+msgid "This flow cell already has a run."
+msgstr "Cette cellule de flux a déjà un passage."
+
+#: poresira/sequencing/services.py
+msgid "A voided instrument cannot be used."
+msgstr "Un appareil annulé ne peut pas être utilisé."
+
+#: poresira/sequencing/services.py
+msgid "This instrument does not run this flow cell."
+msgstr "Cet appareil ne fait pas tourner cette cellule de flux."
+
+#: poresira/sequencing/services.py
+msgid "This flow cell does not suit the kit of the library."
+msgstr "Cette cellule de flux ne convient pas au kit de la bibliothèque."
+
+#: poresira/sequencing/services.py
+msgid "Give the start date of the run."
+msgstr "Indiquez la date de début du passage."
+
+#: poresira/sequencing/services.py
+msgid "A run cannot start in the future."
+msgstr "Un passage ne peut pas commencer dans le futur."
+
+#: poresira/sequencing/services.py
+msgid "Give the reason the run was aborted."
+msgstr "Indiquez pourquoi le passage a été abandonné."
+
+#: poresira/sequencing/services.py
+msgid "This is not a sample of the library of the run."
+msgstr "Ce n'est pas un échantillon de la bibliothèque du passage."
+
+#: poresira/sequencing/services.py
+msgid "Give the basecaller and its version."
+msgstr "Indiquez le logiciel d'appel de bases et sa version."
+
+#: poresira/sequencing/services.py
+msgid "The reads of the samples exceed the reads of the run."
+msgstr "Les lectures des échantillons dépassent celles du passage."
+
+#: poresira/sequencing/services.py
+msgid "Void the members of this library first."
+msgstr "Annulez d'abord les membres de cette bibliothèque."
+
+#: poresira/sequencing/services.py
+msgid "Void the runs of this library first."
+msgstr "Annulez d'abord les passages de cette bibliothèque."
+
+#: poresira/sequencing/services.py
+msgid "Void the results of this sample first."
+msgstr "Annulez d'abord les résultats de cet échantillon."
+
+#: poresira/sequencing/services.py
+msgid "The library of this sample is in use by a run."
+msgstr "La bibliothèque de cet échantillon est utilisée par un passage."
+
+#: poresira/sequencing/services.py
+msgid "Void the results of this run first."
+msgstr "Annulez d'abord les résultats de ce passage."
+
+#: poresira/sequencing/services.py
+msgid "An active run uses this flow cell."
+msgstr "Un passage actif utilise cette cellule de flux."
+
+#: poresira/sequencing/services.py
+msgid "An active library uses this kit."
+msgstr "Une bibliothèque active utilise ce kit."
+
+#: poresira/sequencing/services.py
+msgid "An active flow cell has this type."
+msgstr "Une cellule de flux active a ce type."
+
+#: poresira/sequencing/services.py
+msgid "An active run uses this instrument."
+msgstr "Un passage actif utilise cet appareil."
