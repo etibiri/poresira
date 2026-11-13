@@ -362,6 +362,8 @@ def _guard_voiding(record) -> None:
             raise RecordInUseError(_("Void the derivatives of this sample first."))
         if record.sequence_records.filter(voided_at__isnull=True).exists():
             raise RecordInUseError(_("Void the sequences of this sample first."))
+        if record.pcr_reactions.filter(voided_at__isnull=True).exists():
+            raise RecordInUseError(_("Void the PCR reactions of this sample first."))
     elif isinstance(record, CollectionEvent):
         if record.samples.filter(voided_at__isnull=True).exists():
             raise RecordInUseError(_("Void the samples of this collection event first."))

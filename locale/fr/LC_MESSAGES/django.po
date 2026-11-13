@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 08:01+0000\n"
+"POT-Creation-Date: 2026-11-13 08:07+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -483,6 +483,160 @@ msgstr "qPCR seulement."
 msgid "band size on gel (bp)"
 msgstr "taille de bande sur gel (pb)"
 
+#: poresira/pcr/services.py
+msgid ""
+"Steps must go from the initial steps to the cycle to the final steps."
+msgstr ""
+"Les étapes doivent aller des étapes initiales au cycle puis aux étapes "
+"finales."
+
+#: poresira/pcr/services.py
+msgid "A program needs at least one step inside the cycle."
+msgstr "Un programme a besoin d'au moins une étape dans le cycle."
+
+#: poresira/pcr/services.py
+msgid "The ingredients add up to more than the reaction volume."
+msgstr "Les ingrédients dépassent le volume de réaction."
+
+#: poresira/pcr/services.py
+msgid "This primer is not a forward primer."
+msgstr "Cette amorce n'est pas une amorce sens."
+
+#: poresira/pcr/services.py
+msgid "This primer is not a reverse primer."
+msgstr "Cette amorce n'est pas une amorce antisens."
+
+#: poresira/pcr/services.py
+msgid ""
+"A voided primer, program or master mix cannot be used."
+msgstr ""
+"Une amorce, un programme ou un mélange réactionnel annulé ne peut pas "
+"être utilisé."
+
+#: poresira/pcr/services.py
+#, python-format
+msgid "%(position)s is not a well of a 96-well plate (A1 to H12)."
+msgstr "%(position)s n'est pas un puits d'une plaque 96 puits (A1 à H12)."
+
+#: poresira/pcr/services.py
+#, python-format
+msgid "%(position)s is not a tube of this run (1 to %(count)s)."
+msgstr "%(position)s n'est pas un tube de ce passage (1 à %(count)s)."
+
+#: poresira/pcr/services.py
+msgid "Every position of this run is already used."
+msgstr "Toutes les positions de ce passage sont déjà utilisées."
+
+#: poresira/pcr/services.py
+msgid "A voided assay cannot be used."
+msgstr "Un test annulé ne peut pas être utilisé."
+
+#: poresira/pcr/services.py
+msgid "A voided run cannot be changed."
+msgstr "Un passage annulé ne peut pas être modifié."
+
+#: poresira/pcr/services.py
+#, python-format
+msgid "This run is %(status)s: the change is not possible."
+msgstr "Ce passage est « %(status)s » : le changement est impossible."
+
+#: poresira/pcr/services.py
+msgid "A voided sample cannot be a template."
+msgstr "Un échantillon annulé ne peut pas servir de matrice."
+
+#: poresira/pcr/services.py
+msgid "The template must belong to the project of the run."
+msgstr "La matrice doit appartenir au projet du passage."
+
+#: poresira/pcr/services.py
+msgid ""
+"A living plant cannot be a template; use an extract of it."
+msgstr ""
+"Une plante vivante ne peut pas servir de matrice ; utilisez un extrait "
+"de cette plante."
+
+#: poresira/pcr/services.py
+msgid "This sample is used up or discarded."
+msgstr "Cet échantillon est épuisé ou éliminé."
+
+#: poresira/pcr/services.py
+#, python-format
+msgid "The master mix leaves room for %(room)s µL of template."
+msgstr "Le mélange réactionnel laisse la place à %(room)s µL de matrice."
+
+#: poresira/pcr/services.py
+#, python-format
+msgid "Position %(position)s of this run is already used."
+msgstr "La position %(position)s de ce passage est déjà utilisée."
+
+#: poresira/pcr/services.py
+msgid ""
+"Add at least one reaction before marking the run as performed."
+msgstr ""
+"Ajoutez au moins une réaction avant de marquer le passage comme réalisé."
+
+#: poresira/pcr/services.py
+msgid "Give the date of the run."
+msgstr "Indiquez la date du passage."
+
+#: poresira/pcr/services.py
+msgid "A run cannot take place in the future."
+msgstr "Un passage ne peut pas avoir lieu dans le futur."
+
+#: poresira/pcr/services.py
+msgid "A voided reaction cannot be changed."
+msgstr "Une réaction annulée ne peut pas être modifiée."
+
+#: poresira/pcr/services.py
+msgid "A recorded result cannot go back to pending."
+msgstr "Un résultat enregistré ne peut pas redevenir « en attente »."
+
+#: poresira/pcr/services.py
+msgid "Every reaction needs a result before the run is closed."
+msgstr "Chaque réaction doit avoir un résultat avant la clôture du passage."
+
+#: poresira/pcr/services.py
+msgid "Reconstructed from a publication: controls are unknown."
+msgstr "Reconstitué d'après une publication : les témoins sont inconnus."
+
+#: poresira/pcr/services.py
+#, python-format
+msgid "Positive control %(position)s did not amplify."
+msgstr "Le témoin positif %(position)s n'a pas amplifié."
+
+#: poresira/pcr/services.py
+#, python-format
+msgid "Control %(position)s is contaminated."
+msgstr "Le témoin %(position)s est contaminé."
+
+#: poresira/pcr/services.py
+msgid "No positive control."
+msgstr "Pas de témoin positif."
+
+#: poresira/pcr/services.py
+msgid "No no-template control."
+msgstr "Pas de témoin sans matrice."
+
+#: poresira/pcr/services.py
+msgid "A control has no result yet."
+msgstr "Un témoin n'a pas encore de résultat."
+
+#: poresira/pcr/services.py
+msgid "Void the reactions of this run first."
+msgstr "Annulez d'abord les réactions de ce passage."
+
+#: poresira/pcr/services.py
+msgid "An active assay still uses this primer."
+msgstr "Un test actif utilise encore cette amorce."
+
+#: poresira/pcr/services.py
+msgid "An active assay still uses this record."
+msgstr "Un test actif utilise encore cet enregistrement."
+
+#: poresira/pcr/services.py
+msgid "Void the runs of this assay first."
+msgstr "Annulez d'abord les passages de ce test."
+
 #: poresira/samples/forms.py
 msgid "Search"
 msgstr "Recherche"
@@ -940,6 +1094,10 @@ msgstr "Annulez d'abord les dérivés de cet échantillon."
 #: poresira/samples/services.py
 msgid "Void the sequences of this sample first."
 msgstr "Annulez d'abord les séquences de cet échantillon."
+
+#: poresira/samples/services.py
+msgid "Void the PCR reactions of this sample first."
+msgstr "Annulez d'abord les réactions PCR de cet échantillon."
 
 #: poresira/samples/services.py
 msgid "Void the samples of this collection event first."
