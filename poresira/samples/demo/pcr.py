@@ -11,7 +11,7 @@ from pathlib import Path
 from poresira.core.models import Project, User
 from poresira.pcr import services
 from poresira.pcr.importing import import_pcr_run
-from poresira.pcr.models import Assay, PcrRun, Primer
+from poresira.pcr.models import Assay, Container, PcrRun, Primer
 from poresira.samples.models import Sample
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -194,3 +194,43 @@ def load_pcr_demo(
         )
         created += bool(report.reactions)
     return created
+
+
+THESIS_RUN_NOTE = (
+    "Sweepovirus detection with SPG1/SPG2 on the DNA extracts of the 98 selected samples, from the "
+    "laboratory file. The date, the layout and the controls are not recorded, and the 98 reactions "
+    "do not fit in one set of 96 tubes: they are split in two by order of sample code."
+)
+
+
+def load_thesis_pcr(users: dict[str, User], project: Project, extracts: dict[str, Sample]) -> int:
+    """Two reconstructed runs holding the SPG1/SPG2 results of the laboratory file.
+
+    ``extracts`` maps each sample code to its DNA extract. Returns the number of runs created.
+    """
+    if PcrRun.objects.filter(project=project, notes__startswith=THESIS_RUN_NOTE[:40]).exists():
+        return 0
+    assay = _get_or_create_reference(users["demo_platform"])["SPLCV CP PCR"]
+    codes = sorted(extracts, key=lambda code: int(code.removeprefix("BFA")))
+    results = {row["sample_code"]: row["spg_pcr"] for row in _lab_rows()}
+    half = (len(codes) + 1) // 2
+    created = 0
+    for batch in (codes[:half], codes[half:]):
+        import_pcr_run(
+            user=users["demo_technician"],
+            project=project,
+            assay=assay,
+            rows=[{"sample": extracts[code].identifier, "result": results[code]} for code in batch],
+            container=Container.TUBES,
+            tube_count=len(batch),
+            reconstructed=True,
+            close=True,
+            notes=THESIS_RUN_NOTE,
+        )
+        created += 1
+    return created
+
+
+def _lab_rows() -> list[dict[str, str]]:
+    with (DATA_DIR / "thesis_98_samples.csv").open(newline="", encoding="utf-8") as file:
+        return list(csv.DictReader(file))

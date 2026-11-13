@@ -8,18 +8,26 @@ import unicodedata
 from dataclasses import dataclass, field
 from datetime import date
 from decimal import Decimal
-from itertools import product
+from itertools import count, product
 from pathlib import Path
 
 from django.db import transaction
+from django.db.models import Q
 
 from poresira.core.models import GlobalRole, Project, ProjectMembership, ProjectRole, User
 from poresira.core.reason import acting_as
 from poresira.pcr.models import PcrReaction
 from poresira.samples import services
-from poresira.samples.demo.pcr import load_pcr_demo
+from poresira.samples.demo.pcr import load_pcr_demo, load_thesis_pcr
 from poresira.samples.importing import import_field_samples
-from poresira.samples.models import Sample, SampleKind, SequenceRecord, StorageLocationKind
+from poresira.samples.models import (
+    QcMethod,
+    QcOutcome,
+    Sample,
+    SampleKind,
+    SequenceRecord,
+    StorageLocationKind,
+)
 
 DATA_DIR = Path(__file__).parent / "data"
 DEMO_PROJECT_CODE = "DEMO-SPBF"
@@ -29,6 +37,7 @@ HOST_NAME, HOST_TAX_ID = "Ipomoea batatas", "4120"
 GREENHOUSE_LOCALITY = "kamboinse"
 DEMO_PLACEMENT_REASON = "Demonstration placement"
 SYNTHETIC_SEED = 2026
+RCA_KITS = (("templiphi", "TempliPhi"), ("equiphi29", "EquiPhi29"))
 
 DEMO_USERS = {
     "demo_platform": (GlobalRole.PLATFORM_MANAGER, None),
@@ -50,10 +59,11 @@ SYMPTOM_NAMES = {
     "Vn": "vein necrosis",
 }
 PROJECT_DESCRIPTION = (
-    "Sweetpotato virus survey in Burkina Faso, rebuilt from published data: BioProject "
-    f"{BIOPROJECT} (NCBI) and Tibiri et al. 2020, Plant Pathology, doi:10.1111/ppa.13190 "
-    "(Table 3). Sample names, places, dates and symptoms are published; the storage tree and box "
-    "positions are illustrative. See poresira/samples/demo/data/README.md."
+    "Sweetpotato virus survey in Burkina Faso, rebuilt from published data and the laboratory "
+    f"records of the 98 samples: BioProject {BIOPROJECT} (NCBI) and Tibiri et al. 2020, Plant "
+    "Pathology, doi:10.1111/ppa.13190 (Table 3). Sample names, places, dates, symptoms and "
+    "extraction and PCR results are real; the storage tree and box positions are illustrative. "
+    "See poresira/samples/demo/data/README.md."
 )
 
 
@@ -117,7 +127,9 @@ class _Plan:
     table3: dict[str, dict[str, str]]
     field_biosamples: list[dict[str, str]] = field(default_factory=list)
     greenhouse_biosamples: list[dict[str, str]] = field(default_factory=list)
-    table3_match: dict[str, str] = field(default_factory=dict)  # BioSample isolate -> Table 3 id
+    thesis: list[dict[str, str]] = field(default_factory=list)  # the 98 samples of the lab file
+    legacy_biosamples: list[dict[str, str]] = field(default_factory=list)  # not in that file
+    table3_match: dict[str, str] = field(default_factory=dict)  # sample label -> Table 3 id
 
 
 def _make_plan() -> _Plan:
@@ -131,11 +143,26 @@ def _make_plan() -> _Plan:
         (
             plan.greenhouse_biosamples if locality == GREENHOUSE_LOCALITY else plan.field_biosamples
         ).append(row)
+    by_number = {split_isolate(row["isolate"])[1]: row for row in plan.field_biosamples}
+    for row in _read("thesis_98_samples.csv"):
+        number = row["sample_code"].removeprefix("BFA")
+        biosample = by_number.get(number)
+        row["biosample"] = biosample
+        row["label"] = (
+            biosample["isolate"]
+            if biosample
+            else f"{_ascii(row['district'])[:3].capitalize()}_{row['sample_code']}"
+        )
+        plan.thesis.append(row)
+    in_thesis = {row["biosample"]["isolate"] for row in plan.thesis if row["biosample"]}
+    plan.legacy_biosamples = [r for r in plan.field_biosamples if r["isolate"] not in in_thesis]
     table3_keys = {table3_stem(number, row): number for number, row in plan.table3.items()}
-    for row in plan.field_biosamples:
-        key = split_isolate(row["isolate"])
+    for label in [row["label"] for row in plan.thesis] + [
+        row["isolate"] for row in plan.legacy_biosamples
+    ]:
+        key = split_isolate(label)
         if key in table3_keys:
-            plan.table3_match[row["isolate"]] = table3_keys[key]
+            plan.table3_match[label] = table3_keys[key]
     return plan
 
 
@@ -180,20 +207,52 @@ def _build_storage(platform_user: User) -> dict[str, object]:
     freezer_80 = location(
         "Freezer -80 °C", StorageLocationKind.FREEZER, room, nominal_temperature_c=-80
     )
-    grid = {"grid_rows": 9, "grid_columns": 9}
-    return {
-        "cabinet": cabinet,
-        "dna_box": location("DNA box 1", StorageLocationKind.BOX, freezer_20, **grid),
-        "rca_box": location("RCA box 1", StorageLocationKind.BOX, freezer_20, **grid),
-        "rna_box": location("RNA box 1", StorageLocationKind.BOX, freezer_80, **grid),
-    }
+    return {"cabinet": cabinet, "freezer_20": freezer_20, "freezer_80": freezer_80}
+
+
+def _slots(platform_user: User, parent, prefix: str):
+    """Successive (box, position) pairs; a new 9 x 9 box is created whenever the last is full."""
+    for number in count(1):
+        box = services.create_storage_location(
+            user=platform_user,
+            name=f"{prefix} {number}",
+            kind=StorageLocationKind.BOX,
+            parent=parent,
+            grid_rows=9,
+            grid_columns=9,
+        )
+        for position in grid_positions():
+            yield box, position
 
 
 def _field_rows(plan: _Plan) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
     """CSV rows for the importer and, row for row, what each one stands for."""
     rows, origins = [], []
     host = {"host_taxon": HOST_NAME, "host_tax_id": HOST_TAX_ID}
-    for biosample in plan.field_biosamples:
+    for lab in plan.thesis:
+        table3 = plan.table3.get(plan.table3_match.get(lab["label"], ""))
+        rows.append(
+            {
+                "label": lab["label"],
+                "collected_on": lab["collected_on"],
+                "country": lab["country"],
+                "region": lab["region"],
+                "province": lab["province"],
+                "locality": lab["district"],
+                "site_name": lab["village"],
+                "latitude": lab["latitude"],
+                "longitude": lab["longitude"],
+                "host_variety": lab["variety"],
+                "symptom_score": lab["symptom_scale"],
+                "symptom_notes": expand_symptoms(table3["symptoms_ipomoea_batatas"])
+                if table3
+                else "",
+                **host,
+            }
+        )
+        origins.append({"kind": "thesis", "thesis": lab, "table3": table3})
+
+    for biosample in plan.legacy_biosamples:
         country, province, locality = parse_geo_loc(biosample["geo_loc_name"])
         latitude, longitude = parse_lat_lon(biosample["lat_lon"])
         table3 = plan.table3.get(plan.table3_match.get(biosample["isolate"], ""))
@@ -217,7 +276,7 @@ def _field_rows(plan: _Plan) -> tuple[list[dict[str, str]], list[dict[str, str]]
     provinces = {
         _ascii(parse_geo_loc(row["geo_loc_name"])[2]): parse_geo_loc(row["geo_loc_name"])[1]
         for row in plan.field_biosamples
-    }
+    }  # locality -> province, from the BioSamples (the lab file adds none that Table 3 uses)
     matched_numbers = set(plan.table3_match.values())
     for number, table3 in plan.table3.items():
         if number in matched_numbers:
@@ -235,7 +294,8 @@ def _field_rows(plan: _Plan) -> tuple[list[dict[str, str]], list[dict[str, str]]
         )
         origins.append({"kind": "table3", "table3": table3})
 
-    known_stems = {split_isolate(row["isolate"]) for row in plan.field_biosamples}
+    known_stems = {split_isolate(row["label"]) for row in plan.thesis}
+    known_stems |= {split_isolate(row["isolate"]) for row in plan.legacy_biosamples}
     known_stems |= {table3_stem(number, row) for number, row in plan.table3.items()}
     for biosample in plan.greenhouse_biosamples:
         stem = split_isolate(biosample["isolate"])
@@ -258,7 +318,65 @@ def _field_rows(plan: _Plan) -> tuple[list[dict[str, str]], list[dict[str, str]]
     return rows, origins
 
 
-def _load_real_data(users: dict[str, User], project: Project, plan: _Plan) -> dict[str, int]:
+def _extract_with_readings(technician: User, field_sample: Sample, lab: dict[str, str]) -> Sample:
+    extract = services.derive_sample(
+        user=technician,
+        parent=field_sample,
+        kind=SampleKind.DNA_EXTRACT,
+        label=field_sample.label,
+        notes="Total DNA extracted from the dried leaf (CTAB method).",
+    )
+    services.record_qc(
+        user=technician,
+        sample=extract,
+        method=QcMethod.NANODROP,
+        apply_to_sample=True,
+        concentration_ng_ul=Decimal(lab["dna_ng_ul"]),
+        a260_280=Decimal(lab["a260_280"]),
+        a260_230=Decimal(lab["a260_230"]),
+        notes="Reading from the laboratory file; the measurement date is not recorded.",
+    )
+    return extract
+
+
+def _rca_products(technician: User, extract: Sample, lab: dict[str, str]) -> list[Sample]:
+    """One rolling circle amplification product per kit tried, with the gel result as a check."""
+    products = []
+    biosample = lab["biosample"]
+    both = all(lab[f"{key}_tried"] == "yes" for key, _kit in RCA_KITS)
+    for key, kit in RCA_KITS:
+        if lab[f"{key}_tried"] != "yes":
+            continue
+        worked = lab[f"{key}_result"] == "positive"
+        notes = f"Rolling circle amplification with {kit}; migration on agarose gel: " + (
+            "positive." if worked else "negative."
+        )
+        if worked and lab["sequenced"] == "yes" and biosample:
+            notes += (
+                f" Sequenced. BioSample {biosample['biosample_accession']}, "
+                f"BioProject {BIOPROJECT}."
+            )
+        elif worked and lab["sequenced"] == "yes":
+            notes += " Selected for sequencing."
+        product = services.derive_sample(
+            user=technician,
+            parent=extract,
+            kind=SampleKind.AMPLIFICATION_PRODUCT,
+            label=f"{extract.label} [{kit}]" if both else extract.label,
+            notes=notes,
+        )
+        services.record_qc(
+            user=technician,
+            sample=product,
+            method=QcMethod.GEL,
+            outcome=QcOutcome.PASSED if worked else QcOutcome.FAILED,
+            notes=f"RCA with {kit}, from the laboratory file; the gel date is not recorded.",
+        )
+        products.append(product)
+    return products
+
+
+def _load_real_data(users: dict[str, User], project: Project, plan: _Plan) -> dict[str, Sample]:
     technician, platform = users["demo_technician"], users["demo_platform"]
     storage = _build_storage(platform)
     rows, origins = _field_rows(plan)
@@ -266,11 +384,9 @@ def _load_real_data(users: dict[str, User], project: Project, plan: _Plan) -> di
 
     by_stem: dict[tuple[str, str], Sample] = {}
     by_table3_number: dict[str, Sample] = {}
-    biosample_fields: list[tuple[dict[str, str], Sample]] = []
     for sample, origin in zip(report.samples, origins, strict=True):
-        if origin["kind"] == "biosample":
-            by_stem[split_isolate(origin["biosample"]["isolate"])] = sample
-            biosample_fields.append((origin["biosample"], sample))
+        if origin["kind"] in ("thesis", "biosample"):
+            by_stem[split_isolate(sample.label)] = sample
             if origin["table3"]:
                 by_table3_number[origin["table3"]["sample"]] = sample
         elif origin["kind"] == "table3":
@@ -280,42 +396,50 @@ def _load_real_data(users: dict[str, User], project: Project, plan: _Plan) -> di
         else:
             by_stem[origin["stem"]] = sample
 
-    def place(sample, location_key, positions):
+    def place(sample, slots=None):
+        location, position = (storage["cabinet"], "") if slots is None else next(slots)
         services.move_sample(
             user=technician,
             sample=sample,
-            location=storage[location_key],
-            position=next(positions) if location_key != "cabinet" else "",
+            location=location,
+            position=position,
             reason=DEMO_PLACEMENT_REASON,
         )
 
     for sample in report.samples:
-        place(sample, "cabinet", None)
+        place(sample)
 
-    dna_positions, rca_positions, rna_positions = (
-        grid_positions(),
-        grid_positions(),
-        grid_positions(),
-    )
-    for biosample, field_sample in biosample_fields:
-        label = biosample["isolate"]
-        extract = services.derive_sample(
-            user=technician,
-            parent=field_sample,
-            kind=SampleKind.DNA_EXTRACT,
-            label=label,
-            notes="Total DNA extracted from the dried leaf (CTAB method).",
-        )
-        amplified = services.derive_sample(
-            user=technician,
-            parent=extract,
-            kind=SampleKind.AMPLIFICATION_PRODUCT,
-            label=label,
-            notes=f"Rolling circle amplification product, sequenced. BioSample "
-            f"{biosample['biosample_accession']}, BioProject {BIOPROJECT}.",
-        )
-        place(extract, "dna_box", dna_positions)
-        place(amplified, "rca_box", rca_positions)
+    dna_slots = _slots(platform, storage["freezer_20"], "DNA box")
+    rca_slots = _slots(platform, storage["freezer_20"], "RCA box")
+    rna_slots = _slots(platform, storage["freezer_80"], "RNA box")
+    extracts: dict[str, Sample] = {}  # lab sample code -> DNA extract
+    for sample, origin in zip(report.samples, origins, strict=True):
+        if origin["kind"] == "thesis":
+            lab = origin["thesis"]
+            extract = _extract_with_readings(technician, sample, lab)
+            place(extract, dna_slots)
+            extracts[lab["sample_code"]] = extract
+            for product in _rca_products(technician, extract, lab):
+                place(product, rca_slots)
+        elif origin["kind"] == "biosample":
+            biosample = origin["biosample"]
+            extract = services.derive_sample(
+                user=technician,
+                parent=sample,
+                kind=SampleKind.DNA_EXTRACT,
+                label=biosample["isolate"],
+                notes="Total DNA extracted from the dried leaf (CTAB method).",
+            )
+            amplified = services.derive_sample(
+                user=technician,
+                parent=extract,
+                kind=SampleKind.AMPLIFICATION_PRODUCT,
+                label=biosample["isolate"],
+                notes=f"Rolling circle amplification product, sequenced. BioSample "
+                f"{biosample['biosample_accession']}, BioProject {BIOPROJECT}.",
+            )
+            place(extract, dna_slots)
+            place(amplified, rca_slots)
 
     for number, table3 in plan.table3.items():
         parent = by_table3_number[number]
@@ -347,8 +471,8 @@ def _load_real_data(users: dict[str, User], project: Project, plan: _Plan) -> di
             label=biosample["isolate"],
             notes=f"BioSample {biosample['biosample_accession']}, BioProject {BIOPROJECT}.",
         )
-        place(rna, "rna_box", rna_positions)
-    return {}
+        place(rna, rna_slots)
+    return extracts
 
 
 def _link_genomes(users: dict[str, User], project: Project) -> int:
@@ -358,12 +482,16 @@ def _link_genomes(users: dict[str, User], project: Project) -> int:
     kinds = {"genomic DNA": SampleKind.AMPLIFICATION_PRODUCT, "genomic RNA": SampleKind.RNA_EXTRACT}
     created = 0
     for row in _read("sequences_PRJNA1460897.csv"):
-        sample = Sample.objects.get(
+        isolate = row["biosample_isolate"]
+        candidates = Sample.objects.filter(
+            Q(label=isolate) | Q(label__startswith=f"{isolate} ["),
             project=project,
             kind=kinds[row["mol_type"]],
-            label=row["biosample_isolate"],
             voided_at__isnull=True,
         )
+        if candidates.count() > 1:  # several RCA attempts: the one whose gel passed was sequenced
+            candidates = candidates.filter(qc_measurements__outcome=QcOutcome.PASSED)
+        sample = candidates.get()
         if sample.sequence_records.filter(accession=row["accession"]).exists():
             continue
         note = f"Isolate {row['isolate']} in GenBank. Published in doi:{row['publication']}."
@@ -398,6 +526,19 @@ def _table3_field_samples(project: Project, plan: _Plan) -> dict[str, Sample]:
             voided_at__isnull=True,
         )
         for number in plan.table3
+    }
+
+
+def _dna_extracts(project: Project, plan: _Plan) -> dict[str, Sample]:
+    """The DNA extract of each sample of the laboratory file, by sample code."""
+    return {
+        lab["sample_code"]: Sample.objects.get(
+            project=project,
+            kind=SampleKind.DNA_EXTRACT,
+            label=lab["label"],
+            voided_at__isnull=True,
+        )
+        for lab in plan.thesis
     }
 
 
@@ -464,7 +605,9 @@ def load_demo_data(*, password: str | None = None, synthetic_volume: int = 0) ->
         _load_real_data(users, project, _make_plan())
     else:
         summary.already_loaded = True
-    load_pcr_demo(users, project, _table3_field_samples(project, _make_plan()))
+    plan = _make_plan()
+    load_pcr_demo(users, project, _table3_field_samples(project, plan))
+    load_thesis_pcr(users, project, _dna_extracts(project, plan))
     _link_genomes(users, project)  # also completes a database loaded before genomes existed
     summary.counts = _counts(project)
     if synthetic_volume and not Project.objects.filter(code=SYNTHETIC_PROJECT_CODE).exists():

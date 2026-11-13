@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 # Demonstration data: provenance
 
-These files are the published data behind `manage.py load_demo_data`. Nothing here is invented.
+These files are the real data behind `manage.py load_demo_data`: public data (NCBI, open-access articles) and the maintainer's own laboratory records (`thesis_98_samples.csv`). Nothing here is invented.
 
 ## `biosamples_PRJNA1460897.csv`
 
@@ -35,6 +35,41 @@ chlorosis, Lc leaf curling, Ld leaf distortion, Np necrotic points, S stunting, 
 Vn vein necrosis. The code `P` appears once in the table without being defined in its legend and is
 kept as written.
 
+## `thesis_98_samples.csv`
+
+The 98 sweetpotato samples collected in 2016 and followed in the maintainer's laboratory, from two
+spreadsheets of the thesis work of the maintainer (`98Samples_selected.xlsx`, field data; and
+`98Samples_Extraction_PCR_RCA_Information.xlsx`, laboratory results), joined on the sample code.
+The spreadsheets themselves, the gel images and the slides stay outside the repository.
+
+| Column | Meaning |
+|---|---|
+| `sample_code`, `field_no` | Sample code (`BFA81`) and the number written in the field notebook |
+| `village`, `district`, `province`, `region` | Place; the district is the locality used in the BioSamples |
+| `latitude`, `longitude` | **Rounded to 0.01°** (about 1 km), the precision NCBI already publishes; the GPS readings in the spreadsheet are exact to the plot and are not versioned |
+| `collected_on` | Date of the GPS reading |
+| `variety` | Sweetpotato variety, when known (`Inconnu` is left blank) |
+| `symptom_scale` | Column `Echelle`, read as the 1-9 symptom severity scale (**to be confirmed**) |
+| `dna_ng_ul`, `a260_280`, `a260_230` | NanoDrop reading of the CTAB DNA extract |
+| `spg_pcr` | Sweepovirus detection by PCR with the SPG1/SPG2 primers |
+| `templiphi_*`, `equiphi29_*` | Whether rolling circle amplification was tried with each kit, and whether the product migrated on agarose gel (positive/negative) |
+| `sequenced` | Selected for Oxford Nanopore sequencing |
+
+Checked against the other files: the 53 samples selected for sequencing are exactly the 53 field
+BioSamples of 2016; each of them had a successful amplification (51 with TempliPhi, 2 with
+EquiPhi29 after TempliPhi failed); all 98 collection dates are 2016, and every date agrees with the
+BioSample. The spreadsheet also holds a second date column (`ltime`) that differs from the GPS date
+for five samples (BFA251, BFA316, BFA1093, BFA1094, BFA1107); it is not loaded. It explains the date
+2016-08-18 of the GenBank record PV405577, whose BioSample date 2016-08-16 is the right one.
+
+What this settles about earlier questions: the collection year is 2016; the 98 samples are those of
+the laboratory file, of which 53 are in the BioSamples; `Tou_BFA932` has the same coordinates
+(11.39 N, 5.05 W) in the laboratory file as in the BioSample, so the oddity is in the GPS reading,
+not in the NCBI record; `Pampangou` is the village and `Dianpagou` the district of BFA496.
+
+Not recorded in the file, and therefore not invented: the dates of extraction, PCR and RCA, the PCR
+plate layout and controls, the thermocycler program, and the template volumes.
+
 ## What the loader adds, and what it does not
 
 - **Real:** sample names, localities, provinces, collection dates and coordinates (BioSamples),
@@ -42,8 +77,8 @@ kept as written.
   greenhouse plant, RNA extract; field sample, grafted *I. setosa* plant), storage temperatures
   (DNA at -20 C, RNA at -80 C, as described in the articles).
 - **Illustrative:** the storage tree, the box positions (assigned in order) and the demo user
-  accounts. Real positions and instrument readings (NanoDrop, Qubit) are not published, so none
-  are generated.
+  accounts. Real box positions are not recorded, so none are invented. The NanoDrop readings of the
+  98 DNA extracts are real (`thesis_98_samples.csv`).
 - **Inferred:** nine greenhouse plants have no matching field sample in the published metadata; a
   field sample is created for each, flagged in its notes.
 - Names Table 3 and the BioSamples spell differently (`Tiébélé` and `Tiebele`) are kept as

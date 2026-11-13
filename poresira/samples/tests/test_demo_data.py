@@ -125,14 +125,16 @@ class TestPcrData:
         assert splcv.master_mix.components.count() == 6
 
     def test_three_reconstructed_runs_hold_the_150_published_results(self, loaded_demo):
-        runs = PcrRun.objects.all()
+        runs = PcrRun.objects.filter(notes__startswith="Results transcribed")
 
         assert runs.count() == 3
         assert all(r.reconstructed and r.status == RunStatus.CLOSED for r in runs)
         assert all(r.performed_on is None and r.reactions.count() == 50 for r in runs)
         assert all(assess_run(r).state == Validity.NOT_ASSESSED for r in runs)
-        assert loaded_demo.counts["PCR reactions"] == 150
-        positives = PcrReaction.objects.filter(result=Result.POSITIVE)
+        assert loaded_demo.counts["PCR reactions"] == 150 + 98
+        positives = PcrReaction.objects.filter(
+            result=Result.POSITIVE, run__notes__startswith="Results transcribed"
+        )
         assert positives.filter(run__assay__name="SPFMV CP RT-PCR").count() == 25
         assert positives.filter(run__assay__name="SPCSV CP RT-PCR").count() == 21
         assert positives.filter(run__assay__name="SPLCV CP PCR").count() == 19
@@ -155,13 +157,93 @@ class TestPcrData:
         assert {r.result for r in sample.pcr_reactions.all()} == {"negative"}
 
 
+@pytest.fixture(scope="module")
+def rows():
+    with (loader.DATA_DIR / "thesis_98_samples.csv").open(encoding="utf-8") as file:
+        return list(csv.DictReader(file))
+
+
+class TestLaboratoryFile:
+    def test_it_holds_the_98_samples_and_the_published_selection(self, rows):
+        assert len(rows) == 98 and len({r["sample_code"] for r in rows}) == 98
+        assert sum(r["spg_pcr"] == "positive" for r in rows) == 53
+        assert sum(r["sequenced"] == "yes" for r in rows) == 53
+        assert all(r["collected_on"].startswith("2016") for r in rows)
+
+    def test_every_sequenced_sample_had_a_successful_rca(self, rows):
+        for row in rows:
+            if row["sequenced"] == "yes":
+                assert "positive" in (row["templiphi_result"], row["equiphi29_result"])
+
+    def test_coordinates_are_no_more_precise_than_ncbi(self, rows):
+        for row in rows:
+            for name in ("latitude", "longitude"):
+                assert len(row[name].split(".")[1]) == 2
+
+    def test_it_agrees_with_the_biosamples_on_dates_and_sequenced_samples(self, rows):
+        biosamples = {
+            loader.split_isolate(r["isolate"])[1]: r
+            for r in loader._read("biosamples_PRJNA1460897.csv")
+            if r["collection_date"].startswith("2016")
+        }
+        for row in rows:
+            biosample = biosamples.get(row["sample_code"].removeprefix("BFA"))
+            if biosample:
+                assert biosample["collection_date"] == row["collected_on"]
+            assert (biosample is not None) == (row["sequenced"] == "yes")
+
+
+class TestLaboratoryData:
+    def test_extracts_carry_their_nanodrop_readings(self, loaded_demo):
+        extract = Sample.objects.get(kind=SampleKind.DNA_EXTRACT, label="Sam_BFA148")
+        reading = extract.qc_measurements.get()
+
+        assert reading.method == "nanodrop"
+        assert (str(reading.concentration_ng_ul), str(reading.a260_280)) == ("284.400", "1.98")
+        assert extract.concentration_ng_ul == reading.concentration_ng_ul
+
+    def test_each_rca_attempt_is_a_product_with_its_gel_result(self, loaded_demo):
+        done = Sample.objects.filter(kind=SampleKind.AMPLIFICATION_PRODUCT)
+        assert done.filter(qc_measurements__outcome="passed").count() == 51 + 2
+        assert done.filter(qc_measurements__outcome="failed").count() == 85 - 53
+
+    def test_when_both_kits_were_tried_the_label_names_the_kit(self, loaded_demo):
+        labels = set(
+            Sample.objects.filter(
+                kind=SampleKind.AMPLIFICATION_PRODUCT, label__contains="["
+            ).values_list("label", flat=True)
+        )
+        assert "Sam_BFA81 [TempliPhi]" in labels and "Sam_BFA81 [EquiPhi29]" in labels
+
+    def test_the_sequence_is_linked_to_the_rca_that_worked(self, loaded_demo):
+        for record in SequenceRecord.objects.filter(sample__kind=SampleKind.AMPLIFICATION_PRODUCT):
+            assert record.sample.qc_measurements.get().outcome == "passed"
+
+    def test_two_runs_hold_the_98_sweepovirus_results(self, loaded_demo):
+        runs = PcrRun.objects.filter(notes__startswith="Sweepovirus detection")
+
+        assert [r.tube_count for r in runs.order_by("created_at")] == [49, 49]
+        assert all(r.reconstructed and r.status == RunStatus.CLOSED for r in runs)
+        reactions = PcrReaction.objects.filter(run__in=runs)
+        assert reactions.count() == 98
+        assert reactions.filter(result=Result.POSITIVE).count() == 53
+        assert {r.sample.kind for r in reactions} == {SampleKind.DNA_EXTRACT}
+
+    def test_coordinates_are_rounded_to_a_hundredth_of_a_degree(self, loaded_demo):
+        event = Sample.objects.get(
+            kind=SampleKind.FIELD_SAMPLE, label="Sam_BFA148"
+        ).collection_event
+        assert (str(event.latitude), str(event.longitude)) == ("10.94000", "-5.11000")
+        assert event.site_name == "Samogohiri"
+
+
 class TestLoading:
     def test_the_published_sample_counts_are_reproduced(self, loaded_demo):
         assert not loaded_demo.already_loaded
-        assert kind_count(SampleKind.DNA_EXTRACT) == 53
-        assert kind_count(SampleKind.AMPLIFICATION_PRODUCT) == 53
+        assert kind_count(SampleKind.DNA_EXTRACT) == 98
+        assert kind_count(SampleKind.AMPLIFICATION_PRODUCT) == 75 + 10  # one per RCA attempt
         assert kind_count(SampleKind.RNA_EXTRACT) == 13
-        assert kind_count(SampleKind.FIELD_SAMPLE) == 109
+        assert kind_count(SampleKind.FIELD_SAMPLE) == 98 + 43 + 13
         assert kind_count(SampleKind.LIVING_PLANT) == 50 + 13
 
     def test_the_54_published_sequences_are_linked_to_their_sequenced_material(self, loaded_demo):
@@ -222,7 +304,7 @@ class TestLoading:
         sample = Sample.objects.get(kind=SampleKind.FIELD_SAMPLE, label="Tie_BFA266")
         event = sample.collection_event
 
-        assert (event.province, event.locality) == ("Nahouri", "Tiebele")
+        assert (event.province, event.locality) == ("Nahouri", "Tiébélé")
         assert str(event.collected_on) == "2016-04-15"
         assert (str(event.latitude), str(event.longitude)) == ("11.12000", "-0.96000")
         assert (sample.host_taxon, sample.host_tax_id) == ("Ipomoea batatas", 4120)
@@ -265,9 +347,9 @@ class TestLoading:
             kind=SampleKind.RNA_EXTRACT, label="Yor_BFA412"
         ).storage_location.path == ("LVBV laboratory, INERA Kamboinsé > Freezer -80 °C > RNA box 1")
         placed = Sample.objects.exclude(position="")
-        assert placed.count() == 53 + 53 + 13
+        assert placed.count() == 98 + 85 + 13
         assert len({(s.storage_location_id, s.position) for s in placed}) == placed.count()
-        assert Sample.objects.filter(status=SampleStatus.STORED).count() == 109 + 53 + 53 + 13
+        assert Sample.objects.filter(status=SampleStatus.STORED).count() == 154 + 98 + 85 + 13
 
     def test_the_audit_trail_is_complete_and_unbroken(self, loaded_demo):
         assert verify_audit_chain().is_intact
