@@ -96,8 +96,9 @@ docker compose exec web python manage.py load_demo_data --allow-production --pas
 ```
 
 Builds the project `DEMO-SPBF` from two published studies of sweetpotato virus diseases in
-Burkina Faso: the 66 BioSamples of BioProject PRJNA1460897 and Table 3 of Tibiri et al. 2020
-(*Plant Pathology*, CC BY 4.0). It creates about 290 samples with their lineage, a storage tree
+Burkina Faso: the 66 BioSamples of BioProject PRJNA1460897, Table 3 of Tibiri et al. 2020
+(*Plant Pathology*, CC BY 4.0) and the laboratory records of 98 samples (DNA readings, rolling
+circle amplification, sweepovirus PCR; coordinates rounded to 0.01°). It creates about 410 samples with their lineage, a storage tree
 and four accounts (`demo_platform`, `demo_lead`, `demo_technician`, `demo_viewer`).
 The 54 GenBank sequences of the two companion studies (Front Microbiol 2026 and Viruses 2025)
 are linked to their samples. `--synthetic-volume N` adds the project `DEMO-SYNTHETIC` with random samples (seed 2026) to
@@ -106,5 +107,5 @@ is given, because the accounts it creates use a known password.
 
 What is real and what is illustrative is documented in
 `poresira/samples/demo/data/README.md`. In short: names, places, dates and coordinates are as
-published; storage positions, the storage tree and accounts are illustrative; no instrument
-readings are invented.
+published or recorded in the laboratory file; storage positions, the storage tree and accounts are
+illustrative; no instrument readings are invented.

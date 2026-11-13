@@ -32,6 +32,16 @@ All notable changes are listed here. The format follows
   project from the 66 BioSamples of PRJNA1460897 and Table 3 of Tibiri et al. 2020.
 - `SequenceRecord`: GenBank accessions linked to the sample that was sequenced, with BioSample and
   BioProject; the demo project links 54 published sequences (viral genomes and satellites) of two studies.
+- `pcr` app: primers, cycling programs, master mixes, assays, PCR runs in a 96-well plate or in
+  1 to 96 tubes, reactions with controls, results, Ct and band size. Control-based validity of a
+  run; results of a closed run change only with a reason; read-only identity enforced by triggers.
+- PCR web interface: run list and page with a coloured plate or tube view, forms to plan, add
+  reactions, enter results, close, reopen and void; lists of assays, primers and programs; PCR
+  results on the sample page.
+- `import_pcr_run`: all-or-nothing CSV import of a run.
+- Demonstration data: 98 laboratory samples with NanoDrop readings, rolling circle amplification
+  attempts and SPG1/SPG2 PCR results, and the PCR data of Tibiri et al. 2020 (primers, programs,
+  assays, 150 reconstructed results).
 - `with_reason` and `acting_as` helpers for audited changes made outside a request.
 - Complete French translation of the new screens.
 - AGPL-3.0-or-later license, CLA, contribution guide, code of conduct, citation file.
