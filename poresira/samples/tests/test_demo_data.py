@@ -229,6 +229,15 @@ class TestLaboratoryData:
         assert reactions.filter(result=Result.POSITIVE).count() == 53
         assert {r.sample.kind for r in reactions} == {SampleKind.DNA_EXTRACT}
 
+    def test_places_are_written_without_accents_and_gh_means_near_ghana(self, loaded_demo):
+        event = Sample.objects.get(
+            kind=SampleKind.FIELD_SAMPLE, label="Bou_BFA1274"
+        ).collection_event
+        assert event.site_name == "Boura"
+        assert "Ghana" in event.notes
+        tiebele = Sample.objects.get(kind=SampleKind.FIELD_SAMPLE, label="Tie_BFA266")
+        assert tiebele.collection_event.province == "Nahouri"  # Table 3 keeps its own spelling
+
     def test_coordinates_are_rounded_to_a_hundredth_of_a_degree(self, loaded_demo):
         event = Sample.objects.get(
             kind=SampleKind.FIELD_SAMPLE, label="Sam_BFA148"
@@ -304,7 +313,7 @@ class TestLoading:
         sample = Sample.objects.get(kind=SampleKind.FIELD_SAMPLE, label="Tie_BFA266")
         event = sample.collection_event
 
-        assert (event.province, event.locality) == ("Nahouri", "Tiébélé")
+        assert (event.province, event.locality) == ("Nahouri", "Tiebele")
         assert str(event.collected_on) == "2016-04-15"
         assert (str(event.latitude), str(event.longitude)) == ("11.12000", "-0.96000")
         assert (sample.host_taxon, sample.host_tax_id) == ("Ipomoea batatas", 4120)

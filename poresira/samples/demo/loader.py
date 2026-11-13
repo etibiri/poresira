@@ -73,9 +73,13 @@ class LoadSummary:
     counts: dict[str, int] = field(default_factory=dict)
 
 
-def _ascii(text: str) -> str:
+def _unaccented(text: str) -> str:
     decomposed = unicodedata.normalize("NFKD", text)
-    return "".join(char for char in decomposed if not unicodedata.combining(char)).lower()
+    return "".join(char for char in decomposed if not unicodedata.combining(char))
+
+
+def _ascii(text: str) -> str:
+    return _unaccented(text).lower()
 
 
 def _read(filename: str) -> list[dict[str, str]]:
@@ -236,10 +240,13 @@ def _field_rows(plan: _Plan) -> tuple[list[dict[str, str]], list[dict[str, str]]
                 "label": lab["label"],
                 "collected_on": lab["collected_on"],
                 "country": lab["country"],
-                "region": lab["region"],
-                "province": lab["province"],
-                "locality": lab["district"],
-                "site_name": lab["village"],
+                "region": _unaccented(lab["region"]),
+                "province": _unaccented(lab["province"]),
+                "locality": _unaccented(lab["district"]),
+                "site_name": _unaccented(lab["village"].removesuffix("-GH").strip()),
+                "event_notes": "Near the border with Ghana."
+                if lab["village"].endswith("-GH")
+                else "",
                 "latitude": lab["latitude"],
                 "longitude": lab["longitude"],
                 "host_variety": lab["variety"],

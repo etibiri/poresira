@@ -49,7 +49,7 @@ The spreadsheets themselves, the gel images and the slides stay outside the repo
 | `latitude`, `longitude` | **Rounded to 0.01°** (about 1 km), the precision NCBI already publishes; the GPS readings in the spreadsheet are exact to the plot and are not versioned |
 | `collected_on` | Date of the GPS reading |
 | `variety` | Sweetpotato variety, when known (`Inconnu` is left blank) |
-| `symptom_scale` | Column `Echelle`, read as the 1-9 symptom severity scale (**to be confirmed**) |
+| `symptom_scale` | Column `Echelle`, the 1-9 symptom severity scale (confirmed by the author) |
 | `dna_ng_ul`, `a260_280`, `a260_230` | NanoDrop reading of the CTAB DNA extract |
 | `spg_pcr` | Sweepovirus detection by PCR with the SPG1/SPG2 primers |
 | `templiphi_*`, `equiphi29_*` | Whether rolling circle amplification was tried with each kit, and whether the product migrated on agarose gel (positive/negative) |
@@ -66,6 +66,10 @@ What this settles about earlier questions: the collection year is 2016; the 98 s
 the laboratory file, of which 53 are in the BioSamples; `Tou_BFA932` has the same coordinates
 (11.39 N, 5.05 W) in the laboratory file as in the BioSample, so the oddity is in the GPS reading,
 not in the NCBI record; `Pampangou` is the village and `Dianpagou` the district of BFA496.
+
+The SPG1/SPG2 PCR follows the protocol of the 2020 article (confirmed by the author). The village
+`Boura -GH` is near the Ghana border; the loader writes `Boura` and notes the border. Place names are
+loaded without accents, as the BioSamples spell them (`Tiebele`, `Kenedougou`).
 
 Not recorded in the file, and therefore not invented: the dates of extraction, PCR and RCA, the PCR
 plate layout and controls, the thermocycler program, and the template volumes.
