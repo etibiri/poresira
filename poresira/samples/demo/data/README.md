@@ -68,7 +68,8 @@ coordinates (column `match`, with `match_note` where it is not exact):
 - 43 records equal a BioSample isolate exactly, with identical date and coordinates.
 - 7 records of the Viruses paper have no locality prefix (`BFA942`); each has a single BioSample
   with that number, the same date and the same coordinates, except `BFA1094`: GenBank gives
-  2016-08-18 and the BioSample `Ban_BFA1094` 2016-08-16.
+  2016-08-18 and the BioSample `Ban_BFA1094` 2016-08-16. The BioSample date is the correct one
+  (confirmed by the submitting author); the GenBank record carries the wrong date.
 - 4 SPFMV records (`Tie_E1`, `Tie_E3`, `Heere_E1`, `Heere_E2`) are named differently from their
   BioSample (`Tieb_E1_BFA297`, `Tieb_E3_BFA265`, `Heere_E1_BFA728`, `Heere_E2_BFA880`) and are
   matched on the E number, the 2025-05-17 date and the Kamboinse coordinates; the submitting author

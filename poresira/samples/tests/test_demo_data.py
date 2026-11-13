@@ -118,12 +118,13 @@ class TestLoading:
             "10.3389/fmicb.2026.1722370" in SequenceRecord.objects.get(accession="PV947692").notes
         )
 
-    def test_a_date_that_disagrees_with_the_biosample_is_flagged(self, loaded_demo):
+    def test_a_date_that_disagrees_with_the_biosample_follows_the_biosample(self, loaded_demo):
         record = SequenceRecord.objects.get(accession="PV405577")
 
         assert record.sample.label == "Ban_BFA1094"
         assert "2016-08-18" in record.notes
-        assert "2016-08-16" in record.notes
+        assert "BioSample date is the correct one" in record.notes
+        assert record.sample.collection_event.collected_on.isoformat() == "2016-08-16"
 
     def test_a_genome_reaches_its_biosample_through_the_lineage(self, loaded_demo):
         record = SequenceRecord.objects.get(accession="PV947737")
