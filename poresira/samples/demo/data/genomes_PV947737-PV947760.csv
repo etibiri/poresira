@@ -1,0 +1,25 @@
+accession,version,organism,isolate,length_bp,topology,mol_type,assembly_method,biosample_accession,biosample_isolate,match
+PV947737,1,Sweet potato leaf curl virus,Kan_BFA160,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660677,Kan_BFA160,exact
+PV947738,1,Sweet potato leaf curl virus,Kan_BFA638,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660718,Kan_BFA638,exact
+PV947739,1,Sweet potato leaf curl virus,Kan_BFA641,2827,circular,genomic DNA,Flye v. 2.9.5,SAMN57660689,Kan_BFA641,exact
+PV947740,1,Sweet potato leaf curl virus,Kan_BFA662,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660721,Kan_BFA662,exact
+PV947741,1,Sweet potato leaf curl virus,Kan_BFA692,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660723,Kan_BFA692,exact
+PV947742,1,Sweet potato leaf curl virus,Kan_BFA758,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660691,Kan_BFA758,exact
+PV947743,1,Sweet potato leaf curl virus,Kan_BFA773,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660692,Kan_BFA773,exact
+PV947744,1,Sweet potato leaf curl virus,Leo_BFA440,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660715,Leo_BFA440,exact
+PV947745,1,Sweet potato leaf curl virus,Sam_BFA150,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660700,Sam_BFA150,exact
+PV947746,1,Sweet potato leaf curl virus,Sam_BFA608,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660687,Sam_BFA608,exact
+PV947747,1,Sweet potato leaf curl virus,Sam_BFA622,2804,circular,genomic DNA,Flye v. 2.9.5,SAMN57660688,Sam_BFA622,exact
+PV947748,1,Sweet potato leaf curl virus,Tie_BFA224,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660702,Tie_BFA224,exact
+PV947749,1,Sweet potato leaf curl virus,Tie_BFA255,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660703,Tie_BFA255,exact
+PV947750,1,Sweet potato leaf curl virus,Tie_BFA266,2828,circular,genomic DNA,Flye v. 2.9.5,SAMN57660678,Tie_BFA266,exact
+PV947751,1,Sweet potato leaf curl virus,Tie_BFA301,2827,circular,genomic DNA,Flye v. 2.9.5,SAMN57660705,Tie_BFA301,exact
+PV947752,1,Sweet potato leaf curl virus,Tie_BFA308,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660706,Tie_BFA308,exact
+PV947753,1,Sweet potato leaf curl virus,Tie_BFA310,2825,circular,genomic DNA,Flye v. 2.9.5,SAMN57660680,Tie_BFA310,exact
+PV947754,1,Sweet potato leaf curl virus,Tie_BFA313,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660681,Tie_BFA313,exact
+PV947755,1,Sweet potato leaf curl virus,Tie_BFA314,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660682,Tie_BFA314,exact
+PV947756,1,Sweet potato leaf curl virus,Tie_BFA316,2829,circular,genomic DNA,Flye v. 2.9.5,SAMN57660728,Tie_BFA316,exact
+PV947757,1,Sweet potato feathery mottle virus,Tie_E1,10816,linear,genomic RNA,Flye v. 2.9.5,SAMN57660729,Tieb_E1_BFA297,inferred
+PV947758,1,Sweet potato feathery mottle virus,Tie_E3,10797,linear,genomic RNA,Flye v. 2.9.5,SAMN57660731,Tieb_E3_BFA265,inferred
+PV947759,1,Sweet potato feathery mottle virus,Heere_E1,10816,linear,genomic RNA,Flye v. 2.9.5,SAMN57660732,Heere_E1_BFA728,inferred
+PV947760,1,Sweet potato feathery mottle virus,Heere_E2,10769,linear,genomic RNA,Flye v. 2.9.5,SAMN57660733,Heere_E2_BFA880,inferred

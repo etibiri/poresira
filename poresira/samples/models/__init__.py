@@ -3,6 +3,7 @@
 from .collection import COLLECTION_EVENT_TYPE_CODE, CollectionEvent
 from .qc import QcMeasurement, QcMethod, QcOutcome
 from .sample import KIND_TYPE_CODES, Sample, SampleKind, SampleStatus
+from .sequence import SequenceRecord, SequenceTopology
 from .storage import StorageLocation, StorageLocationKind
 
 __all__ = [
@@ -15,6 +16,8 @@ __all__ = [
     "Sample",
     "SampleKind",
     "SampleStatus",
+    "SequenceRecord",
+    "SequenceTopology",
     "StorageLocation",
     "StorageLocationKind",
 ]

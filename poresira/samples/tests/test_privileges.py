@@ -20,6 +20,7 @@ AUDIT_TABLES_AND_COLUMNS = [
     ("samples_collectioneventhistory", "locality"),
     ("samples_storagelocationevent", "name"),
     ("samples_qcmeasurementevent", "notes"),
+    ("samples_sequencerecordevent", "notes"),
 ]
 
 

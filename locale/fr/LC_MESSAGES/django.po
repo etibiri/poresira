@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 22:13+0000\n"
+"POT-Creation-Date: 2026-11-13 07:19+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -353,7 +353,8 @@ msgid "collector"
 msgstr "collecteur"
 
 #: poresira/samples/models/collection.py poresira/samples/models/qc.py
-#: poresira/samples/models/sample.py poresira/samples/models/storage.py
+#: poresira/samples/models/sample.py poresira/samples/models/sequence.py
+#: poresira/samples/models/storage.py
 msgid "notes"
 msgstr "notes"
 
@@ -389,7 +390,7 @@ msgstr "Non conforme"
 msgid "Not assessed"
 msgstr "Non évalué"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py poresira/samples/models/sequence.py
 msgid "sample"
 msgstr "échantillon"
 
@@ -528,6 +529,55 @@ msgstr "position"
 msgid "volume (µL)"
 msgstr "volume (µL)"
 
+#: poresira/samples/models/sequence.py
+msgid "Linear"
+msgstr "Linéaire"
+
+#: poresira/samples/models/sequence.py
+msgid "Circular"
+msgstr "Circulaire"
+
+#: poresira/samples/models/sequence.py
+msgid "The material that was sequenced."
+msgstr "Le matériel qui a été séquencé."
+
+#: poresira/samples/models/sequence.py
+msgid "accession"
+msgstr "numéro d'accession"
+
+#: poresira/samples/models/sequence.py
+msgid "version"
+msgstr "version"
+
+#: poresira/samples/models/sequence.py
+msgid "organism"
+msgstr "organisme"
+
+#: poresira/samples/models/sequence.py
+msgid "isolate"
+msgstr "isolat"
+
+#: poresira/samples/models/sequence.py
+msgid "length (bp)"
+msgstr "longueur (pb)"
+
+#: poresira/samples/models/sequence.py
+msgid "topology"
+msgstr "topologie"
+
+#: poresira/samples/models/sequence.py
+msgid "assembly method"
+msgstr "méthode d'assemblage"
+
+#: poresira/samples/models/sequence.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "BioSample"
+msgstr "BioSample"
+
+#: poresira/samples/models/sequence.py
+msgid "BioProject"
+msgstr "BioProject"
+
 #: poresira/samples/models/storage.py
 msgid "Room"
 msgstr "Pièce"
@@ -637,6 +687,10 @@ msgstr "Une grille a au plus 26 lignes (A à Z)."
 #: poresira/samples/services.py
 msgid "Void the derivatives of this sample first."
 msgstr "Annulez d'abord les dérivés de cet échantillon."
+
+#: poresira/samples/services.py
+msgid "Void the sequences of this sample first."
+msgstr "Annulez d'abord les séquences de cet échantillon."
 
 #: poresira/samples/services.py
 msgid "Void the samples of this collection event first."
@@ -808,6 +862,26 @@ msgstr "Mesuré le"
 #: poresira/samples/templates/samples/sample_detail.html
 msgid "No measurements yet."
 msgstr "Aucune mesure pour le moment."
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Sequences"
+msgstr "Séquences"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Accession"
+msgstr "Numéro d'accession"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Organism"
+msgstr "Organisme"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Length (bp)"
+msgstr "Longueur (pb)"
+
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Topology"
+msgstr "Topologie"
 
 #: poresira/samples/templates/samples/sample_list.html
 msgid "Filter"

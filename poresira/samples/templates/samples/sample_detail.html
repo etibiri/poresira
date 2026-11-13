@@ -92,6 +92,27 @@
   </tbody>
 </table>
 
+{% if sequences %}
+<h2 class="h5 mt-4">{% trans "Sequences" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr>
+    <th>{% trans "Accession" %}</th><th>{% trans "Organism" %}</th><th>{% trans "Length (bp)" %}</th>
+    <th>{% trans "Topology" %}</th><th>{% trans "BioSample" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for record in sequences %}
+    <tr>
+      <td><a href="{{ record.ncbi_url }}" rel="noopener">{{ record }}</a></td>
+      <td>{{ record.organism }}</td>
+      <td>{{ record.length_bp }}</td>
+      <td>{{ record.get_topology_display }}</td>
+      <td>{{ record.biosample_accession|default:"—" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
 <h2 class="h5 mt-4">{% trans "History" %}</h2>
 {% include "core/_history.html" %}
 {% endblock %}

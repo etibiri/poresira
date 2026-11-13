@@ -18,10 +18,20 @@ StorageLocation (tree) ──< Sample      Sample ──< QcMeasurement
 | `CollectionEvent` | `WBF-C26-00012-K` | A field visit: date (optional), place, coordinates, collector, notes |
 | `Sample` | `WBF-S26-...`, `P`, `D`, `R`, `A` | One physical item; `kind` decides the type letter |
 | `QcMeasurement` | none | One reading (NanoDrop, Qubit, Qubit RNA IQ, gel, other) with an outcome |
+| `SequenceRecord` | none (GenBank accession) | A public sequence, e.g. a viral genome, linked to the sample that was sequenced |
 | `StorageLocation` | none | A node of the storage tree: room, freezer, fridge, cabinet, shelf, rack, box |
 
 Sample kinds: field sample (`S`), living plant (`P`), DNA extract (`D`), RNA extract (`R`),
 amplification product (`A`). Statuses: registered, stored, in process, consumed, discarded.
+
+## Sequences and BioSamples
+
+A `SequenceRecord` stores an INSDC accession (`PV947737.1`), organism, isolate, length,
+topology, assembly method, and the BioSample and BioProject accessions. It is linked to the
+material that was sequenced (an amplification product for a DNA virus, an RNA extract for an
+RNA virus); the field sample and its collection event are reached through the lineage.
+Accession, version and length are read-only, and an accession is unique among active records.
+It is a light record until the `deposits` app can track submissions.
 
 ## Lineage
 
@@ -51,7 +61,7 @@ ancestors and descendants of a sample are computed with a recursive query
 - **Unique labels and barcodes.** A label is unique per project and kind among active samples;
   a barcode is unique.
 - **QC readings are immutable.** A wrong reading is voided with a reason and a new one recorded.
-- **Void, never delete.** A sample with active derivatives, a collection event with active samples and a
+- **Void, never delete.** A sample with active derivatives, a sample with active sequences, a collection event with active samples and a
   storage location with active samples or sub-locations cannot be voided.
 
 ## Permissions
@@ -87,7 +97,7 @@ docker compose exec web python manage.py load_demo_data --allow-production --pas
 
 Builds the project `DEMO-SPBF` from two published studies of sweetpotato virus diseases in
 Burkina Faso: the 66 BioSamples of BioProject PRJNA1460897 and Table 3 of Tibiri et al. 2020
-(*Plant Pathology*, CC BY 4.0). It creates about 290 samples with their lineage, a storage tree
+(*Plant Pathology*, CC BY 4.0). The 24 viral genomes of Front Microbiol 2026 (GenBank PV947737-PV947760: 20 SPLCV, 4 SPFMV) are linked to their samples. It creates about 290 samples with their lineage, a storage tree
 and four accounts (`demo_platform`, `demo_lead`, `demo_technician`, `demo_viewer`).
 `--synthetic-volume N` adds the project `DEMO-SYNTHETIC` with random samples (seed 2026) to
 test performance. The command refuses to run when `DEBUG` is off unless `--allow-production`

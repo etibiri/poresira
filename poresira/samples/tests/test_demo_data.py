@@ -17,6 +17,7 @@ from poresira.samples.models import (
     Sample,
     SampleKind,
     SampleStatus,
+    SequenceRecord,
     StorageLocation,
 )
 
@@ -90,6 +91,33 @@ class TestLoading:
         assert kind_count(SampleKind.RNA_EXTRACT) == 13
         assert kind_count(SampleKind.FIELD_SAMPLE) == 109
         assert kind_count(SampleKind.LIVING_PLANT) == 50 + 13
+
+    def test_the_24_genomes_are_linked_to_their_sequenced_material(self, loaded_demo):
+        records = SequenceRecord.objects.select_related("sample")
+
+        assert records.count() == 24
+        assert loaded_demo.counts["sequences"] == 24
+        dna = records.filter(organism="Sweet potato leaf curl virus")
+        rna = records.filter(organism="Sweet potato feathery mottle virus")
+        assert dna.count() == 20
+        assert {r.sample.kind for r in dna} == {SampleKind.AMPLIFICATION_PRODUCT}
+        assert rna.count() == 4
+        assert {r.sample.kind for r in rna} == {SampleKind.RNA_EXTRACT}
+
+    def test_a_genome_reaches_its_biosample_through_the_lineage(self, loaded_demo):
+        record = SequenceRecord.objects.get(accession="PV947737")
+
+        assert record.biosample_accession == "SAMN57660677"
+        root = ancestors(record.sample)[0]
+        assert root.kind == SampleKind.FIELD_SAMPLE
+        assert root.label == "Kan_BFA160"
+
+    def test_genomes_whose_isolate_name_differs_are_flagged(self, loaded_demo):
+        record = SequenceRecord.objects.get(accession="PV947757")
+
+        assert record.sample.label == "Tieb_E1_BFA297"
+        assert "differs from the BioSample name" in record.notes
+        assert "differs" not in SequenceRecord.objects.get(accession="PV947737").notes
 
     def test_every_derivative_traces_back_to_a_field_sample(self, loaded_demo):
         for sample in Sample.objects.exclude(kind=SampleKind.FIELD_SAMPLE):

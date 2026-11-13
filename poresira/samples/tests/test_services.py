@@ -435,6 +435,47 @@ class TestQualityControl:
             services.record_qc(user=editor, sample=field_sample, method=QcMethod.GEL)
 
 
+class TestSequences:
+    def record(self, editor, sample, accession="PV947737"):
+        return services.record_sequence(
+            user=editor,
+            sample=sample,
+            accession=accession,
+            length_bp=2828,
+            organism="Sweet potato leaf curl virus",
+            topology="circular",
+            biosample_accession="SAMN57660677",
+        )
+
+    def test_a_genome_is_linked_to_its_sample(self, editor, field_sample):
+        record = self.record(editor, field_sample)
+
+        assert list(field_sample.sequence_records.all()) == [record]
+        assert str(record) == "PV947737.1"
+        assert record.ncbi_url.endswith("/nuccore/PV947737.1")
+
+    def test_an_accession_is_unique_among_active_records(self, editor, field_sample):
+        self.record(editor, field_sample)
+
+        with pytest.raises(ValidationError):
+            self.record(editor, field_sample)
+
+    def test_a_viewer_cannot_link_a_genome(self, project, field_sample):
+        viewer = member(project, ProjectRole.VIEWER)
+
+        with pytest.raises(PermissionDenied):
+            self.record(viewer, field_sample)
+
+    def test_a_sample_with_sequences_cannot_be_voided_first(self, editor, field_sample):
+        record = self.record(editor, field_sample)
+
+        with pytest.raises(services.RecordInUseError):
+            services.void_record(user=editor, record=field_sample, reason="mistake")
+
+        services.void_record(user=editor, record=record, reason="wrong sample")
+        services.void_record(user=editor, record=field_sample, reason="mistake")
+
+
 class TestStorageLocations:
     def test_grids_are_limited_to_26_rows(self):
         manager = UserFactory(role=GlobalRole.PLATFORM_MANAGER)

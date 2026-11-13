@@ -178,6 +178,7 @@ class SampleDetailView(SampleMixin, LoginRequiredMixin, TemplateView):
             can_edit=not sample.is_voided and can_edit_project(self.request.user, sample.project),
             family=family_tree(sample),
             measurements=sample.qc_measurements.select_related("measured_by"),
+            sequences=sample.sequence_records.active(),
             entries=history,
             **kwargs,
         )

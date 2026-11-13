@@ -17,7 +17,7 @@ from poresira.core.models import GlobalRole, Project, ProjectMembership, Project
 from poresira.core.reason import acting_as
 from poresira.samples import services
 from poresira.samples.importing import import_field_samples
-from poresira.samples.models import Sample, SampleKind, StorageLocationKind
+from poresira.samples.models import Sample, SampleKind, SequenceRecord, StorageLocationKind
 
 DATA_DIR = Path(__file__).parent / "data"
 DEMO_PROJECT_CODE = "DEMO-SPBF"
@@ -349,6 +349,45 @@ def _load_real_data(users: dict[str, User], project: Project, plan: _Plan) -> di
     return {}
 
 
+def _link_genomes(users: dict[str, User], project: Project) -> int:
+    """Attach each published genome to the sequenced material: the RCA product for DNA viruses,
+    the RNA extract for RNA viruses. Samples are found by label, which is the BioSample isolate."""
+    technician = users["demo_technician"]
+    kinds = {"genomic DNA": SampleKind.AMPLIFICATION_PRODUCT, "genomic RNA": SampleKind.RNA_EXTRACT}
+    created = 0
+    for row in _read("genomes_PV947737-PV947760.csv"):
+        sample = Sample.objects.get(
+            project=project,
+            kind=kinds[row["mol_type"]],
+            label=row["biosample_isolate"],
+            voided_at__isnull=True,
+        )
+        if sample.sequence_records.filter(accession=row["accession"]).exists():
+            continue
+        note = f"Isolate {row['isolate']} in GenBank."
+        if row["match"] == "inferred":
+            note += (
+                " Linked to the BioSample by sample number, date and coordinates: the isolate "
+                "name differs from the BioSample name."
+            )
+        services.record_sequence(
+            user=technician,
+            sample=sample,
+            accession=row["accession"],
+            version=int(row["version"]),
+            organism=row["organism"],
+            isolate=row["isolate"],
+            length_bp=int(row["length_bp"]),
+            topology=row["topology"],
+            assembly_method=row["assembly_method"],
+            biosample_accession=row["biosample_accession"],
+            bioproject_accession=BIOPROJECT,
+            notes=note,
+        )
+        created += 1
+    return created
+
+
 def _load_synthetic(users: dict[str, User], count: int) -> None:
     technician = users["demo_technician"]
     project = _create_project(
@@ -391,6 +430,7 @@ def _counts(project: Project) -> dict[str, int]:
     counts = {"collection events": project.collection_events.count()}
     for kind in SampleKind:
         counts[f"{kind.label}s"] = samples.filter(kind=kind).count()
+    counts["sequences"] = SequenceRecord.objects.filter(sample__project=project).count()
     return counts
 
 
@@ -410,6 +450,7 @@ def load_demo_data(*, password: str | None = None, synthetic_volume: int = 0) ->
         _load_real_data(users, project, _make_plan())
     else:
         summary.already_loaded = True
+    _link_genomes(users, project)  # also completes a database loaded before genomes existed
     summary.counts = _counts(project)
     if synthetic_volume and not Project.objects.filter(code=SYNTHETIC_PROJECT_CODE).exists():
         _load_synthetic(users, synthetic_volume)

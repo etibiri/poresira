@@ -22,6 +22,7 @@ from .models import (
     Sample,
     SampleKind,
     SampleStatus,
+    SequenceRecord,
     StorageLocation,
 )
 from .models.sample import OCCUPYING_STATUSES
@@ -63,6 +64,16 @@ QC_ATTRIBUTES = {
     "a260_230",
     "integrity_number",
     "outcome",
+    "notes",
+}
+SEQUENCE_ATTRIBUTES = {
+    "version",
+    "organism",
+    "isolate",
+    "topology",
+    "assembly_method",
+    "biosample_accession",
+    "bioproject_accession",
     "notes",
 }
 STORAGE_ATTRIBUTES = {"nominal_temperature_c", "grid_rows", "grid_columns", "notes"}
@@ -314,6 +325,19 @@ def record_qc(
 
 
 @transaction.atomic
+def record_sequence(
+    *, user, sample: Sample, accession: str, length_bp: int, **attributes
+) -> SequenceRecord:
+    """Link a public sequence (for example a GenBank genome) to the sample it came from."""
+    _require_project_editor(user, sample.project)
+    _reject_unknown(attributes, SEQUENCE_ATTRIBUTES)
+    record = SequenceRecord(sample=sample, accession=accession, length_bp=length_bp, **attributes)
+    with acting_as(user):
+        _save_new(record)
+    return record
+
+
+@transaction.atomic
 def create_storage_location(
     *, user, name: str, kind: str, parent: StorageLocation | None = None, **attributes
 ) -> StorageLocation:
@@ -329,13 +353,15 @@ def create_storage_location(
 
 
 def _project_of(record) -> Project:
-    return record.sample.project if isinstance(record, QcMeasurement) else record.project
+    return record.sample.project if hasattr(record, "sample") else record.project
 
 
 def _guard_voiding(record) -> None:
     if isinstance(record, Sample):
         if record.children.filter(voided_at__isnull=True).exists():
             raise RecordInUseError(_("Void the derivatives of this sample first."))
+        if record.sequence_records.filter(voided_at__isnull=True).exists():
+            raise RecordInUseError(_("Void the sequences of this sample first."))
     elif isinstance(record, CollectionEvent):
         if record.samples.filter(voided_at__isnull=True).exists():
             raise RecordInUseError(_("Void the samples of this collection event first."))

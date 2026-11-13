@@ -49,3 +49,15 @@ kept as written.
 - Names Table 3 and the BioSamples spell differently (`Tiébélé` and `Tiebele`) are kept as
   published; provinces are filled only when a locality matches a BioSample locality ignoring
   accents.
+
+## `genomes_PV947737-PV947760.csv`
+
+The 24 complete viral genomes of the same study, from the GenBank flat files of accessions
+PV947737 to PV947760 (retrieved 2026-11-13): 20 sweet potato leaf curl virus (circular DNA, from
+the rolling circle products) and 4 sweet potato feathery mottle virus (RNA, from greenhouse plants).
+GenBank records carry no BioSample link, so the match is made on the isolate name. The 20 SPLCV
+isolates equal a BioSample isolate exactly, with identical date and coordinates. The 4 SPFMV
+isolates (`Tie_E1`, `Tie_E3`, `Heere_E1`, `Heere_E2`) are named differently from their BioSample
+(`Tieb_E1_BFA297`, `Tieb_E3_BFA265`, `Heere_E1_BFA728`, `Heere_E2_BFA880`); they are matched on
+the E number, the 2025-05-17 date and the Kamboinse coordinates, and marked `inferred`. Please
+confirm these four.

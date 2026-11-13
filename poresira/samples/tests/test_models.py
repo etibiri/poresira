@@ -16,6 +16,7 @@ from poresira.samples.models import (
     Sample,
     SampleKind,
     SampleStatus,
+    SequenceRecord,
     StorageLocation,
 )
 from poresira.samples.tests.factories import (
@@ -283,6 +284,9 @@ class TestVoidingAndAudit:
     def test_every_model_writes_audit_entries_into_the_chain(self):
         sample = SampleFactory()
         QcMeasurementFactory(sample=DerivativeFactory(parent=sample))
+        SequenceRecord.objects.create(
+            sample=sample, accession="PV000001", length_bp=10, topology="linear"
+        )
         StorageLocationFactory()
         sample.notes = "edited"
         sample.save()
@@ -297,6 +301,7 @@ class TestVoidingAndAudit:
             "samples_sampleevent",
             "samples_qcmeasurementevent",
             "samples_storagelocationevent",
+            "samples_sequencerecordevent",
         }
         assert sample.events.count() == 2
 
