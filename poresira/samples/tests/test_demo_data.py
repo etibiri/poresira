@@ -372,6 +372,23 @@ class TestLoading:
             User.objects.get(username="demo_technician").pk
         )
 
+    def test_the_sequencing_reference_data_and_flow_cells_are_loaded_once(self, loaded_demo):
+        from poresira.sequencing.models import FlowCell, FlowCellType, LibraryKit
+
+        assert set(LibraryKit.objects.values_list("code", flat=True)) == {
+            "SQK-NBD114.96",
+            "SQK-RBK114.96",
+            "SQK-PCB114.24",
+        }
+        assert not FlowCellType.objects.get(code="FLO-FLG001").reusable
+        assert FlowCellType.objects.get(code="FLO-PRO114M").reusable
+        assert set(FlowCell.objects.values_list("flow_cell_id", flat=True)) == {
+            "FAT93267",
+            "FAV02927",
+        }
+        loader.load_demo_data()
+        assert FlowCell.objects.count() == 2
+
     def test_loading_twice_changes_nothing(self, loaded_demo):
         before = (Sample.objects.count(), CollectionEvent.objects.count())
 

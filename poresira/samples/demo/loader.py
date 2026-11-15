@@ -19,6 +19,7 @@ from poresira.core.reason import acting_as
 from poresira.pcr.models import PcrReaction
 from poresira.samples import services
 from poresira.samples.demo.pcr import load_pcr_demo, load_thesis_pcr
+from poresira.samples.demo.sequencing import load_sequencing_demo
 from poresira.samples.importing import import_field_samples
 from poresira.samples.models import (
     QcMethod,
@@ -615,6 +616,7 @@ def load_demo_data(*, password: str | None = None, synthetic_volume: int = 0) ->
     plan = _make_plan()
     load_pcr_demo(users, project, _table3_field_samples(project, plan))
     load_thesis_pcr(users, project, _dna_extracts(project, plan))
+    load_sequencing_demo(users)
     _link_genomes(users, project)  # also completes a database loaded before genomes existed
     summary.counts = _counts(project)
     if synthetic_volume and not Project.objects.filter(code=SYNTHETIC_PROJECT_CODE).exists():
