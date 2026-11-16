@@ -170,6 +170,7 @@ class TestPreparing:
         response = client.post(
             url("deposit-new", run.pk),
             {
+                "archive": "ena",
                 "title": "RCA reads",
                 "description": "Sweetpotato",
                 "sample_checklist": "ERC000011",

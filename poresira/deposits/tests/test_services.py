@@ -118,6 +118,8 @@ class TestPreparing:
         run, _members = sequenced(project)
 
         with pytest.raises(TypeError):
+            services.prepare_deposit(user=editor, run=run, title="T", colour="red")
+        with pytest.raises(ValidationError):
             services.prepare_deposit(user=editor, run=run, title="T", archive="other")
         deposit = services.prepare_deposit(
             user=editor, run=run, title="T", library_strategy="AMPLICON"
