@@ -204,8 +204,18 @@ class TestLaboratoryData:
 
     def test_each_rca_attempt_is_a_product_with_its_gel_result(self, loaded_demo):
         done = Sample.objects.filter(kind=SampleKind.AMPLIFICATION_PRODUCT)
-        assert done.filter(qc_measurements__outcome="passed").count() == 51 + 2
-        assert done.filter(qc_measurements__outcome="failed").count() == 85 - 53
+        assert done.filter(qc_measurements__outcome="passed").count() == 51 + 2 + 1
+        assert done.filter(qc_measurements__outcome="failed").count() == 86 - 54
+
+    def test_the_sequenced_product_of_bfa316_is_the_equiphi29_one(self, loaded_demo):
+        from poresira.sequencing.models import LibraryMember
+
+        member = LibraryMember.objects.get(sample__label__startswith="Tie_BFA316")
+
+        assert member.sample.label == "Tie_BFA316 [EquiPhi29]"
+        assert "Sequenced" in member.sample.notes
+        other = Sample.objects.get(label="Tie_BFA316 [TempliPhi]")
+        assert "Sequenced" not in other.notes
 
     def test_when_both_kits_were_tried_the_label_names_the_kit(self, loaded_demo):
         labels = set(
@@ -250,7 +260,7 @@ class TestLoading:
     def test_the_published_sample_counts_are_reproduced(self, loaded_demo):
         assert not loaded_demo.already_loaded
         assert kind_count(SampleKind.DNA_EXTRACT) == 98
-        assert kind_count(SampleKind.AMPLIFICATION_PRODUCT) == 75 + 10  # one per RCA attempt
+        assert kind_count(SampleKind.AMPLIFICATION_PRODUCT) == 75 + 11  # one per RCA attempt
         assert kind_count(SampleKind.RNA_EXTRACT) == 13
         assert kind_count(SampleKind.FIELD_SAMPLE) == 98 + 43 + 13
         assert kind_count(SampleKind.LIVING_PLANT) == 50 + 13
@@ -356,9 +366,9 @@ class TestLoading:
             kind=SampleKind.RNA_EXTRACT, label="Yor_BFA412"
         ).storage_location.path == ("LVBV laboratory, INERA Kamboinsé > Freezer -80 °C > RNA box 1")
         placed = Sample.objects.exclude(position="")
-        assert placed.count() == 98 + 85 + 13
+        assert placed.count() == 98 + 86 + 13
         assert len({(s.storage_location_id, s.position) for s in placed}) == placed.count()
-        assert Sample.objects.filter(status=SampleStatus.STORED).count() == 154 + 98 + 85 + 13
+        assert Sample.objects.filter(status=SampleStatus.STORED).count() == 154 + 98 + 86 + 13
 
     def test_the_audit_trail_is_complete_and_unbroken(self, loaded_demo):
         assert verify_audit_chain().is_intact
@@ -402,7 +412,7 @@ class TestLoading:
         assert not run.flow_cell.type.reusable
         assert run.instrument.name == "MinION Mk1C MC-111618"
         assert (run.started_on.isoformat(), run.basecaller_version) == ("2022-11-04", "5.1.13")
-        assert member.sample.label == "Tie_BFA316"
+        assert member.sample.label == "Tie_BFA316 [EquiPhi29]"
         assert member.barcode is None
         assert run.results.get().reads == run.total_reads == 530760
 

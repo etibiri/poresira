@@ -359,12 +359,13 @@ def _rca_products(technician: User, extract: Sample, lab: dict[str, str]) -> lis
         notes = f"Rolling circle amplification with {kit}; migration on agarose gel: " + (
             "positive." if worked else "negative."
         )
-        if worked and lab["sequenced"] == "yes" and biosample:
+        chosen = lab["sequenced"] == "yes" and lab["sequenced_with"] == kit
+        if worked and chosen and biosample:
             notes += (
                 f" Sequenced. BioSample {biosample['biosample_accession']}, "
                 f"BioProject {BIOPROJECT}."
             )
-        elif worked and lab["sequenced"] == "yes":
+        elif worked and chosen:
             notes += " Selected for sequencing."
         product = services.derive_sample(
             user=technician,
@@ -497,8 +498,10 @@ def _link_genomes(users: dict[str, User], project: Project) -> int:
             kind=kinds[row["mol_type"]],
             voided_at__isnull=True,
         )
-        if candidates.count() > 1:  # several RCA attempts: the one whose gel passed was sequenced
-            candidates = candidates.filter(qc_measurements__outcome=QcOutcome.PASSED)
+        if candidates.count() > 1:  # several RCA attempts: the one sequenced (gel passed)
+            candidates = candidates.filter(
+                qc_measurements__outcome=QcOutcome.PASSED, notes__icontains="sequenc"
+            )
         sample = candidates.get()
         if sample.sequence_records.filter(accession=row["accession"]).exists():
             continue

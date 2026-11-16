@@ -65,7 +65,8 @@ FLONGLE_NOTES = (
     "Flongle AMF735 (adapter FA-06369) on the MinION Mk1C MC-111618, 4 to 6 November 2022; "
     "MinKNOW 21.11.7, acquisition ID 10f834811c6cc55747f2c2a6f43413289193c1b2. Not barcoded. "
     "Reads and bases are those of the MinKNOW throughput file (passed and failed). "
-    "The protocol group 'Equiphi29' is kept as MinKNOW recorded it. The run was not barcoded "
+    "The product sequenced is the EquiPhi29 one; the protocol group 'Equiphi29' is as MinKNOW "
+    "recorded it. The run was not barcoded "
     "(the thesis document gives this sample BC53; that barcode is not used here)."
 )
 
@@ -78,7 +79,9 @@ def _product(project: Project, label: str) -> Sample:
         kind=SampleKind.AMPLIFICATION_PRODUCT,
     )
     if candidates.count() > 1:
-        candidates = candidates.filter(qc_measurements__outcome=QcOutcome.PASSED)
+        candidates = candidates.filter(
+            qc_measurements__outcome=QcOutcome.PASSED, notes__icontains="sequenc"
+        )
     return candidates.get()
 
 
@@ -135,13 +138,7 @@ def _load_flongle_run(users: dict[str, User], project: Project) -> None:
     """BFA316 on a Flongle (the thesis work of a master's student), from the MinKNOW files."""
     if SequencingRun.objects.filter(project=project, run_id=FLONGLE_RUN_ID).exists():
         return
-    sample = (
-        Sample.objects.active()
-        .filter(project=project, kind=SampleKind.AMPLIFICATION_PRODUCT, label="Tie_BFA316")
-        .first()
-    )
-    if sample is None:
-        return
+    sample = _product(project, "Tie_BFA316")
     user = users["demo_technician"]
     library = services.create_library(
         user=user,

@@ -54,10 +54,13 @@ The spreadsheets themselves, the gel images and the slides stay outside the repo
 | `spg_pcr` | Sweepovirus detection by PCR with the SPG1/SPG2 primers |
 | `templiphi_*`, `equiphi29_*` | Whether rolling circle amplification was tried with each kit, and whether the product migrated on agarose gel (positive/negative) |
 | `sequenced` | Selected for Oxford Nanopore sequencing |
+| `sequenced_with` | The RCA kit whose product was sequenced (needed when both kits worked) |
 
 Checked against the other files: the 53 samples selected for sequencing are exactly the 53 field
 BioSamples of 2016; each of them had a successful amplification (51 with TempliPhi, 2 with
-EquiPhi29 after TempliPhi failed); all 98 collection dates are 2016, and every date agrees with the
+EquiPhi29 after TempliPhi failed, and BFA316, where both worked and the EquiPhi29 product was
+sequenced on the Flongle; the laboratory corrected its spreadsheet, which first listed TempliPhi
+only); all 98 collection dates are 2016, and every date agrees with the
 BioSample. The spreadsheet also holds a second date column (`ltime`) that differs from the GPS date
 for five samples (BFA251, BFA316, BFA1093, BFA1094, BFA1107); it is not loaded. It explains the date
 2016-08-18 of the GenBank record PV405577, whose BioSample date 2016-08-16 is the right one.
