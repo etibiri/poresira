@@ -47,6 +47,7 @@ class SyncReport:
     biosample_differences: list[str] = field(default_factory=list)
     sequenced_without_sra: list[str] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
+    notes: list[str] = field(default_factory=list)
 
     @property
     def has_differences(self) -> bool:
@@ -148,12 +149,16 @@ def _check_genbank(project: Project, ncbi: Ncbi, report: SyncReport) -> None:
 
 
 def _check_biosamples(ncbi: Ncbi, matched: dict[str, Sample], report: SyncReport) -> None:
+    plants_by_origin: list[str] = []
     for accession, record in ncbi.biosamples(sorted(matched)).items():
         sample = matched.get(accession)
         if sample is None:
             continue
         event, attributes, name = sample.collection_event, record.attributes, _name(sample)
-        if event and event.collected_on and attributes.get("collection_date"):
+        by_origin = sample.kind == SampleKind.LIVING_PLANT
+        if by_origin:  # a plant stays tied to where it came from; the BioSample says where it grew
+            plants_by_origin.append(name)
+        if not by_origin and event and event.collected_on and attributes.get("collection_date"):
             theirs = attributes["collection_date"]
             if not event.collected_on.isoformat().startswith(theirs[:10]) and not theirs.startswith(
                 event.collected_on.isoformat()[: len(theirs)]
@@ -168,7 +173,8 @@ def _check_biosamples(ncbi: Ncbi, matched: dict[str, Sample], report: SyncReport
                 f"{name} ({accession}): host {host} at NCBI, {sample.host_taxon} in PoreSira."
             )
         point = parse_lat_lon(attributes.get("lat_lon", ""))
-        if point and event and event.latitude is not None and event.longitude is not None:
+        located = event and event.latitude is not None and event.longitude is not None
+        if not by_origin and point and located:
             far = (
                 abs(point[0] - event.latitude) > COORDINATE_TOLERANCE
                 or abs(point[1] - event.longitude) > COORDINATE_TOLERANCE
@@ -178,6 +184,12 @@ def _check_biosamples(ncbi: Ncbi, matched: dict[str, Sample], report: SyncReport
                     f"{name} ({accession}): coordinates {attributes['lat_lon']} at NCBI differ "
                     "from PoreSira's."
                 )
+    if plants_by_origin:
+        report.notes.append(
+            f"{len(plants_by_origin)} living plant(s) are tied to their place of origin in "
+            "PoreSira; their collection date and coordinates were not compared with the "
+            "BioSample, which may describe where they grew."
+        )
 
 
 def sync_public_archives(

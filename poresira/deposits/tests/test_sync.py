@@ -329,6 +329,47 @@ class TestComparisons:
 
         assert not report.biosample_differences
 
+    def test_a_greenhouse_plant_is_compared_by_host_only_and_noted(self, fake, project, editor):
+        origin = field_sample(project, "Field_BFA297")
+        SampleFactory(
+            project=project,
+            kind=SampleKind.LIVING_PLANT,
+            parent=origin,
+            label="Tieb_E1_BFA297",
+            host_taxon="Ipomoea batatas",
+            collection_event=origin.collection_event,
+        )
+        fake.runs = [("SRR1", "SRX1", "SAMN1", "Tieb_E1_BFA297")]
+        fake.biosamples = {
+            "SAMN1": {
+                "collection_date": "2025-05-17",
+                "host": "Ipomoea batatas",
+                "lat_lon": "12.46 N 1.55 W",
+            }
+        }
+
+        report = sync_public_archives(user=editor, project=project, bioproject="PRJNA1")
+
+        assert not report.biosample_differences
+        assert any("living plant" in note and "place of origin" in note for note in report.notes)
+
+    def test_a_plant_whose_host_differs_is_still_reported(self, fake, project, editor):
+        origin = field_sample(project, "Field_BFA297")
+        SampleFactory(
+            project=project,
+            kind=SampleKind.LIVING_PLANT,
+            parent=origin,
+            label="Tieb_E1_BFA297",
+            host_taxon="Ipomoea batatas",
+            collection_event=origin.collection_event,
+        )
+        fake.runs = [("SRR1", "SRX1", "SAMN1", "Tieb_E1_BFA297")]
+        fake.biosamples = {"SAMN1": {"host": "Manihot esculenta"}}
+
+        report = sync_public_archives(user=editor, project=project, bioproject="PRJNA1")
+
+        assert any("host Manihot esculenta" in m for m in report.biosample_differences)
+
     def test_a_sequenced_sample_without_a_run_in_the_archive_is_named(self, fake, project, editor):
         sample = field_sample(project, "Tie_BFA316")
         self.sequence(sample)

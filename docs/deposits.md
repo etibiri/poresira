@@ -74,7 +74,9 @@ python manage.py sync_public_archives DEMO-SPBF --bioproject PRJNA1460897 --user
   are recorded as `PublicAccession`s with `--apply`; a run with no sample is reported, not invented.
 - **GenBank** records have no link to the BioProject or to the BioSample at NCBI. PoreSira checks
   each of its sequences by accession: not found, different length, different isolate.
-- **BioSamples** are compared with the project: collection date, host and coordinates.
+- **BioSamples** are compared with the project: collection date, host and coordinates. A **living
+  plant stays tied to its place of origin** in PoreSira, whereas its BioSample may say where it
+  grew (a greenhouse, another year): for plants only the host is compared, and a note says so.
 - **Gaps** are named: sequenced samples with no SRA run.
 - **Limits**: NCBI allows about three requests a second without a key (the reader waits and
   retries); set `PORESIRA_NCBI_API_KEY` for more. `PORESIRA_NCBI_EUTILS_URL`,

@@ -49,6 +49,7 @@ class Command(BaseCommand):
             ("BioSample differences", report.biosample_differences),
             ("Sequenced samples with no SRA run", report.sequenced_without_sra),
             ("Not checked", report.errors),
+            ("Notes", report.notes),
         )
         for title, lines in sections:
             if lines:
