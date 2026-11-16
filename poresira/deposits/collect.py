@@ -1,0 +1,207 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+"""Turn the records of a deposit into what the archive is sent, and check they are fit to send."""
+
+from dataclasses import dataclass, field
+from datetime import date
+from decimal import Decimal
+from pathlib import Path
+
+from django.utils.translation import gettext as _
+
+from poresira.samples.models import Sample
+from poresira.sequencing.models import RunStatus
+from poresira.storage.models import Integrity
+
+from .ena import (
+    Attribute,
+    ReadFile,
+    ReadsSpec,
+    SampleSpec,
+    StudySpec,
+    ena_instrument,
+)
+from .models import Deposit, DepositItem, Environment, ItemKind
+
+DAMAGED = (Integrity.MISMATCH, Integrity.MISSING, Integrity.UNREADABLE)
+COORDINATE_DECIMALS_PUBLIC = 2  # 0.01 degree is about a kilometre
+
+
+@dataclass(frozen=True)
+class Finding:
+    """A problem found before sending. An error stops the submission; a warning does not."""
+
+    message: str
+    item: DepositItem | None = None
+
+
+@dataclass
+class Report:
+    errors: list[Finding] = field(default_factory=list)
+    warnings: list[Finding] = field(default_factory=list)
+
+    @property
+    def ready(self) -> bool:
+        return not self.errors
+
+
+def root_sample(sample: Sample) -> Sample:
+    """The field sample a derivative comes from: the one registered as a BioSample."""
+    while sample.parent_id is not None:
+        sample = sample.parent
+    return sample
+
+
+def study_spec(deposit: Deposit) -> StudySpec:
+    study = deposit.items.active().filter(kind=ItemKind.STUDY).first()
+    return StudySpec(
+        alias=study.alias if study else f"{deposit.identifier}_study",
+        title=deposit.title,
+        description=deposit.description,
+    )
+
+
+def sample_spec(item: DepositItem) -> SampleSpec:
+    """The BioSample of a field sample, without the names of people (the collector stays out)."""
+    sample = item.sample
+    event = sample.collection_event
+    attributes = []
+    if event is not None:
+        if event.collected_on:
+            attributes.append(Attribute("collection date", event.collected_on.isoformat()))
+        if event.country:
+            attributes.append(Attribute("geographic location (country and/or sea)", event.country))
+        place = ", ".join(part for part in (event.region, event.province, event.locality) if part)
+        if place:
+            attributes.append(Attribute("geographic location (region and locality)", place))
+        if event.latitude is not None and event.longitude is not None:
+            attributes += [
+                Attribute("geographic location (latitude)", _plain(event.latitude), "DD"),
+                Attribute("geographic location (longitude)", _plain(event.longitude), "DD"),
+            ]
+    if sample.host_taxon:
+        attributes.append(Attribute("host scientific name", sample.host_taxon))
+    if sample.host_variety:
+        attributes.append(Attribute("host variety", sample.host_variety))
+    if sample.symptom_score is not None:
+        attributes.append(Attribute("symptom severity (scale 1 to 9)", str(sample.symptom_score)))
+    return SampleSpec(
+        alias=item.alias,
+        title=sample.label or sample.identifier,
+        scientific_name=sample.host_taxon,
+        tax_id=sample.host_tax_id or 0,
+        attributes=tuple(attributes),
+    )
+
+
+def reads_spec(item: DepositItem, *, study: str, sample: str) -> ReadsSpec:
+    """The manifest content of a reads item; ``study`` and ``sample`` are archive accessions."""
+    deposit, run = item.deposit, item.sequencing_run
+    instrument = ena_instrument(run.instrument.model) if run.instrument else None
+    files = tuple(
+        ReadFile(kind=row.file.kind, path=str(Path(row.file.backend.root) / row.file.path))
+        for row in item.files.active().select_related("file__backend").order_by("file__path")
+    )
+    return ReadsSpec(
+        name=item.alias,
+        study=study,
+        sample=sample,
+        instrument=instrument or "unspecified",
+        library_source=deposit.library_source,
+        library_selection=deposit.library_selection,
+        library_strategy=deposit.library_strategy,
+        files=files,
+        library_name=run.library.name or run.library.identifier,
+        description=f"{run.library.kit.code} on {run.flow_cell.type.code}",
+    )
+
+
+def _plain(value: Decimal) -> str:
+    """The number without the zeros the database pads it with: 11.08000 is 11.08."""
+    return format(value.normalize(), "f")
+
+
+def _decimals(value: Decimal) -> int:
+    return max(0, -value.normalize().as_tuple().exponent)
+
+
+def preflight(deposit: Deposit, today: date | None = None) -> Report:
+    """Everything that would stop, or deserve a second look before, sending this deposit."""
+    today = today or date.today()
+    report = Report()
+    items = list(
+        deposit.items.active().select_related(
+            "sample__collection_event", "sequencing_run__instrument", "sequencing_run__library"
+        )
+    )
+    samples = [item for item in items if item.kind == ItemKind.SAMPLE]
+    reads = [item for item in items if item.kind == ItemKind.READS]
+    if not deposit.title.strip():
+        report.errors.append(Finding(_("The deposit needs a title.")))
+    if not samples or not reads:
+        report.errors.append(Finding(_("The deposit needs at least one sample and its reads.")))
+    if deposit.environment == Environment.PRODUCTION and (
+        deposit.hold_until is None or deposit.hold_until <= today
+    ):
+        report.errors.append(Finding(_("Give a release date in the future.")))
+    for item in samples:
+        _check_sample(item, report)
+    for item in reads:
+        _check_reads(item, report)
+    return report
+
+
+def _say(findings: list, message: str, item: DepositItem | None = None, **values) -> None:
+    findings.append(Finding(message % values if values else message, item))
+
+
+def _check_sample(item: DepositItem, report: Report) -> None:
+    sample = item.sample
+    name = sample.label or sample.identifier
+    event = sample.collection_event
+    lacking = []
+    if event is None or event.collected_on is None:
+        lacking.append(_("the collection date"))
+    if event is None or not event.country:
+        lacking.append(_("the country"))
+    if not sample.host_taxon or not sample.host_tax_id:
+        lacking.append(_("the host species and its NCBI taxon ID"))
+    for what in lacking:
+        _say(report.errors, _("%(sample)s lacks %(what)s."), item, sample=name, what=what)
+    if event is None or event.latitude is None or event.longitude is None:
+        return
+    finest = max(_decimals(event.latitude), _decimals(event.longitude))
+    if finest > COORDINATE_DECIMALS_PUBLIC:
+        message = _(
+            "%(sample)s gives its coordinates to %(places)s decimals: farm locations become public."
+        )
+        _say(report.warnings, message, item, sample=name, places=finest)
+
+
+def _check_reads(item: DepositItem, report: Report) -> None:
+    run = item.sequencing_run
+    name = item.sample.label or item.sample.identifier
+    files = list(item.files.active().select_related("file__backend"))
+    if not files:
+        _say(report.errors, _("%(sample)s has no reads file."), item, sample=name)
+    if len({row.file.kind for row in files}) > 1:
+        _say(report.errors, _("%(sample)s mixes FASTQ and BAM files."), item, sample=name)
+    for row in files:
+        problem = None
+        if row.file.is_voided:
+            problem = _("is voided")
+        elif not row.file.backend.is_readable:
+            problem = _("is on an offline medium")
+        elif row.file.integrity in DAMAGED:
+            problem = _("has changed or is missing")
+        if problem:
+            _say(
+                report.errors, _("%(file)s %(problem)s."), item, file=row.file.name, problem=problem
+            )
+    if run.status != RunStatus.COMPLETED:
+        _say(report.errors, _("The run of %(sample)s is not completed."), item, sample=name)
+    if run.instrument is None or ena_instrument(run.instrument.model) is None:
+        message = _("The instrument of the run of %(sample)s is not known to the archive.")
+        _say(report.errors, message, item, sample=name)
+    if run.reconstructed:
+        message = _("The run of %(sample)s was reconstructed from a record.")
+        _say(report.warnings, message, item, sample=name)

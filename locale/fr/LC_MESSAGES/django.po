@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 14:16+0000\n"
+"POT-Creation-Date: 2026-11-16 14:28+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -813,6 +813,88 @@ msgstr "Un motif est obligatoire pour annuler un enregistrement."
 msgid "This record is already voided."
 msgstr "Cet enregistrement est déjà annulé."
 
+#: poresira/deposits/collect.py
+msgid "The deposit needs a title."
+msgstr "Le dépôt a besoin d’un titre."
+
+#: poresira/deposits/collect.py
+msgid "The deposit needs at least one sample and its reads."
+msgstr "Le dépôt a besoin d’au moins un échantillon et de ses lectures."
+
+#: poresira/deposits/collect.py
+msgid "Give a release date in the future."
+msgstr "Indiquez une date de mise en ligne dans le futur."
+
+#: poresira/deposits/collect.py
+msgid "the collection date"
+msgstr "la date de collecte"
+
+#: poresira/deposits/collect.py
+msgid "the country"
+msgstr "le pays"
+
+#: poresira/deposits/collect.py
+msgid "the host species and its NCBI taxon ID"
+msgstr "l'espèce hôte et son identifiant NCBI"
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid "%(sample)s lacks %(what)s."
+msgstr "%(sample)s : %(what)s manque."
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid ""
+"%(sample)s gives its coordinates to %(places)s decimals: farm locations "
+"become public."
+msgstr ""
+"%(sample)s donne ses coordonnées à %(places)s décimales : l’emplacement "
+"des exploitations deviendrait public."
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid "%(sample)s has no reads file."
+msgstr "%(sample)s n'a aucun fichier de lectures."
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid "%(sample)s mixes FASTQ and BAM files."
+msgstr "%(sample)s mélange des fichiers FASTQ et BAM."
+
+#: poresira/deposits/collect.py
+msgid "is voided"
+msgstr "est annulé"
+
+#: poresira/deposits/collect.py
+msgid "is on an offline medium"
+msgstr "est sur un support hors ligne"
+
+#: poresira/deposits/collect.py
+msgid "has changed or is missing"
+msgstr "a changé ou est absent"
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid "%(file)s %(problem)s."
+msgstr "%(file)s %(problem)s."
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid "The run of %(sample)s is not completed."
+msgstr "Le passage de %(sample)s n'est pas terminé."
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid "The instrument of the run of %(sample)s is not known to the archive."
+msgstr "L'appareil du passage de %(sample)s n'est pas connu de l'archive."
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid ""
+"The run of %(sample)s was reconstructed from a record."
+msgstr ""
+"Le passage de %(sample)s a été reconstitué à partir d’un enregistrement."
+
 #: poresira/deposits/models/deposit.py
 msgid "European Nucleotide Archive (ENA)"
 msgstr "Archive européenne de nucléotides (ENA)"
@@ -880,11 +962,10 @@ msgstr "date de mise en ligne"
 
 #: poresira/deposits/models/deposit.py
 msgid ""
-"The data stay private until this date. Required for the production "
-"service."
+"The data stay private until this date. Required for the production service."
 msgstr ""
-"Les données restent privées jusqu'à cette date. Obligatoire pour le "
-"service de production."
+"Les données restent privées jusqu'à cette date. Obligatoire pour le service "
+"de production."
 
 #: poresira/deposits/models/deposit.py
 msgid "sample checklist"
@@ -911,11 +992,10 @@ msgid "permits checked on"
 msgstr "permis vérifiés le"
 
 #: poresira/deposits/models/deposit.py
-msgid ""
-"Sampling and benefit-sharing permits were checked before publication."
+msgid "Sampling and benefit-sharing permits were checked before publication."
 msgstr ""
-"Les permis de prélèvement et de partage des avantages ont été vérifiés "
-"avant la publication."
+"Les permis de prélèvement et de partage des avantages ont été vérifiés avant "
+"la publication."
 
 #: poresira/deposits/models/deposit.py
 msgid "permits checked by"
@@ -926,8 +1006,7 @@ msgid "archive account"
 msgstr "compte de l'archive"
 
 #: poresira/deposits/models/deposit.py
-msgid ""
-"The account name used to submit. Its password is never stored."
+msgid "The account name used to submit. Its password is never stored."
 msgstr ""
 "Le nom du compte utilisé pour soumettre. Son mot de passe n'est jamais "
 "enregistré."
@@ -978,6 +1057,25 @@ msgstr "message"
 #: poresira/deposits/models/deposit.py
 msgid "item"
 msgstr "élément"
+
+#: poresira/deposits/services.py
+msgid "A voided run cannot be deposited."
+msgstr "Un passage annulé ne peut pas être déposé."
+
+#: poresira/deposits/services.py
+msgid ""
+"Prepare the deposit for the test service; production is a separate step."
+msgstr ""
+"Préparez le dépôt pour le service de test ; la production est une étape "
+"distincte."
+
+#: poresira/deposits/services.py
+msgid "The library of this run has no sample."
+msgstr "La bibliothèque de ce passage n'a aucun échantillon."
+
+#: poresira/deposits/services.py
+msgid "A deposit being submitted cannot be voided."
+msgstr "Un dépôt en cours de soumission ne peut pas être annulé."
 
 #: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
 #: poresira/pcr/templates/pcr/run_list.html
