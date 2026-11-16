@@ -86,6 +86,10 @@ All notable changes are listed here. The format follows
   `import_public_accessions`. A real deposit cites an existing BioSample instead of registering
   one, refuses reads already in SRA, and mentions GenBank sequences. The demonstration project
   records its NCBI BioProject, 66 BioSamples and 66 SRA runs.
+- NCBI deposits: the archive is chosen when a deposit is prepared. For NCBI, PoreSira prepares the
+  BioSample attributes (package `MIMS.me.plant-associated.6.0`), the SRA metadata, the list of
+  files and the steps for the Submission Portal, which a person submits before recording the
+  accessions. Coordinates and unique file names are checked.
 - RO-Crate export of a deposit (samples, files with checksums, sequencing, compute jobs, links to
   the archives) and a download of the exact files to be sent.
 - Deposits interface: list, page with the report and the accessions, forms to prepare, submit

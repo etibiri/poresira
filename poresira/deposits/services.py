@@ -9,6 +9,7 @@ import io
 import re
 import zipfile
 from datetime import date
+from pathlib import Path
 
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import transaction
@@ -22,12 +23,22 @@ from poresira.samples.models import SampleKind
 from poresira.sequencing.models import SequencingRun
 from poresira.storage.models import DataFile, FileKind
 
+from . import ncbi
 from .archive import ArchiveError, EnaArchive, Receipt
-from .collect import preflight, reads_spec, root_sample, sample_spec, study_spec
+from .collect import (
+    ncbi_reads,
+    ncbi_sample,
+    preflight,
+    reads_spec,
+    root_sample,
+    sample_spec,
+    study_spec,
+)
 from .ena import reads_manifest, samples_xml, study_xml, submission_xml
-from .known import known_for
+from .known import known_bioproject, known_for
 from .models import (
     AccessionKind,
+    Archive,
     Deposit,
     DepositFile,
     DepositItem,
@@ -82,7 +93,13 @@ def reads_files_of(run: SequencingRun, barcode: int | None, single_sample: bool)
 
 
 PRODUCTION_REUSE = (ItemStatus.ACCEPTED,)
-OPTION_NAMES = {"sample_checklist", "library_source", "library_selection", "library_strategy"}
+OPTION_NAMES = {
+    "archive",
+    "sample_checklist",
+    "library_source",
+    "library_selection",
+    "library_strategy",
+}
 
 
 def _accepted_in_production(project: Project, **filters) -> DepositItem | None:
@@ -138,7 +155,7 @@ def _build_deposit(*, user, run: SequencingRun, deposit: Deposit) -> Deposit:
     )
     if not members:
         raise ValidationError(_("The library of this run has no sample."))
-    production = deposit.environment == Environment.PRODUCTION
+    production = deposit.is_real
     with acting_as(user):
         _save_new(deposit)
         study_reuse = _reuse_study(deposit) if production else None
@@ -262,6 +279,10 @@ def ready_to_send(user, deposit: Deposit, confirm: str = "") -> None:
     _require_editor(user, deposit.project)
     if deposit.is_voided or deposit.status != DepositStatus.DRAFT:
         raise DepositServiceError(_("Only a draft deposit can be submitted."))
+    if not deposit.sends_itself:
+        raise DepositServiceError(
+            _("An NCBI deposit is uploaded through the Submission Portal: download its files.")
+        )
     if deposit.environment == Environment.PRODUCTION:
         if not can_publish(user, deposit.project):
             raise PermissionDenied
@@ -456,10 +477,33 @@ def void_item(*, user, item: DepositItem, reason: str) -> DepositItem:
     return item
 
 
+def _ncbi_files(deposit: Deposit, items: list[DepositItem]) -> dict[str, str]:
+    """The tables and the list of files for the NCBI Submission Portal."""
+    bioproject = known_bioproject(deposit.project)
+    samples = [i for i in items if i.kind == ItemKind.SAMPLE and i.status != ItemStatus.ACCEPTED]
+    reads = [i for i in items if i.kind == ItemKind.READS]
+    files = {}
+    if samples:
+        files["biosample_attributes.tsv"] = ncbi.biosample_table(
+            [ncbi_sample(item, bioproject) for item in samples]
+        )
+    files["sra_metadata.tsv"] = ncbi.sra_table([ncbi_reads(item, bioproject) for item in reads])
+    paths = [
+        str(Path(row.file.backend.root) / row.file.path)
+        for item in reads
+        for row in item.files.active().select_related("file__backend").order_by("file__path")
+    ]
+    files["files_to_upload.txt"] = ncbi.upload_list(paths)
+    files["README.txt"] = ncbi.instructions(deposit.identifier, bool(samples))
+    return files
+
+
 def submission_files(deposit: Deposit) -> dict[str, str]:
-    """The text that would be sent, for the person to read first. Accessions the archive has not
-    given yet appear as placeholders."""
+    """The text that would be sent (ENA) or uploaded by a person (NCBI), for reading first.
+    Accessions the archive has not given yet appear as placeholders."""
     items = list(deposit.items.active().select_related("sample__collection_event", "sample_item"))
+    if deposit.archive == Archive.NCBI:
+        return _ncbi_files(deposit, items)
     study = next((i for i in items if i.kind == ItemKind.STUDY), None)
     samples = [i for i in items if i.kind == ItemKind.SAMPLE and i.status != ItemStatus.ACCEPTED]
     files = {"submission.xml": submission_xml(deposit.hold_until)}

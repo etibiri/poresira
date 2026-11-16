@@ -39,11 +39,13 @@ class DepositFilterForm(BootstrapFormMixin, forms.Form):
 
 
 class NewDepositForm(BootstrapFormMixin, forms.ModelForm):
-    """A deposit for the test service; the real one is made from a test that worked."""
+    """A deposit for the test service of ENA, or the files for the NCBI Submission Portal. The
+    real ENA deposit is made from a test that worked."""
 
     class Meta:
         model = Deposit
         fields = [
+            "archive",
             "title",
             "description",
             "hold_until",

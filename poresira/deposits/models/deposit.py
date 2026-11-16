@@ -17,6 +17,7 @@ DEPOSIT_TYPE_CODE = "X"
 
 class Archive(models.TextChoices):
     ENA = "ena", _("European Nucleotide Archive (ENA)")
+    NCBI = "ncbi", _("NCBI (Submission Portal)")
 
 
 class Environment(models.TextChoices):
@@ -268,6 +269,18 @@ class Deposit(UUIDPrimaryKeyModel, HumanIdentifiedModel, VoidableModel):
     @property
     def is_final(self) -> bool:
         return self.status in FINAL_STATUSES
+
+    @property
+    def is_real(self) -> bool:
+        """True when what is deposited becomes public: the production service of ENA, or any
+        NCBI deposit (NCBI has no test service PoreSira can use; the portal is the real one)."""
+        return self.environment == Environment.PRODUCTION or self.archive == Archive.NCBI
+
+    @property
+    def sends_itself(self) -> bool:
+        """PoreSira's agent sends ENA deposits. NCBI deposits are uploaded by a person through
+        the Submission Portal, from the files PoreSira prepares."""
+        return self.archive == Archive.ENA
 
     def __str__(self) -> str:
         return f"{self.identifier} {self.title}"

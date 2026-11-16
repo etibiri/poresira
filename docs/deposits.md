@@ -2,9 +2,9 @@
 # Deposits
 
 The `deposits` app sends the data of a sequencing run to the European Nucleotide Archive (ENA),
-records the accessions the archive gives back, takes into account what the public archives
-already hold, and exports a Research Object Crate (RO-Crate) that describes the data and how they
-were made. All tables are audited (see [Architecture](architecture.md)).
+or prepares the files to submit them to NCBI, records the accessions the archive gives back, takes
+into account what the public archives already hold, and exports a Research Object Crate (RO-Crate)
+that describes the data and how they were made. All tables are audited (see [Architecture](architecture.md)).
 
 !!! danger "A real deposit is final"
     Once the archive accepts a real deposit, its accessions are permanent and the data become
@@ -78,6 +78,43 @@ PoreSira records it and checks it.
    permits were checked (Nagoya Protocol). This is a new deposit; studies and samples already
    accepted in production keep their accessions, test accessions are never reused. **Submit for
    real** then asks for the project code to be typed.
+
+## NCBI
+
+NCBI has no open service that PoreSira can send to. Its programmatic route is a file-transfer
+account that NCBI creates for a group (with a production and a test folder), which PoreSira does not
+use yet. So an **NCBI deposit is prepared by PoreSira and submitted by a person** in the
+[Submission Portal](https://submit.ncbi.nlm.nih.gov/about/sra/):
+
+1. Choose **NCBI (Submission Portal)** as the archive when preparing the deposit. The same checks
+   run, and reads already in SRA are an error at once (there is no test step).
+2. **Files for the Submission Portal** downloads:
+   - `biosample_attributes.tsv`: one row per BioSample to create, with the columns of the package
+     `MIMS.me.plant-associated.6.0` (the package of the laboratory's existing BioSamples):
+     `sample_name`, `sample_title`, `organism` (a metagenome: `plant metagenome` by default, set
+     `PORESIRA_NCBI_ORGANISM` to change it), `isolate`, `host`, `collection_date`, the three
+     `env_*` contexts (`not applicable`, as in the accepted records), `geo_loc_name`
+     (`Burkina Faso: Nahouri, Tiebele`) and `lat_lon` (`11.08 N 0.90 W`). A BioSample that
+     already exists is not listed.
+   - `sra_metadata.tsv`: one row per experiment, with the library values, `OXFORD_NANOPORE`, the
+     instrument (`MinION`), the file type and `filename`, `filename2`… columns; an existing
+     BioSample is cited by its accession.
+   - `files_to_upload.txt` and `README.txt` with the steps.
+3. Submit them in the portal, then **record the accessions** NCBI gives with
+   `import_public_accessions`, so that no later deposit sends the same data again.
+
+NCBI requires coordinates and file names that are unique in a submission; both are errors in the
+report. The collector's name is not in any file.
+
+!!! warning "To check against NCBI's template"
+    The BioSample mandatory attributes come from NCBI's page for the package. The **SRA column
+    names** were written from NCBI's documentation but not confirmed (the exact list is in the
+    Excel template NCBI gives you), and the portal documents Excel templates, not `.tsv` upload:
+    copy the columns into the template or paste them in the portal's sheet. The columns are one
+    constant, `SRA_COLUMNS` in `poresira/deposits/ncbi.py`; edit it if a name differs.
+
+An archive is chosen once: the archives exchange their records, so **a deposit goes to one archive
+only**. A trial on NCBI validates the files and the portal steps, it is not a second deposit.
 
 ## Statuses and rules
 

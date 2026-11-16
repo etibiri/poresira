@@ -151,12 +151,15 @@ class DepositDetailView(DepositMixin, LoginRequiredMixin, TemplateView):
             reads=[i for i in items if i.kind == ItemKind.READS],
             report=preflight(deposit) if draft and not deposit.is_voided else None,
             can_edit=editable,
-            can_submit=editable and draft and (publish or not production),
+            can_submit=(
+                editable and draft and deposit.sends_itself and (publish or not production)
+            ),
             can_leave_out=editable and draft,
             can_make_real=(
                 publish
                 and not deposit.is_voided
                 and not production
+                and deposit.sends_itself
                 and deposit.status == DepositStatus.ACCEPTED
             ),
             entries=history,
@@ -170,7 +173,7 @@ class DepositCreateView(DepositServiceFormView):
     form_class = NewDepositForm
     title = gettext_lazy("New deposit")
     submit_label = gettext_lazy("Prepare")
-    success_message = gettext_lazy("Deposit prepared for the test service. Review the report.")
+    success_message = gettext_lazy("Deposit prepared. Review the report.")
 
     @property
     def run(self) -> SequencingRun:

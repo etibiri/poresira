@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 15:38+0000\n"
+"POT-Creation-Date: 2026-11-16 17:14+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -953,6 +953,19 @@ msgstr ""
 msgid "%(sample)s has sequences in GenBank (%(accessions)s)."
 msgstr "%(sample)s a des séquences dans GenBank (%(accessions)s)."
 
+#: poresira/deposits/collect.py
+#, python-format
+msgid "%(sample)s has no coordinates, which NCBI requires."
+msgstr "%(sample)s n'a pas de coordonnées, que NCBI exige."
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid ""
+"%(file)s is named like a file of %(other)s: names must be unique."
+msgstr ""
+"%(file)s porte le même nom qu’un fichier de %(other)s : les noms doivent"
+" être uniques."
+
 #: poresira/deposits/forms.py
 msgid "Environment"
 msgstr "Environnement"
@@ -963,11 +976,10 @@ msgstr "Code du projet"
 
 #: poresira/deposits/forms.py
 #, python-format
-msgid ""
-"Type %(code)s to confirm that the data become public and permanent."
+msgid "Type %(code)s to confirm that the data become public and permanent."
 msgstr ""
-"Saisissez %(code)s pour confirmer que les données deviennent publiques "
-"et définitives."
+"Saisissez %(code)s pour confirmer que les données deviennent publiques et "
+"définitives."
 
 #: poresira/deposits/forms.py
 #: poresira/deposits/templates/deposits/deposit_detail.html
@@ -990,6 +1002,10 @@ msgstr "Obligatoire avant toute publication."
 #: poresira/deposits/models/deposit.py
 msgid "European Nucleotide Archive (ENA)"
 msgstr "Archive européenne de nucléotides (ENA)"
+
+#: poresira/deposits/models/deposit.py
+msgid "NCBI (Submission Portal)"
+msgstr "NCBI (portail de soumission)"
 
 #: poresira/deposits/models/deposit.py
 msgid "Test service (discarded after a day)"
@@ -1225,6 +1241,14 @@ msgid "Only a draft deposit can be submitted."
 msgstr "Seul un brouillon peut être soumis."
 
 #: poresira/deposits/services.py
+msgid ""
+"An NCBI deposit is uploaded through the Submission Portal: download its "
+"files."
+msgstr ""
+"Un dépôt NCBI se téléverse par le portail de soumission : téléchargez "
+"ses fichiers."
+
+#: poresira/deposits/services.py
 #, python-format
 msgid "Type the code of the project (%(code)s) to confirm a public deposit."
 msgstr "Saisissez le code du projet (%(code)s) pour confirmer un dépôt public."
@@ -1333,17 +1357,32 @@ msgid "Files to be sent"
 msgstr "Fichiers à envoyer"
 
 #: poresira/deposits/templates/deposits/deposit_detail.html
+msgid "Files for the Submission Portal"
+msgstr "Fichiers pour le portail de soumission"
+
+#: poresira/deposits/templates/deposits/deposit_detail.html
 msgid "RO-Crate"
 msgstr "RO-Crate"
 
 #: poresira/deposits/templates/deposits/deposit_detail.html
 msgid ""
-"This deposit is for the real archive: once submitted, the accessions are"
-" permanent and the data become public on the release date."
+"NCBI deposit: PoreSira does not send it. Download the files, submit them"
+" in the NCBI Submission Portal, then record the accessions NCBI gives "
+"(import_public_accessions) so that nothing is sent twice."
 msgstr ""
-"Ce dépôt est destiné à l'archive réelle : une fois soumis, les "
-"accessions sont définitives et les données deviennent publiques à la "
-"date de mise en ligne."
+"Dépôt NCBI : PoreSira ne l'envoie pas. Téléchargez les fichiers, "
+"soumettez-les dans le portail de soumission de NCBI, puis enregistrez "
+"les accessions que NCBI donne (import_public_accessions) pour que rien "
+"ne soit envoyé deux fois."
+
+#: poresira/deposits/templates/deposits/deposit_detail.html
+msgid ""
+"This deposit is for the real archive: once submitted, the accessions are "
+"permanent and the data become public on the release date."
+msgstr ""
+"Ce dépôt est destiné à l'archive réelle : une fois soumis, les accessions "
+"sont définitives et les données deviennent publiques à la date de mise en "
+"ligne."
 
 #: poresira/deposits/templates/deposits/deposit_detail.html
 msgid ""
@@ -1436,16 +1475,16 @@ msgid "New deposit"
 msgstr "Nouveau dépôt"
 
 #: poresira/deposits/views.py
-msgid "Deposit prepared for the test service. Review the report."
-msgstr "Dépôt préparé pour le service de test. Lisez le rapport."
+msgid "Deposit prepared. Review the report."
+msgstr "Dépôt préparé. Lisez le rapport."
 
 #: poresira/deposits/views.py
 msgid ""
-"Submission requested: the deposit agent picks it up. Reload this page in"
-" a moment."
+"Submission requested: the deposit agent picks it up. Reload this page in a "
+"moment."
 msgstr ""
-"Soumission demandée : l'agent de dépôt la prend en charge. Rechargez "
-"cette page dans un instant."
+"Soumission demandée : l'agent de dépôt la prend en charge. Rechargez cette "
+"page dans un instant."
 
 #: poresira/deposits/views.py
 msgid "Submit for real (public and permanent)"

@@ -155,4 +155,7 @@ ENA = {
     "CLI_TIMEOUT_SECONDS": env_int("ENA_CLI_TIMEOUT_SECONDS", 6 * 3600),
 }
 
+# NCBI Submission Portal tables (see docs/deposits.md). The package asks for a metagenome organism.
+NCBI = {"ORGANISM": env_str("PORESIRA_NCBI_ORGANISM", "plant metagenome")}
+
 MESSAGE_TAGS = {message_levels.ERROR: "danger"}

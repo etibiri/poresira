@@ -13,7 +13,7 @@
   <div class="btn-group">
     {% if can_submit %}<a class="btn btn-primary btn-sm" href="{% url 'deposits:deposit-submit' deposit.pk %}">{% if deposit.environment == 'production' %}{% trans "Submit for real" %}{% else %}{% trans "Submit to the test service" %}{% endif %}</a>{% endif %}
     {% if can_make_real %}<a class="btn btn-danger btn-sm" href="{% url 'deposits:deposit-production' deposit.pk %}">{% trans "Prepare the real deposit" %}</a>{% endif %}
-    <a class="btn btn-outline-secondary btn-sm" href="{% url 'deposits:deposit-files' deposit.pk %}">{% trans "Files to be sent" %}</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'deposits:deposit-files' deposit.pk %}">{% if deposit.sends_itself %}{% trans "Files to be sent" %}{% else %}{% trans "Files for the Submission Portal" %}{% endif %}</a>
     <a class="btn btn-outline-secondary btn-sm" href="{% url 'deposits:deposit-ro-crate' deposit.pk %}">{% trans "RO-Crate" %}</a>
     {% if can_edit and deposit.status != 'submitting' %}<a class="btn btn-outline-danger btn-sm" href="{% url 'deposits:deposit-void' deposit.pk %}">{% trans "Void" %}</a>{% endif %}
   </div>
@@ -24,9 +24,11 @@
   <strong>{% trans "Reason" %}:</strong> {{ deposit.void_reason }}
 </div>
 {% endif %}
-{% if deposit.environment == 'production' and deposit.status == 'draft' %}
+{% if not deposit.sends_itself %}
+<div class="alert alert-info">{% trans "NCBI deposit: PoreSira does not send it. Download the files, submit them in the NCBI Submission Portal, then record the accessions NCBI gives (import_public_accessions) so that nothing is sent twice." %}</div>
+{% elif deposit.environment == 'production' and deposit.status == 'draft' %}
 <div class="alert alert-danger">{% trans "This deposit is for the real archive: once submitted, the accessions are permanent and the data become public on the release date." %}</div>
-{% elif deposit.environment == 'test' %}
+{% elif deposit.environment == 'test' and deposit.sends_itself %}
 <div class="alert alert-info">{% trans "Test deposit: the archive discards it within a day. Its accessions are temporary." %}</div>
 {% endif %}
 {% if deposit.notes %}<div class="alert alert-warning" style="white-space: pre-line">{{ deposit.notes }}</div>{% endif %}

@@ -6,12 +6,14 @@ from datetime import date
 from decimal import Decimal
 from pathlib import Path
 
+from django.conf import settings
 from django.utils.translation import gettext as _
 
 from poresira.samples.models import Sample, SampleKind
 from poresira.sequencing.models import RunStatus
 from poresira.storage.models import Integrity
 
+from . import ncbi
 from .ena import (
     Attribute,
     ReadFile,
@@ -21,7 +23,7 @@ from .ena import (
     ena_instrument,
 )
 from .known import known_bioproject, known_for
-from .models import Deposit, DepositItem, Environment, ItemKind
+from .models import Archive, Deposit, DepositItem, Environment, ItemKind, ItemStatus
 
 DAMAGED = (Integrity.MISMATCH, Integrity.MISSING, Integrity.UNREADABLE)
 COORDINATE_DECIMALS_PUBLIC = 2  # 0.01 degree is about a kilometre
@@ -158,6 +160,8 @@ def preflight(deposit: Deposit, today: date | None = None) -> Report:
     for item in reads:
         _check_reads(item, report)
         _check_public(item, deposit, report)
+    if deposit.archive == Archive.NCBI:
+        _check_ncbi(samples, reads, report)
     bioproject = known_bioproject(deposit.project)
     if bioproject:
         message = _("The project already has the BioProject %(accession)s: is a new study wanted?")
@@ -233,10 +237,81 @@ def _check_public(item: DepositItem, deposit: Deposit, report: Report) -> None:
         message = _(
             "The reads of %(sample)s are already in SRA (%(runs)s): do not send them again."
         )
-        production = deposit.environment == Environment.PRODUCTION
         _say(
-            report.errors if production else report.warnings, message, item, sample=name, runs=runs
+            report.errors if deposit.is_real else report.warnings,
+            message,
+            item,
+            sample=name,
+            runs=runs,
         )
     if known.genbank:
         message = _("%(sample)s has sequences in GenBank (%(accessions)s).")
         _say(report.warnings, message, item, sample=name, accessions=", ".join(known.genbank))
+
+
+# --- NCBI Submission Portal ------------------------------------------------------------------
+
+
+def ncbi_sample(item: DepositItem, bioproject: str = "") -> ncbi.NcbiSample:
+    """The BioSample row of a field sample, in the package the laboratory already uses. The
+    collector's name is not part of it."""
+    sample = item.sample
+    event = sample.collection_event
+    return ncbi.NcbiSample(
+        name=item.alias,
+        title=sample.label or sample.identifier,
+        organism=settings.NCBI["ORGANISM"],
+        isolate=sample.label or sample.identifier,
+        host=sample.host_taxon,
+        collection_date=event.collected_on.isoformat() if event and event.collected_on else "",
+        geo_loc_name=ncbi.geo_loc_name(
+            event.country if event else "",
+            *((event.province or event.region, event.locality) if event else ()),
+        ),
+        lat_lon=(
+            ncbi.lat_lon(event.latitude, event.longitude)
+            if event and event.latitude is not None and event.longitude is not None
+            else ""
+        ),
+        bioproject_accession=bioproject,
+    )
+
+
+def ncbi_reads(item: DepositItem, bioproject: str = "") -> ncbi.NcbiReads:
+    """The SRA row of the reads of a sample; the BioSample is cited by accession when it exists."""
+    deposit, run = item.deposit, item.sequencing_run
+    files = [row.file for row in item.files.active().select_related("file").order_by("file__path")]
+    instrument = ena_instrument(run.instrument.model) if run.instrument else None
+    sample = item.sample
+    reference = item.sample_item
+    return ncbi.NcbiReads(
+        library_id=item.alias,
+        title=f"{deposit.title}: {sample.label or sample.identifier}",
+        sample_name="" if reference.accession else reference.alias,
+        biosample_accession=reference.accession,
+        instrument_model=instrument or "",
+        library_strategy=deposit.library_strategy,
+        library_source=deposit.library_source,
+        library_selection=deposit.library_selection,
+        design_description=f"{run.library.kit.code} library of {sample.get_kind_display().lower()}",
+        filetype=files[0].kind if files else "fastq",
+        file_names=tuple(file.name for file in files),
+        bioproject_accession=bioproject,
+    )
+
+
+def _check_ncbi(samples: list[DepositItem], reads: list[DepositItem], report: Report) -> None:
+    """What the portal asks on top of the general checks: coordinates, and file names that are
+    unique in the whole submission."""
+    for item in samples:
+        if item.status != ItemStatus.ACCEPTED and not ncbi_sample(item).lat_lon:
+            name = item.sample.label or item.sample.identifier
+            message = _("%(sample)s has no coordinates, which NCBI requires.")
+            _say(report.errors, message, item, sample=name)
+    seen: dict[str, str] = {}
+    for item in reads:
+        for row in item.files.active().select_related("file"):
+            if row.file.name in seen:
+                message = _("%(file)s is named like a file of %(other)s: names must be unique.")
+                _say(report.errors, message, item, file=row.file.name, other=seen[row.file.name])
+            seen[row.file.name] = item.sample.label or item.sample.identifier
