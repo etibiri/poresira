@@ -13,7 +13,7 @@ application itself.
 | `samples` | collection events, samples, derivatives, lineage, storage locations, QC (see [Samples](samples.md)) | implemented |
 | `pcr` | primers, cycling programs, master mixes, assays, runs in plates or tubes, results (see [PCR](pcr.md)) | implemented |
 | `sequencing` | libraries, flow cells, runs, reads per barcode; one adapter per platform (see [Sequencing](sequencing.md)) | implemented |
-| `storage` | file registry and storage backends | planned |
+| `storage` | file registry, storage backends, integrity checks (see [Storage](storage.md)) | implemented |
 | `computing` | compute jobs, Slurm agent | planned |
 | `deposits` | ENA/SRA submissions, RO-Crate export | planned |
 
@@ -113,8 +113,9 @@ One `docker-compose.yml` with three profiles. All run the same images and the sa
 | `backup` | `labo`, `plateforme` | scheduled `pg_dump` |
 | `slurm-agent` | `plateforme` | Celery worker on the `slurm` queue (placeholder until the `computing` app) |
 
-### Storage rules (for upcoming phases)
+### Storage rules
 
 The database never stores sequencing file contents, only path, backend, size, SHA-256 and MD5.
-The `storage` app will reach files through a `StorageBackend` interface; open backends (local
-disk, NAS mount, S3-compatible, catalogued offline media) are enough to run the application.
+The `storage` app reaches files through a `FileStore` interface; the open backends (local disk,
+NAS mount, catalogued offline media, and later S3-compatible) are enough to run the application.
+Files are registered in place and never copied, moved or deleted by PoreSira.

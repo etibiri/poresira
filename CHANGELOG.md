@@ -53,6 +53,15 @@ All notable changes are listed here. The format follows
 - `import_library`: all-or-nothing CSV import of a library.
 - Demonstration data: the 53 sequenced RCA products on two MinION runs (November 2023, from the
   laboratory sheet) and one Flongle run (2022, from the MinKNOW files).
+- `storage` app: a registry of data files (POD5, FAST5, FASTQ, BAM, reports, gel images) kept in
+  place on a local disk, a mounted share or a catalogued offline medium. Each file has its
+  size, SHA-256 and MD5, a tier (hot, warm, cold), and is attached to one sequencing run, PCR
+  run or sample. Fixity checks compare the disk with the record and are kept in the file's
+  history; PoreSira never copies, moves or deletes a file.
+- Files interface: file list and page, forms to register, check (as a Celery task), change tier
+  and void, a Files section on the sequencing run, PCR run and sample pages, French translation.
+- `create_storage_backend` and `register_files`: declare a backend and register a whole run
+  folder in place (resumable, with a dry run).
 - `with_reason` and `acting_as` helpers for audited changes made outside a request.
 - Complete French translation of the new screens.
 - AGPL-3.0-or-later license, CLA, contribution guide, code of conduct, citation file.
