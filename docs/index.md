@@ -5,10 +5,10 @@ PoreSira is an open-source laboratory information management system (LIMS) that 
 biological sample from field collection to public data deposition.
 
 !!! note "Status"
-    Phases 1 (foundation) to 6 (computing) are complete: users, projects and access control,
-    identifiers, the audit trail, collection events, samples with lineage, storage locations, QC,
-    primers, assays, PCR runs, libraries, flow cells, sequencing runs, the registry of data files
-    and compute jobs on Slurm. Deposits (ENA/SRA) are the next phase.
+    All seven phases are complete: users, projects and access control, identifiers, the audit
+    trail, collection events, samples with lineage, storage locations, QC, primers, assays, PCR
+    runs, libraries, flow cells, sequencing runs, the registry of data files, compute jobs on
+    Slurm, and deposits to the European Nucleotide Archive.
 
 - [Installation](installation.md): run it on one computer, a lab server or an HPC platform.
 - [Configuration](configuration.md): every environment variable.
@@ -17,6 +17,7 @@ biological sample from field collection to public data deposition.
 - [Sequencing](sequencing.md): libraries and barcodes, reusable flow cells, runs, reads.
 - [Storage](storage.md): data files registered in place, checksums, integrity checks.
 - [Computing](computing.md): Dorado basecalling and demultiplexing on Slurm, with provenance.
+- [Deposits](deposits.md): ENA submissions, accessions already public, RO-Crate export.
 - [Architecture](architecture.md): how traceability is enforced.
 - [Backup and restore](backup-restore.md): protect your data and rebuild a lost server.
 

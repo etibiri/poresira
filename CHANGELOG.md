@@ -74,6 +74,22 @@ All notable changes are listed here. The format follows
   sequencing run page, script download, French translation.
 - `create_demo_storage`: writes a fictitious, git-ignored data folder (79 placeholder files) for the
   demonstration runs and gel images and registers it as the backend "Demo disk".
+- `deposits` app: deposits to the European Nucleotide Archive built from a sequencing run (study,
+  one sample per field sample, reads of each library member), checked before sending (collection
+  date, country, host taxon, reads files in place, instrument, coordinates precision), sent by a
+  deposit agent (study and samples as XML, reads through Webin-CLI) to the test service first.
+  Accessions are recorded as the archive answers; the Webin password is never stored or logged.
+- Real deposits are a separate step: a project lead or administrator prepares them from an accepted
+  test deposit with a release date and the confirmation that permits were checked, and confirms by
+  typing the project code. Studies and samples already accepted keep their accessions.
+- `PublicAccession`: BioProject, BioSample and SRA accessions that already exist, with
+  `import_public_accessions`. A real deposit cites an existing BioSample instead of registering
+  one, refuses reads already in SRA, and mentions GenBank sequences. The demonstration project
+  records its NCBI BioProject, 66 BioSamples and 66 SRA runs.
+- RO-Crate export of a deposit (samples, files with checksums, sequencing, compute jobs, links to
+  the archives) and a download of the exact files to be sent.
+- Deposits interface: list, page with the report and the accessions, forms to prepare, submit
+  (test or real), leave out, void; public archives on the sample page; French translation.
 - `with_reason` and `acting_as` helpers for audited changes made outside a request.
 - Complete French translation of the new screens.
 - AGPL-3.0-or-later license, CLA, contribution guide, code of conduct, citation file.

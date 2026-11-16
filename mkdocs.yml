@@ -21,6 +21,7 @@ nav:
   - Sequencing: sequencing.md
   - Storage: storage.md
   - Computing: computing.md
+  - Deposits: deposits.md
   - Backup and restore: backup-restore.md
   - Maintainers:
       - CLA Assistant setup: cla-assistant-setup.md

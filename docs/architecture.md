@@ -15,7 +15,7 @@ application itself.
 | `sequencing` | libraries, flow cells, runs, reads per barcode; one adapter per platform (see [Sequencing](sequencing.md)) | implemented |
 | `storage` | file registry, storage backends, integrity checks (see [Storage](storage.md)) | implemented |
 | `computing` | compute jobs (Dorado basecalling and demultiplexing, POD5 conversion), Slurm agent (see [Computing](computing.md)) | implemented |
-| `deposits` | ENA/SRA submissions, RO-Crate export | planned |
+| `deposits` | ENA submissions, accessions, public accessions already held, RO-Crate export (see [Deposits](deposits.md)) | implemented |
 
 ## Access control
 
