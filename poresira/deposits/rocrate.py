@@ -12,7 +12,8 @@ from django.conf import settings
 
 from poresira.computing.models import ComputeJob, JobStatus
 
-from .collect import sample_spec
+from .collect import root_sample, sample_spec
+from .known import NCBI_BIOSAMPLE, NCBI_NUCCORE, NCBI_SRA, known_for
 from .models import Deposit, ItemKind
 
 CONTEXT = "https://w3id.org/ro/crate/1.1/context"
@@ -76,13 +77,29 @@ def build_ro_crate(deposit: Deposit) -> dict:
     sample_refs = {}
     for item in (i for i in items if i.kind == ItemKind.SAMPLE):
         spec = sample_spec(item)
+        known = known_for(item.sample)
+        genbank = [
+            add(
+                {
+                    "@id": f"{NCBI_NUCCORE}{accession}",
+                    "@type": "Dataset",
+                    "name": f"GenBank {accession}",
+                    "identifier": accession,
+                }
+            )
+            for accession in known.genbank
+        ]
         sample_refs[item.pk] = add(
             {
                 "@id": f"#sample-{item.sample.identifier}",
                 "@type": "BioSample",
                 "name": spec.title,
                 "identifier": item.sample.identifier,
-                "sameAs": _accession_urls(item.accession),
+                "sameAs": [
+                    *_accession_urls(item.accession),
+                    *([f"{NCBI_BIOSAMPLE}{known.biosample}"] if known.biosample else []),
+                ],
+                "subjectOf": genbank,
                 "taxonomicRange": spec.scientific_name,
                 "additionalProperty": [
                     _clean(
@@ -127,7 +144,10 @@ def build_ro_crate(deposit: Deposit) -> dict:
                     f"{run.basecall_model}".strip()
                 ),
                 "identifier": [value for value in (run.identifier, run.run_id) if value],
-                "sameAs": _accession_urls(item.accession, item.secondary_accession),
+                "sameAs": [
+                    *_accession_urls(item.accession, item.secondary_accession),
+                    *[f"{NCBI_SRA}{run}" for run in known_for(root_sample(item.sample)).sra_runs],
+                ],
                 "startTime": _iso(run.started_on),
                 "instrument": instrument,
                 "object": sample_refs.get(item.sample_item_id),

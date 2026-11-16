@@ -16,13 +16,16 @@ from django.utils.translation import gettext as _
 from poresira.core.models import Project
 from poresira.core.permissions import can_edit_project
 from poresira.core.reason import acting_as
+from poresira.samples.models import SampleKind
 from poresira.sequencing.models import SequencingRun
 from poresira.storage.models import DataFile, FileKind
 
 from .archive import ArchiveError, EnaArchive, Receipt
 from .collect import preflight, reads_spec, root_sample, sample_spec, study_spec
 from .ena import reads_manifest, samples_xml, study_xml, submission_xml
+from .known import known_for
 from .models import (
+    AccessionKind,
     Deposit,
     DepositFile,
     DepositItem,
@@ -30,6 +33,7 @@ from .models import (
     Environment,
     ItemKind,
     ItemStatus,
+    PublicAccession,
 )
 from .permissions import can_publish
 
@@ -97,15 +101,32 @@ def _accepted_in_production(project: Project, **filters) -> DepositItem | None:
     )
 
 
-def _new_item(deposit: Deposit, reuse: DepositItem | None, **fields) -> DepositItem:
+def _new_item(deposit: Deposit, reused: tuple[str, str] | None, **fields) -> DepositItem:
+    """An item of the deposit. ``reused`` is an accession the archives already hold and where
+    it comes from: the item is then accepted from the start and is not sent again."""
     item = DepositItem(deposit=deposit, **fields)
-    if reuse is not None:
-        item.status, item.accession = ItemStatus.ACCEPTED, reuse.accession
-        item.message = _("Already registered in %(deposit)s.") % {
-            "deposit": reuse.deposit.identifier
-        }
+    if reused is not None:
+        accession, origin = reused
+        item.status, item.accession = ItemStatus.ACCEPTED, accession
+        item.message = _("Already registered in %(origin)s.") % {"origin": origin}
     _save_new(item)
     return item
+
+
+def _reuse_study(deposit: Deposit) -> tuple[str, str] | None:
+    earlier = _accepted_in_production(
+        deposit.project, kind=ItemKind.STUDY, deposit__title=deposit.title
+    )
+    return (earlier.accession, earlier.deposit.identifier) if earlier else None
+
+
+def _reuse_sample(deposit: Deposit, field_sample) -> tuple[str, str] | None:
+    """A BioSample that exists already, in the public archives or from an earlier deposit."""
+    known = known_for(field_sample).biosample
+    if known:
+        return known, _("the public archives")
+    earlier = _accepted_in_production(deposit.project, kind=ItemKind.SAMPLE, sample=field_sample)
+    return (earlier.accession, earlier.deposit.identifier) if earlier else None
 
 
 def _build_deposit(*, user, run: SequencingRun, deposit: Deposit) -> Deposit:
@@ -118,25 +139,13 @@ def _build_deposit(*, user, run: SequencingRun, deposit: Deposit) -> Deposit:
     production = deposit.environment == Environment.PRODUCTION
     with acting_as(user):
         _save_new(deposit)
-        study_reuse = (
-            _accepted_in_production(
-                deposit.project, kind=ItemKind.STUDY, deposit__title=deposit.title
-            )
-            if production
-            else None
-        )
+        study_reuse = _reuse_study(deposit) if production else None
         _new_item(deposit, study_reuse, kind=ItemKind.STUDY, alias=f"{deposit.identifier}_study")
         biosamples: dict = {}
         for member in members:
             field_sample = root_sample(member.sample)
             if field_sample.pk not in biosamples:
-                reuse = (
-                    _accepted_in_production(
-                        deposit.project, kind=ItemKind.SAMPLE, sample=field_sample
-                    )
-                    if production
-                    else None
-                )
+                reuse = _reuse_sample(deposit, field_sample) if production else None
                 biosamples[field_sample.pk] = _new_item(
                     deposit,
                     reuse,
@@ -394,3 +403,35 @@ def void_record(*, user, deposit: Deposit, reason: str) -> Deposit:
     with acting_as(user):
         deposit.void(user=user, reason=reason)
     return deposit
+
+
+# --- Accessions that already exist -----------------------------------------------------------
+
+
+@transaction.atomic
+def record_public_accession(
+    *, user, project: Project, kind: str, accession: str, sample=None, released_on=None, notes=""
+) -> PublicAccession:
+    """Record an accession a public archive already gave: a BioProject (no sample), or for a
+    field sample its BioSample or its SRA experiment or run."""
+    _require_editor(user, project)
+    if kind not in AccessionKind.values:
+        raise ValidationError({"kind": _("Unknown kind of accession.")})
+    if sample is not None:
+        if sample.is_voided or sample.project_id != project.pk:
+            raise ValidationError({"sample": _("The sample must belong to the project.")})
+        if sample.kind not in (SampleKind.FIELD_SAMPLE, SampleKind.LIVING_PLANT):
+            raise ValidationError(
+                {"sample": _("Give the field sample or living plant, not an extract or product.")}
+            )
+    record = PublicAccession(
+        project=project,
+        kind=kind,
+        accession=accession.strip().upper(),
+        sample=sample,
+        released_on=released_on,
+        notes=notes,
+    )
+    with acting_as(user):
+        _save_new(record)
+    return record

@@ -12,10 +12,12 @@ from .deposit import (
     ItemKind,
     ItemStatus,
 )
+from .public import AccessionKind, PublicAccession
 
 __all__ = [
     "DEPOSIT_TYPE_CODE",
     "FINAL_STATUSES",
+    "AccessionKind",
     "Archive",
     "Deposit",
     "DepositFile",
@@ -24,4 +26,5 @@ __all__ = [
     "Environment",
     "ItemKind",
     "ItemStatus",
+    "PublicAccession",
 ]

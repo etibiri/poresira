@@ -3,7 +3,7 @@ import factory
 from django.utils import timezone
 
 from poresira.core.tests.factories import ProjectFactory, UserFactory
-from poresira.deposits.models import Deposit, DepositFile, DepositItem
+from poresira.deposits.models import Deposit, DepositFile, DepositItem, PublicAccession
 from poresira.samples.tests.factories import SampleFactory
 from poresira.sequencing.tests.factories import SequencingRunFactory
 from poresira.storage.models import FileKind
@@ -76,3 +76,17 @@ class DepositFileFactory(factory.django.DjangoModelFactory):
         )
     )
     sha256 = factory.LazyAttribute(lambda row: row.file.sha256)
+
+
+class PublicAccessionFactory(factory.django.DjangoModelFactory):
+    """A BioSample of a field sample of the same project, unless another kind is given."""
+
+    class Meta:
+        model = PublicAccession
+
+    project = factory.SubFactory(ProjectFactory)
+    kind = "biosample"
+    accession = factory.Sequence(lambda number: f"SAMN{57660000 + number}")
+    sample = factory.LazyAttribute(
+        lambda row: SampleFactory(project=row.project) if row.kind != "bioproject" else None
+    )

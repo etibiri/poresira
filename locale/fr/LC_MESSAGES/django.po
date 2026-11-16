@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 14:37+0000\n"
+"POT-Creation-Date: 2026-11-16 15:02+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -167,9 +167,9 @@ msgid "Cancelled"
 msgstr "Annulé"
 
 #: poresira/computing/models/job.py poresira/deposits/models/deposit.py
-#: poresira/pcr/models/run.py poresira/samples/models/collection.py
-#: poresira/samples/models/sample.py poresira/sequencing/models/run.py
-#: poresira/storage/models/file.py
+#: poresira/deposits/models/public.py poresira/pcr/models/run.py
+#: poresira/samples/models/collection.py poresira/samples/models/sample.py
+#: poresira/sequencing/models/run.py poresira/storage/models/file.py
 msgid "project"
 msgstr "projet"
 
@@ -179,7 +179,8 @@ msgid "sequencing run"
 msgstr "passage de séquençage"
 
 #: poresira/computing/models/job.py poresira/deposits/models/deposit.py
-#: poresira/storage/models/backend.py poresira/storage/models/file.py
+#: poresira/deposits/models/public.py poresira/storage/models/backend.py
+#: poresira/storage/models/file.py
 msgid "kind"
 msgstr "nature"
 
@@ -242,12 +243,12 @@ msgid "exit code"
 msgstr "code de sortie"
 
 #: poresira/computing/models/job.py poresira/deposits/models/deposit.py
-#: poresira/pcr/models/reference.py poresira/pcr/models/run.py
-#: poresira/samples/models/collection.py poresira/samples/models/qc.py
-#: poresira/samples/models/sample.py poresira/samples/models/sequence.py
-#: poresira/samples/models/storage.py poresira/sequencing/models/reference.py
-#: poresira/sequencing/models/run.py poresira/storage/models/backend.py
-#: poresira/storage/models/file.py
+#: poresira/deposits/models/public.py poresira/pcr/models/reference.py
+#: poresira/pcr/models/run.py poresira/samples/models/collection.py
+#: poresira/samples/models/qc.py poresira/samples/models/sample.py
+#: poresira/samples/models/sequence.py poresira/samples/models/storage.py
+#: poresira/sequencing/models/reference.py poresira/sequencing/models/run.py
+#: poresira/storage/models/backend.py poresira/storage/models/file.py
 msgid "notes"
 msgstr "notes"
 
@@ -826,6 +827,15 @@ msgid "Give a release date in the future."
 msgstr "Indiquez une date de mise en ligne dans le futur."
 
 #: poresira/deposits/collect.py
+#, python-format
+msgid ""
+"The project already has the BioProject %(accession)s: is a new study "
+"wanted?"
+msgstr ""
+"Le projet a déjà le BioProject %(accession)s : une nouvelle étude est-"
+"elle voulue ?"
+
+#: poresira/deposits/collect.py
 msgid "the collection date"
 msgstr "la date de collecte"
 
@@ -893,6 +903,20 @@ msgstr "L'appareil du passage de %(sample)s n'est pas connu de l'archive."
 msgid "The run of %(sample)s was reconstructed from a record."
 msgstr ""
 "Le passage de %(sample)s a été reconstitué à partir d’un enregistrement."
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid ""
+"The reads of %(sample)s are already in SRA (%(runs)s): do not send them "
+"again."
+msgstr ""
+"Les lectures de %(sample)s sont déjà dans SRA (%(runs)s) : ne les "
+"envoyez pas une seconde fois."
+
+#: poresira/deposits/collect.py
+#, python-format
+msgid "%(sample)s has sequences in GenBank (%(accessions)s)."
+msgstr "%(sample)s a des séquences dans GenBank (%(accessions)s)."
 
 #: poresira/deposits/models/deposit.py
 msgid "European Nucleotide Archive (ENA)"
@@ -1030,7 +1054,7 @@ msgstr "alias"
 msgid "The name the archive knows this object by, unique in the deposit."
 msgstr "Le nom sous lequel l'archive connaît cet objet, unique dans le dépôt."
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py poresira/deposits/models/public.py
 #: poresira/pcr/templates/pcr/run_detail.html poresira/samples/models/qc.py
 #: poresira/samples/models/sequence.py poresira/sequencing/models/run.py
 #: poresira/storage/models/file.py
@@ -1041,7 +1065,8 @@ msgstr "échantillon"
 msgid "sample of the archive"
 msgstr "échantillon de l'archive"
 
-#: poresira/deposits/models/deposit.py poresira/samples/models/sequence.py
+#: poresira/deposits/models/deposit.py poresira/deposits/models/public.py
+#: poresira/samples/models/sequence.py
 msgid "accession"
 msgstr "numéro d'accession"
 
@@ -1057,10 +1082,41 @@ msgstr "message"
 msgid "item"
 msgstr "élément"
 
+#: poresira/deposits/models/public.py poresira/samples/models/sequence.py
+msgid "BioProject"
+msgstr "BioProject"
+
+#: poresira/deposits/models/public.py poresira/samples/models/sequence.py
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "BioSample"
+msgstr "BioSample"
+
+#: poresira/deposits/models/public.py
+msgid "SRA experiment"
+msgstr "Expérience SRA"
+
+#: poresira/deposits/models/public.py
+msgid "SRA run"
+msgstr "Run SRA"
+
+#: poresira/deposits/models/public.py
+msgid ""
+"The field sample or living plant; empty for a BioProject."
+msgstr ""
+"L'échantillon de terrain ou la plante vivante ; vide pour un BioProject."
+
+#: poresira/deposits/models/public.py
+msgid "released on"
+msgstr "publié le"
+
 #: poresira/deposits/services.py
 #, python-format
-msgid "Already registered in %(deposit)s."
-msgstr "Déjà enregistré dans %(deposit)s."
+msgid "Already registered in %(origin)s."
+msgstr "Déjà enregistré dans %(origin)s."
+
+#: poresira/deposits/services.py
+msgid "the public archives"
+msgstr "les archives publiques"
 
 #: poresira/deposits/services.py
 msgid "The library of this run has no sample."
@@ -1114,6 +1170,21 @@ msgstr "L'étude ou l'échantillon de ces lectures n'a pas été enregistré."
 #: poresira/deposits/services.py
 msgid "A deposit being submitted cannot be voided."
 msgstr "Un dépôt en cours de soumission ne peut pas être annulé."
+
+#: poresira/deposits/services.py
+msgid "Unknown kind of accession."
+msgstr "Type d'accession inconnu."
+
+#: poresira/deposits/services.py
+msgid "The sample must belong to the project."
+msgstr "L'échantillon doit appartenir au projet."
+
+#: poresira/deposits/services.py
+msgid ""
+"Give the field sample or living plant, not an extract or product."
+msgstr ""
+"Indiquez l'échantillon de terrain ou la plante vivante, pas un extrait "
+"ni un produit."
 
 #: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
 #: poresira/pcr/templates/pcr/run_list.html
@@ -2207,15 +2278,6 @@ msgstr "topologie"
 #: poresira/samples/models/sequence.py
 msgid "assembly method"
 msgstr "méthode d'assemblage"
-
-#: poresira/samples/models/sequence.py
-#: poresira/samples/templates/samples/sample_detail.html
-msgid "BioSample"
-msgstr "BioSample"
-
-#: poresira/samples/models/sequence.py
-msgid "BioProject"
-msgstr "BioProject"
 
 #: poresira/samples/models/storage.py
 msgid "Room"

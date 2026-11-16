@@ -8,7 +8,7 @@ from pathlib import Path
 
 from django.utils.translation import gettext as _
 
-from poresira.samples.models import Sample
+from poresira.samples.models import Sample, SampleKind
 from poresira.sequencing.models import RunStatus
 from poresira.storage.models import Integrity
 
@@ -20,6 +20,7 @@ from .ena import (
     StudySpec,
     ena_instrument,
 )
+from .known import known_bioproject, known_for
 from .models import Deposit, DepositItem, Environment, ItemKind
 
 DAMAGED = (Integrity.MISMATCH, Integrity.MISSING, Integrity.UNREADABLE)
@@ -44,11 +45,20 @@ class Report:
         return not self.errors
 
 
-def root_sample(sample: Sample) -> Sample:
-    """The field sample a derivative comes from: the one registered as a BioSample."""
-    while sample.parent_id is not None:
-        sample = sample.parent
-    return sample
+BIOLOGICAL_KINDS = (SampleKind.FIELD_SAMPLE, SampleKind.LIVING_PLANT)
+
+
+def biological_sample(sample: Sample) -> Sample:
+    """The material the archive's BioSample describes: the nearest field sample or living plant,
+    going up from the extract or product that was sequenced (a greenhouse plant keeps its own
+    BioSample; a field sample's extracts share the field sample's)."""
+    current = sample
+    while current.kind not in BIOLOGICAL_KINDS and current.parent_id is not None:
+        current = current.parent
+    return current
+
+
+root_sample = biological_sample  # the name used before greenhouse plants had their own BioSample
 
 
 def study_spec(deposit: Deposit) -> StudySpec:
@@ -147,6 +157,11 @@ def preflight(deposit: Deposit, today: date | None = None) -> Report:
         _check_sample(item, report)
     for item in reads:
         _check_reads(item, report)
+        _check_public(item, deposit, report)
+    bioproject = known_bioproject(deposit.project)
+    if bioproject:
+        message = _("The project already has the BioProject %(accession)s: is a new study wanted?")
+        _say(report.warnings, message, accession=bioproject)
     return report
 
 
@@ -205,3 +220,23 @@ def _check_reads(item: DepositItem, report: Report) -> None:
     if run.reconstructed:
         message = _("The run of %(sample)s was reconstructed from a record.")
         _say(report.warnings, message, item, sample=name)
+
+
+def _check_public(item: DepositItem, deposit: Deposit, report: Report) -> None:
+    """Reads that are already in a public archive are not deposited again: that is an error for
+    the real deposit and a warning for a test, which is discarded. GenBank sequences made from
+    the sample are only mentioned: the reads complement them."""
+    name = item.sample.label or item.sample.identifier
+    known = known_for(root_sample(item.sample))
+    if known.archived_reads:
+        runs = ", ".join(known.sra_runs or known.sra_experiments)
+        message = _(
+            "The reads of %(sample)s are already in SRA (%(runs)s): do not send them again."
+        )
+        production = deposit.environment == Environment.PRODUCTION
+        _say(
+            report.errors if production else report.warnings, message, item, sample=name, runs=runs
+        )
+    if known.genbank:
+        message = _("%(sample)s has sequences in GenBank (%(accessions)s).")
+        _say(report.warnings, message, item, sample=name, accessions=", ".join(known.genbank))

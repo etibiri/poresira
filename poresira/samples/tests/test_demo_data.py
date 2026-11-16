@@ -465,6 +465,36 @@ class TestLoading:
         assert (tmp_path / "computing").is_dir()
         assert NOTICE.encode() in (tmp_path / "gels" / "Gel1.jpg").read_bytes()
 
+    def test_the_accessions_the_public_archives_already_hold_are_recorded(self, loaded_demo):
+        from poresira.deposits.known import known_bioproject, known_for
+        from poresira.deposits.models import AccessionKind, PublicAccession
+        from poresira.deposits.tests.factories import PublicAccessionFactory  # noqa: F401
+
+        project = Project.objects.get(code=loader.DEMO_PROJECT_CODE)
+        records = PublicAccession.objects.filter(project=project)
+
+        assert known_bioproject(project) == "PRJNA1460897"
+        assert records.filter(kind=AccessionKind.BIOSAMPLE).count() == 66
+        assert records.filter(kind=AccessionKind.SRA_RUN).count() == 66
+        assert records.filter(kind=AccessionKind.SRA_EXPERIMENT).count() == 66
+        sample = Sample.objects.get(kind=SampleKind.FIELD_SAMPLE, label="Tie_BFA316")
+        known = known_for(sample)
+        assert known.biosample == "SAMN57660728"
+        assert known.sra_runs and known.sra_runs[0].startswith("SRR")
+        assert known.genbank == ("PV947756",)
+        assert all(r.archive_name == "NCBI" for r in records)
+
+    def test_loading_the_accessions_twice_adds_nothing(self, loaded_demo):
+        from poresira.deposits.models import PublicAccession
+        from poresira.samples.demo.public import load_public_accessions
+
+        project = Project.objects.get(code=loader.DEMO_PROJECT_CODE)
+        users = {"demo_technician": User.objects.get(username="demo_technician")}
+        before = PublicAccession.objects.count()
+
+        assert load_public_accessions(users, project) == 0
+        assert PublicAccession.objects.count() == before == 1 + 66 * 3
+
     def test_loading_twice_changes_nothing(self, loaded_demo):
         before = (Sample.objects.count(), CollectionEvent.objects.count())
 
