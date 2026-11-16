@@ -105,7 +105,10 @@ CELERY_BROKER_URL = REDIS_URL
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_TASK_ALWAYS_EAGER = env_bool("CELERY_TASK_ALWAYS_EAGER", False)
 # Compute jobs are handled by the Slurm agent, a worker on the "slurm" queue.
-CELERY_TASK_ROUTES = {"poresira.computing.tasks.*": {"queue": "slurm"}}
+CELERY_TASK_ROUTES = {
+    "poresira.computing.tasks.*": {"queue": "slurm"},
+    "poresira.deposits.tasks.*": {"queue": "deposits"},  # the only worker that reaches the archive
+}
 
 PORESIRA_SITE_PREFIX = env_str("PORESIRA_SITE_PREFIX", "WBF")
 PORESIRA_SOURCE_URL = env_str("PORESIRA_SOURCE_URL", "https://github.com/etibiri/poresira")
@@ -135,6 +138,21 @@ COMPUTING = {
     "CPUS": env_int("PORESIRA_SLURM_CPUS", 8),
     "MEM_GB": env_int("PORESIRA_SLURM_MEM_GB", 64),
     "TIME": env_str("PORESIRA_SLURM_TIME", "24:00:00"),
+}
+
+# Deposits to the European Nucleotide Archive (see docs/deposits.md). The Webin account name
+# and password are read from the environment of the agent only, never stored in the database.
+ENA = {
+    "WEBIN_USER": env_str("ENA_WEBIN_USER"),
+    "WEBIN_PASSWORD": env_str("ENA_WEBIN_PASSWORD"),
+    "TEST_URL": env_str("ENA_TEST_URL", "https://wwwdev.ebi.ac.uk/ena/submit/drop-box/submit"),
+    "PRODUCTION_URL": env_str(
+        "ENA_PRODUCTION_URL", "https://www.ebi.ac.uk/ena/submit/drop-box/submit"
+    ),
+    "WEBIN_CLI": env_str("ENA_WEBIN_CLI", "webin-cli"),  # may be several words, e.g. java -jar
+    "WORK_DIR": env_str("ENA_WORK_DIR", f"{PORESIRA_DATA_DIR}/deposits"),
+    "TIMEOUT_SECONDS": env_int("ENA_TIMEOUT_SECONDS", 120),
+    "CLI_TIMEOUT_SECONDS": env_int("ENA_CLI_TIMEOUT_SECONDS", 6 * 3600),
 }
 
 MESSAGE_TAGS = {message_levels.ERROR: "danger"}
