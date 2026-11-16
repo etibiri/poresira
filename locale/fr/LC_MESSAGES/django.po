@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 10:01+0000\n"
+"POT-Creation-Date: 2026-11-16 10:17+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -2595,11 +2595,11 @@ msgstr "racine"
 
 #: poresira/storage/models/backend.py
 msgid ""
-"Absolute directory of a disk or mounted share; the label of the medium "
-"when offline."
+"Absolute directory of a disk or mounted share; the label of the medium when "
+"offline."
 msgstr ""
-"Répertoire absolu d'un disque ou d'un partage monté ; étiquette du "
-"support s'il est hors ligne."
+"Répertoire absolu d'un disque ou d'un partage monté ; étiquette du support "
+"s'il est hors ligne."
 
 #: poresira/storage/models/file.py
 msgid "POD5 (raw signal)"
@@ -2724,3 +2724,78 @@ msgstr "SHA-256 observé"
 #: poresira/storage/models/file.py
 msgid "observed size (bytes)"
 msgstr "taille observée (octets)"
+
+#: poresira/storage/services.py
+msgid "Give the label of the medium."
+msgstr "Indiquez l’étiquette du support."
+
+#: poresira/storage/services.py
+msgid "Give an absolute directory, such as /data/nanopore."
+msgstr "Indiquez un répertoire absolu, par exemple /data/nanopore."
+
+#: poresira/storage/services.py
+msgid "This directory does not exist on this computer."
+msgstr "Ce répertoire n'existe pas sur cet ordinateur."
+
+#: poresira/storage/services.py
+msgid ""
+"Give a path relative to the backend, without a leading slash or “..”."
+msgstr ""
+"Indiquez un chemin relatif à l'emplacement, sans barre oblique initiale "
+"ni « .. »."
+
+#: poresira/storage/services.py
+msgid ""
+"Attach the file to one sequencing run, one PCR run or one sample."
+msgstr ""
+"Rattachez le fichier à un passage de séquençage, un passage PCR ou un "
+"échantillon."
+
+#: poresira/storage/services.py
+msgid "A voided record cannot receive files."
+msgstr "Un enregistrement annulé ne peut pas recevoir de fichiers."
+
+#: poresira/storage/services.py
+msgid "The record must belong to the project of the file."
+msgstr "L'enregistrement doit appartenir au projet du fichier."
+
+#: poresira/storage/services.py
+#, python-format
+msgid "Give %(length)s hexadecimal characters."
+msgstr "Indiquez %(length)s caractères hexadécimaux."
+
+#: poresira/storage/services.py
+msgid "A voided backend cannot be used."
+msgstr "Un emplacement annulé ne peut pas être utilisé."
+
+#: poresira/storage/services.py
+msgid "No such file in this backend."
+msgstr "Aucun fichier de ce nom dans cet emplacement."
+
+#: poresira/storage/services.py
+msgid "This file cannot be read."
+msgstr "Ce fichier ne peut pas être lu."
+
+#: poresira/storage/services.py
+msgid "Give the size of the file."
+msgstr "Indiquez la taille du fichier."
+
+#: poresira/storage/services.py
+msgid "A voided file cannot be checked."
+msgstr "Un fichier annulé ne peut pas être vérifié."
+
+#: poresira/storage/services.py
+msgid "A file on an offline medium cannot be checked here."
+msgstr "Un fichier sur un support hors ligne ne peut pas être vérifié ici."
+
+#: poresira/storage/services.py
+msgid "A voided file cannot be changed."
+msgstr "Un fichier annulé ne peut pas être modifié."
+
+#: poresira/storage/services.py
+msgid "Unknown tier."
+msgstr "Niveau inconnu."
+
+#: poresira/storage/services.py
+msgid "Active files are registered in this backend."
+msgstr "Des fichiers actifs sont enregistrés dans cet emplacement."
