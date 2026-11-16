@@ -65,8 +65,8 @@ FLONGLE_NOTES = (
     "Flongle AMF735 (adapter FA-06369) on the MinION Mk1C MC-111618, 4 to 6 November 2022; "
     "MinKNOW 21.11.7, acquisition ID 10f834811c6cc55747f2c2a6f43413289193c1b2. Not barcoded. "
     "Reads and bases are those of the MinKNOW throughput file (passed and failed). "
-    "MinKNOW names the protocol group 'Equiphi29', while the thesis sheet records only "
-    "TempliPhi for this sample; the thesis document gives it barcode BC53."
+    "The protocol group 'Equiphi29' is kept as MinKNOW recorded it. The run was not barcoded "
+    "(the thesis document gives this sample BC53; that barcode is not used here)."
 )
 
 

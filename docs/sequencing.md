@@ -112,5 +112,6 @@ three runs of the sweetpotato RCA products, **53 samples in all**:
 The two MinION runs are marked reconstructed: they come from an e-mail and a sheet, not from the
 sequencer, so their reads per barcode are unknown. The Flongle run comes from the MinKNOW output
 (530 760 reads, 462.7 Mb basecalled, Guppy 5.1.13). The thesis document calls BFA316 `BC53`, but
-that run was not barcoded; the run notes say so. Reads files (POD5, FASTQ) are not stored yet: they
+that run was not barcoded and the demo keeps it so; the run notes say so. Its MinKNOW protocol
+group, `Equiphi29`, is kept as recorded. Reads files (POD5, FASTQ) are not stored yet: they
 wait for the `storage` app.

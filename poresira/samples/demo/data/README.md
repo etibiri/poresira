@@ -148,7 +148,7 @@ Qin et al. 2014, Li et al. 2004), with the paper's reported amplicon sizes (abou
 The barcode of each sequenced sample, flow cell and sequencing date, copied from the laboratory
 sheet `Samples_Barcode_correspondance.xlsx` (kept outside the repository). 53 samples: 24 on
 flow cell FAT93267 (BC01-BC24, 2023-11-09), 28 on FAV02927 (BC25-BC52, 2023-11-11) and BFA316 on
-the Flongle AMF735 (2022-11-04, no barcode: the thesis document calls it BC53, but the Flongle
-run was not barcoded). The 53 codes are exactly the samples marked as sequenced in
+the Flongle AMF735 (2022-11-04, no barcode, as the laboratory confirmed: the thesis document calls it BC53,
+which is not used here). The 53 codes are exactly the samples marked as sequenced in
 `thesis_98_samples.csv`, with the same symptom scale. The run details come from the laboratory
 e-mail (MinION runs) and from the MinKNOW files of the Flongle run.
