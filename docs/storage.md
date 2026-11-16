@@ -124,5 +124,17 @@ Changing a tier needs a reason. Nothing is moved automatically.
 
 ## Demonstration data
 
-The demonstration project registers **no file**: the real data live outside the repository. Declare
-a backend, then register a run folder with `register_files` to see the screens fill in.
+`load_demo_data` registers **no file**: the real data live outside the repository. To see the
+screens filled in, write a fictitious data folder and register it:
+
+```bash
+python manage.py create_demo_storage            # writes ./demo-data (ignored by git)
+python manage.py create_demo_storage --root /srv/poresira-data
+```
+
+It makes 79 small placeholder files (under 1 MB in all) for the three demonstration runs (POD5,
+per-barcode FASTQ, a BAM, reports) and the SPG1/SPG2 gel images, declares them as the backend
+"Demo disk" and registers them. Each file starts with a line saying it is fictitious; none is real
+signal, reads or gel. It is safe to repeat. The folder also holds an empty `computing/` folder,
+where compute jobs write their results. With Docker Compose, set `PORESIRA_DATA_DIR` to this
+folder so the containers see it.

@@ -436,6 +436,35 @@ class TestLoading:
         # every sequenced sample of the laboratory file is in exactly one library
         assert LibraryMember.objects.values("sample").distinct().count() == 53
 
+    def test_the_fictitious_storage_folder_is_written_and_registered_once(
+        self, loaded_demo, tmp_path
+    ):
+        from poresira.pcr.models import PcrRun
+        from poresira.sequencing.models import SequencingRun
+        from poresira.storage.demo import NOTICE, create_demo_storage
+        from poresira.storage.models import DataFile, FileKind, Integrity, StorageBackend
+
+        platform = User.objects.get(username="demo_platform")
+        technician = User.objects.get(username="demo_technician")
+
+        first = create_demo_storage(tmp_path, platform=platform, technician=technician)
+        second = create_demo_storage(tmp_path, platform=platform, technician=technician)
+
+        on_disk = [p for p in tmp_path.rglob("*") if p.is_file()]
+        assert first.written == len(on_disk) and second.written == 0 and second.registered == 0
+        assert DataFile.objects.count() == len(on_disk) == first.registered
+        assert StorageBackend.objects.get().root == str(tmp_path)
+        assert sum(path.stat().st_size for path in on_disk) < 3_000_000
+        assert {f.integrity for f in DataFile.objects.all()} == {Integrity.INTACT}
+        kinds = set(DataFile.objects.values_list("kind", flat=True))
+        assert {FileKind.POD5, FileKind.FASTQ, FileKind.BAM, FileKind.GEL_IMAGE} <= kinds
+        first_run = SequencingRun.objects.get(flow_cell__flow_cell_id="FAT93267")
+        assert first_run.files.filter(path__contains="barcode24").exists()
+        gels = PcrRun.objects.filter(notes__startswith="Sweepovirus detection")
+        assert sorted(run.files.count() for run in gels) == [4, 4]
+        assert (tmp_path / "computing").is_dir()
+        assert NOTICE.encode() in (tmp_path / "gels" / "Gel1.jpg").read_bytes()
+
     def test_loading_twice_changes_nothing(self, loaded_demo):
         before = (Sample.objects.count(), CollectionEvent.objects.count())
 

@@ -72,6 +72,8 @@ All notable changes are listed here. The format follows
   brings active jobs up to date.
 - Compute interface: job list and page, Basecall, Demultiplex and Convert actions on the
   sequencing run page, script download, French translation.
+- `create_demo_storage`: writes a fictitious, git-ignored data folder (79 placeholder files) for the
+  demonstration runs and gel images and registers it as the backend "Demo disk".
 - `with_reason` and `acting_as` helpers for audited changes made outside a request.
 - Complete French translation of the new screens.
 - AGPL-3.0-or-later license, CLA, contribution guide, code of conduct, citation file.
