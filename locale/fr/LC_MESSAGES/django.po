@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 11:18+0000\n"
+"POT-Creation-Date: 2026-11-16 11:25+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -13,6 +13,53 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: poresira/computing/jobtypes.py
+#: poresira/sequencing/templates/sequencing/reference.html
+msgid "Model"
+msgstr "Modèle"
+
+#: poresira/computing/jobtypes.py
+msgid ""
+"A speed (fast, hac, sup) or a model name, such as sup@v5.0.0."
+msgstr ""
+"Une vitesse (fast, hac, sup) ou un nom de modèle, par exemple "
+"sup@v5.0.0."
+
+#: poresira/computing/jobtypes.py
+msgid "Barcoding kit"
+msgstr "Kit de codes-barres"
+
+#: poresira/computing/jobtypes.py
+msgid ""
+"Trims adapters and barcodes during basecalling; optional."
+msgstr ""
+"Retire adaptateurs et codes-barres pendant le basecalling ; facultatif."
+
+#: poresira/computing/jobtypes.py
+msgid "Minimum quality"
+msgstr "Qualité minimale"
+
+#: poresira/computing/jobtypes.py
+msgid "Unknown parameter."
+msgstr "Paramètre inconnu."
+
+#: poresira/computing/jobtypes.py
+msgid "This parameter is required."
+msgstr "Ce paramètre est obligatoire."
+
+#: poresira/computing/jobtypes.py
+msgid "Give a whole number."
+msgstr "Indiquez un nombre entier."
+
+#: poresira/computing/jobtypes.py
+#, python-format
+msgid "Give a number from %(low)s to %(high)s."
+msgstr "Indiquez un nombre de %(low)s à %(high)s."
+
+#: poresira/computing/jobtypes.py
+msgid "Use letters, digits and . _ @ - only."
+msgstr "Utilisez seulement des lettres, des chiffres et . _ @ -."
 
 #: poresira/computing/models/job.py
 #: poresira/sequencing/templates/sequencing/run_detail.html
@@ -143,6 +190,60 @@ msgstr "fichier"
 #: poresira/computing/models/job.py
 msgid "SHA-256 at preparation"
 msgstr "SHA-256 à la préparation"
+
+#: poresira/computing/services.py
+#, python-format
+msgid "%(file)s is voided."
+msgstr "%(file)s est annulé."
+
+#: poresira/computing/services.py
+#, python-format
+msgid "%(file)s belongs to another project."
+msgstr "%(file)s appartient à un autre projet."
+
+#: poresira/computing/services.py
+#, python-format
+msgid "%(file)s is not a file this job reads."
+msgstr "%(file)s n'est pas un fichier que ce travail lit."
+
+#: poresira/computing/services.py
+#, python-format
+msgid "%(file)s is on an offline medium."
+msgstr "%(file)s est sur un support hors ligne."
+
+#: poresira/computing/services.py
+#, python-format
+msgid "%(file)s has changed or is missing: check it first."
+msgstr "%(file)s a changé ou est absent : vérifiez-le d’abord."
+
+#: poresira/computing/services.py
+#, python-format
+msgid "%(file)s has a path that cannot be used in a script."
+msgstr "%(file)s a un chemin inutilisable dans un script."
+
+#: poresira/computing/services.py
+msgid "A voided run cannot be processed."
+msgstr "Un passage annulé ne peut pas être traité."
+
+#: poresira/computing/services.py
+msgid "Unknown kind of job."
+msgstr "Type de travail inconnu."
+
+#: poresira/computing/services.py
+msgid "There is no input file for this job."
+msgstr "Ce travail n'a aucun fichier d'entrée."
+
+#: poresira/computing/services.py
+msgid "Only a draft job can be changed."
+msgstr "Seul un brouillon peut être modifié."
+
+#: poresira/computing/services.py
+msgid "Cancel the job before voiding it."
+msgstr "Annulez le travail (arrêt) avant de l'annuler (retrait)."
+
+#: poresira/computing/services.py
+msgid "Void the results of this job first."
+msgstr "Annulez d'abord les résultats de ce travail."
 
 #: poresira/core/history.py
 msgid "Created"
@@ -2542,10 +2643,6 @@ msgstr "Aucun type de cellule de flux pour le moment."
 #: poresira/sequencing/templates/sequencing/reference.html
 msgid "Instruments"
 msgstr "Appareils"
-
-#: poresira/sequencing/templates/sequencing/reference.html
-msgid "Model"
-msgstr "Modèle"
 
 #: poresira/sequencing/templates/sequencing/reference.html
 msgid "Serial number"

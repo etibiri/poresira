@@ -3,7 +3,7 @@ from pathlib import Path
 
 from django.contrib.messages import constants as message_levels
 
-from config.env import env_bool, env_list, env_str
+from config.env import env_bool, env_int, env_list, env_str
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -113,5 +113,24 @@ PORESIRA_VERSION = env_str("PORESIRA_VERSION", "dev")
 DATABASE_APP_ROLE = env_str("POSTGRES_APP_USER", "poresira_app")
 # Only enable behind a reverse proxy that overwrites X-Forwarded-For.
 PORESIRA_TRUST_X_FORWARDED_FOR = env_bool("PORESIRA_TRUST_X_FORWARDED_FOR", False)
+
+# Compute jobs (see docs/computing.md). The commands and setup lines are written by the
+# administrator and trusted; job parameters never reach a shell unquoted.
+PORESIRA_DATA_DIR = env_str("PORESIRA_DATA_DIR", "/srv/poresira-data")
+COMPUTING = {
+    "OUTPUT_DIR": env_str("PORESIRA_COMPUTE_OUTPUT_DIR", f"{PORESIRA_DATA_DIR}/computing"),
+    "SETUP": env_str("PORESIRA_COMPUTE_SETUP"),  # for example: module load dorado/0.9.0
+    "DORADO": env_str("PORESIRA_DORADO_COMMAND", "dorado"),
+    "DORADO_VERSION": env_str("PORESIRA_DORADO_VERSION"),
+    "DORADO_MODELS_DIR": env_str("PORESIRA_DORADO_MODELS_DIR"),
+    "POD5": env_str("PORESIRA_POD5_COMMAND", "pod5"),
+    "POD5_VERSION": env_str("PORESIRA_POD5_VERSION"),
+    "SLURM_PARTITION": env_str("PORESIRA_SLURM_PARTITION"),
+    "SLURM_ACCOUNT": env_str("PORESIRA_SLURM_ACCOUNT"),
+    "GPUS": env_int("PORESIRA_SLURM_GPUS", 1),
+    "CPUS": env_int("PORESIRA_SLURM_CPUS", 8),
+    "MEM_GB": env_int("PORESIRA_SLURM_MEM_GB", 64),
+    "TIME": env_str("PORESIRA_SLURM_TIME", "24:00:00"),
+}
 
 MESSAGE_TAGS = {message_levels.ERROR: "danger"}
