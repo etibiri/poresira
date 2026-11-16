@@ -1,0 +1,10 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% if is_paginated %}
+<nav aria-label="{% trans 'Pages' %}" class="d-flex justify-content-between align-items-center">
+  <span class="text-muted small">{% blocktrans with number=page_obj.number total=page_obj.paginator.num_pages %}Page {{ number }} of {{ total }}{% endblocktrans %}</span>
+  <div>
+    {% if page_obj.has_previous %}<a class="btn btn-sm btn-outline-secondary" href="?{{ query_string }}&page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>{% endif %}
+    {% if page_obj.has_next %}<a class="btn btn-sm btn-outline-secondary" href="?{{ query_string }}&page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>{% endif %}
+  </div>
+</nav>
+{% endif %}

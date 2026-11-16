@@ -7,4 +7,5 @@ urlpatterns = [
     path("", include("poresira.core.urls")),
     path("", include("poresira.samples.urls")),
     path("", include("poresira.pcr.urls")),
+    path("", include("poresira.sequencing.urls")),
 ]

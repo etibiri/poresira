@@ -136,6 +136,24 @@
 </table>
 {% endif %}
 
+{% if library_memberships %}
+<h2 class="h5 mt-4">{% trans "Sequencing" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr>
+    <th>{% trans "Library" %}</th><th>{% trans "Barcode" %}</th><th>{% trans "Runs" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for member in library_memberships %}
+    <tr>
+      <td><a href="{% url 'sequencing:library-detail' member.library_id %}"><code>{{ member.library.identifier }}</code></a> {{ member.library.name }}</td>
+      <td>{% if member.barcode %}<code>BC{{ member.barcode|stringformat:"02d" }}</code>{% else %}—{% endif %}</td>
+      <td>{% for run in member.library.runs.all %}{% if not run.is_voided %}<a href="{% url 'sequencing:run-detail' run.pk %}"><code>{{ run.identifier }}</code></a> {{ run.flow_cell.flow_cell_id }} · {{ run.started_on|date:"SHORT_DATE_FORMAT"|default:"—" }}{% if not forloop.last %}<br>{% endif %}{% endif %}{% endfor %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
 <h2 class="h5 mt-4">{% trans "History" %}</h2>
 {% include "core/_history.html" %}
 {% endblock %}

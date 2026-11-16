@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Flow cells" %} · PoreSira{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">{% trans "Sequencing" %}</h1>
+  {% if can_register %}<a class="btn btn-primary btn-sm" href="{% url 'sequencing:flow-cell-register' %}">{% trans "Register a flow cell" %}</a>{% endif %}
+</div>
+{% include "sequencing/_tabs.html" with tab="flow-cells" %}
+<table class="table table-hover align-middle">
+  <thead><tr>
+    <th>{% trans "Flow cell ID" %}</th><th>{% trans "Type" %}</th><th>{% trans "Reuse" %}</th>
+    <th>{% trans "Active pores at check" %}</th><th>{% trans "Runs" %}</th><th>{% trans "Last run" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for cell in flow_cells %}
+    <tr>
+      <td>{{ cell.flow_cell_id }}</td>
+      <td>{{ cell.type.code }} <span class="text-muted small">{{ cell.type.name }}</span></td>
+      <td>{% if cell.type.reusable %}{% trans "Reusable" %}{% else %}{% trans "Single-use" %}{% endif %}</td>
+      <td>{{ cell.pores_at_qc|default_if_none:"—" }}</td>
+      <td>{{ cell.run_count }}</td>
+      <td>{% if cell.last_run %}<a href="{% url 'sequencing:run-detail' cell.last_run.pk %}"><code>{{ cell.last_run.identifier }}</code></a> {{ cell.last_run.get_status_display }}{% else %}—{% endif %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" class="text-muted">{% trans "No flow cells yet." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

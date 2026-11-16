@@ -1,0 +1,97 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{{ run.identifier }} · PoreSira{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'sequencing:run-list' %}">{% trans "Sequencing" %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ run.identifier }}</li>
+  </ol>
+</nav>
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+  <h1 class="h3 mb-0"><code>{{ run.identifier }}</code> {{ run.flow_cell.flow_cell_id }}
+    <span class="badge text-bg-primary">{{ run.get_status_display }}</span>
+    {% if run.reconstructed %}<span class="badge text-bg-info">{% trans "Reconstructed" %}</span>{% endif %}</h1>
+  {% if can_edit %}
+  <div class="btn-group">
+    {% if run.status == 'planned' %}
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'sequencing:run-start' run.pk %}">{% trans "Start" %}</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'sequencing:run-abort' run.pk %}">{% trans "Abort" %}</a>
+    {% elif run.status == 'running' %}
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'sequencing:run-complete' run.pk %}">{% trans "Complete" %}</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'sequencing:run-abort' run.pk %}">{% trans "Abort" %}</a>
+    {% elif run.status == 'completed' %}
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'sequencing:run-reopen' run.pk %}">{% trans "Reopen" %}</a>
+    {% endif %}
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'sequencing:run-void' run.pk %}">{% trans "Void" %}</a>
+  </div>
+  {% endif %}
+</div>
+{% if run.is_voided %}
+<div class="alert alert-secondary">
+  {% blocktrans with date=run.voided_at|date:"DATETIME_FORMAT" %}Voided on {{ date }}.{% endblocktrans %}
+  <strong>{% trans "Reason" %}:</strong> {{ run.void_reason }}
+</div>
+{% endif %}
+
+<div class="row g-4">
+  <div class="col-lg-6">
+    <h2 class="h5">{% trans "Details" %}</h2>
+    <dl class="row small">
+      <dt class="col-sm-5">{% trans "Project" %}</dt><dd class="col-sm-7">{{ run.project.code }} · {{ run.project.name }}</dd>
+      <dt class="col-sm-5">{% trans "Library" %}</dt><dd class="col-sm-7"><a href="{% url 'sequencing:library-detail' run.library_id %}"><code>{{ run.library.identifier }}</code></a> {{ run.library.name }} · {{ run.library.kit.code }}</dd>
+      <dt class="col-sm-5">{% trans "Flow cell" %}</dt><dd class="col-sm-7">{{ run.flow_cell.flow_cell_id }} · {{ run.flow_cell.type.code }}{% if not run.flow_cell.type.reusable %} ({% trans "single-use" %}){% endif %}</dd>
+      <dt class="col-sm-5">{% trans "Instrument" %}</dt><dd class="col-sm-7">{{ run.instrument|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Active pores at start" %}</dt><dd class="col-sm-7">{{ run.pores_at_start|default_if_none:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Start date" %}</dt><dd class="col-sm-7">{{ run.started_on|date:"DATE_FORMAT"|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Run ID" %}</dt><dd class="col-sm-7 text-break">{{ run.run_id|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Performed by" %}</dt><dd class="col-sm-7">{{ run.performed_by|default:"—" }}</dd>
+    </dl>
+  </div>
+  <div class="col-lg-6">
+    <h2 class="h5">{% trans "Basecalling" %}</h2>
+    <dl class="row small">
+      <dt class="col-sm-5">{% trans "Acquisition software" %}</dt><dd class="col-sm-7">{{ run.acquisition_software|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Basecaller" %}</dt><dd class="col-sm-7">{{ run.basecaller|default:"—" }} {{ run.basecaller_version }}</dd>
+      <dt class="col-sm-5">{% trans "Basecalling model" %}</dt><dd class="col-sm-7">{{ run.basecall_model|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Reads" %}</dt><dd class="col-sm-7">{{ run.total_reads|default_if_none:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Bases" %}</dt><dd class="col-sm-7">{{ run.total_bases|default_if_none:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Notes" %}</dt><dd class="col-sm-7">{{ run.notes|default:"—" }}</dd>
+    </dl>
+  </div>
+</div>
+
+<h2 class="h5 mt-4">{% trans "Reads per sample" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr>
+    <th>{% trans "Barcode" %}</th><th>{% trans "Sample" %}</th><th>{% trans "Label" %}</th>
+    <th>{% trans "Reads" %}</th><th>{% trans "Bases" %}</th><th>{% trans "Read N50 (bp)" %}</th><th>{% trans "Mean quality (Q)" %}</th><th></th>
+  </tr></thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <td>{% if row.member.barcode %}<code>BC{{ row.member.barcode|stringformat:"02d" }}</code>{% else %}—{% endif %}</td>
+      <td><a href="{% url 'samples:sample-detail' row.member.sample_id %}"><code>{{ row.member.sample.identifier }}</code></a></td>
+      <td>{{ row.member.sample.label|default:"—" }}</td>
+      <td>{{ row.result.reads|default_if_none:"—" }}</td><td>{{ row.result.bases|default_if_none:"—" }}</td>
+      <td>{{ row.result.n50|default_if_none:"—" }}</td><td>{{ row.result.mean_quality|default_if_none:"—" }}</td>
+      <td class="text-end">{% if can_enter_results %}<a href="{% url 'sequencing:result' run.pk row.member.pk %}">{% trans "Reads" %}</a>{% endif %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="8" class="text-muted">{% trans "No samples." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if other_runs %}
+<h2 class="h5 mt-4">{% trans "Other runs of this flow cell" %}</h2>
+<ul class="small">
+  {% for other in other_runs %}
+  <li><a href="{% url 'sequencing:run-detail' other.pk %}"><code>{{ other.identifier }}</code></a> · {{ other.get_status_display }} · {{ other.started_on|date:"SHORT_DATE_FORMAT"|default:"—" }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<h2 class="h5 mt-4">{% trans "History" %}</h2>
+{% include "core/_history.html" %}
+{% endblock %}

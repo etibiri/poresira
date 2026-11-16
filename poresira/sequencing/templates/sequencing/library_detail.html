@@ -1,0 +1,78 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{{ library.identifier }} · PoreSira{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'sequencing:library-list' %}">{% trans "Libraries" %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ library.identifier }}</li>
+  </ol>
+</nav>
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+  <h1 class="h3 mb-0"><code>{{ library.identifier }}</code> {{ library.name }}
+    <span class="badge text-bg-primary">{{ library.get_status_display }}</span>
+    {% if library.reconstructed %}<span class="badge text-bg-info">{% trans "Reconstructed" %}</span>{% endif %}</h1>
+  {% if can_edit %}
+  <div class="btn-group">
+    {% if can_add %}
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'sequencing:member-add' library.pk %}">{% trans "Add a sample" %}</a>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'sequencing:library-seal' library.pk %}">{% trans "Seal" %}</a>
+    {% endif %}
+    {% if can_plan %}<a class="btn btn-outline-primary btn-sm" href="{% url 'sequencing:run-plan' library.pk %}">{% trans "Plan a run" %}</a>{% endif %}
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'sequencing:library-void' library.pk %}">{% trans "Void" %}</a>
+  </div>
+  {% endif %}
+</div>
+{% if library.is_voided %}
+<div class="alert alert-secondary">
+  {% blocktrans with date=library.voided_at|date:"DATETIME_FORMAT" %}Voided on {{ date }}.{% endblocktrans %}
+  <strong>{% trans "Reason" %}:</strong> {{ library.void_reason }}
+</div>
+{% endif %}
+<dl class="row small">
+  <dt class="col-sm-3">{% trans "Project" %}</dt><dd class="col-sm-9">{{ library.project.code }} · {{ library.project.name }}</dd>
+  <dt class="col-sm-3">{% trans "Kit" %}</dt><dd class="col-sm-9">{{ library.kit.code }} · {{ library.kit.name }}</dd>
+  <dt class="col-sm-3">{% trans "Date prepared" %}</dt><dd class="col-sm-9">{{ library.prepared_on|date:"DATE_FORMAT"|default:"—" }}</dd>
+  <dt class="col-sm-3">{% trans "Prepared by" %}</dt><dd class="col-sm-9">{{ library.prepared_by|default:"—" }}</dd>
+  <dt class="col-sm-3">{% trans "Notes" %}</dt><dd class="col-sm-9">{{ library.notes|default:"—" }}</dd>
+</dl>
+
+<h2 class="h5 mt-4">{% trans "Samples and barcodes" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr>
+    <th>{% trans "Barcode" %}</th><th>{% trans "Sample" %}</th><th>{% trans "Label" %}</th><th>{% trans "Input (ng)" %}</th><th></th>
+  </tr></thead>
+  <tbody>
+    {% for member in members %}
+    <tr>
+      <td>{% if member.barcode %}<code>BC{{ member.barcode|stringformat:"02d" }}</code>{% else %}—{% endif %}</td>
+      <td><a href="{% url 'samples:sample-detail' member.sample_id %}"><code>{{ member.sample.identifier }}</code></a></td>
+      <td>{{ member.sample.label|default:"—" }}</td>
+      <td>{{ member.input_ng|default_if_none:"—" }}</td>
+      <td class="text-end">{% if can_add %}<a class="text-danger" href="{% url 'sequencing:member-void' member.pk %}">{% trans "Remove" %}</a>{% endif %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" class="text-muted">{% trans "No samples yet." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 class="h5 mt-4">{% trans "Runs" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr><th>{% trans "Identifier" %}</th><th>{% trans "Flow cell" %}</th><th>{% trans "Status" %}</th><th>{% trans "Start date" %}</th></tr></thead>
+  <tbody>
+    {% for run in runs %}
+    <tr>
+      <td><a href="{% url 'sequencing:run-detail' run.pk %}"><code>{{ run.identifier }}</code></a></td>
+      <td>{{ run.flow_cell.flow_cell_id }}</td><td>{{ run.get_status_display }}</td>
+      <td>{{ run.started_on|date:"SHORT_DATE_FORMAT"|default:"—" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4" class="text-muted">{% trans "Not sequenced yet." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 class="h5 mt-4">{% trans "History" %}</h2>
+{% include "core/_history.html" %}
+{% endblock %}

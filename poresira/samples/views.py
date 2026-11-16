@@ -183,6 +183,10 @@ class SampleDetailView(SampleMixin, LoginRequiredMixin, TemplateView):
             .filter(run__voided_at__isnull=True)
             .select_related("run__assay")
             .order_by("run__identifier", "position"),
+            library_memberships=sample.library_memberships.active()
+            .filter(library__voided_at__isnull=True)
+            .select_related("library")
+            .prefetch_related("library__runs__flow_cell"),
             entries=history,
             **kwargs,
         )

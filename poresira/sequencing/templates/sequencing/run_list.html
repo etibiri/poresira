@@ -1,0 +1,32 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Sequencing runs" %} · PoreSira{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Sequencing" %}</h1>
+{% include "sequencing/_tabs.html" with tab="runs" %}
+{% include "sequencing/_filter.html" %}
+<table class="table table-hover align-middle">
+  <thead><tr>
+    <th>{% trans "Identifier" %}</th><th>{% trans "Library" %}</th><th>{% trans "Flow cell" %}</th>
+    <th>{% trans "Project" %}</th><th>{% trans "Status" %}</th><th>{% trans "Start date" %}</th><th>{% trans "Run ID" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for run in runs %}
+    <tr{% if run.is_voided %} class="text-muted"{% endif %}>
+      <td><a href="{% url 'sequencing:run-detail' run.pk %}"><code>{{ run.identifier }}</code></a>
+        {% if run.is_voided %}<span class="badge text-bg-secondary">{% trans "Voided" %}</span>{% endif %}
+        {% if run.reconstructed %}<span class="badge text-bg-info">{% trans "Reconstructed" %}</span>{% endif %}</td>
+      <td><a href="{% url 'sequencing:library-detail' run.library_id %}"><code>{{ run.library.identifier }}</code></a> {{ run.library.name }}</td>
+      <td>{{ run.flow_cell.flow_cell_id }} <span class="text-muted small">{{ run.flow_cell.type.code }}</span></td>
+      <td>{{ run.project.code }}</td>
+      <td>{{ run.get_status_display }}</td>
+      <td>{{ run.started_on|date:"SHORT_DATE_FORMAT"|default:"—" }}</td>
+      <td class="small text-break">{{ run.run_id|default:"—" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7" class="text-muted">{% trans "No runs to show." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% include "sequencing/_pager.html" %}
+{% endblock %}

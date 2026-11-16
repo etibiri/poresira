@@ -1,0 +1,34 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Libraries" %} · PoreSira{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">{% trans "Sequencing" %}</h1>
+  {% if can_create %}<a class="btn btn-primary btn-sm" href="{% url 'sequencing:library-create' %}">{% trans "New library" %}</a>{% endif %}
+</div>
+{% include "sequencing/_tabs.html" with tab="libraries" %}
+{% include "sequencing/_filter.html" %}
+<table class="table table-hover align-middle">
+  <thead><tr>
+    <th>{% trans "Identifier" %}</th><th>{% trans "Name" %}</th><th>{% trans "Kit" %}</th>
+    <th>{% trans "Project" %}</th><th>{% trans "Status" %}</th><th>{% trans "Samples" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for library in libraries %}
+    <tr{% if library.is_voided %} class="text-muted"{% endif %}>
+      <td><a href="{% url 'sequencing:library-detail' library.pk %}"><code>{{ library.identifier }}</code></a>
+        {% if library.is_voided %}<span class="badge text-bg-secondary">{% trans "Voided" %}</span>{% endif %}
+        {% if library.reconstructed %}<span class="badge text-bg-info">{% trans "Reconstructed" %}</span>{% endif %}</td>
+      <td>{{ library.name|default:"—" }}</td>
+      <td>{{ library.kit.code }}</td>
+      <td>{{ library.project.code }}</td>
+      <td>{{ library.get_status_display }}</td>
+      <td>{{ library.member_count }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" class="text-muted">{% trans "No libraries to show." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% include "sequencing/_pager.html" %}
+{% endblock %}

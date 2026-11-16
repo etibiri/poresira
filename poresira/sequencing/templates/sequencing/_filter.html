@@ -1,0 +1,11 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+<form method="get" class="row g-2 align-items-end mb-3">
+  <div class="col-md-4">{{ filter_form.project.label_tag }}{{ filter_form.project }}</div>
+  <div class="col-md-3">{{ filter_form.status.label_tag }}{{ filter_form.status }}</div>
+  <div class="col-md-3">
+    <div class="form-check">{{ filter_form.include_voided }}
+      <label class="form-check-label" for="{{ filter_form.include_voided.id_for_label }}">{{ filter_form.include_voided.label }}</label>
+    </div>
+  </div>
+  <div class="col-md-2"><button type="submit" class="btn btn-sm btn-primary">{% trans "Filter" %}</button></div>
+</form>

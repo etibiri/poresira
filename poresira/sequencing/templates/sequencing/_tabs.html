@@ -1,0 +1,7 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item"><a class="nav-link{% if tab == 'runs' %} active{% endif %}" href="{% url 'sequencing:run-list' %}">{% trans "Runs" %}</a></li>
+  <li class="nav-item"><a class="nav-link{% if tab == 'libraries' %} active{% endif %}" href="{% url 'sequencing:library-list' %}">{% trans "Libraries" %}</a></li>
+  <li class="nav-item"><a class="nav-link{% if tab == 'flow-cells' %} active{% endif %}" href="{% url 'sequencing:flow-cell-list' %}">{% trans "Flow cells" %}</a></li>
+  <li class="nav-item"><a class="nav-link{% if tab == 'reference' %} active{% endif %}" href="{% url 'sequencing:reference' %}">{% trans "Kits and instruments" %}</a></li>
+</ul>
