@@ -32,6 +32,14 @@ jobs:
       - name: pre-commit hooks (SPDX headers, whitespace, YAML)
         run: uv run pre-commit run --all-files --show-diff-on-failure
 
+  docker-context:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: No private or oversized file enters the Docker build context
+        run: ./scripts/check_docker_context.sh
+
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 20

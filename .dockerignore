@@ -1,9 +1,21 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-.git
-.venv
-.env
-__pycache__
-.pytest_cache
-.ruff_cache
-site
-backups
+# An allowlist: nothing enters the image unless it is listed here. The project folder holds
+# private data (sequencing runs, thesis files, manuscripts, backups) that must never be sent to
+# the Docker daemon or baked into an image, so new files stay out by default.
+*
+
+!pyproject.toml
+!uv.lock
+!manage.py
+!README.md
+!LICENSE
+!config
+!poresira
+!static
+!templates
+!locale
+
+# Compiled or local leftovers inside the allowed folders.
+**/__pycache__
+**/*.pyc
+**/*.mo
