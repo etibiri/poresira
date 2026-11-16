@@ -1,0 +1,25 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{# Files of a record. Needs: files, and optionally register_url. #}
+{% if files or register_url %}
+<div class="d-flex justify-content-between align-items-center mt-4">
+  <h2 class="h5 mb-0">{% trans "Files" %}</h2>
+  {% if register_url %}<a class="btn btn-outline-primary btn-sm" href="{{ register_url }}">{% trans "Register a file" %}</a>{% endif %}
+</div>
+<table class="table table-sm align-middle mt-2">
+  <thead><tr>
+    <th>{% trans "File" %}</th><th>{% trans "Kind" %}</th><th>{% trans "Size" %}</th><th>{% trans "Tier" %}</th><th>{% trans "Integrity" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for file in files %}
+    <tr>
+      <td><a href="{% url 'storage:file-detail' file.pk %}">{{ file.name }}</a> <code class="small">{{ file.identifier }}</code></td>
+      <td>{{ file.get_kind_display }}</td><td>{{ file.size_bytes|filesizeformat }}</td>
+      <td>{{ file.get_tier_display }}</td>
+      <td>{% include "storage/_integrity.html" %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" class="text-muted">{% trans "No files registered." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}

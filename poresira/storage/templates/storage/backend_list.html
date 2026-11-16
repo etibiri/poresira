@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Storage backends" %} · PoreSira{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Storage backends" %}</h1>
+<table class="table table-sm align-middle">
+  <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Kind" %}</th><th>{% trans "Root" %}</th><th>{% trans "Files" %}</th></tr></thead>
+  <tbody>
+    {% for backend in backends %}
+    <tr><td>{{ backend.name }}</td><td>{{ backend.get_kind_display }}</td><td><code>{{ backend.root }}</code></td>
+      <td><a href="{% url 'storage:file-list' %}?backend={{ backend.pk }}">{{ backend.file_count }}</a></td></tr>
+    {% empty %}
+    <tr><td colspan="4" class="text-muted">{% trans "No backends yet. Declare one with the create_storage_backend command." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'storage:file-list' %}">{% trans "Files" %}</a>
+{% endblock %}

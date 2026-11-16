@@ -1,0 +1,52 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Files" %} · PoreSira{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">{% trans "Files" %}</h1>
+  <a class="btn btn-outline-secondary btn-sm" href="{% url 'storage:backend-list' %}">{% trans "Storage backends" %}</a>
+</div>
+<form method="get" class="row g-2 align-items-end mb-3">
+  <div class="col-md-3">{{ filter_form.q.label_tag }}{{ filter_form.q }}</div>
+  <div class="col-md-3">{{ filter_form.project.label_tag }}{{ filter_form.project }}</div>
+  <div class="col-md-2">{{ filter_form.backend.label_tag }}{{ filter_form.backend }}</div>
+  <div class="col-md-2">{{ filter_form.kind.label_tag }}{{ filter_form.kind }}</div>
+  <div class="col-md-2">{{ filter_form.tier.label_tag }}{{ filter_form.tier }}</div>
+  <div class="col-md-3">{{ filter_form.integrity.label_tag }}{{ filter_form.integrity }}</div>
+  <div class="col-md-3">
+    <div class="form-check">{{ filter_form.include_voided }}
+      <label class="form-check-label" for="{{ filter_form.include_voided.id_for_label }}">{{ filter_form.include_voided.label }}</label>
+    </div>
+  </div>
+  <div class="col-md-2"><button type="submit" class="btn btn-sm btn-primary">{% trans "Filter" %}</button></div>
+</form>
+<table class="table table-hover align-middle">
+  <thead><tr>
+    <th>{% trans "Identifier" %}</th><th>{% trans "Path" %}</th><th>{% trans "Kind" %}</th><th>{% trans "Size" %}</th>
+    <th>{% trans "Backend" %}</th><th>{% trans "Tier" %}</th><th>{% trans "Integrity" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for file in files %}
+    <tr{% if file.is_voided %} class="text-muted"{% endif %}>
+      <td><a href="{% url 'storage:file-detail' file.pk %}"><code>{{ file.identifier }}</code></a>
+        {% if file.is_voided %}<span class="badge text-bg-secondary">{% trans "Voided" %}</span>{% endif %}</td>
+      <td class="small text-break">{{ file.path }}</td>
+      <td>{{ file.get_kind_display }}</td><td>{{ file.size_bytes|filesizeformat }}</td>
+      <td>{{ file.backend.name }}</td><td>{{ file.get_tier_display }}</td>
+      <td>{% include "storage/_integrity.html" %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7" class="text-muted">{% trans "No files to show." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if is_paginated %}
+<nav aria-label="{% trans 'Pages' %}" class="d-flex justify-content-between align-items-center">
+  <span class="text-muted small">{% blocktrans with number=page_obj.number total=page_obj.paginator.num_pages %}Page {{ number }} of {{ total }}{% endblocktrans %}</span>
+  <div>
+    {% if page_obj.has_previous %}<a class="btn btn-sm btn-outline-secondary" href="?{{ query_string }}&page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>{% endif %}
+    {% if page_obj.has_next %}<a class="btn btn-sm btn-outline-secondary" href="?{{ query_string }}&page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>{% endif %}
+  </div>
+</nav>
+{% endif %}
+{% endblock %}

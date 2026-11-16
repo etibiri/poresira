@@ -23,6 +23,7 @@
         <li class="nav-item"><a class="nav-link" href="{% url 'samples:storage-tree' %}">{% trans "Storage" %}</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'pcr:run-list' %}">{% trans "PCR" %}</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'sequencing:run-list' %}">{% trans "Sequencing" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'storage:file-list' %}">{% trans "Files" %}</a></li>
         {% endif %}
       </ul>
       <form method="post" action="{% url 'set-language' %}" class="d-flex gap-1 me-3">

@@ -206,6 +206,10 @@ class RunDetailView(RunMixin, LoginRequiredMixin, TemplateView):
             can_add=editable and run.status == RunStatus.PLANNED,
             can_enter_results=editable and run.status in (RunStatus.PERFORMED, RunStatus.CLOSED),
             positives=sum(r.result == Result.POSITIVE for r in reactions),
+            files=run.files.active().select_related("backend"),
+            register_url=(
+                reverse("storage:file-register", args=["pcr-run", run.pk]) if editable else ""
+            ),
             entries=history,
             **kwargs,
         )

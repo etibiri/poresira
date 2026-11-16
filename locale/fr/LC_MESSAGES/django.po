@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 10:17+0000\n"
+"POT-Creation-Date: 2026-11-16 10:46+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -34,6 +34,7 @@ msgstr "Modifié"
 #: poresira/sequencing/templates/sequencing/library_list.html
 #: poresira/sequencing/templates/sequencing/run_detail.html
 #: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/storage/forms.py
 msgid "Project"
 msgstr "Projet"
 
@@ -50,6 +51,7 @@ msgstr "Code"
 #: poresira/pcr/templates/pcr/primer_list.html
 #: poresira/sequencing/templates/sequencing/library_list.html
 #: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/storage/templates/storage/backend_list.html
 msgid "Name"
 msgstr "Nom"
 
@@ -125,6 +127,7 @@ msgstr "par %(username)s"
 #: poresira/sequencing/forms.py
 #: poresira/sequencing/templates/sequencing/library_detail.html
 #: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/storage/templates/storage/file_detail.html
 msgid "Reason"
 msgstr "Motif"
 
@@ -176,6 +179,7 @@ msgstr "Échantillons"
 #: poresira/samples/templates/samples/sample_detail.html
 #: poresira/sequencing/templates/sequencing/library_detail.html
 #: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/storage/templates/storage/file_detail.html
 msgid "History"
 msgstr "Historique"
 
@@ -215,6 +219,14 @@ msgid "Sequencing"
 msgstr "Séquençage"
 
 #: poresira/core/templates/core/base.html
+#: poresira/storage/templates/storage/_files.html
+#: poresira/storage/templates/storage/backend_list.html
+#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Files"
+msgstr "Fichiers"
+
+#: poresira/core/templates/core/base.html
 msgid "Log out"
 msgstr "Se déconnecter"
 
@@ -243,6 +255,7 @@ msgid "This record is already voided."
 msgstr "Cet enregistrement est déjà annulé."
 
 #: poresira/pcr/forms.py poresira/samples/forms.py poresira/sequencing/forms.py
+#: poresira/storage/forms.py
 msgid "All"
 msgstr "Tous"
 
@@ -264,6 +277,7 @@ msgid "Status"
 msgstr "Statut"
 
 #: poresira/pcr/forms.py poresira/samples/forms.py poresira/sequencing/forms.py
+#: poresira/storage/forms.py
 msgid "Show voided"
 msgstr "Afficher les annulés"
 
@@ -305,6 +319,8 @@ msgstr "Matrice (µL)"
 #: poresira/sequencing/forms.py
 #: poresira/sequencing/templates/sequencing/library_detail.html
 #: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/storage/forms.py
+#: poresira/storage/templates/storage/file_detail.html
 msgid "Notes"
 msgstr "Notes"
 
@@ -908,6 +924,8 @@ msgstr "Rouvrir"
 #: poresira/sequencing/templates/sequencing/library_detail.html
 #: poresira/sequencing/templates/sequencing/run_detail.html
 #: poresira/sequencing/views.py
+#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/views.py
 msgid "Void"
 msgstr "Annuler"
 
@@ -915,6 +933,7 @@ msgstr "Annuler"
 #: poresira/samples/templates/samples/sample_detail.html
 #: poresira/sequencing/templates/sequencing/library_detail.html
 #: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/storage/templates/storage/file_detail.html
 #, python-format
 msgid "Voided on %(date)s."
 msgstr "Annulé le %(date)s."
@@ -944,6 +963,7 @@ msgstr "Support"
 
 #: poresira/pcr/templates/pcr/run_detail.html
 #: poresira/pcr/templates/pcr/run_list.html
+#: poresira/storage/templates/storage/file_detail.html
 msgid "Date"
 msgstr "Date"
 
@@ -1027,6 +1047,7 @@ msgstr "Nouveau passage"
 #: poresira/pcr/templates/pcr/run_list.html
 #: poresira/samples/templates/samples/sample_list.html
 #: poresira/sequencing/templates/sequencing/_filter.html
+#: poresira/storage/templates/storage/file_list.html
 msgid "Filter"
 msgstr "Filtrer"
 
@@ -1037,6 +1058,7 @@ msgstr "Filtrer"
 #: poresira/sequencing/templates/sequencing/library_detail.html
 #: poresira/sequencing/templates/sequencing/library_list.html
 #: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/storage/templates/storage/file_list.html
 msgid "Identifier"
 msgstr "Identifiant"
 
@@ -1045,6 +1067,7 @@ msgstr "Identifiant"
 #: poresira/samples/templates/samples/sample_detail.html
 #: poresira/sequencing/templates/sequencing/library_list.html
 #: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/storage/templates/storage/file_list.html
 msgid "Voided"
 msgstr "Annulé"
 
@@ -1056,6 +1079,7 @@ msgstr "Aucun passage à afficher."
 #: poresira/pcr/templates/pcr/run_list.html
 #: poresira/samples/templates/samples/_sample_results.html
 #: poresira/sequencing/templates/sequencing/_pager.html
+#: poresira/storage/templates/storage/file_list.html
 msgid "Pages"
 msgstr "Pages"
 
@@ -1068,6 +1092,7 @@ msgstr "Page %(number)s sur %(total)s (%(count)s passages)"
 #: poresira/samples/templates/samples/_sample_results.html
 #: poresira/samples/templates/samples/event_list.html
 #: poresira/sequencing/templates/sequencing/_pager.html
+#: poresira/storage/templates/storage/file_list.html
 msgid "Previous"
 msgstr "Précédent"
 
@@ -1075,6 +1100,7 @@ msgstr "Précédent"
 #: poresira/samples/templates/samples/_sample_results.html
 #: poresira/samples/templates/samples/event_list.html
 #: poresira/sequencing/templates/sequencing/_pager.html
+#: poresira/storage/templates/storage/file_list.html
 msgid "Next"
 msgstr "Suivant"
 
@@ -1230,6 +1256,7 @@ msgstr "Indice d'intégrité"
 
 #: poresira/samples/forms.py
 #: poresira/samples/templates/samples/sample_detail.html
+#: poresira/storage/templates/storage/file_detail.html
 msgid "Outcome"
 msgstr "Résultat"
 
@@ -2266,6 +2293,7 @@ msgid "An active run uses this instrument."
 msgstr "Un passage actif utilise cet appareil."
 
 #: poresira/sequencing/templates/sequencing/_pager.html
+#: poresira/storage/templates/storage/file_list.html
 #, python-format
 msgid "Page %(number)s of %(total)s"
 msgstr "Page %(number)s sur %(total)s"
@@ -2565,13 +2593,76 @@ msgstr "Saisir les lectures"
 msgid "Reads saved."
 msgstr "Lectures enregistrées."
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py poresira/storage/views.py
 msgid "Register"
 msgstr "Enregistrer"
 
 #: poresira/sequencing/views.py
 msgid "Flow cell registered."
 msgstr "Cellule de flux enregistrée."
+
+#: poresira/storage/forms.py
+msgid "Path contains"
+msgstr "Le chemin contient"
+
+#: poresira/storage/forms.py
+#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Backend"
+msgstr "Emplacement"
+
+#: poresira/storage/forms.py poresira/storage/templates/storage/_files.html
+#: poresira/storage/templates/storage/backend_list.html
+#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Kind"
+msgstr "Nature"
+
+#: poresira/storage/forms.py poresira/storage/templates/storage/_files.html
+#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Tier"
+msgstr "Niveau"
+
+#: poresira/storage/forms.py poresira/storage/templates/storage/_files.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Integrity"
+msgstr "Intégrité"
+
+#: poresira/storage/forms.py
+#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Path"
+msgstr "Chemin"
+
+#: poresira/storage/forms.py
+msgid ""
+"Relative to the root of the backend, such as runs/run1/reads.fastq.gz."
+msgstr ""
+"Relatif à la racine de l'emplacement, par exemple "
+"runs/run1/reads.fastq.gz."
+
+#: poresira/storage/forms.py
+msgid "Detect from the name"
+msgstr "Déduire du nom"
+
+#: poresira/storage/forms.py
+msgid "Size (bytes)"
+msgstr "Taille (octets)"
+
+#: poresira/storage/forms.py
+msgid "Only for an offline medium, which cannot be read here."
+msgstr "Seulement pour un support hors ligne, qui ne peut pas être lu ici."
+
+#: poresira/storage/forms.py poresira/storage/models/file.py
+#: poresira/storage/templates/storage/file_detail.html
+msgid "SHA-256"
+msgstr "SHA-256"
+
+#: poresira/storage/forms.py poresira/storage/models/file.py
+#: poresira/storage/templates/storage/file_detail.html
+msgid "MD5"
+msgstr "MD5"
 
 #: poresira/storage/models/backend.py
 msgid "Local disk"
@@ -2674,14 +2765,6 @@ msgid "size (bytes)"
 msgstr "taille (octets)"
 
 #: poresira/storage/models/file.py
-msgid "SHA-256"
-msgstr "SHA-256"
-
-#: poresira/storage/models/file.py
-msgid "MD5"
-msgstr "MD5"
-
-#: poresira/storage/models/file.py
 msgid "tier"
 msgstr "niveau"
 
@@ -2738,15 +2821,13 @@ msgid "This directory does not exist on this computer."
 msgstr "Ce répertoire n'existe pas sur cet ordinateur."
 
 #: poresira/storage/services.py
-msgid ""
-"Give a path relative to the backend, without a leading slash or “..”."
+msgid "Give a path relative to the backend, without a leading slash or “..”."
 msgstr ""
-"Indiquez un chemin relatif à l'emplacement, sans barre oblique initiale "
-"ni « .. »."
+"Indiquez un chemin relatif à l'emplacement, sans barre oblique initiale ni "
+"« .. »."
 
 #: poresira/storage/services.py
-msgid ""
-"Attach the file to one sequencing run, one PCR run or one sample."
+msgid "Attach the file to one sequencing run, one PCR run or one sample."
 msgstr ""
 "Rattachez le fichier à un passage de séquençage, un passage PCR ou un "
 "échantillon."
@@ -2784,7 +2865,7 @@ msgstr "Indiquez la taille du fichier."
 msgid "A voided file cannot be checked."
 msgstr "Un fichier annulé ne peut pas être vérifié."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py poresira/storage/views.py
 msgid "A file on an offline medium cannot be checked here."
 msgstr "Un fichier sur un support hors ligne ne peut pas être vérifié ici."
 
@@ -2799,3 +2880,121 @@ msgstr "Niveau inconnu."
 #: poresira/storage/services.py
 msgid "Active files are registered in this backend."
 msgstr "Des fichiers actifs sont enregistrés dans cet emplacement."
+
+#: poresira/storage/templates/storage/_files.html poresira/storage/views.py
+msgid "Register a file"
+msgstr "Enregistrer un fichier"
+
+#: poresira/storage/templates/storage/_files.html poresira/storage/views.py
+msgid "File"
+msgstr "Fichier"
+
+#: poresira/storage/templates/storage/_files.html
+#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Size"
+msgstr "Taille"
+
+#: poresira/storage/templates/storage/_files.html
+msgid "No files registered."
+msgstr "Aucun fichier enregistré."
+
+#: poresira/storage/templates/storage/backend_list.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Storage backends"
+msgstr "Emplacements de stockage"
+
+#: poresira/storage/templates/storage/backend_list.html
+msgid "Root"
+msgstr "Racine"
+
+#: poresira/storage/templates/storage/backend_list.html
+msgid ""
+"No backends yet. Declare one with the create_storage_backend command."
+msgstr ""
+"Aucun emplacement pour le moment. Déclarez-en un avec la commande "
+"create_storage_backend."
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Check now"
+msgstr "Vérifier maintenant"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Change tier"
+msgstr "Changer de niveau"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "The file on disk no longer matches what was recorded."
+msgstr "Le fichier sur le disque ne correspond plus à ce qui a été enregistré."
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Belongs to"
+msgstr "Appartient à"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "bytes"
+msgstr "octets"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Last checked"
+msgstr "Dernière vérification"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Registered by"
+msgstr "Enregistré par"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Checks"
+msgstr "Vérifications"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Checked by"
+msgstr "Vérifié par"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Observed size (bytes)"
+msgstr "Taille observée (octets)"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Scheduled"
+msgstr "Planifiée"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Not checked since it was registered."
+msgstr "Pas vérifié depuis son enregistrement."
+
+#: poresira/storage/templates/storage/file_list.html
+msgid "No files to show."
+msgstr "Aucun fichier à afficher."
+
+#: poresira/storage/views.py
+msgid "File registered."
+msgstr "Fichier enregistré."
+
+#: poresira/storage/views.py
+msgid "Check the file"
+msgstr "Vérifier le fichier"
+
+#: poresira/storage/views.py
+msgid "Check"
+msgstr "Vérifier"
+
+#: poresira/storage/views.py
+msgid "Check started: reload this page in a moment."
+msgstr "Vérification lancée : rechargez cette page dans un instant."
+
+#: poresira/storage/views.py
+msgid "Change the tier"
+msgstr "Changer le niveau"
+
+#: poresira/storage/views.py
+msgid "Tier changed."
+msgstr "Niveau modifié."
+
+#: poresira/storage/views.py
+msgid "Void file"
+msgstr "Annuler le fichier"
+
+#: poresira/storage/views.py
+msgid "File voided."
+msgstr "Fichier annulé."

@@ -183,6 +183,12 @@ class SampleDetailView(SampleMixin, LoginRequiredMixin, TemplateView):
             .filter(run__voided_at__isnull=True)
             .select_related("run__assay")
             .order_by("run__identifier", "position"),
+            files=sample.files.active().select_related("backend"),
+            register_url=(
+                reverse("storage:file-register", args=["sample", sample.pk])
+                if not sample.is_voided and can_edit_project(self.request.user, sample.project)
+                else ""
+            ),
             library_memberships=sample.library_memberships.active()
             .filter(library__voided_at__isnull=True)
             .select_related("library")

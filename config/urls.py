@@ -8,4 +8,5 @@ urlpatterns = [
     path("", include("poresira.samples.urls")),
     path("", include("poresira.pcr.urls")),
     path("", include("poresira.sequencing.urls")),
+    path("", include("poresira.storage.urls")),
 ]

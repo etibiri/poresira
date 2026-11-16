@@ -399,6 +399,12 @@ class RunDetailView(RunMixin, LoginRequiredMixin, TemplateView):
             rows=rows,
             reads_in_results=sum(r["result"].reads for r in rows if r["result"]),
             other_runs=run.flow_cell.runs.active().exclude(pk=run.pk).order_by("started_on"),
+            files=run.files.active().select_related("backend"),
+            register_url=(
+                reverse("storage:file-register", args=["sequencing-run", run.pk])
+                if editable
+                else ""
+            ),
             can_edit=editable,
             can_enter_results=editable and run.status in (RunStatus.RUNNING, RunStatus.COMPLETED),
             entries=history,

@@ -1,0 +1,62 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{{ file.identifier }} · PoreSira{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'storage:file-list' %}">{% trans "Files" %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ file.identifier }}</li>
+  </ol>
+</nav>
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+  <h1 class="h3 mb-0"><code>{{ file.identifier }}</code> {{ file.name }} {% include "storage/_integrity.html" %}</h1>
+  {% if can_edit %}
+  <div class="btn-group">
+    {% if can_check %}<a class="btn btn-outline-primary btn-sm" href="{% url 'storage:file-check' file.pk %}">{% trans "Check now" %}</a>{% endif %}
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'storage:file-tier' file.pk %}">{% trans "Change tier" %}</a>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'storage:file-void' file.pk %}">{% trans "Void" %}</a>
+  </div>
+  {% endif %}
+</div>
+{% if file.is_voided %}
+<div class="alert alert-secondary">
+  {% blocktrans with date=file.voided_at|date:"DATETIME_FORMAT" %}Voided on {{ date }}.{% endblocktrans %}
+  <strong>{% trans "Reason" %}:</strong> {{ file.void_reason }}
+</div>
+{% endif %}
+{% if file.integrity == 'mismatch' or file.integrity == 'missing' or file.integrity == 'unreadable' %}
+<div class="alert alert-danger">{% trans "The file on disk no longer matches what was recorded." %}</div>
+{% endif %}
+<dl class="row small">
+  <dt class="col-sm-3">{% trans "Belongs to" %}</dt><dd class="col-sm-9"><a href="{{ link_url }}"><code>{{ link_label }}</code></a> · {{ file.project.code }}</dd>
+  <dt class="col-sm-3">{% trans "Backend" %}</dt><dd class="col-sm-9">{{ file.backend.name }} ({{ file.backend.get_kind_display }}) · <code>{{ file.backend.root }}</code></dd>
+  <dt class="col-sm-3">{% trans "Path" %}</dt><dd class="col-sm-9"><code class="text-break">{{ file.path }}</code></dd>
+  <dt class="col-sm-3">{% trans "Kind" %}</dt><dd class="col-sm-9">{{ file.get_kind_display }}</dd>
+  <dt class="col-sm-3">{% trans "Size" %}</dt><dd class="col-sm-9">{{ file.size_bytes|filesizeformat }} ({{ file.size_bytes }} {% trans "bytes" %})</dd>
+  <dt class="col-sm-3">{% trans "SHA-256" %}</dt><dd class="col-sm-9"><code class="text-break">{{ file.sha256 }}</code></dd>
+  <dt class="col-sm-3">{% trans "MD5" %}</dt><dd class="col-sm-9"><code>{{ file.md5 }}</code></dd>
+  <dt class="col-sm-3">{% trans "Tier" %}</dt><dd class="col-sm-9">{{ file.get_tier_display }}</dd>
+  <dt class="col-sm-3">{% trans "Last checked" %}</dt><dd class="col-sm-9">{{ file.last_checked_at|date:"DATETIME_FORMAT"|default:"—" }}</dd>
+  <dt class="col-sm-3">{% trans "Registered by" %}</dt><dd class="col-sm-9">{{ file.registered_by|default:"—" }} · {{ file.created_at|date:"DATETIME_FORMAT" }}</dd>
+  <dt class="col-sm-3">{% trans "Notes" %}</dt><dd class="col-sm-9">{{ file.notes|default:"—" }}</dd>
+</dl>
+
+<h2 class="h5 mt-4">{% trans "Checks" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr><th>{% trans "Date" %}</th><th>{% trans "Outcome" %}</th><th>{% trans "Checked by" %}</th><th>{% trans "Observed size (bytes)" %}</th><th>{% trans "Notes" %}</th></tr></thead>
+  <tbody>
+    {% for check in checks %}
+    <tr>
+      <td>{{ check.checked_at|date:"DATETIME_FORMAT" }}</td><td>{{ check.get_outcome_display }}</td>
+      <td>{{ check.checked_by|default:_("Scheduled") }}</td>
+      <td>{{ check.observed_size_bytes|default_if_none:"—" }}</td><td>{{ check.notes|default:"—" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" class="text-muted">{% trans "Not checked since it was registered." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 class="h5 mt-4">{% trans "History" %}</h2>
+{% include "core/_history.html" %}
+{% endblock %}

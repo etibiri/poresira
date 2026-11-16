@@ -1,0 +1,4 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% if file.integrity == 'intact' %}<span class="badge text-bg-success">{{ file.get_integrity_display }}</span>
+{% elif file.integrity == 'unchecked' %}<span class="badge bg-light border text-dark">{{ file.get_integrity_display }}</span>
+{% else %}<span class="badge text-bg-danger">{{ file.get_integrity_display }}</span>{% endif %}
