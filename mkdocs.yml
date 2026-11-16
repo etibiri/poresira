@@ -18,6 +18,7 @@ nav:
   - PCR: pcr.md
   - Sequencing: sequencing.md
   - Storage: storage.md
+  - Computing: computing.md
   - Backup and restore: backup-restore.md
   - Maintainers:
       - CLA Assistant setup: cla-assistant-setup.md

@@ -14,7 +14,7 @@ application itself.
 | `pcr` | primers, cycling programs, master mixes, assays, runs in plates or tubes, results (see [PCR](pcr.md)) | implemented |
 | `sequencing` | libraries, flow cells, runs, reads per barcode; one adapter per platform (see [Sequencing](sequencing.md)) | implemented |
 | `storage` | file registry, storage backends, integrity checks (see [Storage](storage.md)) | implemented |
-| `computing` | compute jobs, Slurm agent | planned |
+| `computing` | compute jobs (Dorado basecalling and demultiplexing, POD5 conversion), Slurm agent (see [Computing](computing.md)) | implemented |
 | `deposits` | ENA/SRA submissions, RO-Crate export | planned |
 
 ## Access control
@@ -111,7 +111,7 @@ One `docker-compose.yml` with three profiles. All run the same images and the sa
 | `web` | all | gunicorn, as the application role |
 | `worker` | all | Celery worker on the default queue |
 | `backup` | `labo`, `plateforme` | scheduled `pg_dump` |
-| `slurm-agent` | `plateforme` | Celery worker on the `slurm` queue (placeholder until the `computing` app) |
+| `slurm-agent` | `plateforme` | Celery worker on the `slurm` queue (the agent of the [Computing](computing.md) app; to submit for real, run this worker on the cluster login node) |
 
 ### Storage rules
 

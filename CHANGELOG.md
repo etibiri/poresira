@@ -62,6 +62,16 @@ All notable changes are listed here. The format follows
   and void, a Files section on the sequencing run, PCR run and sample pages, French translation.
 - `create_storage_backend` and `register_files`: declare a backend and register a whole run
   folder in place (resumable, with a dry run).
+- `computing` app: compute jobs on a sequencing run (Dorado basecalling, Dorado demultiplexing,
+  FAST5 to POD5 conversion) run through Slurm. Each job keeps its tool and version, validated
+  parameters, the exact script submitted, its input files with the SHA-256 they had, and its
+  results, registered in place. Parameters never reach a shell unquoted, a changed input stops the
+  job before the tool starts, and a job's script and parameters are fixed once it leaves the draft.
+- Slurm agent: submit, follow and cancel jobs with `sbatch`, `squeue`, `sacct` and `scancel`
+  from the `slurm` Celery queue; the Dorado command may be a container prefix; `refresh_jobs`
+  brings active jobs up to date.
+- Compute interface: job list and page, Basecall, Demultiplex and Convert actions on the
+  sequencing run page, script download, French translation.
 - `with_reason` and `acting_as` helpers for audited changes made outside a request.
 - Complete French translation of the new screens.
 - AGPL-3.0-or-later license, CLA, contribution guide, code of conduct, citation file.
