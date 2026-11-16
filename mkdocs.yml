@@ -6,6 +6,8 @@ edit_uri: edit/main/docs/
 theme:
   name: material
   font: false  # no Google Fonts: documentation must also work offline
+  logo: assets/poresira-mark.png
+  favicon: assets/poresira-mark.png
   features:
     - navigation.sections
     - content.code.copy

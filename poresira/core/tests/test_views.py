@@ -188,3 +188,15 @@ def test_health_reports_database_failure(client):
 
     assert response.status_code == 503
     assert response.json()["database"] == "error"
+
+
+def test_the_logo_is_on_the_login_page_and_the_brand_and_icons_in_every_page(client):
+    from django.contrib.staticfiles import finders
+
+    page = client.get(reverse("login")).content.decode()
+
+    assert "img/poresira-logo.jpg" in page
+    assert "img/favicon.ico" in page and "img/apple-touch-icon.png" in page
+    assert 'class="brand-pore"' in page and 'class="brand-sira"' in page
+    for name in ("poresira-logo.jpg", "favicon.png", "favicon.ico", "apple-touch-icon.png"):
+        assert finders.find(f"img/{name}"), name

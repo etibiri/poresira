@@ -4,7 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>[x-cloak] { display: none !important; }</style>
+  <style>
+    [x-cloak] { display: none !important; }
+    .brand-pore { color: #002b56; }
+    .brand-sira { color: #177b06; }
+  </style>
+  <link rel="icon" href="{% static 'img/favicon.ico' %}" sizes="any">
+  <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
   <title>{% block title %}PoreSira{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}">
   <script src="{% static 'vendor/htmx.min.js' %}" defer></script>
@@ -12,9 +19,12 @@
   <script src="{% static 'vendor/bootstrap.bundle.min.js' %}" defer></script>
 </head>
 <body class="d-flex flex-column min-vh-100" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
+  <nav class="navbar navbar-expand navbar-light bg-white border-bottom">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'project-list' %}">PoreSira</a>
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="{% url 'project-list' %}">
+        <img src="{% static 'img/favicon.png' %}" alt="" width="36" height="36">
+        <span><span class="brand-pore">Pore</span><span class="brand-sira">Sira</span></span>
+      </a>
       <ul class="navbar-nav me-auto">
         {% if user.is_authenticated %}
         <li class="nav-item"><a class="nav-link" href="{% url 'project-list' %}">{% trans "Projects" %}</a></li>
@@ -32,7 +42,7 @@
         <input type="hidden" name="next" value="{{ request.get_full_path }}">
         {% for code, name in AVAILABLE_LANGUAGES %}
         <button type="submit" name="language" value="{{ code }}"
-                class="btn btn-sm {% if code == CURRENT_LANGUAGE %}btn-light{% else %}btn-outline-light{% endif %}"
+                class="btn btn-sm {% if code == CURRENT_LANGUAGE %}btn-secondary{% else %}btn-outline-secondary{% endif %}"
                 title="{{ name }}" {% if code == CURRENT_LANGUAGE %}aria-current="true"{% endif %}>{{ code|upper }}</button>
         {% endfor %}
       </form>
@@ -40,7 +50,7 @@
       <form method="post" action="{% url 'logout' %}" class="d-flex align-items-center gap-2">
         {% csrf_token %}
         <span class="navbar-text">{{ user.get_username }}</span>
-        <button type="submit" class="btn btn-sm btn-outline-light">{% trans "Log out" %}</button>
+        <button type="submit" class="btn btn-sm btn-outline-secondary">{% trans "Log out" %}</button>
       </form>
       {% endif %}
     </div>

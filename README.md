@@ -1,4 +1,6 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<p align="center"><img src="docs/assets/poresira-logo.jpg" alt="PoreSira" width="360"></p>
+
 # PoreSira
 
 Open-source laboratory information management system (LIMS) that traces every biological

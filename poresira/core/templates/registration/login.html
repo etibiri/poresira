@@ -1,9 +1,10 @@
 {% extends "core/base.html" %}{% load i18n %}
 {# SPDX-License-Identifier: AGPL-3.0-or-later #}
-{% block title %}{% trans "Log in" %} · PoreSira{% endblock %}
+{% load static %}{% block title %}{% trans "Log in" %} · PoreSira{% endblock %}
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-md-5 col-lg-4">
+    <img src="{% static 'img/poresira-logo.jpg' %}" alt="PoreSira" class="img-fluid d-block mx-auto mb-3" width="320" height="213">
     <h1 class="h3 mb-4">{% trans "Log in" %}</h1>
     <form method="post">
       {% csrf_token %}
