@@ -101,3 +101,11 @@ All notable changes are listed here. The format follows
 - `with_reason` and `acting_as` helpers for audited changes made outside a request.
 - Complete French translation of the new screens.
 - AGPL-3.0-or-later license, CLA, contribution guide, code of conduct, citation file.
+
+### Fixed
+
+- The Docker build context is an allowlist, so private data (sequencing runs, thesis files, backups)
+  can never enter an image; a script and a CI job check it.
+- The Redis host port is configurable (`REDIS_PORT`) instead of fixed to 6379, which stopped the
+  stack when another Redis was running.
+- gunicorn no longer logs a permission error about a control socket in the home folder.

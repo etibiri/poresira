@@ -16,6 +16,7 @@ No internet access is needed at run time. All front-end libraries ship with the 
 git clone https://github.com/etibiri/poresira.git
 cd poresira
 cp .env.example .env
+mkdir backups        # create it yourself: Docker would create it owned by root
 ```
 
 Edit `.env` and replace every `change-me`:

@@ -29,4 +29,5 @@ RUN DJANGO_SECRET_KEY=build-only python manage.py compilemessages \
 USER poresira
 
 EXPOSE 8000
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
+# No control socket: gunicorn would try to create it in the home folder of the unprivileged user.
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--no-control-socket"]
