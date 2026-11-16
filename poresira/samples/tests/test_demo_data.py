@@ -394,7 +394,7 @@ class TestLoading:
     def test_the_flongle_run_of_bfa316_is_recorded_from_the_minknow_files(self, loaded_demo):
         from poresira.sequencing.models import RunStatus, SequencingRun
 
-        run = SequencingRun.objects.get()
+        run = SequencingRun.objects.get(flow_cell__flow_cell_id="AMF735")
         member = run.library.members.get()
 
         assert run.status == RunStatus.COMPLETED
@@ -405,6 +405,26 @@ class TestLoading:
         assert member.sample.label == "Tie_BFA316"
         assert member.barcode is None
         assert run.results.get().reads == run.total_reads == 530760
+
+    def test_the_two_minion_runs_hold_the_52_samples_of_the_barcode_sheet(self, loaded_demo):
+        from poresira.sequencing.models import LibraryMember, SequencingRun
+
+        first = SequencingRun.objects.get(flow_cell__flow_cell_id="FAT93267")
+        second = SequencingRun.objects.get(flow_cell__flow_cell_id="FAV02927")
+
+        assert first.library.members.count() == 24
+        assert second.library.members.count() == 28
+        assert first.run_id == "20231109_1221_mc-111618_fat93267_14bc03be"
+        assert (first.started_on.isoformat(), second.started_on.isoformat()) == (
+            "2023-11-09",
+            "2023-11-11",
+        )
+        assert first.basecaller_version == "0.9.0"
+        last = LibraryMember.objects.get(library=second.library, barcode=52)
+        assert last.sample.label.startswith("BFA1368") or "BFA1368" in last.sample.label
+        assert LibraryMember.objects.count() == 53
+        # every sequenced sample of the laboratory file is in exactly one library
+        assert LibraryMember.objects.values("sample").distinct().count() == 53
 
     def test_loading_twice_changes_nothing(self, loaded_demo):
         before = (Sample.objects.count(), CollectionEvent.objects.count())

@@ -2,21 +2,25 @@
 """Sequencing demo data: the kits, flow cells and instrument of the sweetpotato RCA runs.
 
 Only what the laboratory recorded is loaded: the kits and flow cell types (Front Microbiol 2026,
-Oxford Nanopore catalogue), the MinION Mk1C and the two flow cells of the November 2023 runs.
-The barcode of each sample is not in the records yet: load it with ``import_library`` once the
-laboratory sheet is found, then plan the runs (see ``RUNS``).
+Oxford Nanopore catalogue), the MinION Mk1C, the two MinION runs of November 2023 (from the
+laboratory e-mail and its barcode sheet) and the Flongle run of 2022 (from the MinKNOW files).
 """
 
+import csv
 from datetime import date
+from pathlib import Path
+
+from django.db.models import Q
 
 from poresira.core.models import Project, User
-from poresira.samples.models import Sample, SampleKind
+from poresira.samples.models import QcOutcome, Sample, SampleKind
 from poresira.sequencing import services
 from poresira.sequencing.models import (
     Chemistry,
     FlowCell,
     FlowCellType,
     Instrument,
+    Library,
     LibraryKit,
     SequencingRun,
 )
@@ -36,16 +40,24 @@ FLOW_CELL_TYPES = [
     ("FLO-PRO114M", "PromethION flow cell R10.4.1", "R10.4.1", True),
 ]
 INSTRUMENTS = [("MinION Mk1C MC-111618", "MinION Mk1C"), ("MinION Mk1B", "MinION Mk1B")]
-# The two runs of the RCA products (laboratory e-mail): flow cell, kit, barcodes, date, run ID.
-RUNS = [
-    {
-        "flow_cell": "FAT93267",
-        "barcodes": "BC01-BC24",
-        "date": "2023-11-09",
-        "run_id": "20231109_1221_MC-111618_FAT93267_14bc03be",
+DATA_FILE = Path(__file__).parent / "data" / "sequencing_barcodes.csv"
+MINION_RUNS = {
+    "FAT93267": {
+        "name": "RCA products, MinION run 1",
+        "run_id": "20231109_1221_mc-111618_fat93267_14bc03be",
+        "notes": "Run directory /data/NAME_sequencing/RCA_MinION/ on the MinION Mk1C.",
     },
-    {"flow_cell": "FAV02927", "barcodes": "BC25-BC52", "date": "2023-11-11", "run_id": ""},
-]
+    "FAV02927": {
+        "name": "RCA products, MinION run 2",
+        "run_id": "",
+        "notes": "Run directory /data/NAME_sequencing/RCA_MinION_2/ on the MinION Mk1C.",
+    },
+}
+MINION_NOTES = (
+    "Taken from the laboratory e-mail and barcode sheet. FAST5 converted to POD5, basecalled "
+    "with Dorado v0.9.0, model dna_r10.4.1_e8.2_400bps_sup.cfg (as written in the e-mail). "
+    "Reads per barcode are not recorded."
+)
 
 
 FLONGLE_RUN_ID = "20221104_1920_mc-111618_amf735_c77675e1"
@@ -56,6 +68,67 @@ FLONGLE_NOTES = (
     "MinKNOW names the protocol group 'Equiphi29', while the thesis sheet records only "
     "TempliPhi for this sample; the thesis document gives it barcode BC53."
 )
+
+
+def _product(project: Project, label: str) -> Sample:
+    """The RCA product of a sample; with several attempts, the one whose gel passed."""
+    candidates = Sample.objects.active().filter(
+        Q(label=label) | Q(label__startswith=f"{label} ["),
+        project=project,
+        kind=SampleKind.AMPLIFICATION_PRODUCT,
+    )
+    if candidates.count() > 1:
+        candidates = candidates.filter(qc_measurements__outcome=QcOutcome.PASSED)
+    return candidates.get()
+
+
+def _load_minion_runs(users: dict[str, User], project: Project, labels: dict[str, str]) -> None:
+    """One library and one completed run per MinION flow cell, with each sample's barcode."""
+    with DATA_FILE.open(newline="", encoding="utf-8") as file:
+        sheet = [row for row in csv.DictReader(file) if row["barcode"]]
+    user = users["demo_technician"]
+    kit = LibraryKit.objects.active().get(code="SQK-NBD114.96")
+    for flow_cell_id, spec in MINION_RUNS.items():
+        rows = [row for row in sheet if row["flow_cell_id"] == flow_cell_id]
+        if not rows or Library.objects.filter(project=project, name=spec["name"]).exists():
+            continue
+        library = services.create_library(
+            user=user,
+            project=project,
+            kit=kit,
+            name=spec["name"],
+            reconstructed=True,
+            notes="Preparation date and amounts are not recorded.",
+        )
+        for row in rows:
+            services.add_member(
+                user=user,
+                library=library,
+                sample=_product(project, labels[row["sample_code"]]),
+                barcode=row["barcode"],
+            )
+        services.seal_library(user=user, library=library)
+        run = services.plan_run(
+            user=user,
+            library=library,
+            flow_cell=FlowCell.objects.active().get(flow_cell_id=flow_cell_id),
+            instrument=Instrument.objects.active().get(name="MinION Mk1C MC-111618"),
+            reconstructed=True,
+        )
+        services.start_run(
+            user=user,
+            run=run,
+            started_on=date.fromisoformat(rows[0]["sequenced_on"]),
+            run_id=spec["run_id"],
+        )
+        services.complete_run(
+            user=user,
+            run=run,
+            basecaller="Dorado",
+            basecaller_version="0.9.0",
+            basecall_model="dna_r10.4.1_e8.2_400bps_sup.cfg",
+            notes=f"{spec['notes']} {MINION_NOTES}",
+        )
 
 
 def _load_flongle_run(users: dict[str, User], project: Project) -> None:
@@ -106,8 +179,12 @@ def _load_flongle_run(users: dict[str, User], project: Project) -> None:
     )
 
 
-def load_sequencing_demo(users: dict[str, User], project: Project | None = None) -> None:
-    """Create the reference data, the flow cells and the Flongle run. Safe to repeat."""
+def load_sequencing_demo(
+    users: dict[str, User], project: Project | None = None, labels: dict[str, str] | None = None
+) -> None:
+    """Create the reference data, the flow cells and the runs. Safe to repeat.
+
+    ``labels`` maps each laboratory sample code to the label of its sample."""
     platform = users["demo_platform"]
     for code, name, chemistry, barcodes in KITS:
         if not LibraryKit.objects.active().filter(code=code).exists():
@@ -122,7 +199,9 @@ def load_sequencing_demo(users: dict[str, User], project: Project | None = None)
     for name, model in INSTRUMENTS:
         if not Instrument.objects.active().filter(name=name).exists():
             services.create_instrument(user=platform, name=name, model=model)
-    flow_cells = [(run["flow_cell"], "FLO-MIN114") for run in RUNS] + [("AMF735", "FLO-FLG001")]
+    flow_cells = [(flow_cell, "FLO-MIN114") for flow_cell in MINION_RUNS] + [
+        ("AMF735", "FLO-FLG001")
+    ]
     for flow_cell_id, type_code in flow_cells:
         if not FlowCell.objects.active().filter(flow_cell_id=flow_cell_id).exists():
             services.register_flow_cell(
@@ -131,4 +210,5 @@ def load_sequencing_demo(users: dict[str, User], project: Project | None = None)
                 type=FlowCellType.objects.active().get(code=type_code),
             )
     if project is not None:
+        _load_minion_runs(users, project, labels or {})
         _load_flongle_run(users, project)
