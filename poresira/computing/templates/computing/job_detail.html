@@ -1,0 +1,92 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{{ job.identifier }} · PoreSira{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'computing:job-list' %}">{% trans "Compute jobs" %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ job.identifier }}</li>
+  </ol>
+</nav>
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+  <h1 class="h3 mb-0"><code>{{ job.identifier }}</code> {{ job.get_kind_display }} {% include "computing/_badge.html" %}</h1>
+  <div class="btn-group">
+    {% if can_submit %}<a class="btn btn-primary btn-sm" href="{% url 'computing:job-submit' job.pk %}">{% trans "Submit" %}</a>{% endif %}
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'computing:job-script' job.pk %}">{% trans "Download the script" %}</a>
+    {% if can_cancel %}<a class="btn btn-outline-secondary btn-sm" href="{% url 'computing:job-cancel' job.pk %}">{% trans "Cancel the job" %}</a>{% endif %}
+    {% if can_void %}<a class="btn btn-outline-danger btn-sm" href="{% url 'computing:job-void' job.pk %}">{% trans "Void" %}</a>{% endif %}
+  </div>
+</div>
+{% if job.is_voided %}
+<div class="alert alert-secondary">
+  {% blocktrans with date=job.voided_at|date:"DATETIME_FORMAT" %}Voided on {{ date }}.{% endblocktrans %}
+  <strong>{% trans "Reason" %}:</strong> {{ job.void_reason }}
+</div>
+{% endif %}
+{% if job.status == 'draft' %}
+<div class="alert alert-light border">{% trans "This job is a draft. Submitting it hands it to the Slurm agent; if nothing happens, the agent is not running." %}</div>
+{% elif job.status == 'failed' %}
+<div class="alert alert-danger">{% blocktrans with code=job.exit_code|default_if_none:"?" path=job.log_path %}The job failed (exit code {{ code }}). The log is {{ path }}.{% endblocktrans %}</div>
+{% endif %}
+{% if job.notes %}<div class="alert alert-warning" style="white-space: pre-line">{{ job.notes }}</div>{% endif %}
+
+<div class="row g-4">
+  <div class="col-lg-6">
+    <h2 class="h5">{% trans "Details" %}</h2>
+    <dl class="row small">
+      <dt class="col-sm-5">{% trans "Project" %}</dt><dd class="col-sm-7">{{ job.project.code }} · {{ job.project.name }}</dd>
+      <dt class="col-sm-5">{% trans "Sequencing run" %}</dt><dd class="col-sm-7"><a href="{% url 'sequencing:run-detail' job.sequencing_run_id %}"><code>{{ job.sequencing_run.identifier }}</code></a></dd>
+      <dt class="col-sm-5">{% trans "Tool" %}</dt><dd class="col-sm-7">{{ job.tool }} {{ job.tool_version|default:"" }}</dd>
+      <dt class="col-sm-5">{% trans "Submitted by" %}</dt><dd class="col-sm-7">{{ job.submitted_by|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Submitted at" %}</dt><dd class="col-sm-7">{{ job.submitted_at|date:"DATETIME_FORMAT"|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Started at" %}</dt><dd class="col-sm-7">{{ job.started_at|date:"DATETIME_FORMAT"|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Finished at" %}</dt><dd class="col-sm-7">{{ job.finished_at|date:"DATETIME_FORMAT"|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Scheduler job ID" %}</dt><dd class="col-sm-7">{{ job.scheduler_job_id|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Working directory" %}</dt><dd class="col-sm-7 text-break"><code>{{ job.working_directory|default:"—" }}</code></dd>
+      <dt class="col-sm-5">{% trans "Log file" %}</dt><dd class="col-sm-7 text-break"><code>{{ job.log_path|default:"—" }}</code></dd>
+      <dt class="col-sm-5">{% trans "Exit code" %}</dt><dd class="col-sm-7">{{ job.exit_code|default_if_none:"—" }}</dd>
+    </dl>
+  </div>
+  <div class="col-lg-6">
+    <h2 class="h5">{% trans "Parameters" %}</h2>
+    <dl class="row small">
+      {% for name, value in job.parameters.items %}
+      <dt class="col-sm-5"><code>{{ name }}</code></dt><dd class="col-sm-7">{{ value }}</dd>
+      {% empty %}
+      <dd class="col-12 text-muted">{% trans "No parameters." %}</dd>
+      {% endfor %}
+    </dl>
+  </div>
+</div>
+
+<h2 class="h5 mt-4">{% trans "Input files" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr><th>{% trans "File" %}</th><th>{% trans "Size" %}</th><th>{% trans "SHA-256 at preparation" %}</th></tr></thead>
+  <tbody>
+    {% for row in inputs %}
+    <tr>
+      <td><a href="{% url 'storage:file-detail' row.file_id %}">{{ row.file.path }}</a></td>
+      <td>{{ row.file.size_bytes|filesizeformat }}</td><td><code class="small text-break">{{ row.sha256 }}</code></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 class="h5 mt-4">{% trans "Results" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr><th>{% trans "File" %}</th><th>{% trans "Kind" %}</th><th>{% trans "Size" %}</th></tr></thead>
+  <tbody>
+    {% for row in outputs %}
+    <tr>
+      <td><a href="{% url 'storage:file-detail' row.file_id %}">{{ row.file.path }}</a></td>
+      <td>{{ row.file.get_kind_display }}</td><td>{{ row.file.size_bytes|filesizeformat }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3" class="text-muted">{% trans "No results registered." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 class="h5 mt-4">{% trans "History" %}</h2>
+{% include "core/_history.html" %}
+{% endblock %}

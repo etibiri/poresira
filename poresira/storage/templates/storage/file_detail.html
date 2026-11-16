@@ -29,6 +29,7 @@
 {% endif %}
 <dl class="row small">
   <dt class="col-sm-3">{% trans "Belongs to" %}</dt><dd class="col-sm-9"><a href="{{ link_url }}"><code>{{ link_label }}</code></a> · {{ file.project.code }}</dd>
+  {% if produced_by %}<dt class="col-sm-3">{% trans "Produced by" %}</dt><dd class="col-sm-9"><a href="{% url 'computing:job-detail' produced_by.job_id %}"><code>{{ produced_by.job.identifier }}</code></a> · {{ produced_by.job.get_kind_display }}</dd>{% endif %}
   <dt class="col-sm-3">{% trans "Backend" %}</dt><dd class="col-sm-9">{{ file.backend.name }} ({{ file.backend.get_kind_display }}) · <code>{{ file.backend.root }}</code></dd>
   <dt class="col-sm-3">{% trans "Path" %}</dt><dd class="col-sm-9"><code class="text-break">{{ file.path }}</code></dd>
   <dt class="col-sm-3">{% trans "Kind" %}</dt><dd class="col-sm-9">{{ file.get_kind_display }}</dd>

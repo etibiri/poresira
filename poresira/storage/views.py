@@ -138,6 +138,7 @@ class FileDetailView(FileMixin, LoginRequiredMixin, TemplateView):
             checks=file.checks.active().select_related("checked_by")[:50],
             link_url=reverse(route, args=[record.pk]),
             link_label=getattr(record, "identifier", str(record)),
+            produced_by=file.job_outputs.active().select_related("job").first(),
             can_edit=self.can_write(),
             can_check=self.can_write() and file.backend.is_readable,
             entries=history,

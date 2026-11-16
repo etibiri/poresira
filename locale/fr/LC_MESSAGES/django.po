@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 12:07+0000\n"
+"POT-Creation-Date: 2026-11-16 12:26+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -13,6 +13,76 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: poresira/computing/forms.py
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_list.html
+#: poresira/core/history.py poresira/pcr/forms.py
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_list.html poresira/samples/forms.py
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_list.html
+#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/sequencing/forms.py
+#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/library_list.html
+#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/storage/forms.py
+msgid "Project"
+msgstr "Projet"
+
+#: poresira/computing/forms.py poresira/pcr/forms.py poresira/samples/forms.py
+#: poresira/sequencing/forms.py poresira/storage/forms.py
+msgid "All"
+msgstr "Tous"
+
+#: poresira/computing/forms.py
+#: poresira/computing/templates/computing/_jobs.html
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_list.html
+#: poresira/storage/forms.py poresira/storage/templates/storage/_files.html
+#: poresira/storage/templates/storage/backend_list.html
+#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Kind"
+msgstr "Nature"
+
+#: poresira/computing/forms.py
+#: poresira/computing/templates/computing/_jobs.html
+#: poresira/computing/templates/computing/job_list.html poresira/pcr/forms.py
+#: poresira/pcr/templates/pcr/run_list.html poresira/samples/forms.py
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/sequencing/forms.py
+#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/library_list.html
+#: poresira/sequencing/templates/sequencing/run_list.html
+msgid "Status"
+msgstr "Statut"
+
+#: poresira/computing/forms.py poresira/pcr/forms.py poresira/samples/forms.py
+#: poresira/sequencing/forms.py poresira/storage/forms.py
+msgid "Show voided"
+msgstr "Afficher les annulés"
+
+#: poresira/computing/forms.py
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Input files"
+msgstr "Fichiers d'entrée"
+
+#: poresira/computing/forms.py poresira/pcr/forms.py
+#: poresira/pcr/templates/pcr/run_detail.html poresira/samples/forms.py
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/sequencing/forms.py
+#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/storage/forms.py
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Notes"
+msgstr "Notes"
 
 #: poresira/computing/jobtypes.py
 #: poresira/sequencing/templates/sequencing/reference.html
@@ -185,6 +255,7 @@ msgid "file"
 msgstr "fichier"
 
 #: poresira/computing/models/job.py
+#: poresira/computing/templates/computing/job_detail.html
 msgid "SHA-256 at preparation"
 msgstr "SHA-256 à la préparation"
 
@@ -236,7 +307,7 @@ msgstr "Seul un brouillon peut être modifié."
 
 #: poresira/computing/services.py
 msgid "Cancel the job before voiding it."
-msgstr "Annulez le travail (arrêt) avant de l'annuler (retrait)."
+msgstr "Arrêtez le travail avant de l'annuler."
 
 #: poresira/computing/services.py
 msgid "Void the results of this job first."
@@ -250,6 +321,284 @@ msgstr "Seul un brouillon peut être soumis."
 msgid "This job is already finished."
 msgstr "Ce travail est déjà terminé."
 
+#: poresira/computing/templates/computing/_jobs.html
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_list.html
+msgid "Compute jobs"
+msgstr "Travaux de calcul"
+
+#: poresira/computing/templates/computing/_jobs.html
+msgid "Basecall"
+msgstr "Basecaller"
+
+#: poresira/computing/templates/computing/_jobs.html
+msgid "Demultiplex"
+msgstr "Démultiplexer"
+
+#: poresira/computing/templates/computing/_jobs.html
+msgid "Convert FAST5 to POD5"
+msgstr "Convertir FAST5 en POD5"
+
+#: poresira/computing/templates/computing/_jobs.html
+#: poresira/computing/views.py
+msgid "Job"
+msgstr "Travail"
+
+#: poresira/computing/templates/computing/_jobs.html
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_list.html
+msgid "Submitted at"
+msgstr "Soumis le"
+
+#: poresira/computing/templates/computing/_jobs.html
+msgid "No compute jobs yet."
+msgstr "Aucun travail de calcul pour le moment."
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/views.py
+msgid "Submit"
+msgstr "Soumettre"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Download the script"
+msgstr "Télécharger le script"
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/views.py
+msgid "Cancel the job"
+msgstr "Arrêter le travail"
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/views.py poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/views.py poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/views.py
+#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/views.py
+#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/views.py
+msgid "Void"
+msgstr "Annuler"
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/storage/templates/storage/file_detail.html
+#, python-format
+msgid "Voided on %(date)s."
+msgstr "Annulé le %(date)s."
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/core/templates/core/_history.html poresira/pcr/forms.py
+#: poresira/pcr/templates/pcr/run_detail.html poresira/samples/forms.py
+#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/sequencing/forms.py
+#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Reason"
+msgstr "Motif"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid ""
+"This job is a draft. Submitting it hands it to the Slurm agent; if "
+"nothing happens, the agent is not running."
+msgstr ""
+"Ce travail est un brouillon. Le soumettre le confie à l'agent Slurm ; si"
+" rien ne se passe, l'agent n'est pas lancé."
+
+#: poresira/computing/templates/computing/job_detail.html
+#, python-format
+msgid ""
+"The job failed (exit code %(code)s). The log is %(path)s."
+msgstr ""
+"Le travail a échoué (code de sortie %(code)s). Le journal est %(path)s."
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html
+msgid "Details"
+msgstr "Détails"
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_list.html
+msgid "Sequencing run"
+msgstr "Passage de séquençage"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Tool"
+msgstr "Outil"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Submitted by"
+msgstr "Soumis par"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Started at"
+msgstr "Démarré le"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Finished at"
+msgstr "Terminé le"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Scheduler job ID"
+msgstr "Identifiant dans l'ordonnanceur"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Working directory"
+msgstr "Répertoire de travail"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Log file"
+msgstr "Fichier journal"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Exit code"
+msgstr "Code de sortie"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "Parameters"
+msgstr "Paramètres"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "No parameters."
+msgstr "Aucun paramètre."
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/storage/templates/storage/_files.html poresira/storage/views.py
+msgid "File"
+msgstr "Fichier"
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/storage/templates/storage/_files.html
+#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Size"
+msgstr "Taille"
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_list.html
+msgid "Results"
+msgstr "Résultats"
+
+#: poresira/computing/templates/computing/job_detail.html
+msgid "No results registered."
+msgstr "Aucun résultat enregistré."
+
+#: poresira/computing/templates/computing/job_detail.html
+#: poresira/core/templates/core/_project_rows.html
+#: poresira/core/templates/core/project_history.html
+#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/storage/templates/storage/file_detail.html
+msgid "History"
+msgstr "Historique"
+
+#: poresira/computing/templates/computing/job_list.html
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/sample_list.html
+#: poresira/sequencing/templates/sequencing/_filter.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Filter"
+msgstr "Filtrer"
+
+#: poresira/computing/templates/computing/job_list.html
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_list.html
+#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/library_list.html
+#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Identifier"
+msgstr "Identifiant"
+
+#: poresira/computing/templates/computing/job_list.html
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/sequencing/templates/sequencing/library_list.html
+#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Voided"
+msgstr "Annulé"
+
+#: poresira/computing/templates/computing/job_list.html
+msgid "No compute jobs to show."
+msgstr "Aucun travail de calcul à afficher."
+
+#: poresira/computing/templates/computing/job_list.html
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/sequencing/templates/sequencing/_pager.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Pages"
+msgstr "Pages"
+
+#: poresira/computing/templates/computing/job_list.html
+#: poresira/sequencing/templates/sequencing/_pager.html
+#: poresira/storage/templates/storage/file_list.html
+#, python-format
+msgid "Page %(number)s of %(total)s"
+msgstr "Page %(number)s sur %(total)s"
+
+#: poresira/computing/templates/computing/job_list.html
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_list.html
+#: poresira/sequencing/templates/sequencing/_pager.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Previous"
+msgstr "Précédent"
+
+#: poresira/computing/templates/computing/job_list.html
+#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/event_list.html
+#: poresira/sequencing/templates/sequencing/_pager.html
+#: poresira/storage/templates/storage/file_list.html
+msgid "Next"
+msgstr "Suivant"
+
+#: poresira/computing/views.py
+msgid "Prepare"
+msgstr "Préparer"
+
+#: poresira/computing/views.py
+msgid "Job prepared. Review it, then submit it."
+msgstr "Travail préparé. Vérifiez-le, puis soumettez-le."
+
+#: poresira/computing/views.py
+msgid "Submit the job"
+msgstr "Soumettre le travail"
+
+#: poresira/computing/views.py
+msgid ""
+"Submission requested: the Slurm agent picks it up. Reload this page in a"
+" moment."
+msgstr ""
+"Soumission demandée : l'agent Slurm la prend en charge. Rechargez cette "
+"page dans un instant."
+
+#: poresira/computing/views.py
+msgid "Cancellation requested."
+msgstr "Arrêt demandé."
+
+#: poresira/computing/views.py
+msgid "Void job"
+msgstr "Annuler le travail"
+
+#: poresira/computing/views.py
+msgid "Job voided."
+msgstr "Travail annulé."
+
 #: poresira/core/history.py
 msgid "Created"
 msgstr "Créé"
@@ -257,22 +606,6 @@ msgstr "Créé"
 #: poresira/core/history.py
 msgid "Modified"
 msgstr "Modifié"
-
-#: poresira/core/history.py poresira/pcr/forms.py
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/pcr/templates/pcr/run_list.html poresira/samples/forms.py
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/event_list.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/templates/sequencing/run_list.html
-#: poresira/storage/forms.py
-msgid "Project"
-msgstr "Projet"
 
 #: poresira/core/history.py
 msgid "Membership"
@@ -357,16 +690,6 @@ msgstr "Un motif est obligatoire pour cette modification."
 msgid "by %(username)s"
 msgstr "par %(username)s"
 
-#: poresira/core/templates/core/_history.html poresira/pcr/forms.py
-#: poresira/pcr/templates/pcr/run_detail.html poresira/samples/forms.py
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/storage/templates/storage/file_detail.html
-msgid "Reason"
-msgstr "Motif"
-
 #: poresira/core/templates/core/_history.html
 msgid "Hide details"
 msgstr "Masquer les détails"
@@ -408,16 +731,6 @@ msgstr "Aucun historique pour le moment."
 #: poresira/sequencing/templates/sequencing/library_list.html
 msgid "Samples"
 msgstr "Échantillons"
-
-#: poresira/core/templates/core/_project_rows.html
-#: poresira/core/templates/core/project_history.html
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/storage/templates/storage/file_detail.html
-msgid "History"
-msgstr "Historique"
 
 #: poresira/core/templates/core/_project_rows.html
 msgid "No projects to show."
@@ -463,6 +776,10 @@ msgid "Files"
 msgstr "Fichiers"
 
 #: poresira/core/templates/core/base.html
+msgid "Compute"
+msgstr "Calcul"
+
+#: poresira/core/templates/core/base.html
 msgid "Log out"
 msgstr "Se déconnecter"
 
@@ -490,32 +807,11 @@ msgstr "Un motif est obligatoire pour annuler un enregistrement."
 msgid "This record is already voided."
 msgstr "Cet enregistrement est déjà annulé."
 
-#: poresira/pcr/forms.py poresira/samples/forms.py poresira/sequencing/forms.py
-#: poresira/storage/forms.py
-msgid "All"
-msgstr "Tous"
-
 #: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
 #: poresira/pcr/templates/pcr/run_list.html
 #: poresira/samples/templates/samples/sample_detail.html
 msgid "Assay"
 msgstr "Test"
-
-#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/run_list.html
-msgid "Status"
-msgstr "Statut"
-
-#: poresira/pcr/forms.py poresira/samples/forms.py poresira/sequencing/forms.py
-#: poresira/storage/forms.py
-msgid "Show voided"
-msgstr "Afficher les annulés"
 
 #: poresira/pcr/forms.py
 msgid "Only for PCR tubes: from 1 to 96."
@@ -547,18 +843,6 @@ msgstr ""
 #: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
 msgid "Template (µL)"
 msgstr "Matrice (µL)"
-
-#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/storage/forms.py
-#: poresira/storage/templates/storage/file_detail.html
-msgid "Notes"
-msgstr "Notes"
 
 #: poresira/pcr/forms.py poresira/sequencing/forms.py
 #, python-format
@@ -1134,26 +1418,6 @@ msgstr "Clore"
 msgid "Reopen"
 msgstr "Rouvrir"
 
-#: poresira/pcr/templates/pcr/run_detail.html poresira/pcr/views.py
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/samples/views.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/views.py
-#: poresira/storage/templates/storage/file_detail.html
-#: poresira/storage/views.py
-msgid "Void"
-msgstr "Annuler"
-
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/storage/templates/storage/file_detail.html
-#, python-format
-msgid "Voided on %(date)s."
-msgstr "Annulé le %(date)s."
-
 #: poresira/pcr/templates/pcr/run_detail.html
 msgid "Controls valid: the results can be trusted."
 msgstr "Témoins valides : les résultats sont fiables."
@@ -1165,12 +1429,6 @@ msgstr "Témoins en échec : le passage est invalide."
 #: poresira/pcr/templates/pcr/run_detail.html
 msgid "Validity not assessed."
 msgstr "Validité non évaluée."
-
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-msgid "Details"
-msgstr "Détails"
 
 #: poresira/pcr/templates/pcr/run_detail.html
 #: poresira/pcr/templates/pcr/run_list.html
@@ -1261,64 +1519,14 @@ msgid "New run"
 msgstr "Nouveau passage"
 
 #: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/sample_list.html
-#: poresira/sequencing/templates/sequencing/_filter.html
-#: poresira/storage/templates/storage/file_list.html
-msgid "Filter"
-msgstr "Filtrer"
-
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/event_list.html
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/run_list.html
-#: poresira/storage/templates/storage/file_list.html
-msgid "Identifier"
-msgstr "Identifiant"
-
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/run_list.html
-#: poresira/storage/templates/storage/file_list.html
-msgid "Voided"
-msgstr "Annulé"
-
-#: poresira/pcr/templates/pcr/run_list.html
 #: poresira/sequencing/templates/sequencing/run_list.html
 msgid "No runs to show."
 msgstr "Aucun passage à afficher."
 
 #: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/sequencing/templates/sequencing/_pager.html
-#: poresira/storage/templates/storage/file_list.html
-msgid "Pages"
-msgstr "Pages"
-
-#: poresira/pcr/templates/pcr/run_list.html
 #, python-format
 msgid "Page %(number)s of %(total)s (%(count)s runs)"
 msgstr "Page %(number)s sur %(total)s (%(count)s passages)"
-
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_list.html
-#: poresira/sequencing/templates/sequencing/_pager.html
-#: poresira/storage/templates/storage/file_list.html
-msgid "Previous"
-msgstr "Précédent"
-
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_list.html
-#: poresira/sequencing/templates/sequencing/_pager.html
-#: poresira/storage/templates/storage/file_list.html
-msgid "Next"
-msgstr "Suivant"
 
 #: poresira/pcr/views.py poresira/samples/templates/samples/sample_detail.html
 #: poresira/sequencing/views.py
@@ -2496,12 +2704,6 @@ msgstr "Une cellule de flux active a ce type."
 msgid "An active run uses this instrument."
 msgstr "Un passage actif utilise cet appareil."
 
-#: poresira/sequencing/templates/sequencing/_pager.html
-#: poresira/storage/templates/storage/file_list.html
-#, python-format
-msgid "Page %(number)s of %(total)s"
-msgstr "Page %(number)s sur %(total)s"
-
 #: poresira/sequencing/templates/sequencing/_tabs.html
 #: poresira/sequencing/templates/sequencing/library_detail.html
 #: poresira/sequencing/templates/sequencing/library_list.html
@@ -2808,13 +3010,6 @@ msgid "Backend"
 msgstr "Emplacement"
 
 #: poresira/storage/forms.py poresira/storage/templates/storage/_files.html
-#: poresira/storage/templates/storage/backend_list.html
-#: poresira/storage/templates/storage/file_detail.html
-#: poresira/storage/templates/storage/file_list.html
-msgid "Kind"
-msgstr "Nature"
-
-#: poresira/storage/forms.py poresira/storage/templates/storage/_files.html
 #: poresira/storage/templates/storage/file_detail.html
 #: poresira/storage/templates/storage/file_list.html
 msgid "Tier"
@@ -3067,16 +3262,6 @@ msgstr "Des fichiers actifs sont enregistrés dans cet emplacement."
 msgid "Register a file"
 msgstr "Enregistrer un fichier"
 
-#: poresira/storage/templates/storage/_files.html poresira/storage/views.py
-msgid "File"
-msgstr "Fichier"
-
-#: poresira/storage/templates/storage/_files.html
-#: poresira/storage/templates/storage/file_detail.html
-#: poresira/storage/templates/storage/file_list.html
-msgid "Size"
-msgstr "Taille"
-
 #: poresira/storage/templates/storage/_files.html
 msgid "No files registered."
 msgstr "Aucun fichier enregistré."
@@ -3111,6 +3296,10 @@ msgstr "Le fichier sur le disque ne correspond plus à ce qui a été enregistr�
 #: poresira/storage/templates/storage/file_detail.html
 msgid "Belongs to"
 msgstr "Appartient à"
+
+#: poresira/storage/templates/storage/file_detail.html
+msgid "Produced by"
+msgstr "Produit par"
 
 #: poresira/storage/templates/storage/file_detail.html
 msgid "bytes"

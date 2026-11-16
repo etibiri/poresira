@@ -1,0 +1,5 @@
+{% if job.status == 'succeeded' %}<span class="badge text-bg-success">{{ job.get_status_display }}</span>
+{% elif job.status == 'failed' %}<span class="badge text-bg-danger">{{ job.get_status_display }}</span>
+{% elif job.status == 'running' %}<span class="badge text-bg-primary">{{ job.get_status_display }}</span>
+{% elif job.status == 'submitted' %}<span class="badge text-bg-info">{{ job.get_status_display }}</span>
+{% else %}<span class="badge text-bg-secondary">{{ job.get_status_display }}</span>{% endif %}

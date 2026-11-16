@@ -1,0 +1,29 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{# Compute jobs of a sequencing run. Needs: compute_jobs, can_compute, run. #}
+{% if compute_jobs or can_compute %}
+<div class="d-flex flex-wrap justify-content-between align-items-center mt-4">
+  <h2 class="h5 mb-0">{% trans "Compute jobs" %}</h2>
+  {% if can_compute %}
+  <div class="btn-group">
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'computing:job-new' run.pk 'basecalling' %}">{% trans "Basecall" %}</a>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'computing:job-new' run.pk 'demultiplexing' %}">{% trans "Demultiplex" %}</a>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'computing:job-new' run.pk 'pod5_conversion' %}">{% trans "Convert FAST5 to POD5" %}</a>
+  </div>
+  {% endif %}
+</div>
+<table class="table table-sm align-middle mt-2">
+  <thead><tr><th>{% trans "Job" %}</th><th>{% trans "Kind" %}</th><th>{% trans "Status" %}</th><th>{% trans "Submitted at" %}</th></tr></thead>
+  <tbody>
+    {% for job in compute_jobs %}
+    <tr>
+      <td><a href="{% url 'computing:job-detail' job.pk %}"><code>{{ job.identifier }}</code></a></td>
+      <td>{{ job.get_kind_display }}</td>
+      <td>{% include "computing/_badge.html" %}</td>
+      <td>{{ job.submitted_at|date:"DATETIME_FORMAT"|default:"—" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4" class="text-muted">{% trans "No compute jobs yet." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
