@@ -8,11 +8,12 @@ PCR, sequencing (Oxford Nanopore first), data files, compute jobs, and ENA/SRA s
 PoreSira is built for field-to-sequence laboratories that work with limited connectivity:
 everything runs from local Docker containers and no asset is loaded from the internet.
 
-> **Status: phase 3 (PCR).** Foundation (users, projects, access control, identifiers, audit
+> **Status: phase 4 (sequencing).** Foundation (users, projects, access control, identifiers, audit
 > trail, deployment profiles), samples (collection events, derivatives and lineage, storage
-> locations, QC, CSV import, demonstration data) and PCR (primers, assays, runs in plates or
-> tubes, results, control validity) are in place. Sequencing and the other domain apps are not
-> implemented yet.
+> locations, QC, CSV import, demonstration data), PCR (primers, assays, runs in plates or
+> tubes, results, control validity) and sequencing (libraries and barcodes, reusable flow cells,
+> runs, reads per barcode; Oxford Nanopore) are in place. Files, compute jobs and deposits are
+> not implemented yet.
 
 ## What the foundation gives you
 

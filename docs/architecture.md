@@ -12,7 +12,7 @@ application itself.
 | `core` | users, projects and memberships, roles, identifiers, audit | implemented |
 | `samples` | collection events, samples, derivatives, lineage, storage locations, QC (see [Samples](samples.md)) | implemented |
 | `pcr` | primers, cycling programs, master mixes, assays, runs in plates or tubes, results (see [PCR](pcr.md)) | implemented |
-| `sequencing` | libraries, pools, flow cells, runs; one adapter per platform | planned |
+| `sequencing` | libraries, flow cells, runs, reads per barcode; one adapter per platform (see [Sequencing](sequencing.md)) | implemented |
 | `storage` | file registry and storage backends | planned |
 | `computing` | compute jobs, Slurm agent | planned |
 | `deposits` | ENA/SRA submissions, RO-Crate export | planned |

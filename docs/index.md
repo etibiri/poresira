@@ -5,15 +5,16 @@ PoreSira is an open-source laboratory information management system (LIMS) that 
 biological sample from field collection to public data deposition.
 
 !!! note "Status"
-    Phases 1 (foundation), 2 (samples) and 3 (PCR) are complete: users, projects and access
-    control, identifiers, the audit trail, collection events, samples with lineage, storage
-    locations, QC, primers, assays and PCR runs. Sequencing, files, computing and deposits are
-    the next phases.
+    Phases 1 (foundation), 2 (samples), 3 (PCR) and 4 (sequencing) are complete: users, projects
+    and access control, identifiers, the audit trail, collection events, samples with lineage,
+    storage locations, QC, primers, assays, PCR runs, libraries, flow cells and sequencing runs.
+    Files, computing and deposits are the next phases.
 
 - [Installation](installation.md): run it on one computer, a lab server or an HPC platform.
 - [Configuration](configuration.md): every environment variable.
 - [Samples](samples.md): collection events, lineage, storage, demonstration data.
 - [PCR](pcr.md): primers, assays, runs in plates or tubes, results.
+- [Sequencing](sequencing.md): libraries and barcodes, reusable flow cells, runs, reads.
 - [Architecture](architecture.md): how traceability is enforced.
 - [Backup and restore](backup-restore.md): protect your data and rebuild a lost server.
 

@@ -42,6 +42,17 @@ All notable changes are listed here. The format follows
 - Demonstration data: 98 laboratory samples with NanoDrop readings, rolling circle amplification
   attempts and SPG1/SPG2 PCR results, and the PCR data of Tibiri et al. 2020 (primers, programs,
   assays, 150 reconstructed results).
+- `sequencing` app (Oxford Nanopore): library kits, flow cell types, instruments, flow cells,
+  libraries with samples under barcodes, runs and reads per barcode. A flow cell carries one run
+  at a time and several in turn when reusable (single-use types such as a Flongle serve one);
+  each run keeps its pores at start. A library is sealed before it is sequenced, and results of a
+  completed run change only with a reason. One adapter per platform holds barcode and ID rules.
+- Sequencing web interface: runs, libraries with their barcode table, flow cells, kits and
+  instruments; forms to plan, start, enter reads, complete, abort, reopen and void; a Sequencing
+  section on the sample page.
+- `import_library`: all-or-nothing CSV import of a library.
+- Demonstration data: the 53 sequenced RCA products on two MinION runs (November 2023, from the
+  laboratory sheet) and one Flongle run (2022, from the MinKNOW files).
 - `with_reason` and `acting_as` helpers for audited changes made outside a request.
 - Complete French translation of the new screens.
 - AGPL-3.0-or-later license, CLA, contribution guide, code of conduct, citation file.
