@@ -1,0 +1,21 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{# Deposits of a sequencing run. Needs: run_deposits, can_deposit, run. #}
+{% if run_deposits or can_deposit %}
+<div class="d-flex justify-content-between align-items-center mt-4">
+  <h2 class="h5 mb-0">{% trans "Deposits" %}</h2>
+  {% if can_deposit %}<a class="btn btn-outline-primary btn-sm" href="{% url 'deposits:deposit-new' run.pk %}">{% trans "Prepare a deposit" %}</a>{% endif %}
+</div>
+<table class="table table-sm align-middle mt-2">
+  <thead><tr><th>{% trans "Deposit" %}</th><th>{% trans "Title" %}</th><th>{% trans "Status" %}</th></tr></thead>
+  <tbody>
+    {% for deposit in run_deposits %}
+    <tr>
+      <td><a href="{% url 'deposits:deposit-detail' deposit.pk %}"><code>{{ deposit.identifier }}</code></a></td>
+      <td>{{ deposit.title }}</td><td>{% include "deposits/_badges.html" %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3" class="text-muted">{% trans "No deposits yet." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}

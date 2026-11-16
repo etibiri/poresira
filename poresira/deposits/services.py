@@ -5,7 +5,9 @@ Preparing a deposit builds its study, sample and reads items from a sequencing r
 ``collect.preflight`` says whether it is fit to send. Sending is the work of the agent.
 """
 
+import io
 import re
+import zipfile
 from datetime import date
 
 from django.core.exceptions import PermissionDenied, ValidationError
@@ -255,7 +257,8 @@ def note_problem(deposit: Deposit, message: str) -> None:
         current.save(update_fields=["notes", "updated_at"])
 
 
-def _ready_to_send(user, deposit: Deposit, confirm: str) -> None:
+def ready_to_send(user, deposit: Deposit, confirm: str = "") -> None:
+    """Raise unless this person may send this deposit now (the web page asks before it queues)."""
     _require_editor(user, deposit.project)
     if deposit.is_voided or deposit.status != DepositStatus.DRAFT:
         raise DepositServiceError(_("Only a draft deposit can be submitted."))
@@ -382,7 +385,7 @@ def submit_deposit(*, user, deposit: Deposit, confirm: str = "", archive_factory
     computer. Each object is recorded as the archive answers, so an interruption leaves what
     was accepted in place. Production needs a person allowed to publish and the project code
     typed as confirmation. Run it on the agent: it reaches the archive."""
-    _ready_to_send(user, deposit, confirm)
+    ready_to_send(user, deposit, confirm)
     archive = archive_factory(deposit.environment)  # refuses when no Webin account is set
     deposit = _begin(user, deposit, archive.user)
     receipts: list[str] = []
@@ -435,3 +438,52 @@ def record_public_accession(
     with acting_as(user):
         _save_new(record)
     return record
+
+
+@transaction.atomic
+def void_item(*, user, item: DepositItem, reason: str) -> DepositItem:
+    """Leave an object out of a draft deposit, for example reads the archives already hold."""
+    deposit = item.deposit
+    _require_editor(user, deposit.project)
+    if deposit.status != DepositStatus.DRAFT or deposit.is_voided:
+        raise DepositServiceError(_("Items can be left out of a draft deposit only."))
+    if item.kind == ItemKind.STUDY:
+        raise DepositServiceError(_("The study cannot be left out."))
+    if item.kind == ItemKind.SAMPLE and item.reads_items.active().exists():
+        raise DepositServiceError(_("Leave out the reads of this sample first."))
+    with acting_as(user):
+        item.void(user=user, reason=reason)
+    return item
+
+
+def submission_files(deposit: Deposit) -> dict[str, str]:
+    """The text that would be sent, for the person to read first. Accessions the archive has not
+    given yet appear as placeholders."""
+    items = list(deposit.items.active().select_related("sample__collection_event", "sample_item"))
+    study = next((i for i in items if i.kind == ItemKind.STUDY), None)
+    samples = [i for i in items if i.kind == ItemKind.SAMPLE and i.status != ItemStatus.ACCEPTED]
+    files = {"submission.xml": submission_xml(deposit.hold_until)}
+    if study is not None and study.status != ItemStatus.ACCEPTED:
+        files["study.xml"] = study_xml(study_spec(deposit))
+    if samples:
+        files["samples.xml"] = samples_xml(
+            [sample_spec(item) for item in samples], deposit.sample_checklist
+        )
+    for item in (i for i in items if i.kind == ItemKind.READS):
+        manifest = reads_manifest(
+            reads_spec(
+                item,
+                study=(study.accession if study else "") or "<STUDY ACCESSION>",
+                sample=item.sample_item.accession or "<SAMPLE ACCESSION>",
+            )
+        )
+        files[f"manifests/{item.alias}.txt"] = manifest
+    return files
+
+
+def submission_zip(deposit: Deposit) -> bytes:
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as archive:
+        for name, text in submission_files(deposit).items():
+            archive.writestr(name, text)
+    return buffer.getvalue()

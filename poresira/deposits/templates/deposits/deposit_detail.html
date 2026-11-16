@@ -1,0 +1,115 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{{ deposit.identifier }} · PoreSira{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'deposits:deposit-list' %}">{% trans "Deposits" %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ deposit.identifier }}</li>
+  </ol>
+</nav>
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+  <h1 class="h3 mb-0"><code>{{ deposit.identifier }}</code> {{ deposit.title }} {% include "deposits/_badges.html" %}</h1>
+  <div class="btn-group">
+    {% if can_submit %}<a class="btn btn-primary btn-sm" href="{% url 'deposits:deposit-submit' deposit.pk %}">{% if deposit.environment == 'production' %}{% trans "Submit for real" %}{% else %}{% trans "Submit to the test service" %}{% endif %}</a>{% endif %}
+    {% if can_make_real %}<a class="btn btn-danger btn-sm" href="{% url 'deposits:deposit-production' deposit.pk %}">{% trans "Prepare the real deposit" %}</a>{% endif %}
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'deposits:deposit-files' deposit.pk %}">{% trans "Files to be sent" %}</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'deposits:deposit-ro-crate' deposit.pk %}">{% trans "RO-Crate" %}</a>
+    {% if can_edit and deposit.status != 'submitting' %}<a class="btn btn-outline-danger btn-sm" href="{% url 'deposits:deposit-void' deposit.pk %}">{% trans "Void" %}</a>{% endif %}
+  </div>
+</div>
+{% if deposit.is_voided %}
+<div class="alert alert-secondary">
+  {% blocktrans with date=deposit.voided_at|date:"DATETIME_FORMAT" %}Voided on {{ date }}.{% endblocktrans %}
+  <strong>{% trans "Reason" %}:</strong> {{ deposit.void_reason }}
+</div>
+{% endif %}
+{% if deposit.environment == 'production' and deposit.status == 'draft' %}
+<div class="alert alert-danger">{% trans "This deposit is for the real archive: once submitted, the accessions are permanent and the data become public on the release date." %}</div>
+{% elif deposit.environment == 'test' %}
+<div class="alert alert-info">{% trans "Test deposit: the archive discards it within a day. Its accessions are temporary." %}</div>
+{% endif %}
+{% if deposit.notes %}<div class="alert alert-warning" style="white-space: pre-line">{{ deposit.notes }}</div>{% endif %}
+
+{% if report %}
+{% if report.errors %}
+<div class="alert alert-danger"><strong>{% trans "Not ready to submit:" %}</strong>
+  <ul class="mb-0">{% for finding in report.errors %}<li>{{ finding.message }}{% if finding.item and can_leave_out and finding.item.kind != 'study' %} <a href="{% url 'deposits:item-leave-out' finding.item.pk %}">{% trans "Leave out" %}</a>{% endif %}</li>{% endfor %}</ul></div>
+{% else %}
+<div class="alert alert-success">{% trans "Ready to submit." %}</div>
+{% endif %}
+{% if report.warnings %}
+<div class="alert alert-warning"><strong>{% trans "To look at:" %}</strong>
+  <ul class="mb-0">{% for finding in report.warnings %}<li>{{ finding.message }}</li>{% endfor %}</ul></div>
+{% endif %}
+{% endif %}
+
+<div class="row g-4">
+  <div class="col-lg-6">
+    <h2 class="h5">{% trans "Details" %}</h2>
+    <dl class="row small">
+      <dt class="col-sm-5">{% trans "Project" %}</dt><dd class="col-sm-7">{{ deposit.project.code }} · {{ deposit.project.name }}</dd>
+      <dt class="col-sm-5">{% trans "Archive" %}</dt><dd class="col-sm-7">{{ deposit.get_archive_display }}</dd>
+      <dt class="col-sm-5">{% trans "Release date" %}</dt><dd class="col-sm-7">{{ deposit.hold_until|date:"DATE_FORMAT"|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Sample checklist" %}</dt><dd class="col-sm-7">{{ deposit.sample_checklist }}</dd>
+      <dt class="col-sm-5">{% trans "Library" %}</dt><dd class="col-sm-7">{{ deposit.library_source }} · {{ deposit.library_selection }} · {{ deposit.library_strategy }}</dd>
+      <dt class="col-sm-5">{% trans "Description" %}</dt><dd class="col-sm-7">{{ deposit.description|default:"—" }}</dd>
+    </dl>
+  </div>
+  <div class="col-lg-6">
+    <h2 class="h5">{% trans "Submission" %}</h2>
+    <dl class="row small">
+      <dt class="col-sm-5">{% trans "Submitted by" %}</dt><dd class="col-sm-7">{{ deposit.submitted_by|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Submitted at" %}</dt><dd class="col-sm-7">{{ deposit.submitted_at|date:"DATETIME_FORMAT"|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Finished at" %}</dt><dd class="col-sm-7">{{ deposit.finished_at|date:"DATETIME_FORMAT"|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Archive account" %}</dt><dd class="col-sm-7">{{ deposit.webin_user|default:"—" }}</dd>
+      <dt class="col-sm-5">{% trans "Permits checked on" %}</dt><dd class="col-sm-7">{{ deposit.compliance_confirmed_at|date:"DATE_FORMAT"|default:"—" }}</dd>
+    </dl>
+  </div>
+</div>
+
+<h2 class="h5 mt-4">{% trans "Study" %}</h2>
+{% if study %}
+<p class="small"><code>{{ study.alias }}</code> · {{ study.get_status_display }}
+  {% if study.accession %}· <strong>{{ study.accession }}</strong>{% endif %}
+  {% if study.message %}<span class="text-muted">· {{ study.message }}</span>{% endif %}</p>
+{% endif %}
+
+<h2 class="h5 mt-4">{% trans "Samples" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr><th>{% trans "Sample" %}</th><th>{% trans "Alias" %}</th><th>{% trans "Status" %}</th><th>{% trans "Accession" %}</th><th>{% trans "Message" %}</th></tr></thead>
+  <tbody>
+    {% for item in samples %}
+    <tr>
+      <td><a href="{% url 'samples:sample-detail' item.sample_id %}">{{ item.sample.label|default:item.sample.identifier }}</a></td>
+      <td class="small"><code>{{ item.alias }}</code></td><td>{{ item.get_status_display }}</td>
+      <td>{{ item.accession|default:"—" }}</td><td class="small text-muted">{{ item.message }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 class="h5 mt-4">{% trans "Reads" %}</h2>
+<table class="table table-sm align-middle">
+  <thead><tr><th>{% trans "Sample" %}</th><th>{% trans "Sequencing run" %}</th><th>{% trans "Files" %}</th><th>{% trans "Status" %}</th><th>{% trans "Run accession" %}</th><th>{% trans "Experiment accession" %}</th><th>{% trans "Message" %}</th><th></th></tr></thead>
+  <tbody>
+    {% for item in reads %}
+    <tr>
+      <td>{{ item.sample.label|default:item.sample.identifier }}</td>
+      <td><a href="{% url 'sequencing:run-detail' item.sequencing_run_id %}"><code>{{ item.sequencing_run.identifier }}</code></a></td>
+      <td>{{ item.file_count }}</td><td>{{ item.get_status_display }}</td>
+      <td>{{ item.accession|default:"—" }}</td><td>{{ item.secondary_accession|default:"—" }}</td>
+      <td class="small text-muted">{{ item.message }}</td>
+      <td class="text-end">{% if can_leave_out %}<a class="text-danger" href="{% url 'deposits:item-leave-out' item.pk %}">{% trans "Leave out" %}</a>{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if deposit.receipt %}
+<details class="mt-3"><summary>{% trans "Last receipt" %}</summary><pre class="small border p-2 mt-2 text-break" style="white-space: pre-wrap">{{ deposit.receipt }}</pre></details>
+{% endif %}
+
+<h2 class="h5 mt-4">{% trans "History" %}</h2>
+{% include "core/_history.html" %}
+{% endblock %}

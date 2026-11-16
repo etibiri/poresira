@@ -11,6 +11,8 @@ from django.views.generic import FormView, ListView, TemplateView
 from poresira.core.history import HistorySource, build_history
 from poresira.core.models import Project
 from poresira.core.permissions import can_edit_project
+from poresira.deposits.collect import biological_sample
+from poresira.deposits.known import known_for
 
 from . import services
 from .forms import (
@@ -183,6 +185,7 @@ class SampleDetailView(SampleMixin, LoginRequiredMixin, TemplateView):
             .filter(run__voided_at__isnull=True)
             .select_related("run__assay")
             .order_by("run__identifier", "position"),
+            public=known_for(biological_sample(sample)),
             files=sample.files.active().select_related("backend"),
             register_url=(
                 reverse("storage:file-register", args=["sample", sample.pk])

@@ -1,0 +1,13 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{# What the public archives hold for a sample. Needs: public (a Known). #}
+{% if public.biosample or public.sra_runs or public.sra_experiments or public.genbank %}
+<h2 class="h5 mt-4">{% trans "Public archives" %}</h2>
+<table class="table table-sm align-middle">
+  <tbody>
+    {% if public.biosample %}<tr><th class="w-25">{% trans "BioSample" %}</th><td><a href="https://www.ncbi.nlm.nih.gov/biosample/{{ public.biosample }}" rel="noopener">{{ public.biosample }}</a></td></tr>{% endif %}
+    {% if public.sra_runs %}<tr><th>{% trans "SRA runs" %}</th><td>{% for accession in public.sra_runs %}<a href="https://www.ncbi.nlm.nih.gov/sra/{{ accession }}" rel="noopener">{{ accession }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</td></tr>{% endif %}
+    {% if public.sra_experiments %}<tr><th>{% trans "SRA experiments" %}</th><td>{% for accession in public.sra_experiments %}<a href="https://www.ncbi.nlm.nih.gov/sra/{{ accession }}" rel="noopener">{{ accession }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</td></tr>{% endif %}
+    {% if public.genbank %}<tr><th>{% trans "GenBank" %}</th><td>{% for accession in public.genbank %}<a href="https://www.ncbi.nlm.nih.gov/nuccore/{{ accession }}" rel="noopener">{{ accession }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</td></tr>{% endif %}
+  </tbody>
+</table>
+{% endif %}

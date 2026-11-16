@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Deposits" %} · PoreSira{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Deposits" %}</h1>
+<form method="get" class="row g-2 align-items-end mb-3">
+  <div class="col-md-3">{{ filter_form.project.label_tag }}{{ filter_form.project }}</div>
+  <div class="col-md-3">{{ filter_form.environment.label_tag }}{{ filter_form.environment }}</div>
+  <div class="col-md-2">{{ filter_form.status.label_tag }}{{ filter_form.status }}</div>
+  <div class="col-md-2">
+    <div class="form-check">{{ filter_form.include_voided }}
+      <label class="form-check-label" for="{{ filter_form.include_voided.id_for_label }}">{{ filter_form.include_voided.label }}</label>
+    </div>
+  </div>
+  <div class="col-md-2"><button type="submit" class="btn btn-sm btn-primary">{% trans "Filter" %}</button></div>
+</form>
+<table class="table table-hover align-middle">
+  <thead><tr>
+    <th>{% trans "Identifier" %}</th><th>{% trans "Title" %}</th><th>{% trans "Project" %}</th>
+    <th>{% trans "Status" %}</th><th>{% trans "Objects" %}</th><th>{% trans "Release date" %}</th>
+  </tr></thead>
+  <tbody>
+    {% for deposit in deposits %}
+    <tr{% if deposit.is_voided %} class="text-muted"{% endif %}>
+      <td><a href="{% url 'deposits:deposit-detail' deposit.pk %}"><code>{{ deposit.identifier }}</code></a>
+        {% if deposit.is_voided %}<span class="badge text-bg-secondary">{% trans "Voided" %}</span>{% endif %}</td>
+      <td>{{ deposit.title }}</td><td>{{ deposit.project.code }}</td>
+      <td>{% include "deposits/_badges.html" %}</td>
+      <td>{{ deposit.item_count }}</td><td>{{ deposit.hold_until|date:"SHORT_DATE_FORMAT"|default:"—" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" class="text-muted">{% trans "No deposits to show." %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if is_paginated %}
+<nav aria-label="{% trans 'Pages' %}" class="d-flex justify-content-between align-items-center">
+  <span class="text-muted small">{% blocktrans with number=page_obj.number total=page_obj.paginator.num_pages %}Page {{ number }} of {{ total }}{% endblocktrans %}</span>
+  <div>
+    {% if page_obj.has_previous %}<a class="btn btn-sm btn-outline-secondary" href="?{{ query_string }}&page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>{% endif %}
+    {% if page_obj.has_next %}<a class="btn btn-sm btn-outline-secondary" href="?{{ query_string }}&page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>{% endif %}
+  </div>
+</nav>
+{% endif %}
+{% endblock %}

@@ -10,4 +10,5 @@ urlpatterns = [
     path("", include("poresira.sequencing.urls")),
     path("", include("poresira.storage.urls")),
     path("", include("poresira.computing.urls")),
+    path("", include("poresira.deposits.urls")),
 ]

@@ -1,0 +1,6 @@
+{% load i18n %}{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% if deposit.environment == 'production' %}<span class="badge text-bg-danger">{% trans "Production" %}</span>{% else %}<span class="badge text-bg-info">{% trans "Test" %}</span>{% endif %}
+{% if deposit.status == 'accepted' %}<span class="badge text-bg-success">{{ deposit.get_status_display }}</span>
+{% elif deposit.status == 'rejected' %}<span class="badge text-bg-danger">{{ deposit.get_status_display }}</span>
+{% elif deposit.status == 'submitting' %}<span class="badge text-bg-primary">{{ deposit.get_status_display }}</span>
+{% else %}<span class="badge text-bg-secondary">{{ deposit.get_status_display }}</span>{% endif %}

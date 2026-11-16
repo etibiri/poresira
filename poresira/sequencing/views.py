@@ -11,6 +11,7 @@ from django.views.generic import ListView, TemplateView
 from poresira.core.history import HistorySource, build_history
 from poresira.core.models import Project
 from poresira.core.permissions import can_edit_project
+from poresira.deposits.models import Deposit
 from poresira.samples.views import ServiceFormView
 
 from . import services
@@ -399,6 +400,12 @@ class RunDetailView(RunMixin, LoginRequiredMixin, TemplateView):
             rows=rows,
             reads_in_results=sum(r["result"].reads for r in rows if r["result"]),
             other_runs=run.flow_cell.runs.active().exclude(pk=run.pk).order_by("started_on"),
+            run_deposits=Deposit.objects.visible_to(self.request.user)
+            .active()
+            .filter(items__sequencing_run=run, items__voided_at__isnull=True)
+            .distinct()
+            .order_by("-created_at"),
+            can_deposit=editable and not run.is_voided,
             compute_jobs=run.compute_jobs.active().order_by("-created_at"),
             can_compute=editable and not run.is_voided,
             files=run.files.active().select_related("backend"),
