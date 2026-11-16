@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 08:42+0000\n"
+"POT-Creation-Date: 2026-11-16 10:01+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -336,6 +336,7 @@ msgstr "Antisens"
 
 #: poresira/pcr/models/reference.py poresira/samples/models/storage.py
 #: poresira/sequencing/models/reference.py poresira/sequencing/models/run.py
+#: poresira/storage/models/backend.py
 msgid "name"
 msgstr "nom"
 
@@ -363,7 +364,8 @@ msgstr "référence"
 #: poresira/samples/models/collection.py poresira/samples/models/qc.py
 #: poresira/samples/models/sample.py poresira/samples/models/sequence.py
 #: poresira/samples/models/storage.py poresira/sequencing/models/reference.py
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py poresira/storage/models/backend.py
+#: poresira/storage/models/file.py
 msgid "notes"
 msgstr "notes"
 
@@ -516,6 +518,7 @@ msgstr "Non concluant"
 
 #: poresira/pcr/models/run.py poresira/samples/models/collection.py
 #: poresira/samples/models/sample.py poresira/sequencing/models/run.py
+#: poresira/storage/models/file.py
 msgid "project"
 msgstr "projet"
 
@@ -974,6 +977,7 @@ msgstr[1] "%(total)s réactions, %(positives)s positives."
 
 #: poresira/pcr/templates/pcr/run_detail.html poresira/samples/models/qc.py
 #: poresira/samples/models/sequence.py poresira/sequencing/models/run.py
+#: poresira/storage/models/file.py
 msgid "sample"
 msgstr "échantillon"
 
@@ -1290,6 +1294,7 @@ msgid "Gel electrophoresis"
 msgstr "Électrophorèse sur gel"
 
 #: poresira/samples/models/qc.py poresira/sequencing/models/reference.py
+#: poresira/storage/models/file.py
 msgid "Other"
 msgstr "Autre"
 
@@ -1329,7 +1334,7 @@ msgstr "indice d'intégrité"
 msgid "RNA integrity score such as RIN, RQN or the Qubit IQ value."
 msgstr "Score d'intégrité de l'ARN : RIN, RQN ou valeur IQ de Qubit."
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py poresira/storage/models/file.py
 msgid "outcome"
 msgstr "résultat"
 
@@ -1877,11 +1882,9 @@ msgid "Identifier or label of the DNA extract or RCA product."
 msgstr "Identifiant ou étiquette de l'extrait d'ADN ou du produit RCA."
 
 #: poresira/sequencing/forms.py
-msgid ""
-"A number, NB07 or barcode07; empty only for a kit without barcodes."
+msgid "A number, NB07 or barcode07; empty only for a kit without barcodes."
 msgstr ""
-"Un numéro, NB07 ou barcode07 ; vide seulement pour un kit sans code-"
-"barres."
+"Un numéro, NB07 ou barcode07 ; vide seulement pour un kit sans code-barres."
 
 #: poresira/sequencing/forms.py
 #: poresira/sequencing/templates/sequencing/library_detail.html
@@ -1916,11 +1919,9 @@ msgid "Mean quality (Q)"
 msgstr "Qualité moyenne (Q)"
 
 #: poresira/sequencing/forms.py
-msgid ""
-"Required once the run is completed; recorded in the audit log."
+msgid "Required once the run is completed; recorded in the audit log."
 msgstr ""
-"Obligatoire une fois le passage terminé ; consignée dans le journal "
-"d'audit."
+"Obligatoire une fois le passage terminé ; consignée dans le journal d'audit."
 
 #: poresira/sequencing/models/reference.py
 msgid "Oxford Nanopore"
@@ -2571,3 +2572,155 @@ msgstr "Enregistrer"
 #: poresira/sequencing/views.py
 msgid "Flow cell registered."
 msgstr "Cellule de flux enregistrée."
+
+#: poresira/storage/models/backend.py
+msgid "Local disk"
+msgstr "Disque local"
+
+#: poresira/storage/models/backend.py
+msgid "Network share (mounted)"
+msgstr "Partage réseau (monté)"
+
+#: poresira/storage/models/backend.py
+msgid "Offline medium (catalogued)"
+msgstr "Support hors ligne (catalogué)"
+
+#: poresira/storage/models/backend.py poresira/storage/models/file.py
+msgid "kind"
+msgstr "nature"
+
+#: poresira/storage/models/backend.py
+msgid "root"
+msgstr "racine"
+
+#: poresira/storage/models/backend.py
+msgid ""
+"Absolute directory of a disk or mounted share; the label of the medium "
+"when offline."
+msgstr ""
+"Répertoire absolu d'un disque ou d'un partage monté ; étiquette du "
+"support s'il est hors ligne."
+
+#: poresira/storage/models/file.py
+msgid "POD5 (raw signal)"
+msgstr "POD5 (signal brut)"
+
+#: poresira/storage/models/file.py
+msgid "FAST5 (raw signal)"
+msgstr "FAST5 (signal brut)"
+
+#: poresira/storage/models/file.py
+msgid "FASTQ (reads)"
+msgstr "FASTQ (lectures)"
+
+#: poresira/storage/models/file.py
+msgid "BAM (reads)"
+msgstr "BAM (lectures)"
+
+#: poresira/storage/models/file.py
+msgid "Run report"
+msgstr "Rapport de passage"
+
+#: poresira/storage/models/file.py
+msgid "Gel image"
+msgstr "Image de gel"
+
+#: poresira/storage/models/file.py
+msgid "Hot"
+msgstr "Chaud"
+
+#: poresira/storage/models/file.py
+msgid "Warm"
+msgstr "Tiède"
+
+#: poresira/storage/models/file.py
+msgid "Cold"
+msgstr "Froid"
+
+#: poresira/storage/models/file.py
+msgid "Not checked"
+msgstr "Non vérifié"
+
+#: poresira/storage/models/file.py
+msgid "Intact"
+msgstr "Intact"
+
+#: poresira/storage/models/file.py
+msgid "Changed"
+msgstr "Modifié"
+
+#: poresira/storage/models/file.py
+msgid "Missing"
+msgstr "Absent"
+
+#: poresira/storage/models/file.py
+msgid "Unreadable"
+msgstr "Illisible"
+
+#: poresira/storage/models/file.py
+msgid "backend"
+msgstr "emplacement"
+
+#: poresira/storage/models/file.py
+msgid "path"
+msgstr "chemin"
+
+#: poresira/storage/models/file.py
+msgid "Relative to the root of the backend, with no leading slash."
+msgstr "Relatif à la racine de l'emplacement, sans barre oblique initiale."
+
+#: poresira/storage/models/file.py
+msgid "size (bytes)"
+msgstr "taille (octets)"
+
+#: poresira/storage/models/file.py
+msgid "SHA-256"
+msgstr "SHA-256"
+
+#: poresira/storage/models/file.py
+msgid "MD5"
+msgstr "MD5"
+
+#: poresira/storage/models/file.py
+msgid "tier"
+msgstr "niveau"
+
+#: poresira/storage/models/file.py
+msgid "integrity"
+msgstr "intégrité"
+
+#: poresira/storage/models/file.py
+msgid "last checked"
+msgstr "dernière vérification"
+
+#: poresira/storage/models/file.py
+msgid "sequencing run"
+msgstr "passage de séquençage"
+
+#: poresira/storage/models/file.py
+msgid "PCR run"
+msgstr "passage PCR"
+
+#: poresira/storage/models/file.py
+msgid "registered by"
+msgstr "enregistré par"
+
+#: poresira/storage/models/file.py
+msgid "file"
+msgstr "fichier"
+
+#: poresira/storage/models/file.py
+msgid "checked at"
+msgstr "vérifié le"
+
+#: poresira/storage/models/file.py
+msgid "checked by"
+msgstr "vérifié par"
+
+#: poresira/storage/models/file.py
+msgid "observed SHA-256"
+msgstr "SHA-256 observé"
+
+#: poresira/storage/models/file.py
+msgid "observed size (bytes)"
+msgstr "taille observée (octets)"
