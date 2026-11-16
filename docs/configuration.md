@@ -46,6 +46,7 @@ Everything is configured through environment variables, normally in `.env` (copy
 | `PORESIRA_PORT` | `8000` | Published web port. |
 | `PORESIRA_BIND_ADDRESS` | `127.0.0.1` | `0.0.0.0` to serve the lab network. |
 | `BACKUP_DIR` | `./backups` | Host folder for backups. Prefer another disk or the NAS. |
+| `PORESIRA_DATA_DIR` | `/srv/poresira-data` | Host folder of the data files, mounted read-only in `web` and `worker` at the same path. Use it as the root of a storage backend. |
 | `BACKUP_KEEP_DAYS` | `30` | Older backups are deleted. |
 | `BACKUP_INTERVAL_HOURS` | `24` | Delay between scheduled backups (`labo`, `plateforme`). |
 | `BACKUP_OWNER` | none | `uid:gid` that should own backup files on the host. |

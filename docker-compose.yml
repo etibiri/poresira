@@ -26,6 +26,10 @@ x-django-service: &django-service
     redis:
       condition: service_healthy
 
+# Data files are registered where they are, so the web server and the worker must see them at the
+# same path as the host. They are mounted read-only: PoreSira never writes to them.
+x-data-volume: &data-volume ${PORESIRA_DATA_DIR:-/srv/poresira-data}:${PORESIRA_DATA_DIR:-/srv/poresira-data}:ro
+
 x-app-role: &app-role
   POSTGRES_USER: ${POSTGRES_APP_USER:-poresira_app}
   POSTGRES_PASSWORD: ${POSTGRES_APP_PASSWORD}
@@ -87,6 +91,8 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
+    volumes:
+      - *data-volume
     ports:
       # Loopback by default; set PORESIRA_BIND_ADDRESS=0.0.0.0 to serve the lab network.
       - "${PORESIRA_BIND_ADDRESS:-127.0.0.1}:${PORESIRA_PORT:-8000}:8000"
@@ -99,6 +105,8 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
+    volumes:
+      - *data-volume
     command: ["celery", "-A", "config", "worker", "--queues", "celery", "--loglevel", "info"]
 
   backup:

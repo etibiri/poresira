@@ -90,8 +90,11 @@ be checked.
 
 !!! warning "The worker must see the files"
     The web server and the Celery worker must both reach the backend root **at the same path**. With
-    Docker Compose, mount the disk or share in the `web` and `worker` services. Without a worker
-    (a development setup), set `CELERY_TASK_ALWAYS_EAGER=true` to run checks inside the request.
+    Docker Compose, `PORESIRA_DATA_DIR` (default `/srv/poresira-data`) is mounted read-only in the
+    `web` and `worker` services at the same path as on the host; use it, or a folder below it, as
+    the root of the backend. For a NAS, mount the share on the host under that folder. A backend
+    outside that folder is not visible to the containers. Without a worker (a development setup),
+    set `CELERY_TASK_ALWAYS_EAGER=true` to run checks inside the request.
 
 No periodic check is scheduled yet.
 
