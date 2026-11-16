@@ -109,3 +109,5 @@ All notable changes are listed here. The format follows
 - The Redis host port is configurable (`REDIS_PORT`) instead of fixed to 6379, which stopped the
   stack when another Redis was running.
 - gunicorn no longer logs a permission error about a control socket in the home folder.
+- `scripts/restore.sh` works on macOS (`shasum` when `sha256sum` is missing); installation notes for
+  Apple silicon.

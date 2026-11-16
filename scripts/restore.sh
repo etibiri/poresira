@@ -13,8 +13,14 @@ usage() {
 dump_file="$2"
 [ -f "$dump_file" ] || { echo "No such file: $dump_file" >&2; exit 1; }
 
+# macOS has no sha256sum; `shasum -a 256` reads the same checksum files.
 if [ -f "$dump_file.sha256" ]; then
-    (cd "$(dirname "$dump_file")" && sha256sum -c "$(basename "$dump_file").sha256")
+    if command -v sha256sum >/dev/null 2>&1; then
+        check="sha256sum -c"
+    else
+        check="shasum -a 256 -c"
+    fi
+    (cd "$(dirname "$dump_file")" && $check "$(basename "$dump_file").sha256")
 fi
 
 compose="docker compose"

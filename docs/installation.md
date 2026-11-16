@@ -10,6 +10,35 @@
 
 No internet access is needed at run time. All front-end libraries ship with the application.
 
+## Install on macOS (Apple silicon, M1 and later)
+
+PoreSira runs on a Mac with an Apple chip through Docker: every image it uses (Python, PostgreSQL,
+Redis) has an `arm64` build, and every compiled Python library in `uv.lock` has an `aarch64`
+wheel, so nothing is emulated.
+
+1. Install [Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/) (Apple
+   silicon version), or [OrbStack](https://orbstack.dev/) or Colima, then start it. Compose is
+   included. In Docker Desktop, give it at least 4 GB of memory.
+2. Install the tools the commands below use: `git` (with the Xcode command line tools,
+   `xcode-select --install`) and `python3`, which the same tools provide.
+3. Follow [Install](#install) below. On macOS:
+   - run the commands in Terminal, from the cloned folder;
+   - **put the data folder under `/Users`**, for example `PORESIRA_DATA_DIR=/Users/you/poresira-data`
+     (create it first). Docker Desktop shares `/Users`, `/Volumes`, `/private` and `/tmp` by
+     default; any other folder must be added in *Settings → Resources → File sharing*;
+   - leave `BACKUP_OWNER` empty, or set it to your own ids (`id -u`:`id -g`, usually `501:20`):
+     the default `1000:1000` does not exist on a Mac;
+   - port 5000 is used by AirPlay on recent macOS, but PoreSira uses 8000, so no change is needed;
+   - `scripts/restore.sh` uses `shasum` when `sha256sum` is missing.
+4. Open `http://localhost:8000`.
+
+What does **not** run on a Mac: Dorado on a GPU (basecalling goes through the Slurm agent on a
+cluster) and the Slurm agent itself. The Docker `poste` and `labo` profiles are fine.
+
+To work on the code, follow
+[CONTRIBUTING.md](https://github.com/etibiri/poresira/blob/main/CONTRIBUTING.md) after
+`brew install uv gettext`: the database and Redis still run in Docker.
+
 ## Install
 
 ```sh
