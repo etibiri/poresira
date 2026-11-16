@@ -104,6 +104,8 @@ REDIS_URL = env_str("REDIS_URL", "redis://localhost:6379/0")
 CELERY_BROKER_URL = REDIS_URL
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_TASK_ALWAYS_EAGER = env_bool("CELERY_TASK_ALWAYS_EAGER", False)
+# Compute jobs are handled by the Slurm agent, a worker on the "slurm" queue.
+CELERY_TASK_ROUTES = {"poresira.computing.tasks.*": {"queue": "slurm"}}
 
 PORESIRA_SITE_PREFIX = env_str("PORESIRA_SITE_PREFIX", "WBF")
 PORESIRA_SOURCE_URL = env_str("PORESIRA_SOURCE_URL", "https://github.com/etibiri/poresira")
@@ -125,6 +127,8 @@ COMPUTING = {
     "DORADO_MODELS_DIR": env_str("PORESIRA_DORADO_MODELS_DIR"),
     "POD5": env_str("PORESIRA_POD5_COMMAND", "pod5"),
     "POD5_VERSION": env_str("PORESIRA_POD5_VERSION"),
+    "SLURM_BIN_DIR": env_str("PORESIRA_SLURM_BIN_DIR"),  # folder of sbatch; empty: use PATH
+    "POLL_SECONDS": env_int("PORESIRA_COMPUTE_POLL_SECONDS", 60),
     "SLURM_PARTITION": env_str("PORESIRA_SLURM_PARTITION"),
     "SLURM_ACCOUNT": env_str("PORESIRA_SLURM_ACCOUNT"),
     "GPUS": env_int("PORESIRA_SLURM_GPUS", 1),

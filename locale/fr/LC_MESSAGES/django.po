@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 11:25+0000\n"
+"POT-Creation-Date: 2026-11-16 12:07+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -20,19 +20,16 @@ msgid "Model"
 msgstr "Modèle"
 
 #: poresira/computing/jobtypes.py
-msgid ""
-"A speed (fast, hac, sup) or a model name, such as sup@v5.0.0."
+msgid "A speed (fast, hac, sup) or a model name, such as sup@v5.0.0."
 msgstr ""
-"Une vitesse (fast, hac, sup) ou un nom de modèle, par exemple "
-"sup@v5.0.0."
+"Une vitesse (fast, hac, sup) ou un nom de modèle, par exemple sup@v5.0.0."
 
 #: poresira/computing/jobtypes.py
 msgid "Barcoding kit"
 msgstr "Kit de codes-barres"
 
 #: poresira/computing/jobtypes.py
-msgid ""
-"Trims adapters and barcodes during basecalling; optional."
+msgid "Trims adapters and barcodes during basecalling; optional."
 msgstr ""
 "Retire adaptateurs et codes-barres pendant le basecalling ; facultatif."
 
@@ -244,6 +241,14 @@ msgstr "Annulez le travail (arrêt) avant de l'annuler (retrait)."
 #: poresira/computing/services.py
 msgid "Void the results of this job first."
 msgstr "Annulez d'abord les résultats de ce travail."
+
+#: poresira/computing/services.py
+msgid "Only a draft job can be submitted."
+msgstr "Seul un brouillon peut être soumis."
+
+#: poresira/computing/services.py
+msgid "This job is already finished."
+msgstr "Ce travail est déjà terminé."
 
 #: poresira/core/history.py
 msgid "Created"

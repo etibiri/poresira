@@ -5,23 +5,27 @@ A job is prepared as a draft with its inputs and validated parameters. Submittin
 scheduler is the work of the agent (``poresira.computing.tasks``).
 """
 
+import logging
 import re
 from pathlib import Path
 
 from django.conf import settings
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import transaction
+from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from poresira.core.permissions import can_edit_project
 from poresira.core.reason import acting_as
 from poresira.sequencing.models import SequencingRun
-from poresira.storage.models import DataFile, Integrity
+from poresira.storage.importing import DirectoryError, register_directory
+from poresira.storage.models import BackendKind, DataFile, Integrity, StorageBackend
 
 from .jobtypes import JOB_TYPES, Staged, Tool, clean_parameters
 from .models import ComputeJob, JobInput, JobKind, JobOutput, JobStatus
 from .scripts import InputFile, Resources, render_script
 
+logger = logging.getLogger(__name__)
 CONTROL_CHARACTERS = re.compile(r"[\x00-\x1f\x7f]")
 USABLE_INTEGRITY = (Integrity.INTACT, Integrity.UNCHECKED)
 
@@ -185,4 +189,140 @@ def void_record(*, user, job: ComputeJob, reason: str) -> ComputeJob:
         raise RecordInUseError(_("Void the results of this job first."))
     with acting_as(user):
         job.void(user=user, reason=reason)
+    return job
+
+
+# --- Running -----------------------------------------------------------------------------------
+
+
+def _locked(job: ComputeJob) -> ComputeJob:
+    """The job as stored, locked until the end of the transaction."""
+    return ComputeJob.objects.select_for_update().select_related("project").get(pk=job.pk)
+
+
+def _work_directory(job: ComputeJob) -> Path:
+    return Path(settings.COMPUTING["OUTPUT_DIR"]) / job.identifier
+
+
+@transaction.atomic
+def submit_job(*, user, job: ComputeJob, scheduler) -> ComputeJob:
+    """Write the script where the cluster can read it and hand it to the scheduler.
+
+    The agent creates the working directory first: Slurm loses the log of a job whose output
+    folder does not exist. The script is stored in the job as it was submitted.
+    """
+    job = _locked(job)
+    _require_editor(user, job.project)
+    if job.is_voided or job.status != JobStatus.DRAFT:
+        raise ComputeServiceError(_("Only a draft job can be submitted."))
+    script = render_job_script(job)
+    work_directory = _work_directory(job)
+    work_directory.mkdir(parents=True, exist_ok=True)
+    script_path = work_directory / "job.sh"
+    script_path.write_text(script)
+    script_path.chmod(0o750)
+    scheduler_job_id = scheduler.submit(script_path)
+    job.status = JobStatus.SUBMITTED
+    job.script = script
+    job.scheduler_job_id = scheduler_job_id
+    job.working_directory = str(work_directory)
+    job.log_path = f"{work_directory}/slurm-{scheduler_job_id}.log"
+    job.submitted_by = user
+    job.submitted_at = timezone.now()
+    with acting_as(user):
+        job.full_clean()
+        job.save()
+    return job
+
+
+def note_problem(job: ComputeJob, message: str) -> None:
+    """Keep a problem in the notes of the job, outside any transaction that is being undone."""
+    with transaction.atomic():
+        job = _locked(job)
+        job.notes = f"{job.notes}\n{message}".strip()
+        job.save(update_fields=["notes", "updated_at"])
+
+
+def _backend_covering(directory: Path) -> StorageBackend | None:
+    """The readable backend whose root holds ``directory``; the deepest root wins."""
+    directory = directory.resolve()
+    roots = [
+        (Path(backend.root).resolve(), backend)
+        for backend in StorageBackend.objects.active().exclude(kind=BackendKind.OFFLINE)
+    ]
+    inside = [(root, backend) for root, backend in roots if directory.is_relative_to(root)]
+    return max(inside, key=lambda pair: len(pair[0].parts))[1] if inside else None
+
+
+def _register_outputs(job: ComputeJob) -> None:
+    """Register what the job wrote under ``output/`` where it is, and link it to the job."""
+    directory = Path(job.working_directory) / "output"
+    backend = _backend_covering(directory)
+    if backend is None:
+        job.notes = f"{job.notes}\nResults not registered: no storage backend holds {directory}."
+        job.save(update_fields=["notes", "updated_at"])
+        return
+    try:
+        report = register_directory(
+            user=job.submitted_by,
+            project=job.project,
+            backend=backend,
+            directory=directory,
+            link={"sequencing_run": job.sequencing_run},
+        )
+    except DirectoryError as error:
+        job.notes = f"{job.notes}\nResults not registered: {error}"
+        job.save(update_fields=["notes", "updated_at"])
+        return
+    with acting_as(job.submitted_by):
+        for file in report.registered:
+            _save_new(JobOutput(job=job, file=file))
+    if report.failed:
+        listed = "; ".join(f"{path} ({problem})" for path, problem in report.failed)
+        job.notes = f"{job.notes}\nNot registered: {listed}"
+        job.save(update_fields=["notes", "updated_at"])
+
+
+@transaction.atomic
+def refresh_job(*, job: ComputeJob, scheduler) -> ComputeJob:
+    """Bring the job up to date with the scheduler. A job that succeeded gets its results
+    registered. A job the scheduler does not know is left as it is."""
+    job = _locked(job)
+    if job.status not in (JobStatus.SUBMITTED, JobStatus.RUNNING):
+        return job
+    state = scheduler.state(job.scheduler_job_id)
+    if state.status in (None, job.status):
+        return job
+    if state.status == JobStatus.SUBMITTED:  # back in the queue
+        return job
+    now = timezone.now()
+    if state.status != JobStatus.RUNNING:
+        job.finished_at = state.finished_at or now
+        job.exit_code = state.exit_code
+    if job.started_at is None and state.status != JobStatus.SUBMITTED:
+        job.started_at = state.started_at or now
+    job.status = state.status
+    with acting_as(job.submitted_by):
+        job.full_clean()
+        job.save()
+        if job.status == JobStatus.SUCCEEDED:
+            _register_outputs(job)
+    return job
+
+
+@transaction.atomic
+def cancel_job(*, user, job: ComputeJob, scheduler=None) -> ComputeJob:
+    """Stop a job. A draft is cancelled in the database; a queued or running job is stopped in
+    the scheduler (which needs ``scheduler``, so this runs on the agent)."""
+    job = _locked(job)
+    _require_editor(user, job.project)
+    if job.is_voided or job.is_final:
+        raise ComputeServiceError(_("This job is already finished."))
+    if job.status != JobStatus.DRAFT:
+        scheduler.cancel(job.scheduler_job_id)
+    job.status = JobStatus.CANCELLED
+    job.finished_at = timezone.now()
+    with acting_as(user):
+        job.full_clean()
+        job.save()
     return job

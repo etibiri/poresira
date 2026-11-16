@@ -141,6 +141,11 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
+    volumes:
+      # The agent writes the working folder and results of each job, so this mount is writable.
+      # The image has no Slurm client tools: to submit for real, run this worker on the cluster's
+      # login node instead (celery -A config worker --queues slurm).
+      - ${PORESIRA_DATA_DIR:-/srv/poresira-data}:${PORESIRA_DATA_DIR:-/srv/poresira-data}
     command: ["celery", "-A", "config", "worker", "--queues", "slurm", "--hostname", "slurm@%h", "--loglevel", "info"]
 
 volumes:
