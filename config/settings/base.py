@@ -158,4 +158,15 @@ ENA = {
 # NCBI Submission Portal tables (see docs/deposits.md). The package asks for a metagenome organism.
 NCBI = {"ORGANISM": env_str("PORESIRA_NCBI_ORGANISM", "plant metagenome")}
 
+# Reading the public archives (see docs/deposits.md). Only public accession numbers are sent.
+PUBLIC_ARCHIVES = {
+    "NCBI_URL": env_str(
+        "PORESIRA_NCBI_EUTILS_URL", "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+    ),
+    "ENA_URL": env_str("PORESIRA_ENA_PORTAL_URL", "https://www.ebi.ac.uk/ena/portal/api"),
+    "NCBI_API_KEY": env_str("PORESIRA_NCBI_API_KEY"),  # optional: raises the rate limit
+    "MIN_INTERVAL_SECONDS": float(env_str("PORESIRA_PUBLIC_MIN_INTERVAL", "0.4")),
+    "TIMEOUT_SECONDS": env_int("PORESIRA_PUBLIC_TIMEOUT", 60),
+}
+
 MESSAGE_TAGS = {message_levels.ERROR: "danger"}

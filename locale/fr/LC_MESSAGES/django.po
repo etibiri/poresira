@@ -960,11 +960,10 @@ msgstr "%(sample)s n'a pas de coordonnées, que NCBI exige."
 
 #: poresira/deposits/collect.py
 #, python-format
-msgid ""
-"%(file)s is named like a file of %(other)s: names must be unique."
+msgid "%(file)s is named like a file of %(other)s: names must be unique."
 msgstr ""
-"%(file)s porte le même nom qu’un fichier de %(other)s : les noms doivent"
-" être uniques."
+"%(file)s porte le même nom qu’un fichier de %(other)s : les noms doivent "
+"être uniques."
 
 #: poresira/deposits/forms.py
 msgid "Environment"
@@ -1245,8 +1244,8 @@ msgid ""
 "An NCBI deposit is uploaded through the Submission Portal: download its "
 "files."
 msgstr ""
-"Un dépôt NCBI se téléverse par le portail de soumission : téléchargez "
-"ses fichiers."
+"Un dépôt NCBI se téléverse par le portail de soumission : téléchargez ses "
+"fichiers."
 
 #: poresira/deposits/services.py
 #, python-format
@@ -1366,14 +1365,14 @@ msgstr "RO-Crate"
 
 #: poresira/deposits/templates/deposits/deposit_detail.html
 msgid ""
-"NCBI deposit: PoreSira does not send it. Download the files, submit them"
-" in the NCBI Submission Portal, then record the accessions NCBI gives "
+"NCBI deposit: PoreSira does not send it. Download the files, submit them in "
+"the NCBI Submission Portal, then record the accessions NCBI gives "
 "(import_public_accessions) so that nothing is sent twice."
 msgstr ""
-"Dépôt NCBI : PoreSira ne l'envoie pas. Téléchargez les fichiers, "
-"soumettez-les dans le portail de soumission de NCBI, puis enregistrez "
-"les accessions que NCBI donne (import_public_accessions) pour que rien "
-"ne soit envoyé deux fois."
+"Dépôt NCBI : PoreSira ne l'envoie pas. Téléchargez les fichiers, soumettez-"
+"les dans le portail de soumission de NCBI, puis enregistrez les accessions "
+"que NCBI donne (import_public_accessions) pour que rien ne soit envoyé deux "
+"fois."
 
 #: poresira/deposits/templates/deposits/deposit_detail.html
 msgid ""

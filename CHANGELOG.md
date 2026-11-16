@@ -86,6 +86,10 @@ All notable changes are listed here. The format follows
   `import_public_accessions`. A real deposit cites an existing BioSample instead of registering
   one, refuses reads already in SRA, and mentions GenBank sequences. The demonstration project
   records its NCBI BioProject, 66 BioSamples and 66 SRA runs.
+- `sync_public_archives`: reads NCBI (E-utilities) and ENA (Portal API) for a BioProject, records
+  the BioSample, SRA experiment and run accessions PoreSira lacks (dry run by default), and reports
+  differences: GenBank records (missing, length, isolate), BioSample attributes, sequenced samples
+  with no SRA run. Reading only; links to NCBI and ENA on the sample page.
 - NCBI deposits: the archive is chosen when a deposit is prepared. For NCBI, PoreSira prepares the
   BioSample attributes (package `MIMS.me.plant-associated.6.0`), the SRA metadata, the list of
   files and the steps for the Submission Portal, which a person submits before recording the

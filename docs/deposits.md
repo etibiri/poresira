@@ -55,6 +55,34 @@ PoreSira records it and checks it.
 - GenBank sequences and an existing BioProject of the project are mentioned as warnings. The
   RO-Crate links them, the BioSample and the SRA runs to the public archives.
 
+## Linking PoreSira to the public archives
+
+Once data are deposited, PoreSira can read the archives and keep its records in step:
+
+```bash
+python manage.py sync_public_archives DEMO-SPBF --bioproject PRJNA1460897 --user alice          # dry run
+python manage.py sync_public_archives DEMO-SPBF --bioproject PRJNA1460897 --user alice --apply
+```
+
+- **Reading only.** PoreSira never writes to the archives and never changes a sample, a sequence or
+  a BioSample. Only public accession numbers leave the computer (and the tool name `poresira`; no
+  e-mail address is sent). Run it where the Internet is reachable, for example from cron.
+- **SRA**: NCBI (E-utilities) or ENA (Portal API, where SRA runs are mirrored) give the runs of the
+  BioProject. `--source auto` (the default) tries NCBI then ENA. A run is matched to its sample by a
+  BioSample the project already knows, otherwise by the label of the isolate (a field sample wins
+  over a plant with the same label). The BioProject, BioSamples, experiments and runs that are new
+  are recorded as `PublicAccession`s with `--apply`; a run with no sample is reported, not invented.
+- **GenBank** records have no link to the BioProject or to the BioSample at NCBI. PoreSira checks
+  each of its sequences by accession: not found, different length, different isolate.
+- **BioSamples** are compared with the project: collection date, host and coordinates.
+- **Gaps** are named: sequenced samples with no SRA run.
+- **Limits**: NCBI allows about three requests a second without a key (the reader waits and
+  retries); set `PORESIRA_NCBI_API_KEY` for more. `PORESIRA_NCBI_EUTILS_URL`,
+  `PORESIRA_ENA_PORTAL_URL`, `PORESIRA_PUBLIC_MIN_INTERVAL` and `PORESIRA_PUBLIC_TIMEOUT` tune it.
+
+The sample page links each BioSample, SRA run and GenBank record to NCBI and, for BioSamples and runs,
+to ENA, which mirrors them.
+
 ## A deposit, step by step
 
 1. **Prepare.** On the page of a sequencing run, **Prepare a deposit**: title, description,
