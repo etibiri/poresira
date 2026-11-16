@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 10:46+0000\n"
+"POT-Creation-Date: 2026-11-16 11:18+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -13,6 +13,136 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: poresira/computing/models/job.py
+#: poresira/sequencing/templates/sequencing/run_detail.html
+msgid "Basecalling"
+msgstr "Appel de bases"
+
+#: poresira/computing/models/job.py
+msgid "Demultiplexing"
+msgstr "Démultiplexage"
+
+#: poresira/computing/models/job.py
+msgid "FAST5 to POD5 conversion"
+msgstr "Conversion FAST5 vers POD5"
+
+#: poresira/computing/models/job.py poresira/sequencing/models/run.py
+msgid "Draft"
+msgstr "Brouillon"
+
+#: poresira/computing/models/job.py
+msgid "Submitted"
+msgstr "Soumis"
+
+#: poresira/computing/models/job.py poresira/sequencing/models/run.py
+msgid "Running"
+msgstr "En cours"
+
+#: poresira/computing/models/job.py
+msgid "Succeeded"
+msgstr "Réussi"
+
+#: poresira/computing/models/job.py poresira/samples/models/qc.py
+msgid "Failed"
+msgstr "Non conforme"
+
+#: poresira/computing/models/job.py
+msgid "Cancelled"
+msgstr "Annulé"
+
+#: poresira/computing/models/job.py poresira/pcr/models/run.py
+#: poresira/samples/models/collection.py poresira/samples/models/sample.py
+#: poresira/sequencing/models/run.py poresira/storage/models/file.py
+msgid "project"
+msgstr "projet"
+
+#: poresira/computing/models/job.py poresira/storage/models/file.py
+msgid "sequencing run"
+msgstr "passage de séquençage"
+
+#: poresira/computing/models/job.py poresira/storage/models/backend.py
+#: poresira/storage/models/file.py
+msgid "kind"
+msgstr "nature"
+
+#: poresira/computing/models/job.py poresira/pcr/models/run.py
+#: poresira/samples/models/sample.py poresira/sequencing/models/run.py
+msgid "status"
+msgstr "statut"
+
+#: poresira/computing/models/job.py
+msgid "parameters"
+msgstr "paramètres"
+
+#: poresira/computing/models/job.py
+msgid "script"
+msgstr "script"
+
+#: poresira/computing/models/job.py
+msgid "The batch script as it was submitted."
+msgstr "Le script de calcul tel qu’il a été soumis."
+
+#: poresira/computing/models/job.py
+msgid "tool"
+msgstr "outil"
+
+#: poresira/computing/models/job.py
+msgid "tool version"
+msgstr "version de l'outil"
+
+#: poresira/computing/models/job.py
+msgid "scheduler job ID"
+msgstr "identifiant du travail dans l'ordonnanceur"
+
+#: poresira/computing/models/job.py
+msgid "working directory"
+msgstr "répertoire de travail"
+
+#: poresira/computing/models/job.py
+msgid "log file"
+msgstr "fichier journal"
+
+#: poresira/computing/models/job.py
+msgid "submitted by"
+msgstr "soumis par"
+
+#: poresira/computing/models/job.py
+msgid "submitted at"
+msgstr "soumis le"
+
+#: poresira/computing/models/job.py
+msgid "started at"
+msgstr "démarré le"
+
+#: poresira/computing/models/job.py
+msgid "finished at"
+msgstr "terminé le"
+
+#: poresira/computing/models/job.py
+msgid "exit code"
+msgstr "code de sortie"
+
+#: poresira/computing/models/job.py poresira/pcr/models/reference.py
+#: poresira/pcr/models/run.py poresira/samples/models/collection.py
+#: poresira/samples/models/qc.py poresira/samples/models/sample.py
+#: poresira/samples/models/sequence.py poresira/samples/models/storage.py
+#: poresira/sequencing/models/reference.py poresira/sequencing/models/run.py
+#: poresira/storage/models/backend.py poresira/storage/models/file.py
+msgid "notes"
+msgstr "notes"
+
+#: poresira/computing/models/job.py
+msgid "job"
+msgstr "travail"
+
+#: poresira/computing/models/job.py poresira/storage/models/file.py
+msgid "file"
+msgstr "fichier"
+
+#: poresira/computing/models/job.py
+msgid "SHA-256 at preparation"
+msgstr "SHA-256 à la préparation"
 
 #: poresira/core/history.py
 msgid "Created"
@@ -376,15 +506,6 @@ msgstr "cible"
 msgid "reference"
 msgstr "référence"
 
-#: poresira/pcr/models/reference.py poresira/pcr/models/run.py
-#: poresira/samples/models/collection.py poresira/samples/models/qc.py
-#: poresira/samples/models/sample.py poresira/samples/models/sequence.py
-#: poresira/samples/models/storage.py poresira/sequencing/models/reference.py
-#: poresira/sequencing/models/run.py poresira/storage/models/backend.py
-#: poresira/storage/models/file.py
-msgid "notes"
-msgstr "notes"
-
 #: poresira/pcr/models/reference.py
 msgid "number of cycles"
 msgstr "nombre de cycles"
@@ -532,12 +653,6 @@ msgstr "Négatif"
 msgid "Inconclusive"
 msgstr "Non concluant"
 
-#: poresira/pcr/models/run.py poresira/samples/models/collection.py
-#: poresira/samples/models/sample.py poresira/sequencing/models/run.py
-#: poresira/storage/models/file.py
-msgid "project"
-msgstr "projet"
-
 #: poresira/pcr/models/run.py
 msgid "assay"
 msgstr "test"
@@ -553,11 +668,6 @@ msgstr "nombre de tubes"
 #: poresira/pcr/models/run.py
 msgid "Only for PCR tubes."
 msgstr "Seulement pour les tubes PCR."
-
-#: poresira/pcr/models/run.py poresira/samples/models/sample.py
-#: poresira/sequencing/models/run.py
-msgid "status"
-msgstr "statut"
 
 #: poresira/pcr/models/run.py
 msgid "date"
@@ -1330,10 +1440,6 @@ msgid "Passed"
 msgstr "Conforme"
 
 #: poresira/samples/models/qc.py
-msgid "Failed"
-msgstr "Non conforme"
-
-#: poresira/samples/models/qc.py
 msgid "Not assessed"
 msgstr "Non évalué"
 
@@ -2018,16 +2124,8 @@ msgid "serial number"
 msgstr "numéro de série"
 
 #: poresira/sequencing/models/run.py
-msgid "Draft"
-msgstr "Brouillon"
-
-#: poresira/sequencing/models/run.py
 msgid "Sealed"
 msgstr "Scellée"
-
-#: poresira/sequencing/models/run.py
-msgid "Running"
-msgstr "En cours"
 
 #: poresira/sequencing/models/run.py
 msgid "Completed"
@@ -2490,10 +2588,6 @@ msgid "Run ID"
 msgstr "Identifiant du passage"
 
 #: poresira/sequencing/templates/sequencing/run_detail.html
-msgid "Basecalling"
-msgstr "Appel de bases"
-
-#: poresira/sequencing/templates/sequencing/run_detail.html
 msgid "Acquisition software"
 msgstr "Logiciel d'acquisition"
 
@@ -2636,11 +2730,9 @@ msgid "Path"
 msgstr "Chemin"
 
 #: poresira/storage/forms.py
-msgid ""
-"Relative to the root of the backend, such as runs/run1/reads.fastq.gz."
+msgid "Relative to the root of the backend, such as runs/run1/reads.fastq.gz."
 msgstr ""
-"Relatif à la racine de l'emplacement, par exemple "
-"runs/run1/reads.fastq.gz."
+"Relatif à la racine de l'emplacement, par exemple runs/run1/reads.fastq.gz."
 
 #: poresira/storage/forms.py
 msgid "Detect from the name"
@@ -2675,10 +2767,6 @@ msgstr "Partage réseau (monté)"
 #: poresira/storage/models/backend.py
 msgid "Offline medium (catalogued)"
 msgstr "Support hors ligne (catalogué)"
-
-#: poresira/storage/models/backend.py poresira/storage/models/file.py
-msgid "kind"
-msgstr "nature"
 
 #: poresira/storage/models/backend.py
 msgid "root"
@@ -2777,20 +2865,12 @@ msgid "last checked"
 msgstr "dernière vérification"
 
 #: poresira/storage/models/file.py
-msgid "sequencing run"
-msgstr "passage de séquençage"
-
-#: poresira/storage/models/file.py
 msgid "PCR run"
 msgstr "passage PCR"
 
 #: poresira/storage/models/file.py
 msgid "registered by"
 msgstr "enregistré par"
-
-#: poresira/storage/models/file.py
-msgid "file"
-msgstr "fichier"
 
 #: poresira/storage/models/file.py
 msgid "checked at"
@@ -2909,8 +2989,7 @@ msgid "Root"
 msgstr "Racine"
 
 #: poresira/storage/templates/storage/backend_list.html
-msgid ""
-"No backends yet. Declare one with the create_storage_backend command."
+msgid "No backends yet. Declare one with the create_storage_backend command."
 msgstr ""
 "Aucun emplacement pour le moment. Déclarez-en un avec la commande "
 "create_storage_backend."
