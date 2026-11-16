@@ -616,8 +616,8 @@ def load_demo_data(*, password: str | None = None, synthetic_volume: int = 0) ->
     plan = _make_plan()
     load_pcr_demo(users, project, _table3_field_samples(project, plan))
     load_thesis_pcr(users, project, _dna_extracts(project, plan))
-    load_sequencing_demo(users)
     _link_genomes(users, project)  # also completes a database loaded before genomes existed
+    load_sequencing_demo(users, project)
     summary.counts = _counts(project)
     if synthetic_volume and not Project.objects.filter(code=SYNTHETIC_PROJECT_CODE).exists():
         _load_synthetic(users, synthetic_volume)

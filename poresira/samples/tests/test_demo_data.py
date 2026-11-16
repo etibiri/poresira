@@ -379,15 +379,32 @@ class TestLoading:
             "SQK-NBD114.96",
             "SQK-RBK114.96",
             "SQK-PCB114.24",
+            "SQK-PSK004",
         }
         assert not FlowCellType.objects.get(code="FLO-FLG001").reusable
         assert FlowCellType.objects.get(code="FLO-PRO114M").reusable
         assert set(FlowCell.objects.values_list("flow_cell_id", flat=True)) == {
             "FAT93267",
             "FAV02927",
+            "AMF735",
         }
         loader.load_demo_data()
-        assert FlowCell.objects.count() == 2
+        assert FlowCell.objects.count() == 3
+
+    def test_the_flongle_run_of_bfa316_is_recorded_from_the_minknow_files(self, loaded_demo):
+        from poresira.sequencing.models import RunStatus, SequencingRun
+
+        run = SequencingRun.objects.get()
+        member = run.library.members.get()
+
+        assert run.status == RunStatus.COMPLETED
+        assert run.flow_cell.flow_cell_id == "AMF735"
+        assert not run.flow_cell.type.reusable
+        assert run.instrument.name == "MinION Mk1C MC-111618"
+        assert (run.started_on.isoformat(), run.basecaller_version) == ("2022-11-04", "5.1.13")
+        assert member.sample.label == "Tie_BFA316"
+        assert member.barcode is None
+        assert run.results.get().reads == run.total_reads == 530760
 
     def test_loading_twice_changes_nothing(self, loaded_demo):
         before = (Sample.objects.count(), CollectionEvent.objects.count())
