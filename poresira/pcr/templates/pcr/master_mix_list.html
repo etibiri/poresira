@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Master mixes" %} · PoreSira{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">{% trans "Master mixes" %}</h1>
+  {% if can_manage %}<a class="btn btn-primary btn-sm" href="{% url 'pcr:master-mix-new' %}">{% trans "New master mix" %}</a>{% endif %}
+</div>
+{% for mix in mixes %}
+<div class="card mb-3"><div class="card-body">
+  <h2 class="h6">{{ mix.name }} <span class="text-muted small">{{ mix.polymerase }} · {% blocktrans with volume=mix.reaction_volume_ul|floatformat:"-1" %}{{ volume }} µL per reaction{% endblocktrans %}</span></h2>
+  <table class="table table-sm mb-0">
+    <thead><tr><th>{% trans "Ingredient" %}</th><th>{% trans "Concentration" %}</th><th>{% trans "Volume per reaction (µL)" %}</th></tr></thead>
+    <tbody>
+      {% for part in mix.components.all %}
+      <tr><td>{{ part.name }}</td><td>{{ part.concentration|default:"—" }}</td><td>{{ part.volume_ul|floatformat:"-2" }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if mix.reference %}<p class="small text-muted mt-2 mb-0">{{ mix.reference }}</p>{% endif %}
+</div></div>
+{% empty %}
+<p class="text-muted">{% trans "No master mixes yet." %}</p>
+{% endfor %}
+<a href="{% url 'pcr:run-list' %}">{% trans "PCR runs" %}</a>
+{% endblock %}

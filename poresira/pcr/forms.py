@@ -25,6 +25,7 @@ from .models import (
 __all__ = [
     "PAGE_SIZE",
     "AssayForm",
+    "MasterMixForm",
     "PerformForm",
     "PrimerForm",
     "ProgramForm",
@@ -218,3 +219,43 @@ class AssayForm(BootstrapFormMixin, forms.ModelForm):
         self.fields["forward_primer"].queryset = primers.filter(direction=PrimerDirection.FORWARD)
         self.fields["reverse_primer"].queryset = primers.filter(direction=PrimerDirection.REVERSE)
         self.fields["master_mix"].queryset = MasterMix.objects.active()
+
+
+class MasterMixForm(BootstrapFormMixin, forms.Form):
+    name = forms.CharField(max_length=100, label=_("Name"))
+    polymerase = forms.CharField(required=False, max_length=100, label=_("Polymerase"))
+    reaction_volume_ul = forms.DecimalField(
+        min_value=Decimal("0.1"), max_digits=6, decimal_places=1, label=_("Reaction volume (µL)")
+    )
+    components = forms.CharField(
+        label=_("Ingredients"),
+        widget=forms.Textarea(attrs={"rows": 6}),
+        help_text=_("One per line: ingredient;µL;concentration, e.g. Buffer;5;10X"),
+    )
+    reference = forms.CharField(required=False, label=_("Reference"))
+    notes = forms.CharField(
+        required=False, label=_("Notes"), widget=forms.Textarea(attrs={"rows": 2})
+    )
+
+    def clean_components(self) -> list[dict]:
+        parts = []
+        for number, line in enumerate(self.cleaned_data["components"].splitlines(), start=1):
+            if not line.strip():
+                continue
+            try:
+                name, volume, *concentration = [part.strip() for part in line.split(";")]
+                if not name:
+                    raise ValueError
+                parts.append(
+                    {
+                        "name": name,
+                        "volume_ul": Decimal(volume),
+                        "concentration": ";".join(concentration),
+                    }
+                )
+            except (ValueError, ArithmeticError):
+                raise forms.ValidationError(
+                    _("Line %(number)s is not ingredient;volume;concentration."),
+                    params={"number": number},
+                ) from None
+        return parts

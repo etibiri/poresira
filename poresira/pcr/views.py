@@ -28,6 +28,7 @@ from .models import (
     Assay,
     Container,
     CyclingProgram,
+    MasterMix,
     PcrReaction,
     PcrReactionEvent,
     PcrRun,
@@ -424,6 +425,14 @@ class ProgramListView(ManageContextMixin, LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return CyclingProgram.objects.active().prefetch_related("steps").order_by("name")
+
+
+class MasterMixListView(ManageContextMixin, LoginRequiredMixin, ListView):
+    template_name = "pcr/master_mix_list.html"
+    context_object_name = "mixes"
+
+    def get_queryset(self):
+        return MasterMix.objects.active().prefetch_related("components").order_by("name")
 
 
 class ReferenceCreateView(PcrServiceFormView):

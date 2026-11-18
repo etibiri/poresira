@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 09:25+0000\n"
+"POT-Creation-Date: 2026-11-18 09:47+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -1615,7 +1615,9 @@ msgstr "Étapes"
 
 #: poresira/pcr/forms.py
 msgid "One step per line: stage;°C;seconds;label, e.g. cycle;55;30;Annealing"
-msgstr "Une étape par ligne : phase;°C;secondes;libellé, par ex. cycle;55;30;Hybridation"
+msgstr ""
+"Une étape par ligne : phase;°C;secondes;libellé, par ex. cycle;55;30;"
+"Hybridation"
 
 #: poresira/pcr/forms.py poresira/pcr/templates/pcr/primer_list.html
 msgid "Reference"
@@ -1626,6 +1628,27 @@ msgstr "Référence"
 msgid "Line %(number)s is not stage;temperature;duration;label."
 msgstr ""
 "La ligne %(number)s n'est pas de la forme phase;température;durée;libellé."
+
+#: poresira/pcr/forms.py
+msgid "Polymerase"
+msgstr "Polymérase"
+
+#: poresira/pcr/forms.py
+msgid "Reaction volume (µL)"
+msgstr "Volume de réaction (µL)"
+
+#: poresira/pcr/forms.py
+msgid "Ingredients"
+msgstr "Ingrédients"
+
+#: poresira/pcr/forms.py
+msgid "One per line: ingredient;µL;concentration, e.g. Buffer;5;10X"
+msgstr "Un par ligne : ingrédient;µL;concentration, par ex. Tampon;5;10X"
+
+#: poresira/pcr/forms.py
+#, python-format
+msgid "Line %(number)s is not ingredient;volume;concentration."
+msgstr "La ligne %(number)s n'est pas de la forme ingrédient;volume;concentration."
 
 #: poresira/pcr/models/reference.py
 msgid "Forward"
@@ -2082,12 +2105,43 @@ msgid "No assays yet."
 msgstr "Aucun test pour le moment."
 
 #: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/master_mix_list.html
 #: poresira/pcr/templates/pcr/primer_list.html
 #: poresira/pcr/templates/pcr/program_list.html
 #: poresira/pcr/templates/pcr/run_detail.html
 #: poresira/pcr/templates/pcr/run_list.html
 msgid "PCR runs"
 msgstr "Passages PCR"
+
+#: poresira/pcr/templates/pcr/master_mix_list.html
+#: poresira/pcr/templates/pcr/run_list.html
+msgid "Master mixes"
+msgstr "Mélanges réactionnels"
+
+#: poresira/pcr/templates/pcr/master_mix_list.html poresira/pcr/urls.py
+msgid "New master mix"
+msgstr "Nouveau mélange réactionnel"
+
+#: poresira/pcr/templates/pcr/master_mix_list.html
+#, python-format
+msgid "%(volume)s µL per reaction"
+msgstr "%(volume)s µL par réaction"
+
+#: poresira/pcr/templates/pcr/master_mix_list.html
+msgid "Ingredient"
+msgstr "Ingrédient"
+
+#: poresira/pcr/templates/pcr/master_mix_list.html
+msgid "Concentration"
+msgstr "Concentration"
+
+#: poresira/pcr/templates/pcr/master_mix_list.html
+msgid "Volume per reaction (µL)"
+msgstr "Volume par réaction (µL)"
+
+#: poresira/pcr/templates/pcr/master_mix_list.html
+msgid "No master mixes yet."
+msgstr "Aucun mélange réactionnel pour le moment."
 
 #: poresira/pcr/templates/pcr/primer_list.html
 #: poresira/pcr/templates/pcr/run_list.html

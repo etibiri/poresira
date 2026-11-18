@@ -8,6 +8,7 @@
     <a class="btn btn-outline-secondary btn-sm" href="{% url 'pcr:assay-list' %}">{% trans "Assays" %}</a>
     <a class="btn btn-outline-secondary btn-sm" href="{% url 'pcr:primer-list' %}">{% trans "Primers" %}</a>
     <a class="btn btn-outline-secondary btn-sm" href="{% url 'pcr:program-list' %}">{% trans "Cycling programs" %}</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'pcr:master-mix-list' %}">{% trans "Master mixes" %}</a>
     {% if can_create %}<a class="btn btn-primary btn-sm" href="{% url 'pcr:run-create' %}">{% trans "New run" %}</a>{% endif %}
   </div>
 </div>

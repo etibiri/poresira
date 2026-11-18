@@ -3,7 +3,7 @@ from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
 from . import services, views
-from .forms import AssayForm, PrimerForm, ProgramForm
+from .forms import AssayForm, MasterMixForm, PrimerForm, ProgramForm
 
 app_name = "pcr"
 
@@ -50,5 +50,16 @@ urlpatterns = [
         name="program-new",
     ),
     path("pcr/primers/", views.PrimerListView.as_view(), name="primer-list"),
+    path("pcr/mixes/", views.MasterMixListView.as_view(), name="master-mix-list"),
+    path(
+        "pcr/mixes/new/",
+        views.ReferenceCreateView.as_view(
+            form_class=MasterMixForm,
+            service=services.create_master_mix,
+            title=_("New master mix"),
+            list_url="pcr:master-mix-list",
+        ),
+        name="master-mix-new",
+    ),
     path("pcr/programs/", views.ProgramListView.as_view(), name="program-list"),
 ]

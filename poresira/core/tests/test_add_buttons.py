@@ -126,6 +126,7 @@ class TestReferenceForms:
             "pcr:primer-new",
             "pcr:program-new",
             "pcr:assay-new",
+            "pcr:master-mix-new",
         ],
     )
     def test_a_project_editor_is_refused(self, client, editor, name):
