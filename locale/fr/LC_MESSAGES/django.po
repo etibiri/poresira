@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 17:14+0000\n"
+"POT-Creation-Date: 2026-11-18 09:25+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -45,7 +45,8 @@ msgstr "Tous"
 #: poresira/computing/templates/computing/_jobs.html
 #: poresira/computing/templates/computing/job_detail.html
 #: poresira/computing/templates/computing/job_list.html
-#: poresira/storage/forms.py poresira/storage/templates/storage/_files.html
+#: poresira/deposits/forms.py poresira/storage/forms.py
+#: poresira/storage/templates/storage/_files.html
 #: poresira/storage/templates/storage/backend_list.html
 #: poresira/storage/templates/storage/file_detail.html
 #: poresira/storage/templates/storage/file_list.html
@@ -80,7 +81,7 @@ msgstr "Afficher les annulés"
 msgid "Input files"
 msgstr "Fichiers d'entrée"
 
-#: poresira/computing/forms.py poresira/pcr/forms.py
+#: poresira/computing/forms.py poresira/deposits/forms.py poresira/pcr/forms.py
 #: poresira/pcr/templates/pcr/run_detail.html poresira/samples/forms.py
 #: poresira/samples/templates/samples/event_detail.html
 #: poresira/samples/templates/samples/sample_detail.html
@@ -447,7 +448,9 @@ msgstr "Détails"
 
 #: poresira/computing/templates/computing/job_detail.html
 #: poresira/computing/templates/computing/job_list.html
+#: poresira/computing/views.py
 #: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/urls.py
 msgid "Sequencing run"
 msgstr "Passage de séquençage"
 
@@ -527,6 +530,11 @@ msgid "History"
 msgstr "Historique"
 
 #: poresira/computing/templates/computing/job_list.html
+#: poresira/computing/views.py
+msgid "New job"
+msgstr "Nouveau job"
+
+#: poresira/computing/templates/computing/job_list.html
 #: poresira/deposits/templates/deposits/deposit_list.html
 #: poresira/pcr/templates/pcr/run_list.html
 #: poresira/samples/templates/samples/sample_list.html
@@ -600,6 +608,10 @@ msgstr "Précédent"
 msgid "Next"
 msgstr "Suivant"
 
+#: poresira/computing/views.py
+msgid "Job type"
+msgstr "Type de job"
+
 #: poresira/computing/views.py poresira/deposits/views.py
 msgid "Prepare"
 msgstr "Préparer"
@@ -632,6 +644,10 @@ msgstr "Annuler le travail"
 msgid "Job voided."
 msgstr "Travail annulé."
 
+#: poresira/core/admin.py templates/admin/base_site.html
+msgid "Administration"
+msgstr "Administration"
+
 #: poresira/core/history.py
 msgid "Created"
 msgstr "Créé"
@@ -649,7 +665,7 @@ msgid "Code"
 msgstr "Code"
 
 #: poresira/core/history.py poresira/core/templates/core/project_list.html
-#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/forms.py poresira/pcr/templates/pcr/assay_list.html
 #: poresira/pcr/templates/pcr/primer_list.html
 #: poresira/sequencing/templates/sequencing/library_list.html
 #: poresira/sequencing/templates/sequencing/reference.html
@@ -998,6 +1014,31 @@ msgstr "Les permis de prélèvement et de partage des avantages ont été vérif
 msgid "Required before anything is made public."
 msgstr "Obligatoire avant toute publication."
 
+#: poresira/deposits/forms.py
+#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/samples/templates/samples/sample_detail.html
+msgid "Accession"
+msgstr "Numéro d'accession"
+
+#: poresira/deposits/forms.py poresira/deposits/models/deposit.py
+#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/pcr/models/run.py poresira/samples/views.py
+#: poresira/sequencing/forms.py
+#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html
+msgid "Sample"
+msgstr "Échantillon"
+
+#: poresira/deposits/forms.py
+msgid "The field sample or living plant; leave empty for a BioProject."
+msgstr ""
+"L'échantillon de terrain ou la plante vivante ; à laisser vide pour un "
+"BioProject."
+
+#: poresira/deposits/forms.py
+msgid "Released on"
+msgstr "Publié le"
+
 #: poresira/deposits/models/deposit.py
 msgid "European Nucleotide Archive (ENA)"
 msgstr "Archive européenne de nucléotides (ENA)"
@@ -1030,15 +1071,6 @@ msgstr "Refusé"
 #: poresira/deposits/templates/deposits/deposit_detail.html
 msgid "Study"
 msgstr "Étude"
-
-#: poresira/deposits/models/deposit.py
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/pcr/models/run.py poresira/samples/views.py
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-msgid "Sample"
-msgstr "Échantillon"
 
 #: poresira/deposits/models/deposit.py
 #: poresira/deposits/templates/deposits/deposit_detail.html
@@ -1420,7 +1452,7 @@ msgstr "Liste de contrôle d'échantillon"
 #: poresira/samples/templates/samples/sample_detail.html
 #: poresira/sequencing/templates/sequencing/run_detail.html
 #: poresira/sequencing/templates/sequencing/run_list.html
-#: poresira/sequencing/views.py
+#: poresira/sequencing/urls.py poresira/sequencing/views.py
 msgid "Library"
 msgstr "Bibliothèque"
 
@@ -1441,11 +1473,6 @@ msgid "Alias"
 msgstr "Alias"
 
 #: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-msgid "Accession"
-msgstr "Numéro d'accession"
-
-#: poresira/deposits/templates/deposits/deposit_detail.html
 msgid "Message"
 msgstr "Message"
 
@@ -1462,6 +1489,16 @@ msgid "Last receipt"
 msgstr "Dernier reçu"
 
 #: poresira/deposits/templates/deposits/deposit_list.html
+#: poresira/deposits/views.py
+msgid "Record an existing accession"
+msgstr "Enregistrer une accession existante"
+
+#: poresira/deposits/templates/deposits/deposit_list.html
+#: poresira/deposits/urls.py poresira/deposits/views.py
+msgid "New deposit"
+msgstr "Nouveau dépôt"
+
+#: poresira/deposits/templates/deposits/deposit_list.html
 msgid "Objects"
 msgstr "Objets"
 
@@ -1469,9 +1506,13 @@ msgstr "Objets"
 msgid "No deposits to show."
 msgstr "Aucun dépôt à afficher."
 
+#: poresira/deposits/views.py poresira/samples/views.py
+msgid "Record"
+msgstr "Enregistrer"
+
 #: poresira/deposits/views.py
-msgid "New deposit"
-msgstr "Nouveau dépôt"
+msgid "Accession recorded."
+msgstr "Accession enregistrée."
 
 #: poresira/deposits/views.py
 msgid "Deposit prepared. Review the report."
@@ -1563,6 +1604,28 @@ msgstr "Un témoin n'a pas d'échantillon comme matrice."
 msgid "Required once the run is closed; recorded in the audit log."
 msgstr ""
 "Obligatoire une fois le passage clos ; enregistré dans le journal d'audit."
+
+#: poresira/pcr/forms.py
+msgid "Cycles"
+msgstr "Cycles"
+
+#: poresira/pcr/forms.py
+msgid "Steps"
+msgstr "Étapes"
+
+#: poresira/pcr/forms.py
+msgid "One step per line: stage;°C;seconds;label, e.g. cycle;55;30;Annealing"
+msgstr "Une étape par ligne : phase;°C;secondes;libellé, par ex. cycle;55;30;Hybridation"
+
+#: poresira/pcr/forms.py poresira/pcr/templates/pcr/primer_list.html
+msgid "Reference"
+msgstr "Référence"
+
+#: poresira/pcr/forms.py
+#, python-format
+msgid "Line %(number)s is not stage;temperature;duration;label."
+msgstr ""
+"La ligne %(number)s n'est pas de la forme phase;température;durée;libellé."
 
 #: poresira/pcr/models/reference.py
 msgid "Forward"
@@ -1973,6 +2036,10 @@ msgstr "Annulez d'abord les passages de ce test."
 msgid "Assays"
 msgstr "Tests"
 
+#: poresira/pcr/templates/pcr/assay_list.html poresira/pcr/urls.py
+msgid "New assay"
+msgstr "Nouvel essai"
+
 #: poresira/pcr/templates/pcr/assay_list.html
 #: poresira/pcr/templates/pcr/primer_list.html
 msgid "Target"
@@ -2027,6 +2094,10 @@ msgstr "Passages PCR"
 msgid "Primers"
 msgstr "Amorces"
 
+#: poresira/pcr/templates/pcr/primer_list.html poresira/pcr/urls.py
+msgid "New primer"
+msgstr "Nouvelle amorce"
+
 #: poresira/pcr/templates/pcr/primer_list.html
 msgid "Sequence (5'→3')"
 msgstr "Séquence (5'→3')"
@@ -2040,10 +2111,6 @@ msgid "Direction"
 msgstr "Sens"
 
 #: poresira/pcr/templates/pcr/primer_list.html
-msgid "Reference"
-msgstr "Référence"
-
-#: poresira/pcr/templates/pcr/primer_list.html
 msgid "No primers yet."
 msgstr "Aucune amorce pour le moment."
 
@@ -2051,6 +2118,10 @@ msgstr "Aucune amorce pour le moment."
 #: poresira/pcr/templates/pcr/run_list.html
 msgid "Cycling programs"
 msgstr "Programmes de cycles"
+
+#: poresira/pcr/templates/pcr/program_list.html poresira/pcr/urls.py
+msgid "New cycling program"
+msgstr "Nouveau programme de cycles"
 
 #: poresira/pcr/templates/pcr/program_list.html
 #, python-format
@@ -2200,6 +2271,8 @@ msgid "No reactions yet."
 msgstr "Aucune réaction pour le moment."
 
 #: poresira/pcr/templates/pcr/run_list.html
+#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/sequencing/urls.py
 msgid "New run"
 msgstr "Nouveau passage"
 
@@ -2235,7 +2308,7 @@ msgstr "Créer"
 msgid "PCR run planned."
 msgstr "Passage PCR planifié."
 
-#: poresira/pcr/views.py poresira/sequencing/views.py
+#: poresira/pcr/views.py poresira/sequencing/views.py poresira/storage/views.py
 msgid "Add"
 msgstr "Ajouter"
 
@@ -2290,6 +2363,10 @@ msgstr "Annuler la réaction"
 #: poresira/pcr/views.py
 msgid "Reaction voided."
 msgstr "Réaction annulée."
+
+#: poresira/pcr/views.py poresira/sequencing/views.py
+msgid "Added."
+msgstr "Ajouté."
 
 #: poresira/samples/forms.py
 msgid "Search"
@@ -2812,10 +2889,15 @@ msgid "Measure"
 msgstr "Mesurer"
 
 #: poresira/samples/templates/samples/sample_detail.html
+msgid "GenBank sequence"
+msgstr "Séquence GenBank"
+
+#: poresira/samples/templates/samples/sample_detail.html
 msgid "Edit"
 msgstr "Modifier"
 
 #: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/urls.py
 msgid "Collection event"
 msgstr "Événement de collecte"
 
@@ -2874,6 +2956,10 @@ msgstr "Résultats PCR"
 msgid "Runs"
 msgstr "Passages"
 
+#: poresira/samples/templates/samples/sample_list.html poresira/samples/urls.py
+msgid "New sample"
+msgstr "Nouvel échantillon"
+
 #: poresira/samples/templates/samples/storage_tree.html
 #: poresira/samples/views.py
 msgid "New storage location"
@@ -2893,6 +2979,10 @@ msgstr "Aucun emplacement de stockage pour le moment."
 #: poresira/samples/views.py
 msgid "Save"
 msgstr "Enregistrer"
+
+#: poresira/samples/views.py
+msgid "Continue"
+msgstr "Continuer"
 
 #: poresira/samples/views.py
 msgid "Edit description"
@@ -2929,6 +3019,14 @@ msgstr "Enregistrer une mesure"
 #: poresira/samples/views.py
 msgid "Measurement recorded."
 msgstr "Mesure enregistrée."
+
+#: poresira/samples/views.py
+msgid "Record a GenBank sequence"
+msgstr "Enregistrer une séquence GenBank"
+
+#: poresira/samples/views.py
+msgid "Sequence recorded."
+msgstr "Séquence enregistrée."
 
 #: poresira/samples/views.py
 msgid "Void sample"
@@ -2980,10 +3078,20 @@ msgstr ""
 "comme PAW12345."
 
 #: poresira/sequencing/forms.py
+#: poresira/sequencing/templates/sequencing/_tabs.html
+#: poresira/sequencing/templates/sequencing/reference.html
+msgid "Kits and instruments"
+msgstr "Kits et appareils"
+
+#: poresira/sequencing/forms.py
 #: poresira/sequencing/templates/sequencing/library_detail.html
 #: poresira/sequencing/templates/sequencing/library_list.html
 msgid "Kit"
 msgstr "Kit"
+
+#: poresira/sequencing/forms.py
+msgid "Not in the list? Add the kit in"
+msgstr "Absent de la liste ? Ajoutez le kit dans"
 
 #: poresira/sequencing/forms.py
 msgid "Identifier or label of the DNA extract or RCA product."
@@ -3025,6 +3133,10 @@ msgstr "Qualité moyenne (Q)"
 msgid "Required once the run is completed; recorded in the audit log."
 msgstr ""
 "Obligatoire une fois le passage terminé ; consignée dans le journal d'audit."
+
+#: poresira/sequencing/forms.py
+msgid "Not in the list? Add the type in"
+msgstr "Absent de la liste ? Ajoutez le type dans"
 
 #: poresira/sequencing/models/reference.py
 msgid "Oxford Nanopore"
@@ -3371,11 +3483,6 @@ msgstr "Bibliothèques"
 msgid "Flow cells"
 msgstr "Cellules de flux"
 
-#: poresira/sequencing/templates/sequencing/_tabs.html
-#: poresira/sequencing/templates/sequencing/reference.html
-msgid "Kits and instruments"
-msgstr "Kits et appareils"
-
 #: poresira/sequencing/templates/sequencing/flow_cell_list.html
 #: poresira/sequencing/views.py
 msgid "Register a flow cell"
@@ -3472,6 +3579,11 @@ msgid "Library kits"
 msgstr "Kits de préparation"
 
 #: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/urls.py
+msgid "New library kit"
+msgstr "Nouveau kit de préparation"
+
+#: poresira/sequencing/templates/sequencing/reference.html
 msgid "Kit code"
 msgstr "Code du kit"
 
@@ -3492,6 +3604,11 @@ msgid "Flow cell types"
 msgstr "Types de cellule de flux"
 
 #: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/urls.py
+msgid "New flow cell type"
+msgstr "Nouveau type de cellule de flux"
+
+#: poresira/sequencing/templates/sequencing/reference.html
 msgid "Product code"
 msgstr "Code produit"
 
@@ -3506,6 +3623,11 @@ msgstr "Aucun type de cellule de flux pour le moment."
 #: poresira/sequencing/templates/sequencing/reference.html
 msgid "Instruments"
 msgstr "Appareils"
+
+#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/urls.py
+msgid "New instrument"
+msgstr "Nouvel appareil"
 
 #: poresira/sequencing/templates/sequencing/reference.html
 msgid "Serial number"
@@ -3928,12 +4050,18 @@ msgid "Storage backends"
 msgstr "Emplacements de stockage"
 
 #: poresira/storage/templates/storage/backend_list.html
+#: poresira/storage/views.py
+msgid "New storage backend"
+msgstr "Nouvel emplacement de stockage"
+
+#: poresira/storage/templates/storage/backend_list.html
 msgid "Root"
 msgstr "Racine"
 
 #: poresira/storage/templates/storage/backend_list.html
 msgid "No backends yet. Add one with the button above."
-msgstr "Aucun emplacement pour le moment. Ajoutez-en un avec le bouton ci-dessus."
+msgstr ""
+"Aucun emplacement pour le moment. Ajoutez-en un avec le bouton ci-dessus."
 
 #: poresira/storage/templates/storage/file_detail.html
 msgid "Check now"
@@ -4022,3 +4150,7 @@ msgstr "Annuler le fichier"
 #: poresira/storage/views.py
 msgid "File voided."
 msgstr "Fichier annulé."
+
+#: poresira/storage/views.py
+msgid "Storage backend added."
+msgstr "Emplacement de stockage ajouté."

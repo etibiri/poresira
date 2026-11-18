@@ -163,10 +163,7 @@ class ProgramForm(BootstrapFormMixin, forms.Form):
     steps = forms.CharField(
         label=_("Steps"),
         widget=forms.Textarea(attrs={"rows": 6}),
-        help_text=_(
-            "One step per line: stage;temperature (°C);duration (s);label. The stage is "
-            "initial, cycle or final. Example: cycle;55;30;Annealing"
-        ),
+        help_text=_("One step per line: stage;°C;seconds;label, e.g. cycle;55;30;Annealing"),
     )
     reference = forms.CharField(required=False, label=_("Reference"))
     notes = forms.CharField(
