@@ -27,6 +27,7 @@ from .forms import (
     QcForm,
     SampleEditForm,
     SampleFilterForm,
+    SequenceRecordForm,
     StorageLocationForm,
     VoidForm,
 )
@@ -325,6 +326,17 @@ class SampleQcView(SampleMixin, ServiceFormView):
             apply_to_sample=apply_to_sample,
             **values,
         )
+
+
+class SampleSequenceView(SampleMixin, ServiceFormView):
+    form_class = SequenceRecordForm
+    title = _("Record a GenBank sequence")
+    submit_label = _("Record")
+    success_message = _("Sequence recorded.")
+
+    def perform(self, cleaned_data):
+        data = {k: v for k, v in cleaned_data.items() if v not in (None, "")}
+        return services.record_sequence(user=self.request.user, sample=self.sample, **data)
 
 
 class SampleVoidView(SampleMixin, ServiceFormView):

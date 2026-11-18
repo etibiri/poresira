@@ -5,8 +5,9 @@ from django.utils.translation import gettext_lazy as _
 from poresira.core.forms import BootstrapFormMixin
 from poresira.core.models import Project
 from poresira.samples.forms import PAGE_SIZE, ReasonFormMixin, VoidForm
+from poresira.samples.models import Sample, SampleKind
 
-from .models import Deposit, DepositStatus, Environment
+from .models import AccessionKind, Deposit, DepositStatus, Environment
 
 __all__ = [
     "PAGE_SIZE",
@@ -14,6 +15,7 @@ __all__ = [
     "DepositFilterForm",
     "NewDepositForm",
     "ProductionForm",
+    "PublicAccessionForm",
     "ReasonForm",
     "VoidForm",
 ]
@@ -86,3 +88,31 @@ class ProductionForm(BootstrapFormMixin, forms.Form):
         label=_("Sampling and benefit-sharing permits were checked"),
         help_text=_("Required before anything is made public."),
     )
+
+
+class PublicAccessionForm(BootstrapFormMixin, forms.Form):
+    """An accession NCBI, ENA or DDBJ already gave (for example from an earlier GenBank deposit)."""
+
+    project = forms.ModelChoiceField(queryset=Project.objects.none(), label=_("Project"))
+    kind = forms.ChoiceField(choices=AccessionKind.choices, label=_("Kind"))
+    accession = forms.CharField(max_length=20, label=_("Accession"))
+    sample = forms.ModelChoiceField(
+        queryset=Sample.objects.none(),
+        required=False,
+        label=_("Sample"),
+        help_text=_("The field sample or living plant; leave empty for a BioProject."),
+    )
+    released_on = forms.DateField(
+        required=False, label=_("Released on"), widget=forms.DateInput(attrs={"type": "date"})
+    )
+    notes = forms.CharField(
+        required=False, label=_("Notes"), widget=forms.Textarea(attrs={"rows": 2})
+    )
+
+    def __init__(self, *args, editable_projects, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["project"].queryset = editable_projects
+        self.fields["sample"].queryset = Sample.objects.active().filter(
+            project__in=editable_projects,
+            kind__in=[SampleKind.FIELD_SAMPLE, SampleKind.LIVING_PLANT],
+        )

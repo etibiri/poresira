@@ -22,6 +22,11 @@ urlpatterns = [
         ),
         name="deposit-pick",
     ),
+    path(
+        "deposits/accessions/new/",
+        views.PublicAccessionCreateView.as_view(),
+        name="accession-new",
+    ),
     path("deposits/<uuid:pk>/", views.DepositDetailView.as_view(), name="deposit-detail"),
     path("deposits/<uuid:pk>/submit/", views.DepositSubmitView.as_view(), name="deposit-submit"),
     path(

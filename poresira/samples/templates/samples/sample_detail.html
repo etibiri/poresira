@@ -19,6 +19,7 @@
     <a class="btn btn-outline-primary btn-sm" href="{% url 'samples:sample-move' sample.pk %}">{% trans "Move" %}</a>
     <a class="btn btn-outline-primary btn-sm" href="{% url 'samples:sample-change' sample.pk %}">{% trans "Status and quantities" %}</a>
     <a class="btn btn-outline-primary btn-sm" href="{% url 'samples:sample-qc' sample.pk %}">{% trans "Measure" %}</a>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'samples:sample-sequence' sample.pk %}">{% trans "GenBank sequence" %}</a>
     <a class="btn btn-outline-secondary btn-sm" href="{% url 'samples:sample-edit' sample.pk %}">{% trans "Edit" %}</a>
     <a class="btn btn-outline-danger btn-sm" href="{% url 'samples:sample-void' sample.pk %}">{% trans "Void" %}</a>
   </div>

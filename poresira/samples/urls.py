@@ -25,6 +25,11 @@ urlpatterns = [
     path("samples/<uuid:pk>/derive/", views.SampleDeriveView.as_view(), name="sample-derive"),
     path("samples/<uuid:pk>/move/", views.SampleMoveView.as_view(), name="sample-move"),
     path("samples/<uuid:pk>/change/", views.SampleChangeView.as_view(), name="sample-change"),
+    path(
+        "samples/<uuid:pk>/sequences/new/",
+        views.SampleSequenceView.as_view(),
+        name="sample-sequence",
+    ),
     path("samples/<uuid:pk>/qc/", views.SampleQcView.as_view(), name="sample-qc"),
     path("samples/<uuid:pk>/void/", views.SampleVoidView.as_view(), name="sample-void"),
     path("measurements/<uuid:pk>/void/", views.QcVoidView.as_view(), name="qc-void"),

@@ -24,6 +24,7 @@ from .forms import (
     DepositFilterForm,
     NewDepositForm,
     ProductionForm,
+    PublicAccessionForm,
     ReasonForm,
     VoidForm,
 )
@@ -169,6 +170,26 @@ class DepositDetailView(DepositMixin, LoginRequiredMixin, TemplateView):
             entries=history,
             **kwargs,
         )
+
+
+class PublicAccessionCreateView(DepositServiceFormView):
+    """Record an accession that a public archive already gave, so no deposit sends it twice."""
+
+    form_class = PublicAccessionForm
+    title = gettext_lazy("Record an existing accession")
+    submit_label = gettext_lazy("Record")
+    success_message = gettext_lazy("Accession recorded.")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.pop("instance", None)
+        return {**kwargs, "editable_projects": Project.objects.editable_by(self.request.user)}
+
+    def perform(self, cleaned_data):
+        return services.record_public_accession(user=self.request.user, **cleaned_data)
+
+    def get_success_url(self) -> str:
+        return reverse("deposits:deposit-list")
 
 
 class DepositCreateView(DepositServiceFormView):

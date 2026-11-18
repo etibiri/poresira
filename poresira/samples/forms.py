@@ -12,6 +12,7 @@ from .models import (
     Sample,
     SampleKind,
     SampleStatus,
+    SequenceRecord,
     StorageLocation,
     StorageLocationKind,
 )
@@ -239,4 +240,24 @@ class StorageLocationForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = StorageLocation
         fields = STORAGE_FIELDS
+        widgets = {"notes": forms.Textarea(attrs={"rows": 2})}
+
+
+class SequenceRecordForm(BootstrapFormMixin, forms.ModelForm):
+    """A sequence that is already public in GenBank (or ENA, DDBJ), made from the sample."""
+
+    class Meta:
+        model = SequenceRecord
+        fields = [
+            "accession",
+            "version",
+            "organism",
+            "isolate",
+            "length_bp",
+            "topology",
+            "assembly_method",
+            "biosample_accession",
+            "bioproject_accession",
+            "notes",
+        ]
         widgets = {"notes": forms.Textarea(attrs={"rows": 2})}
