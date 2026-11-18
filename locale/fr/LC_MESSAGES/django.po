@@ -3932,10 +3932,8 @@ msgid "Root"
 msgstr "Racine"
 
 #: poresira/storage/templates/storage/backend_list.html
-msgid "No backends yet. Declare one with the create_storage_backend command."
-msgstr ""
-"Aucun emplacement pour le moment. Déclarez-en un avec la commande "
-"create_storage_backend."
+msgid "No backends yet. Add one with the button above."
+msgstr "Aucun emplacement pour le moment. Ajoutez-en un avec le bouton ci-dessus."
 
 #: poresira/storage/templates/storage/file_detail.html
 msgid "Check now"

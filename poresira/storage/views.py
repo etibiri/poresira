@@ -19,6 +19,7 @@ from . import services
 from .backends import FileNotReadableError
 from .forms import (
     PAGE_SIZE,
+    BackendForm,
     FileFilterForm,
     ReasonForm,
     RegisterFileForm,
@@ -26,6 +27,7 @@ from .forms import (
     VoidForm,
 )
 from .models import DataFile, DataFileEvent, StorageBackend
+from .permissions import can_manage_reference_data
 from .tasks import verify_file_task
 
 FILE_HISTORY_FIELDS = ("tier", "notes", "voided_at", "void_reason")
@@ -247,3 +249,26 @@ class BackendListView(LoginRequiredMixin, ListView):
             .annotate(file_count=Count("files", filter=Q(files__voided_at__isnull=True)))
             .order_by("name")
         )
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(
+            can_manage=can_manage_reference_data(self.request.user), **kwargs
+        )
+
+
+class BackendCreateView(StorageServiceFormView):
+    form_class = BackendForm
+    title = gettext_lazy("New storage backend")
+    submit_label = gettext_lazy("Add")
+    success_message = gettext_lazy("Storage backend added.")
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and not can_manage_reference_data(request.user):
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+    def perform(self, cleaned_data):
+        return services.create_backend(user=self.request.user, **cleaned_data)
+
+    def get_success_url(self) -> str:
+        return reverse("storage:backend-list")

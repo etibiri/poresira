@@ -10,12 +10,20 @@ from .models import FileKind, Integrity, StorageBackend, Tier
 
 __all__ = [
     "PAGE_SIZE",
+    "BackendForm",
     "FileFilterForm",
     "ReasonForm",
     "RegisterFileForm",
     "TierForm",
     "VoidForm",
 ]
+
+
+class BackendForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = StorageBackend
+        fields = ["name", "kind", "root", "notes"]
+        widgets = {"notes": forms.Textarea(attrs={"rows": 2})}
 
 
 class ReasonForm(BootstrapFormMixin, ReasonFormMixin):

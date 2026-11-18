@@ -17,4 +17,5 @@ urlpatterns = [
         name="file-register",
     ),
     path("files/backends/", views.BackendListView.as_view(), name="backend-list"),
+    path("files/backends/new/", views.BackendCreateView.as_view(), name="backend-new"),
 ]
