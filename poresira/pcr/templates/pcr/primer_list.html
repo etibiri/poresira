@@ -2,7 +2,10 @@
 {# SPDX-License-Identifier: AGPL-3.0-or-later #}
 {% block title %}{% trans "Primers" %} · PoreSira{% endblock %}
 {% block content %}
-<h1 class="h3 mb-3">{% trans "Primers" %}</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">{% trans "Primers" %}</h1>
+  {% if can_manage %}<a class="btn btn-primary btn-sm" href="{% url 'pcr:primer-new' %}">{% trans "New primer" %}</a>{% endif %}
+</div>
 <table class="table table-sm align-middle">
   <thead><tr>
     <th>{% trans "Name" %}</th><th>{% trans "Sequence (5'→3')" %}</th><th>{% trans "Length" %}</th>

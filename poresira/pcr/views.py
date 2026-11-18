@@ -36,6 +36,7 @@ from .models import (
     Result,
     RunStatus,
 )
+from .permissions import can_manage_reference_data
 
 RUN_HISTORY_FIELDS = (
     "status",
@@ -390,7 +391,14 @@ class ReactionVoidView(ReactionMixin, PcrServiceFormView):
         )
 
 
-class AssayListView(LoginRequiredMixin, ListView):
+class ManageContextMixin:
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(
+            can_manage=can_manage_reference_data(self.request.user), **kwargs
+        )
+
+
+class AssayListView(ManageContextMixin, LoginRequiredMixin, ListView):
     template_name = "pcr/assay_list.html"
     context_object_name = "assays"
 
@@ -402,7 +410,7 @@ class AssayListView(LoginRequiredMixin, ListView):
         )
 
 
-class PrimerListView(LoginRequiredMixin, ListView):
+class PrimerListView(ManageContextMixin, LoginRequiredMixin, ListView):
     template_name = "pcr/primer_list.html"
     context_object_name = "primers"
 
@@ -410,9 +418,30 @@ class PrimerListView(LoginRequiredMixin, ListView):
         return Primer.objects.active().order_by("name")
 
 
-class ProgramListView(LoginRequiredMixin, ListView):
+class ProgramListView(ManageContextMixin, LoginRequiredMixin, ListView):
     template_name = "pcr/program_list.html"
     context_object_name = "programs"
 
     def get_queryset(self):
         return CyclingProgram.objects.active().prefetch_related("steps").order_by("name")
+
+
+class ReferenceCreateView(PcrServiceFormView):
+    """Add a primer, a cycling program or an assay; ``service`` records it."""
+
+    submit_label = gettext_lazy("Add")
+    success_message = gettext_lazy("Added.")
+    service = None
+    list_url = ""
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and not can_manage_reference_data(request.user):
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+    def perform(self, cleaned_data):
+        data = {k: v for k, v in cleaned_data.items() if v not in (None, "")}
+        return self.service(user=self.request.user, **data)
+
+    def get_success_url(self) -> str:
+        return reverse(self.list_url)

@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 from django.urls import path
+from django.utils.translation import gettext_lazy as _
 
-from . import views
+from . import services, views
+from .forms import AssayForm, PrimerForm, ProgramForm
 
 app_name = "pcr"
 
@@ -17,6 +19,36 @@ urlpatterns = [
     path("pcr/reactions/<uuid:pk>/result/", views.ResultView.as_view(), name="reaction-result"),
     path("pcr/reactions/<uuid:pk>/void/", views.ReactionVoidView.as_view(), name="reaction-void"),
     path("pcr/assays/", views.AssayListView.as_view(), name="assay-list"),
+    path(
+        "pcr/assays/new/",
+        views.ReferenceCreateView.as_view(
+            form_class=AssayForm,
+            service=services.create_assay,
+            title=_("New assay"),
+            list_url="pcr:assay-list",
+        ),
+        name="assay-new",
+    ),
+    path(
+        "pcr/primers/new/",
+        views.ReferenceCreateView.as_view(
+            form_class=PrimerForm,
+            service=services.create_primer,
+            title=_("New primer"),
+            list_url="pcr:primer-list",
+        ),
+        name="primer-new",
+    ),
+    path(
+        "pcr/programs/new/",
+        views.ReferenceCreateView.as_view(
+            form_class=ProgramForm,
+            service=services.create_cycling_program,
+            title=_("New cycling program"),
+            list_url="pcr:program-list",
+        ),
+        name="program-new",
+    ),
     path("pcr/primers/", views.PrimerListView.as_view(), name="primer-list"),
     path("pcr/programs/", views.ProgramListView.as_view(), name="program-list"),
 ]

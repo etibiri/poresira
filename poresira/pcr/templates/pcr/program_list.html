@@ -2,7 +2,10 @@
 {# SPDX-License-Identifier: AGPL-3.0-or-later #}
 {% block title %}{% trans "Cycling programs" %} · PoreSira{% endblock %}
 {% block content %}
-<h1 class="h3 mb-3">{% trans "Cycling programs" %}</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">{% trans "Cycling programs" %}</h1>
+  {% if can_manage %}<a class="btn btn-primary btn-sm" href="{% url 'pcr:program-new' %}">{% trans "New cycling program" %}</a>{% endif %}
+</div>
 {% for program in programs %}
 <div class="card mb-3"><div class="card-body">
   <h2 class="h6">{{ program.name }} <span class="text-muted small">{% blocktrans with cycles=program.cycles %}{{ cycles }} cycles{% endblocktrans %}</span></h2>

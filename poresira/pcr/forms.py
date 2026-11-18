@@ -1,4 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+from decimal import Decimal
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
@@ -7,11 +9,25 @@ from poresira.core.models import Project
 from poresira.samples.forms import PAGE_SIZE, ReasonFormMixin, VoidForm
 from poresira.samples.models import Sample
 
-from .models import Assay, Container, PcrReaction, PcrRun, Result, Role
+from .models import (
+    Assay,
+    Container,
+    MasterMix,
+    PcrReaction,
+    PcrRun,
+    Primer,
+    PrimerDirection,
+    Result,
+    Role,
+    StepStage,
+)
 
 __all__ = [
     "PAGE_SIZE",
+    "AssayForm",
     "PerformForm",
+    "PrimerForm",
+    "ProgramForm",
     "ReactionForm",
     "ReasonForm",
     "ResultForm",
@@ -132,3 +148,76 @@ class ResultForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["result"].choices = [c for c in Result.choices if c[0] != Result.PENDING]
+
+
+class PrimerForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = Primer
+        fields = ["name", "sequence", "direction", "target", "reference", "notes"]
+        widgets = {"notes": forms.Textarea(attrs={"rows": 2})}
+
+
+class ProgramForm(BootstrapFormMixin, forms.Form):
+    name = forms.CharField(max_length=100, label=_("Name"))
+    cycles = forms.IntegerField(min_value=1, label=_("Cycles"))
+    steps = forms.CharField(
+        label=_("Steps"),
+        widget=forms.Textarea(attrs={"rows": 6}),
+        help_text=_(
+            "One step per line: stage;temperature (°C);duration (s);label. The stage is "
+            "initial, cycle or final. Example: cycle;55;30;Annealing"
+        ),
+    )
+    reference = forms.CharField(required=False, label=_("Reference"))
+    notes = forms.CharField(
+        required=False, label=_("Notes"), widget=forms.Textarea(attrs={"rows": 2})
+    )
+
+    def clean_steps(self) -> list[dict]:
+        steps = []
+        for number, line in enumerate(self.cleaned_data["steps"].splitlines(), start=1):
+            if not line.strip():
+                continue
+            try:
+                stage, temperature, seconds, *label = [part.strip() for part in line.split(";")]
+                if stage not in StepStage.values:
+                    raise ValueError
+                steps.append(
+                    {
+                        "stage": stage,
+                        "temperature_c": Decimal(temperature),
+                        "duration_seconds": int(seconds),
+                        "label": ";".join(label),
+                    }
+                )
+            except (ValueError, ArithmeticError):
+                raise forms.ValidationError(
+                    _("Line %(number)s is not stage;temperature;duration;label."),
+                    params={"number": number},
+                ) from None
+        return steps
+
+
+class AssayForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = Assay
+        fields = [
+            "name",
+            "target",
+            "forward_primer",
+            "reverse_primer",
+            "cycling_program",
+            "master_mix",
+            "reverse_transcription",
+            "expected_amplicon_bp",
+            "reference",
+            "notes",
+        ]
+        widgets = {"notes": forms.Textarea(attrs={"rows": 2})}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        primers = Primer.objects.active()
+        self.fields["forward_primer"].queryset = primers.filter(direction=PrimerDirection.FORWARD)
+        self.fields["reverse_primer"].queryset = primers.filter(direction=PrimerDirection.REVERSE)
+        self.fields["master_mix"].queryset = MasterMix.objects.active()
