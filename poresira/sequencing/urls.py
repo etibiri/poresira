@@ -4,7 +4,8 @@ from django.utils.translation import gettext_lazy as _
 
 from poresira.samples.views import PickParentView
 
-from . import views
+from . import services, views
+from .forms import FlowCellTypeForm, InstrumentForm, LibraryKitForm
 from .models import Library
 
 app_name = "sequencing"
@@ -62,4 +63,31 @@ urlpatterns = [
         name="flow-cell-register",
     ),
     path("sequencing/reference/", views.ReferenceView.as_view(), name="reference"),
+    path(
+        "sequencing/reference/kits/new/",
+        views.ReferenceCreateView.as_view(
+            form_class=LibraryKitForm,
+            service=services.create_library_kit,
+            title=_("New library kit"),
+        ),
+        name="kit-new",
+    ),
+    path(
+        "sequencing/reference/flow-cell-types/new/",
+        views.ReferenceCreateView.as_view(
+            form_class=FlowCellTypeForm,
+            service=services.create_flow_cell_type,
+            title=_("New flow cell type"),
+        ),
+        name="flow-cell-type-new",
+    ),
+    path(
+        "sequencing/reference/instruments/new/",
+        views.ReferenceCreateView.as_view(
+            form_class=InstrumentForm,
+            service=services.create_instrument,
+            title=_("New instrument"),
+        ),
+        name="instrument-new",
+    ),
 ]

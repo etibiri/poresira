@@ -22,8 +22,11 @@ __all__ = [
     "PAGE_SIZE",
     "CompleteRunForm",
     "FlowCellForm",
+    "FlowCellTypeForm",
+    "InstrumentForm",
     "LibraryFilterForm",
     "LibraryForm",
+    "LibraryKitForm",
     "MemberForm",
     "PlanRunForm",
     "ReasonForm",
@@ -163,6 +166,29 @@ class CompleteRunForm(BootstrapFormMixin, forms.ModelForm):
             "total_reads",
             "total_bases",
         ]
+
+
+class _ReferenceForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        widgets = {"notes": forms.Textarea(attrs={"rows": 2})}
+
+
+class LibraryKitForm(_ReferenceForm):
+    class Meta(_ReferenceForm.Meta):
+        model = LibraryKit
+        fields = ["code", "name", "chemistry", "barcode_count", "notes"]
+
+
+class FlowCellTypeForm(_ReferenceForm):
+    class Meta(_ReferenceForm.Meta):
+        model = FlowCellType
+        fields = ["code", "name", "pore", "reusable", "notes"]
+
+
+class InstrumentForm(_ReferenceForm):
+    class Meta(_ReferenceForm.Meta):
+        model = Instrument
+        fields = ["name", "model", "serial_number", "notes"]
 
 
 class FlowCellForm(BootstrapFormMixin, forms.ModelForm):

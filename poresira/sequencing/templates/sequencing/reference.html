@@ -4,7 +4,10 @@
 {% block content %}
 <h1 class="h3 mb-3">{% trans "Sequencing" %}</h1>
 {% include "sequencing/_tabs.html" with tab="reference" %}
-<h2 class="h5">{% trans "Library kits" %}</h2>
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h2 class="h5">{% trans "Library kits" %}</h2>
+  {% if can_manage %}<a class="btn btn-primary btn-sm" href="{% url 'sequencing:kit-new' %}">{% trans "New library kit" %}</a>{% endif %}
+</div>
 <table class="table table-sm align-middle">
   <thead><tr><th>{% trans "Kit code" %}</th><th>{% trans "Name" %}</th><th>{% trans "Chemistry" %}</th><th>{% trans "Barcodes" %}</th></tr></thead>
   <tbody>
@@ -13,7 +16,10 @@
     {% empty %}<tr><td colspan="4" class="text-muted">{% trans "No kits yet." %}</td></tr>{% endfor %}
   </tbody>
 </table>
-<h2 class="h5 mt-4">{% trans "Flow cell types" %}</h2>
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h2 class="h5 mt-4">{% trans "Flow cell types" %}</h2>
+  {% if can_manage %}<a class="btn btn-primary btn-sm" href="{% url 'sequencing:flow-cell-type-new' %}">{% trans "New flow cell type" %}</a>{% endif %}
+</div>
 <table class="table table-sm align-middle">
   <thead><tr><th>{% trans "Product code" %}</th><th>{% trans "Name" %}</th><th>{% trans "Pore type" %}</th><th>{% trans "Reuse" %}</th></tr></thead>
   <tbody>
@@ -23,7 +29,10 @@
     {% empty %}<tr><td colspan="4" class="text-muted">{% trans "No flow cell types yet." %}</td></tr>{% endfor %}
   </tbody>
 </table>
-<h2 class="h5 mt-4">{% trans "Instruments" %}</h2>
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h2 class="h5 mt-4">{% trans "Instruments" %}</h2>
+  {% if can_manage %}<a class="btn btn-primary btn-sm" href="{% url 'sequencing:instrument-new' %}">{% trans "New instrument" %}</a>{% endif %}
+</div>
 <table class="table table-sm align-middle">
   <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Model" %}</th><th>{% trans "Serial number" %}</th></tr></thead>
   <tbody>

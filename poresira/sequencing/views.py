@@ -42,7 +42,7 @@ from .models import (
     SequencingRun,
     SequencingRunEvent,
 )
-from .permissions import can_register_flow_cells
+from .permissions import can_manage_reference_data, can_register_flow_cells
 
 LIBRARY_HISTORY_FIELDS = (
     "name",
@@ -619,5 +619,25 @@ class ReferenceView(LoginRequiredMixin, TemplateView):
             kits=LibraryKit.objects.active().order_by("code"),
             flow_cell_types=FlowCellType.objects.active().order_by("code"),
             instruments=Instrument.objects.active().order_by("name"),
+            can_manage=can_manage_reference_data(self.request.user),
             **kwargs,
         )
+
+
+class ReferenceCreateView(SequencingServiceFormView):
+    """Add a kit, a flow cell type or an instrument; ``service`` is the one that records it."""
+
+    submit_label = gettext_lazy("Add")
+    success_message = gettext_lazy("Added.")
+    service = None
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and not can_manage_reference_data(request.user):
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+    def perform(self, cleaned_data):
+        return self.service(user=self.request.user, **_given(cleaned_data))
+
+    def get_success_url(self) -> str:
+        return reverse("sequencing:reference")
