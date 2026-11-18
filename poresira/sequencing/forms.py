@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 from django import forms
+from django.urls import reverse
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
 from poresira.core.forms import BootstrapFormMixin
@@ -63,9 +65,19 @@ class RunFilterForm(_FilterForm):
     status_choices = RunStatus.choices
 
 
+def _missing_hint(what):
+    """Help text for a choice of reference data, pointing to where it is added."""
+    return format_html(
+        '{} <a href="{}">{}</a>', what, reverse("sequencing:reference"), _("Kits and instruments")
+    )
+
+
 class LibraryForm(BootstrapFormMixin, forms.ModelForm):
     project = forms.ModelChoiceField(queryset=Project.objects.none(), label=_("Project"))
-    kit = forms.ModelChoiceField(queryset=LibraryKit.objects.active(), label=_("Kit"))
+    kit = forms.ModelChoiceField(
+        queryset=LibraryKit.objects.active(),
+        label=_("Kit"),
+    )
 
     class Meta:
         model = Library
@@ -78,6 +90,7 @@ class LibraryForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, editable_projects, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["project"].queryset = editable_projects
+        self.fields["kit"].help_text = _missing_hint(_("Not in the list? Add the kit in"))
 
 
 class MemberForm(BootstrapFormMixin, forms.Form):
@@ -192,9 +205,16 @@ class InstrumentForm(_ReferenceForm):
 
 
 class FlowCellForm(BootstrapFormMixin, forms.ModelForm):
-    type = forms.ModelChoiceField(queryset=FlowCellType.objects.active(), label=_("Type"))
+    type = forms.ModelChoiceField(
+        queryset=FlowCellType.objects.active(),
+        label=_("Type"),
+    )
 
     class Meta:
         model = FlowCell
         fields = ["flow_cell_id", "type", "pores_at_qc", "notes"]
         widgets = {"notes": forms.Textarea(attrs={"rows": 2})}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["type"].help_text = _missing_hint(_("Not in the list? Add the type in"))
