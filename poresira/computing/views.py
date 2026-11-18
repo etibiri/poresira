@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Count, Q
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
@@ -11,8 +12,9 @@ from django.views import View
 from django.views.generic import ListView, TemplateView
 
 from poresira.core.history import HistorySource, build_history
+from poresira.core.models import Project
 from poresira.core.permissions import can_edit_project
-from poresira.samples.views import ServiceFormView
+from poresira.samples.views import PickParentView, ServiceFormView
 from poresira.sequencing.models import SequencingRun
 
 from . import services
@@ -100,7 +102,10 @@ class JobListView(LoginRequiredMixin, ListView):
         query = self.request.GET.copy()
         query.pop("page", None)
         return super().get_context_data(
-            filter_form=self.get_filter_form(), query_string=query.urlencode(), **kwargs
+            filter_form=self.get_filter_form(),
+            query_string=query.urlencode(),
+            can_create=Project.objects.editable_by(self.request.user).exists(),
+            **kwargs,
         )
 
 
@@ -132,6 +137,28 @@ class JobDetailView(JobMixin, LoginRequiredMixin, TemplateView):
             can_void=editable and job.status not in (JobStatus.SUBMITTED, JobStatus.RUNNING),
             entries=history,
             **kwargs,
+        )
+
+
+class JobPickView(PickParentView):
+    """Choose the run and the kind of job, then go to the job form."""
+
+    title = gettext_lazy("New job")
+    label = gettext_lazy("Sequencing run")
+    cancel = "computing:job-list"
+    choices = staticmethod(lambda user: SequencingRun.objects.visible_to(user).active())
+
+    def get_form_class(self):
+        form = super().get_form_class()
+        return type(
+            "JobPickForm",
+            (form,),
+            {"kind": forms.ChoiceField(choices=JobKind.choices, label=gettext_lazy("Job type"))},
+        )
+
+    def form_valid(self, form):
+        return redirect(
+            "computing:job-new", form.cleaned_data["parent"].pk, form.cleaned_data["kind"]
         )
 
 

@@ -7,6 +7,7 @@ app_name = "computing"
 
 urlpatterns = [
     path("compute/", views.JobListView.as_view(), name="job-list"),
+    path("compute/jobs/new/", views.JobPickView.as_view(), name="job-pick"),
     path("compute/jobs/<uuid:pk>/", views.JobDetailView.as_view(), name="job-detail"),
     path("compute/jobs/<uuid:pk>/submit/", views.JobSubmitView.as_view(), name="job-submit"),
     path("compute/jobs/<uuid:pk>/cancel/", views.JobCancelView.as_view(), name="job-cancel"),
