@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+from django import forms
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied, ValidationError
@@ -8,6 +9,7 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.generic import FormView, ListView, TemplateView
 
+from poresira.core.forms import BootstrapFormMixin
 from poresira.core.history import HistorySource, build_history
 from poresira.core.models import Project
 from poresira.core.permissions import can_edit_project
@@ -89,6 +91,32 @@ class ServiceFormView(LoginRequiredMixin, FormView):
         return redirect(self.get_success_url())
 
 
+class PickParentView(ServiceFormView):
+    """Choose the record a new item hangs on (event, library, run), then go to its own form."""
+
+    submit_label = _("Continue")
+    label = ""
+    target = ""  # URL name taking the chosen record's pk
+    cancel = ""
+    choices = None  # callable(user) -> queryset of records the user can see
+
+    def get_form_class(self):
+        queryset = self.choices(self.request.user).filter(
+            project__in=Project.objects.editable_by(self.request.user)
+        )
+
+        class PickForm(BootstrapFormMixin, forms.Form):
+            parent = forms.ModelChoiceField(queryset=queryset, label=self.label)
+
+        return PickForm
+
+    def form_valid(self, form):
+        return redirect(self.target, form.cleaned_data["parent"].pk)
+
+    def get_cancel_url(self) -> str:
+        return reverse(self.cancel)
+
+
 class SampleMixin:
     """Loads the sample from the URL among those the user can see, and requires write access."""
 
@@ -154,7 +182,10 @@ class SampleListView(LoginRequiredMixin, ListView):
         query = self.request.GET.copy()
         query.pop("page", None)
         return super().get_context_data(
-            filter_form=self.get_filter_form(), query_string=query.urlencode(), **kwargs
+            filter_form=self.get_filter_form(),
+            query_string=query.urlencode(),
+            can_create=Project.objects.editable_by(self.request.user).exists(),
+            **kwargs,
         )
 
 

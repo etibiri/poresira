@@ -2,7 +2,10 @@
 {# SPDX-License-Identifier: AGPL-3.0-or-later #}
 {% block title %}{% trans "Sequencing runs" %} · PoreSira{% endblock %}
 {% block content %}
-<h1 class="h3 mb-3">{% trans "Sequencing" %}</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">{% trans "Sequencing" %}</h1>
+  {% if can_create %}<a class="btn btn-primary btn-sm" href="{% url 'sequencing:run-new' %}">{% trans "New run" %}</a>{% endif %}
+</div>
 {% include "sequencing/_tabs.html" with tab="runs" %}
 {% include "sequencing/_filter.html" %}
 <table class="table table-hover align-middle">

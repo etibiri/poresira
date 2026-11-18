@@ -1,12 +1,25 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 from django.urls import path
+from django.utils.translation import gettext_lazy as _
 
 from . import views
+from .models import CollectionEvent
 
 app_name = "samples"
 
 urlpatterns = [
     path("samples/", views.SampleListView.as_view(), name="sample-list"),
+    path(
+        "samples/new/",
+        views.PickParentView.as_view(
+            title=_("New sample"),
+            label=_("Collection event"),
+            target="samples:field-sample-create",
+            cancel="samples:sample-list",
+            choices=lambda user: CollectionEvent.objects.visible_to(user).active(),
+        ),
+        name="sample-new",
+    ),
     path("samples/<uuid:pk>/", views.SampleDetailView.as_view(), name="sample-detail"),
     path("samples/<uuid:pk>/edit/", views.SampleEditView.as_view(), name="sample-edit"),
     path("samples/<uuid:pk>/derive/", views.SampleDeriveView.as_view(), name="sample-derive"),

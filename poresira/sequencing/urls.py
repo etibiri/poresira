@@ -1,12 +1,27 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 from django.urls import path
+from django.utils.translation import gettext_lazy as _
+
+from poresira.samples.views import PickParentView
 
 from . import views
+from .models import Library
 
 app_name = "sequencing"
 
 urlpatterns = [
     path("sequencing/", views.RunListView.as_view(), name="run-list"),
+    path(
+        "sequencing/runs/new/",
+        PickParentView.as_view(
+            title=_("New run"),
+            label=_("Library"),
+            target="sequencing:run-plan",
+            cancel="sequencing:run-list",
+            choices=lambda user: Library.objects.visible_to(user).active(),
+        ),
+        name="run-new",
+    ),
     path("sequencing/runs/<uuid:pk>/", views.RunDetailView.as_view(), name="run-detail"),
     path("sequencing/runs/<uuid:pk>/start/", views.RunStartView.as_view(), name="run-start"),
     path(

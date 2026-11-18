@@ -11,6 +11,7 @@ from django.views import View
 from django.views.generic import ListView, TemplateView
 
 from poresira.core.history import HistorySource, build_history
+from poresira.core.models import Project
 from poresira.core.permissions import can_edit_project
 from poresira.samples.views import ServiceFormView
 from poresira.sequencing.models import SequencingRun
@@ -113,7 +114,10 @@ class DepositListView(LoginRequiredMixin, ListView):
         query = self.request.GET.copy()
         query.pop("page", None)
         return super().get_context_data(
-            filter_form=self.get_filter_form(), query_string=query.urlencode(), **kwargs
+            filter_form=self.get_filter_form(),
+            query_string=query.urlencode(),
+            can_create=Project.objects.editable_by(self.request.user).exists(),
+            **kwargs,
         )
 
 

@@ -366,7 +366,10 @@ class RunListView(LoginRequiredMixin, ListView):
         query = self.request.GET.copy()
         query.pop("page", None)
         return super().get_context_data(
-            filter_form=self.get_filter_form(), query_string=query.urlencode(), **kwargs
+            filter_form=self.get_filter_form(),
+            query_string=query.urlencode(),
+            can_create=Project.objects.editable_by(self.request.user).exists(),
+            **kwargs,
         )
 
 

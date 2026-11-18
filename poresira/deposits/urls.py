@@ -1,5 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 from django.urls import path
+from django.utils.translation import gettext_lazy as _
+
+from poresira.samples.views import PickParentView
+from poresira.sequencing.models import SequencingRun
 
 from . import views
 
@@ -7,6 +11,17 @@ app_name = "deposits"
 
 urlpatterns = [
     path("deposits/", views.DepositListView.as_view(), name="deposit-list"),
+    path(
+        "deposits/new/",
+        PickParentView.as_view(
+            title=_("New deposit"),
+            label=_("Sequencing run"),
+            target="deposits:deposit-new",
+            cancel="deposits:deposit-list",
+            choices=lambda user: SequencingRun.objects.visible_to(user).active(),
+        ),
+        name="deposit-pick",
+    ),
     path("deposits/<uuid:pk>/", views.DepositDetailView.as_view(), name="deposit-detail"),
     path("deposits/<uuid:pk>/submit/", views.DepositSubmitView.as_view(), name="deposit-submit"),
     path(
