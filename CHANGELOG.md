@@ -7,6 +7,8 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-18
+
 ### Added
 
 - Project foundation: Django 5.2 on PostgreSQL 16, uv, ruff, pre-commit, GitHub Actions.
@@ -101,6 +103,12 @@ All notable changes are listed here. The format follows
 - `with_reason` and `acting_as` helpers for audited changes made outside a request.
 - Complete French translation of the new screens.
 - AGPL-3.0-or-later license, CLA, contribution guide, code of conduct, citation file.
+- Add from the list pages, without the command line: New sample, New run, New deposit and New
+  job (choose the event, library or run first), kits, flow cell types and instruments on Kits and
+  instruments, storage backends, primers, cycling programs, assays and master mixes. Reference
+  data is limited to administrators and platform managers.
+- Record what is already public: a GenBank sequence on a sample, and BioProject, BioSample or SRA
+  accessions from the Deposits page, so that no deposit sends them twice.
 
 ### Fixed
 

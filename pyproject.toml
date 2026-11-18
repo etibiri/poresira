@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 [project]
 name = "poresira"
-version = "0.1.0.dev0"
+version = "0.1.0"
 description = "Open-source LIMS tracing biological samples from field collection to public data deposition."
 readme = "README.md"
 license = "AGPL-3.0-or-later"

@@ -14,7 +14,8 @@ authors:
     affiliation: "INERA/CNRST, WAVE Research Burkina Faso"
 repository-code: "https://github.com/etibiri/poresira"
 license: AGPL-3.0-or-later
-version: 0.1.0.dev0
+version: 0.1.0
+date-released: 2026-11-18
 keywords:
   - LIMS
   - sample traceability
