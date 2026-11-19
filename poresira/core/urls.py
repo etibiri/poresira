@@ -14,6 +14,7 @@ urlpatterns = [
         name="login",
     ),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("demo/", views.DemoDataView.as_view(), name="demo-data"),
     path("language/", views.set_language, name="set-language"),
     path("health/", views.health, name="health"),
 ]

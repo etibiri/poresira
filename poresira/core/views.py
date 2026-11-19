@@ -1,12 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 import redis
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import connection
 from django.db.models import Q
-from django.http import JsonResponse
+from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import ListView, TemplateView
 
@@ -37,7 +39,27 @@ class ProjectListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["search_text"] = self.request.GET.get("q", "")
+        context["can_load_demo"] = self.request.user.sees_all_projects
         return context
+
+
+class DemoDataView(LoginRequiredMixin, TemplateView):
+    """Let an administrator load the demonstration data without a shell on the server."""
+
+    template_name = "core/demo_data.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and not request.user.sees_all_projects:
+            return HttpResponseForbidden()
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+        from poresira.samples.demo.loader import load_demo_data  # heavy: only when asked
+
+        summary = load_demo_data()
+        text = _("Demo data already present.") if summary.already_loaded else _("Demo data loaded.")
+        messages.success(request, text)
+        return redirect("project-list")
 
 
 class ProjectHistoryView(LoginRequiredMixin, TemplateView):

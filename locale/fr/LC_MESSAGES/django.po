@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoreSira\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 09:47+0000\n"
+"POT-Creation-Date: 2026-11-19 18:46+0000\n"
 "PO-Revision-Date: 2026-11-12 15:08+0000\n"
 "Last-Translator: Ezechiel B. Tibiri\n"
 "Language-Team: French\n"
@@ -14,417 +14,444 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: poresira/computing/forms.py
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/core/history.py poresira/deposits/forms.py
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/deposits/templates/deposits/deposit_list.html poresira/pcr/forms.py
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/pcr/templates/pcr/run_list.html poresira/samples/forms.py
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/event_list.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/templates/sequencing/run_list.html
-#: poresira/storage/forms.py
+#: poresira/computing/forms.py:22
+#: poresira/computing/templates/computing/job_detail.html:37
+#: poresira/computing/templates/computing/job_list.html:23
+#: poresira/core/history.py:95 poresira/deposits/forms.py:30
+#: poresira/deposits/forms.py:96
+#: poresira/deposits/templates/deposits/deposit_detail.html:53
+#: poresira/deposits/templates/deposits/deposit_list.html:25
+#: poresira/pcr/forms.py:47 poresira/pcr/forms.py:62
+#: poresira/pcr/templates/pcr/run_detail.html:52
+#: poresira/pcr/templates/pcr/run_list.html:28 poresira/samples/forms.py:91
+#: poresira/samples/forms.py:105
+#: poresira/samples/templates/samples/_sample_results.html:6
+#: poresira/samples/templates/samples/event_detail.html:16
+#: poresira/samples/templates/samples/event_list.html:12
+#: poresira/samples/templates/samples/sample_detail.html:40
+#: poresira/sequencing/forms.py:48 poresira/sequencing/forms.py:76
+#: poresira/sequencing/templates/sequencing/library_detail.html:33
+#: poresira/sequencing/templates/sequencing/library_list.html:14
+#: poresira/sequencing/templates/sequencing/run_detail.html:41
+#: poresira/sequencing/templates/sequencing/run_list.html:14
+#: poresira/storage/forms.py:36
 msgid "Project"
 msgstr "Projet"
 
-#: poresira/computing/forms.py poresira/deposits/forms.py poresira/pcr/forms.py
-#: poresira/samples/forms.py poresira/sequencing/forms.py
-#: poresira/storage/forms.py
+#: poresira/computing/forms.py:22 poresira/computing/forms.py:31
+#: poresira/computing/forms.py:32 poresira/deposits/forms.py:30
+#: poresira/deposits/forms.py:39 poresira/deposits/forms.py:40
+#: poresira/pcr/forms.py:47 poresira/pcr/forms.py:50 poresira/pcr/forms.py:58
+#: poresira/samples/forms.py:91 poresira/samples/forms.py:100
+#: poresira/samples/forms.py:101 poresira/sequencing/forms.py:48
+#: poresira/sequencing/forms.py:57 poresira/storage/forms.py:36
+#: poresira/storage/forms.py:42 poresira/storage/forms.py:57
 msgid "All"
 msgstr "Tous"
 
-#: poresira/computing/forms.py
-#: poresira/computing/templates/computing/_jobs.html
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/deposits/forms.py poresira/storage/forms.py
-#: poresira/storage/templates/storage/_files.html
-#: poresira/storage/templates/storage/backend_list.html
-#: poresira/storage/templates/storage/file_detail.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/computing/forms.py:24
+#: poresira/computing/templates/computing/_jobs.html:15
+#: poresira/computing/templates/computing/job_detail.html:77
+#: poresira/computing/templates/computing/job_list.html:22
+#: poresira/deposits/forms.py:97 poresira/storage/forms.py:44
+#: poresira/storage/forms.py:68
+#: poresira/storage/templates/storage/_files.html:10
+#: poresira/storage/templates/storage/backend_list.html:10
+#: poresira/storage/templates/storage/file_detail.html:35
+#: poresira/storage/templates/storage/file_list.html:25
 msgid "Kind"
 msgstr "Nature"
 
-#: poresira/computing/forms.py
-#: poresira/computing/templates/computing/_jobs.html
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/deposits/forms.py
-#: poresira/deposits/templates/deposits/_deposits.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/deposits/templates/deposits/deposit_list.html poresira/pcr/forms.py
-#: poresira/pcr/templates/pcr/run_list.html poresira/samples/forms.py
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/computing/forms.py:25
+#: poresira/computing/templates/computing/_jobs.html:15
+#: poresira/computing/templates/computing/job_list.html:23
+#: poresira/deposits/forms.py:33
+#: poresira/deposits/templates/deposits/_deposits.html:9
+#: poresira/deposits/templates/deposits/deposit_detail.html:82
+#: poresira/deposits/templates/deposits/deposit_detail.html:96
+#: poresira/deposits/templates/deposits/deposit_list.html:26
+#: poresira/pcr/forms.py:52 poresira/pcr/templates/pcr/run_list.html:29
+#: poresira/samples/forms.py:94 poresira/samples/forms.py:175
+#: poresira/samples/templates/samples/_sample_results.html:6
+#: poresira/samples/templates/samples/event_detail.html:30
+#: poresira/sequencing/forms.py:50
+#: poresira/sequencing/templates/sequencing/library_detail.html:62
+#: poresira/sequencing/templates/sequencing/library_list.html:14
+#: poresira/sequencing/templates/sequencing/run_list.html:14
 msgid "Status"
 msgstr "Statut"
 
-#: poresira/computing/forms.py poresira/deposits/forms.py poresira/pcr/forms.py
-#: poresira/samples/forms.py poresira/sequencing/forms.py
-#: poresira/storage/forms.py
+#: poresira/computing/forms.py:26 poresira/deposits/forms.py:34
+#: poresira/pcr/forms.py:53 poresira/samples/forms.py:95
+#: poresira/sequencing/forms.py:51 poresira/storage/forms.py:47
 msgid "Show voided"
 msgstr "Afficher les annulés"
 
-#: poresira/computing/forms.py
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/forms.py:46
+#: poresira/computing/templates/computing/job_detail.html:62
 msgid "Input files"
 msgstr "Fichiers d'entrée"
 
-#: poresira/computing/forms.py poresira/deposits/forms.py poresira/pcr/forms.py
-#: poresira/pcr/templates/pcr/run_detail.html poresira/samples/forms.py
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/storage/forms.py
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/computing/forms.py:49 poresira/deposits/forms.py:109
+#: poresira/pcr/forms.py:101 poresira/pcr/forms.py:171
+#: poresira/pcr/forms.py:237 poresira/pcr/templates/pcr/run_detail.html:60
+#: poresira/samples/forms.py:221
+#: poresira/samples/templates/samples/event_detail.html:26
+#: poresira/samples/templates/samples/sample_detail.html:52
+#: poresira/sequencing/forms.py:109 poresira/sequencing/forms.py:162
+#: poresira/sequencing/templates/sequencing/library_detail.html:37
+#: poresira/sequencing/templates/sequencing/run_detail.html:59
+#: poresira/storage/forms.py:72
+#: poresira/storage/templates/storage/file_detail.html:42
+#: poresira/storage/templates/storage/file_detail.html:47
 msgid "Notes"
 msgstr "Notes"
 
-#: poresira/computing/jobtypes.py
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/computing/jobtypes.py:100
+#: poresira/sequencing/templates/sequencing/reference.html:37
 msgid "Model"
 msgstr "Modèle"
 
-#: poresira/computing/jobtypes.py
+#: poresira/computing/jobtypes.py:104
 msgid "A speed (fast, hac, sup) or a model name, such as sup@v5.0.0."
 msgstr ""
 "Une vitesse (fast, hac, sup) ou un nom de modèle, par exemple sup@v5.0.0."
 
-#: poresira/computing/jobtypes.py
+#: poresira/computing/jobtypes.py:108 poresira/computing/jobtypes.py:121
 msgid "Barcoding kit"
 msgstr "Kit de codes-barres"
 
-#: poresira/computing/jobtypes.py
+#: poresira/computing/jobtypes.py:110
 msgid "Trims adapters and barcodes during basecalling; optional."
 msgstr ""
 "Retire adaptateurs et codes-barres pendant le basecalling ; facultatif."
 
-#: poresira/computing/jobtypes.py
+#: poresira/computing/jobtypes.py:112
 msgid "Minimum quality"
 msgstr "Qualité minimale"
 
-#: poresira/computing/jobtypes.py
+#: poresira/computing/jobtypes.py:139
 msgid "Unknown parameter."
 msgstr "Paramètre inconnu."
 
-#: poresira/computing/jobtypes.py
+#: poresira/computing/jobtypes.py:146
 msgid "This parameter is required."
 msgstr "Ce paramètre est obligatoire."
 
-#: poresira/computing/jobtypes.py
+#: poresira/computing/jobtypes.py:152
 msgid "Give a whole number."
 msgstr "Indiquez un nombre entier."
 
-#: poresira/computing/jobtypes.py
+#: poresira/computing/jobtypes.py:155
 #, python-format
 msgid "Give a number from %(low)s to %(high)s."
 msgstr "Indiquez un nombre de %(low)s à %(high)s."
 
-#: poresira/computing/jobtypes.py
+#: poresira/computing/jobtypes.py:161
 msgid "Use letters, digits and . _ @ - only."
 msgstr "Utilisez seulement des lettres, des chiffres et . _ @ -."
 
-#: poresira/computing/models/job.py
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/computing/models/job.py:18
+#: poresira/sequencing/templates/sequencing/run_detail.html:52
 msgid "Basecalling"
 msgstr "Appel de bases"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:19
 msgid "Demultiplexing"
 msgstr "Démultiplexage"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:20
 msgid "FAST5 to POD5 conversion"
 msgstr "Conversion FAST5 vers POD5"
 
-#: poresira/computing/models/job.py poresira/deposits/models/deposit.py
-#: poresira/sequencing/models/run.py
+#: poresira/computing/models/job.py:24 poresira/deposits/models/deposit.py:29
+#: poresira/sequencing/models/run.py:22
 msgid "Draft"
 msgstr "Brouillon"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:25
 msgid "Submitted"
 msgstr "Soumis"
 
-#: poresira/computing/models/job.py poresira/sequencing/models/run.py
+#: poresira/computing/models/job.py:26 poresira/sequencing/models/run.py:28
 msgid "Running"
 msgstr "En cours"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:27
 msgid "Succeeded"
 msgstr "Réussi"
 
-#: poresira/computing/models/job.py poresira/samples/models/qc.py
+#: poresira/computing/models/job.py:28 poresira/samples/models/qc.py:25
 msgid "Failed"
 msgstr "Non conforme"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:29
 msgid "Cancelled"
 msgstr "Annulé"
 
-#: poresira/computing/models/job.py poresira/deposits/models/deposit.py
-#: poresira/deposits/models/public.py poresira/pcr/models/run.py
-#: poresira/samples/models/collection.py poresira/samples/models/sample.py
-#: poresira/sequencing/models/run.py poresira/storage/models/file.py
+#: poresira/computing/models/job.py:116 poresira/deposits/models/deposit.py:164
+#: poresira/deposits/models/public.py:51 poresira/pcr/models/run.py:91
+#: poresira/samples/models/collection.py:31
+#: poresira/samples/models/sample.py:68 poresira/sequencing/models/run.py:146
+#: poresira/sequencing/models/run.py:291 poresira/storage/models/file.py:87
 msgid "project"
 msgstr "projet"
 
-#: poresira/computing/models/job.py poresira/deposits/models/deposit.py
-#: poresira/storage/models/file.py
+#: poresira/computing/models/job.py:122 poresira/deposits/models/deposit.py:316
+#: poresira/storage/models/file.py:112
 msgid "sequencing run"
 msgstr "passage de séquençage"
 
-#: poresira/computing/models/job.py poresira/deposits/models/deposit.py
-#: poresira/deposits/models/public.py poresira/storage/models/backend.py
-#: poresira/storage/models/file.py
+#: poresira/computing/models/job.py:124 poresira/deposits/models/deposit.py:296
+#: poresira/deposits/models/public.py:53 poresira/storage/models/backend.py:24
+#: poresira/storage/models/file.py:97
 msgid "kind"
 msgstr "nature"
 
-#: poresira/computing/models/job.py poresira/deposits/models/deposit.py
-#: poresira/pcr/models/run.py poresira/samples/models/sample.py
-#: poresira/sequencing/models/run.py
+#: poresira/computing/models/job.py:126 poresira/deposits/models/deposit.py:173
+#: poresira/deposits/models/deposit.py:327 poresira/pcr/models/run.py:103
+#: poresira/samples/models/sample.py:103 poresira/sequencing/models/run.py:153
+#: poresira/sequencing/models/run.py:322
 msgid "status"
 msgstr "statut"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:128
 msgid "parameters"
 msgstr "paramètres"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:130
 msgid "script"
 msgstr "script"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:130
 msgid "The batch script as it was submitted."
 msgstr "Le script de calcul tel qu’il a été soumis."
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:132
 msgid "tool"
 msgstr "outil"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:133
 msgid "tool version"
 msgstr "version de l'outil"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:134
 msgid "scheduler job ID"
 msgstr "identifiant du travail dans l'ordonnanceur"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:135
 msgid "working directory"
 msgstr "répertoire de travail"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:136
 msgid "log file"
 msgstr "fichier journal"
 
-#: poresira/computing/models/job.py poresira/deposits/models/deposit.py
+#: poresira/computing/models/job.py:143 poresira/deposits/models/deposit.py:218
 msgid "submitted by"
 msgstr "soumis par"
 
-#: poresira/computing/models/job.py poresira/deposits/models/deposit.py
+#: poresira/computing/models/job.py:145 poresira/deposits/models/deposit.py:220
 msgid "submitted at"
 msgstr "soumis le"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:146
 msgid "started at"
 msgstr "démarré le"
 
-#: poresira/computing/models/job.py poresira/deposits/models/deposit.py
+#: poresira/computing/models/job.py:147 poresira/deposits/models/deposit.py:221
 msgid "finished at"
 msgstr "terminé le"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:148
 msgid "exit code"
 msgstr "code de sortie"
 
-#: poresira/computing/models/job.py poresira/deposits/models/deposit.py
-#: poresira/deposits/models/public.py poresira/pcr/models/reference.py
-#: poresira/pcr/models/run.py poresira/samples/models/collection.py
-#: poresira/samples/models/qc.py poresira/samples/models/sample.py
-#: poresira/samples/models/sequence.py poresira/samples/models/storage.py
-#: poresira/sequencing/models/reference.py poresira/sequencing/models/run.py
-#: poresira/storage/models/backend.py poresira/storage/models/file.py
+#: poresira/computing/models/job.py:149 poresira/deposits/models/deposit.py:227
+#: poresira/deposits/models/public.py:65 poresira/pcr/models/reference.py:39
+#: poresira/pcr/models/reference.py:74 poresira/pcr/models/reference.py:149
+#: poresira/pcr/models/reference.py:250 poresira/pcr/models/run.py:122
+#: poresira/pcr/models/run.py:192 poresira/samples/models/collection.py:56
+#: poresira/samples/models/qc.py:77 poresira/samples/models/sample.py:121
+#: poresira/samples/models/sequence.py:50 poresira/samples/models/storage.py:43
+#: poresira/sequencing/models/reference.py:47
+#: poresira/sequencing/models/reference.py:89
+#: poresira/sequencing/models/reference.py:120
+#: poresira/sequencing/models/run.py:169 poresira/sequencing/models/run.py:209
+#: poresira/sequencing/models/run.py:262 poresira/sequencing/models/run.py:344
+#: poresira/sequencing/models/run.py:408 poresira/storage/models/backend.py:33
+#: poresira/storage/models/file.py:138 poresira/storage/models/file.py:237
 msgid "notes"
 msgstr "notes"
 
-#: poresira/computing/models/job.py
+#: poresira/computing/models/job.py:211 poresira/computing/models/job.py:254
 msgid "job"
 msgstr "travail"
 
-#: poresira/computing/models/job.py poresira/deposits/models/deposit.py
-#: poresira/storage/models/file.py
+#: poresira/computing/models/job.py:214 poresira/computing/models/job.py:257
+#: poresira/deposits/models/deposit.py:411 poresira/storage/models/file.py:221
 msgid "file"
 msgstr "fichier"
 
-#: poresira/computing/models/job.py
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/deposits/models/deposit.py
+#: poresira/computing/models/job.py:216
+#: poresira/computing/templates/computing/job_detail.html:64
+#: poresira/deposits/models/deposit.py:413
 msgid "SHA-256 at preparation"
 msgstr "SHA-256 à la préparation"
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:82
 #, python-format
 msgid "%(file)s is voided."
 msgstr "%(file)s est annulé."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:84
 #, python-format
 msgid "%(file)s belongs to another project."
 msgstr "%(file)s appartient à un autre projet."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:86
 #, python-format
 msgid "%(file)s is not a file this job reads."
 msgstr "%(file)s n'est pas un fichier que ce travail lit."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:88
 #, python-format
 msgid "%(file)s is on an offline medium."
 msgstr "%(file)s est sur un support hors ligne."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:90
 #, python-format
 msgid "%(file)s has changed or is missing: check it first."
 msgstr "%(file)s a changé ou est absent : vérifiez-le d’abord."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:92
 #, python-format
 msgid "%(file)s has a path that cannot be used in a script."
 msgstr "%(file)s a un chemin inutilisable dans un script."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:111
 msgid "A voided run cannot be processed."
 msgstr "Un passage annulé ne peut pas être traité."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:113
 msgid "Unknown kind of job."
 msgstr "Type de travail inconnu."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:118
 msgid "There is no input file for this job."
 msgstr "Ce travail n'a aucun fichier d'entrée."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:142
 msgid "Only a draft job can be changed."
 msgstr "Seul un brouillon peut être modifié."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:187
 msgid "Cancel the job before voiding it."
 msgstr "Arrêtez le travail avant de l'annuler."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:189
 msgid "Void the results of this job first."
 msgstr "Annulez d'abord les résultats de ce travail."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:217
 msgid "Only a draft job can be submitted."
 msgstr "Seul un brouillon peut être soumis."
 
-#: poresira/computing/services.py
+#: poresira/computing/services.py:320
 msgid "This job is already finished."
 msgstr "Ce travail est déjà terminé."
 
-#: poresira/computing/templates/computing/_jobs.html
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/computing/templates/computing/job_list.html
+#: poresira/computing/templates/computing/_jobs.html:5
+#: poresira/computing/templates/computing/job_detail.html:7
+#: poresira/computing/templates/computing/job_list.html:3
+#: poresira/computing/templates/computing/job_list.html:6
 msgid "Compute jobs"
 msgstr "Travaux de calcul"
 
-#: poresira/computing/templates/computing/_jobs.html
+#: poresira/computing/templates/computing/_jobs.html:8
 msgid "Basecall"
 msgstr "Basecaller"
 
-#: poresira/computing/templates/computing/_jobs.html
+#: poresira/computing/templates/computing/_jobs.html:9
 msgid "Demultiplex"
 msgstr "Démultiplexer"
 
-#: poresira/computing/templates/computing/_jobs.html
+#: poresira/computing/templates/computing/_jobs.html:10
 msgid "Convert FAST5 to POD5"
 msgstr "Convertir FAST5 en POD5"
 
-#: poresira/computing/templates/computing/_jobs.html
-#: poresira/computing/views.py
+#: poresira/computing/templates/computing/_jobs.html:15
+#: poresira/computing/views.py:125
 msgid "Job"
 msgstr "Travail"
 
-#: poresira/computing/templates/computing/_jobs.html
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/computing/templates/computing/_jobs.html:15
+#: poresira/computing/templates/computing/job_detail.html:41
+#: poresira/computing/templates/computing/job_list.html:23
+#: poresira/deposits/templates/deposits/deposit_detail.html:65
 msgid "Submitted at"
 msgstr "Soumis le"
 
-#: poresira/computing/templates/computing/_jobs.html
+#: poresira/computing/templates/computing/_jobs.html:25
 msgid "No compute jobs yet."
 msgstr "Aucun travail de calcul pour le moment."
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/computing/views.py poresira/deposits/views.py
+#: poresira/computing/templates/computing/job_detail.html:14
+#: poresira/computing/views.py:242 poresira/deposits/views.py:245
 msgid "Submit"
 msgstr "Soumettre"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:15
 msgid "Download the script"
 msgstr "Télécharger le script"
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/computing/views.py
+#: poresira/computing/templates/computing/job_detail.html:16
+#: poresira/computing/views.py:255 poresira/computing/views.py:256
 msgid "Cancel the job"
 msgstr "Arrêter le travail"
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/computing/views.py
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/deposits/views.py poresira/pcr/templates/pcr/run_detail.html
-#: poresira/pcr/views.py poresira/samples/templates/samples/sample_detail.html
-#: poresira/samples/views.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/views.py
-#: poresira/storage/templates/storage/file_detail.html
-#: poresira/storage/views.py
+#: poresira/computing/templates/computing/job_detail.html:17
+#: poresira/computing/views.py:272
+#: poresira/deposits/templates/deposits/deposit_detail.html:18
+#: poresira/deposits/views.py:304 poresira/pcr/templates/pcr/run_detail.html:26
+#: poresira/pcr/templates/pcr/run_detail.html:109 poresira/pcr/views.py:327
+#: poresira/pcr/views.py:386
+#: poresira/samples/templates/samples/sample_detail.html:24
+#: poresira/samples/templates/samples/sample_detail.html:88
+#: poresira/samples/views.py:345 poresira/samples/views.py:360
+#: poresira/sequencing/templates/sequencing/library_detail.html:22
+#: poresira/sequencing/templates/sequencing/run_detail.html:26
+#: poresira/sequencing/views.py:292 poresira/sequencing/views.py:508
+#: poresira/storage/templates/storage/file_detail.html:17
+#: poresira/storage/views.py:233
 msgid "Void"
 msgstr "Annuler"
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/computing/templates/computing/job_detail.html:22
+#: poresira/deposits/templates/deposits/deposit_detail.html:23
+#: poresira/pcr/templates/pcr/run_detail.html:33
+#: poresira/samples/templates/samples/sample_detail.html:31
+#: poresira/sequencing/templates/sequencing/library_detail.html:28
+#: poresira/sequencing/templates/sequencing/run_detail.html:32
+#: poresira/storage/templates/storage/file_detail.html:23
 #, python-format
 msgid "Voided on %(date)s."
 msgstr "Annulé le %(date)s."
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/core/templates/core/_history.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/computing/templates/computing/job_detail.html:23
+#: poresira/core/templates/core/_history.html:12
+#: poresira/deposits/templates/deposits/deposit_detail.html:24
+#: poresira/pcr/forms.py:139 poresira/pcr/templates/pcr/run_detail.html:34
+#: poresira/samples/forms.py:151
+#: poresira/samples/templates/samples/sample_detail.html:32
+#: poresira/sequencing/forms.py:166
+#: poresira/sequencing/templates/sequencing/library_detail.html:29
+#: poresira/sequencing/templates/sequencing/run_detail.html:33
+#: poresira/storage/templates/storage/file_detail.html:24
 msgid "Reason"
 msgstr "Motif"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:27
 msgid ""
 "This job is a draft. Submitting it hands it to the Slurm agent; if nothing "
 "happens, the agent is not running."
@@ -432,199 +459,204 @@ msgstr ""
 "Ce travail est un brouillon. Le soumettre le confie à l'agent Slurm ; si "
 "rien ne se passe, l'agent n'est pas lancé."
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:29
 #, python-format
 msgid "The job failed (exit code %(code)s). The log is %(path)s."
 msgstr ""
 "Le travail a échoué (code de sortie %(code)s). Le journal est %(path)s."
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/computing/templates/computing/job_detail.html:35
+#: poresira/deposits/templates/deposits/deposit_detail.html:51
+#: poresira/pcr/templates/pcr/run_detail.html:50
+#: poresira/samples/templates/samples/sample_detail.html:38
+#: poresira/sequencing/templates/sequencing/run_detail.html:39
 msgid "Details"
 msgstr "Détails"
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/computing/views.py
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/deposits/urls.py
+#: poresira/computing/templates/computing/job_detail.html:38
+#: poresira/computing/templates/computing/job_list.html:22
+#: poresira/computing/views.py:147
+#: poresira/deposits/templates/deposits/deposit_detail.html:96
+#: poresira/deposits/urls.py:18
 msgid "Sequencing run"
 msgstr "Passage de séquençage"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:39
 msgid "Tool"
 msgstr "Outil"
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/computing/templates/computing/job_detail.html:40
+#: poresira/deposits/templates/deposits/deposit_detail.html:64
 msgid "Submitted by"
 msgstr "Soumis par"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:42
 msgid "Started at"
 msgstr "Démarré le"
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/computing/templates/computing/job_detail.html:43
+#: poresira/deposits/templates/deposits/deposit_detail.html:66
 msgid "Finished at"
 msgstr "Terminé le"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:44
 msgid "Scheduler job ID"
 msgstr "Identifiant dans l'ordonnanceur"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:45
 msgid "Working directory"
 msgstr "Répertoire de travail"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:46
 msgid "Log file"
 msgstr "Fichier journal"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:47
 msgid "Exit code"
 msgstr "Code de sortie"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:51
 msgid "Parameters"
 msgstr "Paramètres"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:56
 msgid "No parameters."
 msgstr "Aucun paramètre."
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/storage/templates/storage/_files.html poresira/storage/views.py
+#: poresira/computing/templates/computing/job_detail.html:64
+#: poresira/computing/templates/computing/job_detail.html:77
+#: poresira/storage/templates/storage/_files.html:10
+#: poresira/storage/views.py:129
 msgid "File"
 msgstr "Fichier"
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/storage/templates/storage/_files.html
-#: poresira/storage/templates/storage/file_detail.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/computing/templates/computing/job_detail.html:64
+#: poresira/computing/templates/computing/job_detail.html:77
+#: poresira/storage/templates/storage/_files.html:10
+#: poresira/storage/templates/storage/file_detail.html:36
+#: poresira/storage/templates/storage/file_list.html:25
 msgid "Size"
 msgstr "Taille"
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/computing/templates/computing/job_list.html
+#: poresira/computing/templates/computing/job_detail.html:75
+#: poresira/computing/templates/computing/job_list.html:23
 msgid "Results"
 msgstr "Résultats"
 
-#: poresira/computing/templates/computing/job_detail.html
+#: poresira/computing/templates/computing/job_detail.html:85
 msgid "No results registered."
 msgstr "Aucun résultat enregistré."
 
-#: poresira/computing/templates/computing/job_detail.html
-#: poresira/core/templates/core/_project_rows.html
-#: poresira/core/templates/core/project_history.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/computing/templates/computing/job_detail.html:90
+#: poresira/core/templates/core/_project_rows.html:8
+#: poresira/core/templates/core/project_history.html:3
+#: poresira/core/templates/core/project_history.html:11
+#: poresira/deposits/templates/deposits/deposit_detail.html:115
+#: poresira/pcr/templates/pcr/run_detail.html:120
+#: poresira/samples/templates/samples/sample_detail.html:162
+#: poresira/sequencing/templates/sequencing/library_detail.html:76
+#: poresira/sequencing/templates/sequencing/run_detail.html:101
+#: poresira/storage/templates/storage/file_detail.html:61
 msgid "History"
 msgstr "Historique"
 
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/computing/views.py
+#: poresira/computing/templates/computing/job_list.html:7
+#: poresira/computing/views.py:146
 msgid "New job"
 msgstr "Nouveau job"
 
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/deposits/templates/deposits/deposit_list.html
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/sample_list.html
-#: poresira/sequencing/templates/sequencing/_filter.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/computing/templates/computing/job_list.html:18
+#: poresira/deposits/templates/deposits/deposit_list.html:21
+#: poresira/pcr/templates/pcr/run_list.html:24
+#: poresira/samples/templates/samples/sample_list.html:20
+#: poresira/sequencing/templates/sequencing/_filter.html:10
+#: poresira/storage/templates/storage/file_list.html:21
 msgid "Filter"
 msgstr "Filtrer"
 
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/deposits/templates/deposits/deposit_list.html
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/event_list.html
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/run_list.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/computing/templates/computing/job_list.html:22
+#: poresira/deposits/templates/deposits/deposit_list.html:25
+#: poresira/pcr/templates/pcr/run_list.html:28
+#: poresira/samples/templates/samples/_sample_results.html:5
+#: poresira/samples/templates/samples/event_detail.html:30
+#: poresira/samples/templates/samples/event_list.html:11
+#: poresira/sequencing/templates/sequencing/library_detail.html:62
+#: poresira/sequencing/templates/sequencing/library_list.html:13
+#: poresira/sequencing/templates/sequencing/run_list.html:13
+#: poresira/storage/templates/storage/file_list.html:25
 msgid "Identifier"
 msgstr "Identifiant"
 
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/deposits/templates/deposits/deposit_list.html
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/run_list.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/computing/templates/computing/job_list.html:29
+#: poresira/deposits/templates/deposits/deposit_list.html:32
+#: poresira/pcr/templates/pcr/run_list.html:35
+#: poresira/samples/templates/samples/_sample_results.html:13
+#: poresira/samples/templates/samples/sample_detail.html:64
+#: poresira/sequencing/templates/sequencing/library_list.html:20
+#: poresira/sequencing/templates/sequencing/run_list.html:20
+#: poresira/storage/templates/storage/file_list.html:32
 msgid "Voided"
 msgstr "Annulé"
 
-#: poresira/computing/templates/computing/job_list.html
+#: poresira/computing/templates/computing/job_list.html:38
 msgid "No compute jobs to show."
 msgstr "Aucun travail de calcul à afficher."
 
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/deposits/templates/deposits/deposit_list.html
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/sequencing/templates/sequencing/_pager.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/computing/templates/computing/job_list.html:43
+#: poresira/deposits/templates/deposits/deposit_list.html:43
+#: poresira/pcr/templates/pcr/run_list.html:50
+#: poresira/samples/templates/samples/_sample_results.html:26
+#: poresira/sequencing/templates/sequencing/_pager.html:3
+#: poresira/storage/templates/storage/file_list.html:44
 msgid "Pages"
 msgstr "Pages"
 
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/deposits/templates/deposits/deposit_list.html
-#: poresira/sequencing/templates/sequencing/_pager.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/computing/templates/computing/job_list.html:44
+#: poresira/deposits/templates/deposits/deposit_list.html:44
+#: poresira/sequencing/templates/sequencing/_pager.html:4
+#: poresira/storage/templates/storage/file_list.html:45
 #, python-format
 msgid "Page %(number)s of %(total)s"
 msgstr "Page %(number)s sur %(total)s"
 
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/deposits/templates/deposits/deposit_list.html
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_list.html
-#: poresira/sequencing/templates/sequencing/_pager.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/computing/templates/computing/job_list.html:46
+#: poresira/deposits/templates/deposits/deposit_list.html:46
+#: poresira/pcr/templates/pcr/run_list.html:53
+#: poresira/samples/templates/samples/_sample_results.html:29
+#: poresira/samples/templates/samples/event_list.html:29
+#: poresira/sequencing/templates/sequencing/_pager.html:6
+#: poresira/storage/templates/storage/file_list.html:47
 msgid "Previous"
 msgstr "Précédent"
 
-#: poresira/computing/templates/computing/job_list.html
-#: poresira/deposits/templates/deposits/deposit_list.html
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_list.html
-#: poresira/sequencing/templates/sequencing/_pager.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/computing/templates/computing/job_list.html:47
+#: poresira/deposits/templates/deposits/deposit_list.html:47
+#: poresira/pcr/templates/pcr/run_list.html:54
+#: poresira/samples/templates/samples/_sample_results.html:30
+#: poresira/samples/templates/samples/event_list.html:30
+#: poresira/sequencing/templates/sequencing/_pager.html:7
+#: poresira/storage/templates/storage/file_list.html:48
 msgid "Next"
 msgstr "Suivant"
 
-#: poresira/computing/views.py
+#: poresira/computing/views.py:156
 msgid "Job type"
 msgstr "Type de job"
 
-#: poresira/computing/views.py poresira/deposits/views.py
+#: poresira/computing/views.py:168 poresira/deposits/views.py:200
+#: poresira/deposits/views.py:280
 msgid "Prepare"
 msgstr "Préparer"
 
-#: poresira/computing/views.py
+#: poresira/computing/views.py:169
 msgid "Job prepared. Review it, then submit it."
 msgstr "Travail préparé. Vérifiez-le, puis soumettez-le."
 
-#: poresira/computing/views.py
+#: poresira/computing/views.py:241
 msgid "Submit the job"
 msgstr "Soumettre le travail"
 
-#: poresira/computing/views.py
+#: poresira/computing/views.py:244
 msgid ""
 "Submission requested: the Slurm agent picks it up. Reload this page in a "
 "moment."
@@ -632,253 +664,301 @@ msgstr ""
 "Soumission demandée : l'agent Slurm la prend en charge. Rechargez cette page "
 "dans un instant."
 
-#: poresira/computing/views.py
+#: poresira/computing/views.py:257
 msgid "Cancellation requested."
 msgstr "Arrêt demandé."
 
-#: poresira/computing/views.py
+#: poresira/computing/views.py:271
 msgid "Void job"
 msgstr "Annuler le travail"
 
-#: poresira/computing/views.py
+#: poresira/computing/views.py:273
 msgid "Job voided."
 msgstr "Travail annulé."
 
-#: poresira/core/admin.py templates/admin/base_site.html
+#: poresira/core/admin.py:10 templates/admin/base_site.html:16
 msgid "Administration"
 msgstr "Administration"
 
-#: poresira/core/history.py
+#: poresira/core/history.py:13
 msgid "Created"
 msgstr "Créé"
 
-#: poresira/core/history.py
+#: poresira/core/history.py:13
 msgid "Modified"
 msgstr "Modifié"
 
-#: poresira/core/history.py
+#: poresira/core/history.py:96
 msgid "Membership"
 msgstr "Appartenance"
 
-#: poresira/core/history.py poresira/core/templates/core/project_list.html
+#: poresira/core/history.py:99
+#: poresira/core/templates/core/project_list.html:15
 msgid "Code"
 msgstr "Code"
 
-#: poresira/core/history.py poresira/core/templates/core/project_list.html
-#: poresira/pcr/forms.py poresira/pcr/templates/pcr/assay_list.html
-#: poresira/pcr/templates/pcr/primer_list.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/reference.html
-#: poresira/storage/templates/storage/backend_list.html
+#: poresira/core/history.py:100
+#: poresira/core/templates/core/project_list.html:15 poresira/pcr/forms.py:162
+#: poresira/pcr/forms.py:225 poresira/pcr/templates/pcr/assay_list.html:11
+#: poresira/pcr/templates/pcr/primer_list.html:11
+#: poresira/sequencing/templates/sequencing/library_list.html:13
+#: poresira/sequencing/templates/sequencing/reference.html:12
+#: poresira/sequencing/templates/sequencing/reference.html:24
+#: poresira/sequencing/templates/sequencing/reference.html:37
+#: poresira/storage/templates/storage/backend_list.html:10
 msgid "Name"
 msgstr "Nom"
 
-#: poresira/core/history.py
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/core/history.py:101
+#: poresira/deposits/templates/deposits/deposit_detail.html:58
 msgid "Description"
 msgstr "Description"
 
-#: poresira/core/history.py poresira/pcr/forms.py
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/core/history.py:102 poresira/pcr/forms.py:86
+#: poresira/pcr/templates/pcr/run_detail.html:94
 msgid "Role"
 msgstr "Rôle"
 
-#: poresira/core/history.py
+#: poresira/core/history.py:103
 msgid "Voided at"
 msgstr "Annulé le"
 
-#: poresira/core/history.py
+#: poresira/core/history.py:104
 msgid "Void reason"
 msgstr "Motif d'annulation"
 
-#: poresira/core/models.py
+#: poresira/core/models.py:42
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: poresira/core/models.py
+#: poresira/core/models.py:43
 msgid "Platform manager"
 msgstr "Responsable de plateforme"
 
-#: poresira/core/models.py
+#: poresira/core/models.py:44
 msgid "Technician"
 msgstr "Technicien"
 
-#: poresira/core/models.py
+#: poresira/core/models.py:45
 msgid "Bioinformatician"
 msgstr "Bio-informaticien"
 
-#: poresira/core/models.py
+#: poresira/core/models.py:46
 msgid "Project lead"
 msgstr "Responsable de projet"
 
-#: poresira/core/models.py
+#: poresira/core/models.py:47
 msgid "Guest"
 msgstr "Invité"
 
-#: poresira/core/models.py
+#: poresira/core/models.py:56
 msgid "Interface language. Empty means the site default."
 msgstr "Langue de l'interface. Vide : langue par défaut du site."
 
-#: poresira/core/models.py
+#: poresira/core/models.py:111
 msgid "Lead"
 msgstr "Responsable"
 
-#: poresira/core/models.py
+#: poresira/core/models.py:112
 msgid "Contributor"
 msgstr "Contributeur"
 
-#: poresira/core/models.py
+#: poresira/core/models.py:113
 msgid "Viewer"
 msgstr "Lecteur"
 
-#: poresira/core/reason.py
+#: poresira/core/reason.py:35
 msgid "A reason is required for this change."
 msgstr "Un motif est obligatoire pour cette modification."
 
-#: poresira/core/templates/core/_history.html
+#: poresira/core/templates/core/_history.html:8
 #, python-format
 msgid "by %(username)s"
 msgstr "par %(username)s"
 
-#: poresira/core/templates/core/_history.html
+#: poresira/core/templates/core/_history.html:13
 msgid "Hide details"
 msgstr "Masquer les détails"
 
-#: poresira/core/templates/core/_history.html
+#: poresira/core/templates/core/_history.html:13
 msgid "Show details"
 msgstr "Afficher les détails"
 
-#: poresira/core/templates/core/_history.html
+#: poresira/core/templates/core/_history.html:17
 msgid "Field"
 msgstr "Champ"
 
-#: poresira/core/templates/core/_history.html
+#: poresira/core/templates/core/_history.html:17
 msgid "Before"
 msgstr "Avant"
 
-#: poresira/core/templates/core/_history.html
+#: poresira/core/templates/core/_history.html:17
 msgid "After"
 msgstr "Après"
 
-#: poresira/core/templates/core/_history.html
+#: poresira/core/templates/core/_history.html:26
 msgid "IP address"
 msgstr "Adresse IP"
 
-#: poresira/core/templates/core/_history.html
+#: poresira/core/templates/core/_history.html:26
 msgid "Request"
 msgstr "Requête"
 
-#: poresira/core/templates/core/_history.html
+#: poresira/core/templates/core/_history.html:31
 msgid "No history yet."
 msgstr "Aucun historique pour le moment."
 
-#: poresira/core/templates/core/_project_rows.html
-#: poresira/core/templates/core/base.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/event_list.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/samples/templates/samples/sample_list.html
-#: poresira/sequencing/templates/sequencing/library_list.html
+#: poresira/core/templates/core/_project_rows.html:7
+#: poresira/core/templates/core/base.html:31
+#: poresira/deposits/templates/deposits/deposit_detail.html:80
+#: poresira/samples/templates/samples/event_detail.html:28
+#: poresira/samples/templates/samples/event_list.html:12
+#: poresira/samples/templates/samples/sample_detail.html:7
+#: poresira/samples/templates/samples/sample_list.html:3
+#: poresira/samples/templates/samples/sample_list.html:6
+#: poresira/sequencing/templates/sequencing/library_list.html:14
 msgid "Samples"
 msgstr "Échantillons"
 
-#: poresira/core/templates/core/_project_rows.html
+#: poresira/core/templates/core/_project_rows.html:12
 msgid "No projects to show."
 msgstr "Aucun projet à afficher."
 
-#: poresira/core/templates/core/base.html
-#: poresira/core/templates/core/project_history.html
-#: poresira/core/templates/core/project_list.html
+#: poresira/core/templates/core/base.html:30
+#: poresira/core/templates/core/project_history.html:7
+#: poresira/core/templates/core/project_list.html:3
+#: poresira/core/templates/core/project_list.html:6
 msgid "Projects"
 msgstr "Projets"
 
-#: poresira/core/templates/core/base.html
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/event_list.html
+#: poresira/core/templates/core/base.html:32
+#: poresira/samples/templates/samples/event_detail.html:7
+#: poresira/samples/templates/samples/event_list.html:3
+#: poresira/samples/templates/samples/event_list.html:6
 msgid "Collection events"
 msgstr "Événements de collecte"
 
-#: poresira/core/templates/core/base.html
-#: poresira/samples/templates/samples/storage_tree.html
+#: poresira/core/templates/core/base.html:33
+#: poresira/samples/templates/samples/storage_tree.html:3
+#: poresira/samples/templates/samples/storage_tree.html:6
 msgid "Storage"
 msgstr "Stockage"
 
-#: poresira/core/templates/core/base.html
+#: poresira/core/templates/core/base.html:34
 msgid "PCR"
 msgstr "PCR"
 
-#: poresira/core/templates/core/base.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/reference.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/core/templates/core/base.html:35
+#: poresira/samples/templates/samples/sample_detail.html:145
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:6
+#: poresira/sequencing/templates/sequencing/library_list.html:6
+#: poresira/sequencing/templates/sequencing/reference.html:5
+#: poresira/sequencing/templates/sequencing/run_detail.html:7
+#: poresira/sequencing/templates/sequencing/run_list.html:6
 msgid "Sequencing"
 msgstr "Séquençage"
 
-#: poresira/core/templates/core/base.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/storage/templates/storage/_files.html
-#: poresira/storage/templates/storage/backend_list.html
-#: poresira/storage/templates/storage/file_detail.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/core/templates/core/base.html:36
+#: poresira/deposits/templates/deposits/deposit_detail.html:96
+#: poresira/storage/templates/storage/_files.html:5
+#: poresira/storage/templates/storage/backend_list.html:10
+#: poresira/storage/templates/storage/backend_list.html:20
+#: poresira/storage/templates/storage/file_detail.html:7
+#: poresira/storage/templates/storage/file_list.html:3
+#: poresira/storage/templates/storage/file_list.html:6
 msgid "Files"
 msgstr "Fichiers"
 
-#: poresira/core/templates/core/base.html
+#: poresira/core/templates/core/base.html:37
 msgid "Compute"
 msgstr "Calcul"
 
-#: poresira/core/templates/core/base.html
-#: poresira/deposits/templates/deposits/_deposits.html
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/deposits/templates/deposits/deposit_list.html
+#: poresira/core/templates/core/base.html:38
+#: poresira/deposits/templates/deposits/_deposits.html:5
+#: poresira/deposits/templates/deposits/deposit_detail.html:7
+#: poresira/deposits/templates/deposits/deposit_list.html:3
+#: poresira/deposits/templates/deposits/deposit_list.html:6
 msgid "Deposits"
 msgstr "Dépôts"
 
-#: poresira/core/templates/core/base.html
+#: poresira/core/templates/core/base.html:54
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: poresira/core/templates/core/base.html
+#: poresira/core/templates/core/base.html:70
 msgid "Licensed under AGPL-3.0-or-later"
 msgstr "Sous licence AGPL-3.0-or-later"
 
-#: poresira/core/templates/core/base.html
+#: poresira/core/templates/core/base.html:71
 msgid "Source"
 msgstr "Source"
 
-#: poresira/core/templates/core/project_list.html
+#: poresira/core/templates/core/demo_data.html:3
+#: poresira/core/templates/core/demo_data.html:5
+#: poresira/core/templates/core/demo_data.html:9
+#: poresira/core/templates/core/project_list.html:7
+msgid "Load demo data"
+msgstr "Charger les données de démonstration"
+
+#: poresira/core/templates/core/demo_data.html:6
+msgid ""
+"Adds a sweetpotato project rebuilt from published studies, with its samples, "
+"PCR runs, sequencing and public accessions, and four demo accounts that "
+"cannot sign in."
+msgstr ""
+"Ajoute un projet sur la patate douce reconstitué à partir d'études publiées, avec ses échantillons, ses PCR, son séquençage et ses numéros d'accès publics, ainsi que quatre comptes de démonstration qui ne peuvent pas se connecter."
+
+#: poresira/core/templates/core/demo_data.html:7
+msgid ""
+"Records cannot be deleted: once loaded, the demo data stays in this "
+"database. Do not use this on a production database."
+msgstr ""
+"Les enregistrements ne peuvent pas être supprimés : une fois chargées, les données de démonstration restent dans cette base. Ne l'utilisez pas sur une base de production."
+
+#: poresira/core/templates/core/demo_data.html:10
+#: poresira/samples/templates/samples/form.html:29
+msgid "Cancel"
+msgstr "Annuler"
+
+#: poresira/core/templates/core/project_list.html:10
 msgid "Filter by code or name"
 msgstr "Filtrer par code ou nom"
 
-#: poresira/core/templates/registration/login.html
+#: poresira/core/templates/registration/login.html:3
+#: poresira/core/templates/registration/login.html:8
+#: poresira/core/templates/registration/login.html:19
 msgid "Log in"
 msgstr "Se connecter"
 
-#: poresira/core/voiding.py
+#: poresira/core/views.py:60
+msgid "Demo data already present."
+msgstr "Les données de démonstration sont déjà présentes."
+
+#: poresira/core/views.py:60
+msgid "Demo data loaded."
+msgstr "Données de démonstration chargées."
+
+#: poresira/core/voiding.py:64
 msgid "A reason is required to void a record."
 msgstr "Un motif est obligatoire pour annuler un enregistrement."
 
-#: poresira/core/voiding.py
+#: poresira/core/voiding.py:66
 msgid "This record is already voided."
 msgstr "Cet enregistrement est déjà annulé."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:151
 msgid "The deposit needs a title."
 msgstr "Le dépôt a besoin d’un titre."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:153
 msgid "The deposit needs at least one sample and its reads."
 msgstr "Le dépôt a besoin d’au moins un échantillon et de ses lectures."
 
-#: poresira/deposits/collect.py poresira/deposits/services.py
+#: poresira/deposits/collect.py:157 poresira/deposits/services.py:246
 msgid "Give a release date in the future."
 msgstr "Indiquez une date de mise en ligne dans le futur."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:167
 #, python-format
 msgid ""
 "The project already has the BioProject %(accession)s: is a new study wanted?"
@@ -886,24 +966,24 @@ msgstr ""
 "Le projet a déjà le BioProject %(accession)s : une nouvelle étude est-elle "
 "voulue ?"
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:182
 msgid "the collection date"
 msgstr "la date de collecte"
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:184
 msgid "the country"
 msgstr "le pays"
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:186
 msgid "the host species and its NCBI taxon ID"
 msgstr "l'espèce hôte et son identifiant NCBI"
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:188
 #, python-format
 msgid "%(sample)s lacks %(what)s."
 msgstr "%(sample)s : %(what)s manque."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:194
 #, python-format
 msgid ""
 "%(sample)s gives its coordinates to %(places)s decimals: farm locations "
@@ -912,50 +992,50 @@ msgstr ""
 "%(sample)s donne ses coordonnées à %(places)s décimales : l’emplacement des "
 "exploitations deviendrait public."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:204
 #, python-format
 msgid "%(sample)s has no reads file."
 msgstr "%(sample)s n'a aucun fichier de lectures."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:206
 #, python-format
 msgid "%(sample)s mixes FASTQ and BAM files."
 msgstr "%(sample)s mélange des fichiers FASTQ et BAM."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:210
 msgid "is voided"
 msgstr "est annulé"
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:212
 msgid "is on an offline medium"
 msgstr "est sur un support hors ligne"
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:214
 msgid "has changed or is missing"
 msgstr "a changé ou est absent"
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:217
 #, python-format
 msgid "%(file)s %(problem)s."
 msgstr "%(file)s %(problem)s."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:220
 #, python-format
 msgid "The run of %(sample)s is not completed."
 msgstr "Le passage de %(sample)s n'est pas terminé."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:222
 #, python-format
 msgid "The instrument of the run of %(sample)s is not known to the archive."
 msgstr "L'appareil du passage de %(sample)s n'est pas connu de l'archive."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:225
 #, python-format
 msgid "The run of %(sample)s was reconstructed from a record."
 msgstr ""
 "Le passage de %(sample)s a été reconstitué à partir d’un enregistrement."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:238
 #, python-format
 msgid ""
 "The reads of %(sample)s are already in SRA (%(runs)s): do not send them "
@@ -964,314 +1044,320 @@ msgstr ""
 "Les lectures de %(sample)s sont déjà dans SRA (%(runs)s) : ne les envoyez "
 "pas une seconde fois."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:248
 #, python-format
 msgid "%(sample)s has sequences in GenBank (%(accessions)s)."
 msgstr "%(sample)s a des séquences dans GenBank (%(accessions)s)."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:309
 #, python-format
 msgid "%(sample)s has no coordinates, which NCBI requires."
 msgstr "%(sample)s n'a pas de coordonnées, que NCBI exige."
 
-#: poresira/deposits/collect.py
+#: poresira/deposits/collect.py:315
 #, python-format
 msgid "%(file)s is named like a file of %(other)s: names must be unique."
 msgstr ""
 "%(file)s porte le même nom qu’un fichier de %(other)s : les noms doivent "
 "être uniques."
 
-#: poresira/deposits/forms.py
+#: poresira/deposits/forms.py:32
 msgid "Environment"
 msgstr "Environnement"
 
-#: poresira/deposits/forms.py
+#: poresira/deposits/forms.py:68
 msgid "Project code"
 msgstr "Code du projet"
 
-#: poresira/deposits/forms.py
+#: poresira/deposits/forms.py:77
 #, python-format
 msgid "Type %(code)s to confirm that the data become public and permanent."
 msgstr ""
 "Saisissez %(code)s pour confirmer que les données deviennent publiques et "
 "définitives."
 
-#: poresira/deposits/forms.py
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/deposits/templates/deposits/deposit_list.html
+#: poresira/deposits/forms.py:83
+#: poresira/deposits/templates/deposits/deposit_detail.html:55
+#: poresira/deposits/templates/deposits/deposit_list.html:26
 msgid "Release date"
 msgstr "Date de mise en ligne"
 
-#: poresira/deposits/forms.py
+#: poresira/deposits/forms.py:85
 msgid "The data stay private until this date."
 msgstr "Les données restent privées jusqu'à cette date."
 
-#: poresira/deposits/forms.py
+#: poresira/deposits/forms.py:88
 msgid "Sampling and benefit-sharing permits were checked"
 msgstr "Les permis de prélèvement et de partage des avantages ont été vérifiés"
 
-#: poresira/deposits/forms.py
+#: poresira/deposits/forms.py:89
 msgid "Required before anything is made public."
 msgstr "Obligatoire avant toute publication."
 
-#: poresira/deposits/forms.py
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/deposits/forms.py:98
+#: poresira/deposits/templates/deposits/deposit_detail.html:82
+#: poresira/samples/templates/samples/sample_detail.html:100
 msgid "Accession"
 msgstr "Numéro d'accession"
 
-#: poresira/deposits/forms.py poresira/deposits/models/deposit.py
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/pcr/models/run.py poresira/samples/views.py
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/deposits/forms.py:102 poresira/deposits/models/deposit.py:40
+#: poresira/deposits/templates/deposits/deposit_detail.html:82
+#: poresira/deposits/templates/deposits/deposit_detail.html:96
+#: poresira/pcr/models/run.py:32 poresira/samples/views.py:206
+#: poresira/sequencing/forms.py:98
+#: poresira/sequencing/templates/sequencing/library_detail.html:43
+#: poresira/sequencing/templates/sequencing/run_detail.html:67
 msgid "Sample"
 msgstr "Échantillon"
 
-#: poresira/deposits/forms.py
+#: poresira/deposits/forms.py:103
 msgid "The field sample or living plant; leave empty for a BioProject."
 msgstr ""
 "L'échantillon de terrain ou la plante vivante ; à laisser vide pour un "
 "BioProject."
 
-#: poresira/deposits/forms.py
+#: poresira/deposits/forms.py:106
 msgid "Released on"
 msgstr "Publié le"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:19
 msgid "European Nucleotide Archive (ENA)"
 msgstr "Archive européenne de nucléotides (ENA)"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:20
 msgid "NCBI (Submission Portal)"
 msgstr "NCBI (portail de soumission)"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:24
 msgid "Test service (discarded after a day)"
 msgstr "Service de test (effacé après un jour)"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:25
 msgid "Production (public and permanent)"
 msgstr "Production (public et définitif)"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:30
 msgid "Being submitted"
 msgstr "En cours de soumission"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:31
+#: poresira/deposits/models/deposit.py:46
 msgid "Accepted"
 msgstr "Accepté"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:32
+#: poresira/deposits/models/deposit.py:47
 msgid "Rejected"
 msgstr "Refusé"
 
-#: poresira/deposits/models/deposit.py
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/models/deposit.py:39
+#: poresira/deposits/templates/deposits/deposit_detail.html:73
 msgid "Study"
 msgstr "Étude"
 
-#: poresira/deposits/models/deposit.py
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/deposits/models/deposit.py:41
+#: poresira/deposits/templates/deposits/deposit_detail.html:94
+#: poresira/sequencing/forms.py:155
+#: poresira/sequencing/templates/sequencing/run_detail.html:57
+#: poresira/sequencing/templates/sequencing/run_detail.html:68
+#: poresira/sequencing/templates/sequencing/run_detail.html:78
 msgid "Reads"
 msgstr "Lectures"
 
-#: poresira/deposits/models/deposit.py poresira/pcr/models/run.py
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/deposits/models/deposit.py:45 poresira/pcr/models/run.py:39
+#: poresira/pcr/templates/pcr/run_detail.html:70
 msgid "Pending"
 msgstr "En attente"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:167
 msgid "archive"
 msgstr "archive"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:170
 msgid "environment"
 msgstr "environnement"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:175
 msgid "title"
 msgstr "titre"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:176
 msgid "description"
 msgstr "description"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:178
 msgid "release date"
 msgstr "date de mise en ligne"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:181
 msgid ""
 "The data stay private until this date. Required for the production service."
 msgstr ""
 "Les données restent privées jusqu'à cette date. Obligatoire pour le service "
 "de production."
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:184
 msgid "sample checklist"
 msgstr "liste de contrôle d'échantillon"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:187
 msgid "The archive's checklist of sample attributes."
 msgstr "La liste des attributs d'échantillon de l'archive."
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:189
 msgid "library source"
 msgstr "source de la bibliothèque"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:190
 msgid "library selection"
 msgstr "sélection de la bibliothèque"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:191
 msgid "library strategy"
 msgstr "stratégie de la bibliothèque"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:193
 msgid "permits checked on"
 msgstr "permis vérifiés le"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:196
 msgid "Sampling and benefit-sharing permits were checked before publication."
 msgstr ""
 "Les permis de prélèvement et de partage des avantages ont été vérifiés avant "
 "la publication."
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:204
 msgid "permits checked by"
 msgstr "permis vérifiés par"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:207
 msgid "archive account"
 msgstr "compte de l'archive"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:210
 msgid "The account name used to submit. Its password is never stored."
 msgstr ""
 "Le nom du compte utilisé pour soumettre. Son mot de passe n'est jamais "
 "enregistré."
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:223
 msgid "last receipt"
 msgstr "dernier reçu"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:225
 msgid "What the archive answered, without credentials."
 msgstr "Ce que l'archive a répondu, sans identifiants."
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:294
 msgid "deposit"
 msgstr "dépôt"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:298
 msgid "alias"
 msgstr "alias"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:300
 msgid "The name the archive knows this object by, unique in the deposit."
 msgstr "Le nom sous lequel l'archive connaît cet objet, unique dans le dépôt."
 
-#: poresira/deposits/models/deposit.py poresira/deposits/models/public.py
-#: poresira/pcr/templates/pcr/run_detail.html poresira/samples/models/qc.py
-#: poresira/samples/models/sequence.py poresira/sequencing/models/run.py
-#: poresira/storage/models/file.py
+#: poresira/deposits/models/deposit.py:308
+#: poresira/deposits/models/public.py:61
+#: poresira/pcr/templates/pcr/run_detail.html:66
+#: poresira/samples/models/qc.py:45 poresira/samples/models/sequence.py:38
+#: poresira/sequencing/models/run.py:203 poresira/storage/models/file.py:128
 msgid "sample"
 msgstr "échantillon"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:324
 msgid "sample of the archive"
 msgstr "échantillon de l'archive"
 
-#: poresira/deposits/models/deposit.py poresira/deposits/models/public.py
-#: poresira/samples/models/sequence.py
+#: poresira/deposits/models/deposit.py:329
+#: poresira/deposits/models/public.py:54 poresira/samples/models/sequence.py:41
 msgid "accession"
 msgstr "numéro d'accession"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:330
 msgid "experiment accession"
 msgstr "accession de l'expérience"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:331
 msgid "message"
 msgstr "message"
 
-#: poresira/deposits/models/deposit.py
+#: poresira/deposits/models/deposit.py:408
 msgid "item"
 msgstr "élément"
 
-#: poresira/deposits/models/public.py poresira/samples/models/sequence.py
+#: poresira/deposits/models/public.py:16 poresira/samples/models/sequence.py:49
 msgid "BioProject"
 msgstr "BioProject"
 
-#: poresira/deposits/models/public.py
-#: poresira/deposits/templates/deposits/_public.html
-#: poresira/samples/models/sequence.py
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/deposits/models/public.py:17
+#: poresira/deposits/templates/deposits/_public.html:7
+#: poresira/samples/models/sequence.py:48
+#: poresira/samples/templates/samples/sample_detail.html:101
 msgid "BioSample"
 msgstr "BioSample"
 
-#: poresira/deposits/models/public.py
+#: poresira/deposits/models/public.py:18
 msgid "SRA experiment"
 msgstr "Expérience SRA"
 
-#: poresira/deposits/models/public.py
+#: poresira/deposits/models/public.py:19
 msgid "SRA run"
 msgstr "Run SRA"
 
-#: poresira/deposits/models/public.py
+#: poresira/deposits/models/public.py:62
 msgid "The field sample or living plant; empty for a BioProject."
 msgstr ""
 "L'échantillon de terrain ou la plante vivante ; vide pour un BioProject."
 
-#: poresira/deposits/models/public.py
+#: poresira/deposits/models/public.py:64
 msgid "released on"
 msgstr "publié le"
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:130
 #, python-format
 msgid "Already registered in %(origin)s."
 msgstr "Déjà enregistré dans %(origin)s."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:146
 msgid "the public archives"
 msgstr "les archives publiques"
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:157
 msgid "The library of this run has no sample."
 msgstr "La bibliothèque de ce passage n'a aucun échantillon."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:207
 msgid "A voided run cannot be deposited."
 msgstr "Un passage annulé ne peut pas être déposé."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:210
 msgid ""
 "Prepare the deposit for the test service; production is a separate step."
 msgstr ""
 "Préparez le dépôt pour le service de test ; la production est une étape "
 "distincte."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:238
 msgid "Only a test deposit that the archive accepted can be copied."
 msgstr "Seul un dépôt de test accepté par l'archive peut être copié."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:240
 msgid "A voided deposit cannot be copied."
 msgstr "Un dépôt annulé ne peut pas être copié."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:243
 msgid "Confirm that the permits were checked."
 msgstr "Confirmez que les permis ont été vérifiés."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:281 poresira/deposits/services.py:306
 msgid "Only a draft deposit can be submitted."
 msgstr "Seul un brouillon peut être soumis."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:284
 msgid ""
 "An NCBI deposit is uploaded through the Submission Portal: download its "
 "files."
@@ -1279,123 +1365,123 @@ msgstr ""
 "Un dépôt NCBI se téléverse par le portail de soumission : téléchargez ses "
 "fichiers."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:291
 #, python-format
 msgid "Type the code of the project (%(code)s) to confirm a public deposit."
 msgstr "Saisissez le code du projet (%(code)s) pour confirmer un dépôt public."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:297
 #, python-format
 msgid "The deposit is not ready: %(problems)s"
 msgstr "Le dépôt n'est pas prêt : %(problems)s"
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:374
 msgid "No accession."
 msgstr "Aucune accession."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:383
 msgid "The study or the sample of these reads was not registered."
 msgstr "L'étude ou l'échantillon de ces lectures n'a pas été enregistré."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:426
 msgid "A deposit being submitted cannot be voided."
 msgstr "Un dépôt en cours de soumission ne peut pas être annulé."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:443
 msgid "Unknown kind of accession."
 msgstr "Type d'accession inconnu."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:446
 msgid "The sample must belong to the project."
 msgstr "L'échantillon doit appartenir au projet."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:449
 msgid "Give the field sample or living plant, not an extract or product."
 msgstr ""
 "Indiquez l'échantillon de terrain ou la plante vivante, pas un extrait ni un "
 "produit."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:470
 msgid "Items can be left out of a draft deposit only."
 msgstr "On ne peut écarter des éléments que d'un brouillon."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:472
 msgid "The study cannot be left out."
 msgstr "L'étude ne peut pas être écartée."
 
-#: poresira/deposits/services.py
+#: poresira/deposits/services.py:474
 msgid "Leave out the reads of this sample first."
 msgstr "Écartez d'abord les lectures de cet échantillon."
 
-#: poresira/deposits/templates/deposits/_badges.html
+#: poresira/deposits/templates/deposits/_badges.html:3
 msgid "Production"
 msgstr "Production"
 
-#: poresira/deposits/templates/deposits/_badges.html
+#: poresira/deposits/templates/deposits/_badges.html:3
 msgid "Test"
 msgstr "Test"
 
-#: poresira/deposits/templates/deposits/_deposits.html
+#: poresira/deposits/templates/deposits/_deposits.html:6
 msgid "Prepare a deposit"
 msgstr "Préparer un dépôt"
 
-#: poresira/deposits/templates/deposits/_deposits.html
-#: poresira/deposits/views.py
+#: poresira/deposits/templates/deposits/_deposits.html:9
+#: poresira/deposits/views.py:146
 msgid "Deposit"
 msgstr "Dépôt"
 
-#: poresira/deposits/templates/deposits/_deposits.html
-#: poresira/deposits/templates/deposits/deposit_list.html
+#: poresira/deposits/templates/deposits/_deposits.html:9
+#: poresira/deposits/templates/deposits/deposit_list.html:25
 msgid "Title"
 msgstr "Titre"
 
-#: poresira/deposits/templates/deposits/_deposits.html
+#: poresira/deposits/templates/deposits/_deposits.html:17
 msgid "No deposits yet."
 msgstr "Aucun dépôt pour le moment."
 
-#: poresira/deposits/templates/deposits/_public.html
+#: poresira/deposits/templates/deposits/_public.html:4
 msgid "Public archives"
 msgstr "Archives publiques"
 
-#: poresira/deposits/templates/deposits/_public.html
+#: poresira/deposits/templates/deposits/_public.html:8
 msgid "SRA runs"
 msgstr "Runs SRA"
 
-#: poresira/deposits/templates/deposits/_public.html
+#: poresira/deposits/templates/deposits/_public.html:9
 msgid "SRA experiments"
 msgstr "Expériences SRA"
 
-#: poresira/deposits/templates/deposits/_public.html
+#: poresira/deposits/templates/deposits/_public.html:10
 msgid "GenBank"
 msgstr "GenBank"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:14
 msgid "Submit for real"
 msgstr "Soumettre pour de bon"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/deposits/views.py
+#: poresira/deposits/templates/deposits/deposit_detail.html:14
+#: poresira/deposits/views.py:254
 msgid "Submit to the test service"
 msgstr "Soumettre au service de test"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/deposits/views.py
+#: poresira/deposits/templates/deposits/deposit_detail.html:15
+#: poresira/deposits/views.py:279
 msgid "Prepare the real deposit"
 msgstr "Préparer le dépôt réel"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:16
 msgid "Files to be sent"
 msgstr "Fichiers à envoyer"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:16
 msgid "Files for the Submission Portal"
 msgstr "Fichiers pour le portail de soumission"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:17
 msgid "RO-Crate"
 msgstr "RO-Crate"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:28
 msgid ""
 "NCBI deposit: PoreSira does not send it. Download the files, submit them in "
 "the NCBI Submission Portal, then record the accessions NCBI gives "
@@ -1406,7 +1492,7 @@ msgstr ""
 "que NCBI donne (import_public_accessions) pour que rien ne soit envoyé deux "
 "fois."
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:30
 msgid ""
 "This deposit is for the real archive: once submitted, the accessions are "
 "permanent and the data become public on the release date."
@@ -1415,7 +1501,7 @@ msgstr ""
 "sont définitives et les données deviennent publiques à la date de mise en "
 "ligne."
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:32
 msgid ""
 "Test deposit: the archive discards it within a day. Its accessions are "
 "temporary."
@@ -1423,102 +1509,104 @@ msgstr ""
 "Dépôt de test : l'archive l'efface sous un jour. Ses accessions sont "
 "temporaires."
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:38
 msgid "Not ready to submit:"
 msgstr "Pas prêt à soumettre :"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/deposits/views.py
+#: poresira/deposits/templates/deposits/deposit_detail.html:39
+#: poresira/deposits/templates/deposits/deposit_detail.html:105
+#: poresira/deposits/views.py:319
 msgid "Leave out"
 msgstr "Écarter"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:41
 msgid "Ready to submit."
 msgstr "Prêt à soumettre."
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:44
 msgid "To look at:"
 msgstr "À examiner :"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:54
 msgid "Archive"
 msgstr "Archive"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:56
 msgid "Sample checklist"
 msgstr "Liste de contrôle d'échantillon"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/templates/sequencing/run_list.html
-#: poresira/sequencing/urls.py poresira/sequencing/views.py
+#: poresira/deposits/templates/deposits/deposit_detail.html:57
+#: poresira/samples/templates/samples/sample_detail.html:148
+#: poresira/sequencing/templates/sequencing/run_detail.html:42
+#: poresira/sequencing/templates/sequencing/run_list.html:13
+#: poresira/sequencing/urls.py:19 poresira/sequencing/views.py:219
 msgid "Library"
 msgstr "Bibliothèque"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:62
 msgid "Submission"
 msgstr "Soumission"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:67
 msgid "Archive account"
 msgstr "Compte de l'archive"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:68
 msgid "Permits checked on"
 msgstr "Permis vérifiés le"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:82
 msgid "Alias"
 msgstr "Alias"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:82
+#: poresira/deposits/templates/deposits/deposit_detail.html:96
 msgid "Message"
 msgstr "Message"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:96
 msgid "Run accession"
 msgstr "Accession du run"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:96
 msgid "Experiment accession"
 msgstr "Accession de l'expérience"
 
-#: poresira/deposits/templates/deposits/deposit_detail.html
+#: poresira/deposits/templates/deposits/deposit_detail.html:112
 msgid "Last receipt"
 msgstr "Dernier reçu"
 
-#: poresira/deposits/templates/deposits/deposit_list.html
-#: poresira/deposits/views.py
+#: poresira/deposits/templates/deposits/deposit_list.html:8
+#: poresira/deposits/views.py:179
 msgid "Record an existing accession"
 msgstr "Enregistrer une accession existante"
 
-#: poresira/deposits/templates/deposits/deposit_list.html
-#: poresira/deposits/urls.py poresira/deposits/views.py
+#: poresira/deposits/templates/deposits/deposit_list.html:9
+#: poresira/deposits/urls.py:17 poresira/deposits/views.py:199
 msgid "New deposit"
 msgstr "Nouveau dépôt"
 
-#: poresira/deposits/templates/deposits/deposit_list.html
+#: poresira/deposits/templates/deposits/deposit_list.html:26
 msgid "Objects"
 msgstr "Objets"
 
-#: poresira/deposits/templates/deposits/deposit_list.html
+#: poresira/deposits/templates/deposits/deposit_list.html:38
 msgid "No deposits to show."
 msgstr "Aucun dépôt à afficher."
 
-#: poresira/deposits/views.py poresira/samples/views.py
+#: poresira/deposits/views.py:180 poresira/samples/views.py:334
 msgid "Record"
 msgstr "Enregistrer"
 
-#: poresira/deposits/views.py
+#: poresira/deposits/views.py:181
 msgid "Accession recorded."
 msgstr "Accession enregistrée."
 
-#: poresira/deposits/views.py
+#: poresira/deposits/views.py:201
 msgid "Deposit prepared. Review the report."
 msgstr "Dépôt préparé. Lisez le rapport."
 
-#: poresira/deposits/views.py
+#: poresira/deposits/views.py:247
 msgid ""
 "Submission requested: the deposit agent picks it up. Reload this page in a "
 "moment."
@@ -1526,1277 +1614,1301 @@ msgstr ""
 "Soumission demandée : l'agent de dépôt la prend en charge. Rechargez cette "
 "page dans un instant."
 
-#: poresira/deposits/views.py
+#: poresira/deposits/views.py:253
 msgid "Submit for real (public and permanent)"
 msgstr "Soumettre pour de bon (public et définitif)"
 
-#: poresira/deposits/views.py
+#: poresira/deposits/views.py:281
 msgid "Deposit prepared. Check it, then submit it for real."
 msgstr "Dépôt préparé. Vérifiez-le, puis soumettez-le pour de bon."
 
-#: poresira/deposits/views.py
+#: poresira/deposits/views.py:303
 msgid "Void deposit"
 msgstr "Annuler le dépôt"
 
-#: poresira/deposits/views.py
+#: poresira/deposits/views.py:305
 msgid "Deposit voided."
 msgstr "Dépôt annulé."
 
-#: poresira/deposits/views.py
+#: poresira/deposits/views.py:318
 msgid "Leave out of the deposit"
 msgstr "Écarter du dépôt"
 
-#: poresira/deposits/views.py
+#: poresira/deposits/views.py:320
 msgid "Left out of the deposit."
 msgstr "Écarté du dépôt."
 
-#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/pcr/forms.py:50 poresira/pcr/forms.py:63
+#: poresira/pcr/templates/pcr/run_detail.html:53
+#: poresira/pcr/templates/pcr/run_list.html:28
+#: poresira/samples/templates/samples/sample_detail.html:121
 msgid "Assay"
 msgstr "Test"
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:69
 msgid "Only for PCR tubes: from 1 to 96."
 msgstr "Seulement pour les tubes PCR : de 1 à 96."
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:81
 msgid "Give the number of tubes."
 msgstr "Indiquez le nombre de tubes."
 
-#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/forms.py:89 poresira/pcr/templates/pcr/run_detail.html:94
 msgid "Template"
 msgstr "Matrice"
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:90
 msgid "Identifier or label of the sample; empty for a control."
 msgstr "Identifiant ou étiquette de l'échantillon ; vide pour un témoin."
 
-#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/pcr/forms.py:94 poresira/pcr/templates/pcr/run_detail.html:94
+#: poresira/samples/forms.py:168
+#: poresira/samples/templates/samples/sample_detail.html:121
 msgid "Position"
 msgstr "Position"
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:95
 msgid "Well such as A1, or tube number; empty takes the next free one."
 msgstr ""
 "Puits comme A1, ou numéro du tube ; vide prend la première position libre."
 
-#: poresira/pcr/forms.py poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/forms.py:98 poresira/pcr/templates/pcr/run_detail.html:94
 msgid "Template (µL)"
 msgstr "Matrice (µL)"
 
-#: poresira/pcr/forms.py poresira/sequencing/forms.py
+#: poresira/pcr/forms.py:116 poresira/sequencing/forms.py:122
 #, python-format
 msgid "No single sample of this project matches “%(text)s”."
 msgstr "Aucun échantillon unique de ce projet ne correspond à « %(text)s »."
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:123
 msgid "A sample reaction needs a template."
 msgstr "Une réaction d'échantillon a besoin d'une matrice."
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:125
 msgid "A control has no template sample."
 msgstr "Un témoin n'a pas d'échantillon comme matrice."
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:140
 msgid "Required once the run is closed; recorded in the audit log."
 msgstr ""
 "Obligatoire une fois le passage clos ; enregistré dans le journal d'audit."
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:163
 msgid "Cycles"
 msgstr "Cycles"
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:165
 msgid "Steps"
 msgstr "Étapes"
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:167
 msgid "One step per line: stage;°C;seconds;label, e.g. cycle;55;30;Annealing"
 msgstr ""
 "Une étape par ligne : phase;°C;secondes;libellé, par ex. cycle;55;30;"
 "Hybridation"
 
-#: poresira/pcr/forms.py poresira/pcr/templates/pcr/primer_list.html
+#: poresira/pcr/forms.py:169 poresira/pcr/forms.py:235
+#: poresira/pcr/templates/pcr/primer_list.html:12
 msgid "Reference"
 msgstr "Référence"
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:193
 #, python-format
 msgid "Line %(number)s is not stage;temperature;duration;label."
 msgstr ""
 "La ligne %(number)s n'est pas de la forme phase;température;durée;libellé."
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:226
 msgid "Polymerase"
 msgstr "Polymérase"
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:228
 msgid "Reaction volume (µL)"
 msgstr "Volume de réaction (µL)"
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:231
 msgid "Ingredients"
 msgstr "Ingrédients"
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:233
 msgid "One per line: ingredient;µL;concentration, e.g. Buffer;5;10X"
 msgstr "Un par ligne : ingrédient;µL;concentration, par ex. Tampon;5;10X"
 
-#: poresira/pcr/forms.py
+#: poresira/pcr/forms.py:258
 #, python-format
 msgid "Line %(number)s is not ingredient;volume;concentration."
-msgstr "La ligne %(number)s n'est pas de la forme ingrédient;volume;concentration."
+msgstr ""
+"La ligne %(number)s n'est pas de la forme ingrédient;volume;concentration."
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:22
 msgid "Forward"
 msgstr "Sens"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:23
 msgid "Reverse"
 msgstr "Antisens"
 
-#: poresira/pcr/models/reference.py poresira/samples/models/storage.py
-#: poresira/sequencing/models/reference.py poresira/sequencing/models/run.py
-#: poresira/storage/models/backend.py
+#: poresira/pcr/models/reference.py:30 poresira/pcr/models/reference.py:71
+#: poresira/pcr/models/reference.py:143 poresira/pcr/models/reference.py:213
+#: poresira/samples/models/storage.py:36
+#: poresira/sequencing/models/reference.py:38
+#: poresira/sequencing/models/reference.py:82
+#: poresira/sequencing/models/reference.py:117
+#: poresira/sequencing/models/run.py:151 poresira/storage/models/backend.py:23
 msgid "name"
 msgstr "nom"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:32
 msgid "sequence (5' to 3')"
 msgstr "séquence (5' vers 3')"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:34
 msgid "Use upper-case IUPAC DNA letters only."
 msgstr "Utilisez uniquement des lettres IUPAC de l'ADN, en majuscules."
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:36
 msgid "direction"
 msgstr "sens"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:37 poresira/pcr/models/reference.py:214
 msgid "target"
 msgstr "cible"
 
-#: poresira/pcr/models/reference.py poresira/sequencing/models/reference.py
+#: poresira/pcr/models/reference.py:38 poresira/pcr/models/reference.py:73
+#: poresira/pcr/models/reference.py:148 poresira/pcr/models/reference.py:249
+#: poresira/sequencing/models/reference.py:46
 msgid "reference"
 msgstr "référence"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:72
 msgid "number of cycles"
 msgstr "nombre de cycles"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:97
 msgid "Initial"
 msgstr "Initiale"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:98
 msgid "Cycle"
 msgstr "Cycle"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:99
 msgid "Final"
 msgstr "Finale"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:107
 msgid "program"
 msgstr "programme"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:109
 msgid "order"
 msgstr "ordre"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:110
 msgid "stage"
 msgstr "phase"
 
-#: poresira/pcr/models/reference.py poresira/samples/models/sample.py
+#: poresira/pcr/models/reference.py:111 poresira/samples/models/sample.py:86
 msgid "label"
 msgstr "étiquette"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:112
 msgid "temperature (°C)"
 msgstr "température (°C)"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:113
 msgid "duration (s)"
 msgstr "durée (s)"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:144
 msgid "polymerase"
 msgstr "polymérase"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:146
 msgid "reaction volume (µL)"
 msgstr "volume de réaction (µL)"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:181 poresira/pcr/models/reference.py:239
 msgid "master mix"
 msgstr "mélange réactionnel"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:183
 msgid "ingredient"
 msgstr "ingrédient"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:185
 msgid "concentration"
 msgstr "concentration"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:185
 msgid "As written, e.g. 10 µM."
 msgstr "Telle qu'écrite, par exemple 10 µM."
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:187
 msgid "volume per reaction (µL)"
 msgstr "volume par réaction (µL)"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:219
 msgid "forward primer"
 msgstr "amorce sens"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:225
 msgid "reverse primer"
 msgstr "amorce antisens"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:231
 msgid "cycling program"
 msgstr "programme de cycles"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:242
 msgid "reverse transcription"
 msgstr "transcription inverse"
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:244
 msgid "The template is RNA that is reverse-transcribed first (RT-PCR)."
 msgstr "La matrice est de l'ARN rétrotranscrit d'abord (RT-PCR)."
 
-#: poresira/pcr/models/reference.py
+#: poresira/pcr/models/reference.py:247
 msgid "expected amplicon (bp)"
 msgstr "amplicon attendu (pb)"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:21
 msgid "96-well plate"
 msgstr "Plaque 96 puits"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:22
 msgid "PCR tubes"
 msgstr "Tubes PCR"
 
-#: poresira/pcr/models/run.py poresira/sequencing/models/run.py
+#: poresira/pcr/models/run.py:26 poresira/sequencing/models/run.py:27
 msgid "Planned"
 msgstr "Planifié"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:27
 msgid "Performed"
 msgstr "Réalisé"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:28
 msgid "Closed"
 msgstr "Clos"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:33
 msgid "Positive control"
 msgstr "Témoin positif"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:34
 msgid "No-template control"
 msgstr "Témoin sans matrice"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:35
 msgid "Extraction blank"
 msgstr "Blanc d'extraction"
 
-#: poresira/pcr/models/run.py poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/models/run.py:40 poresira/pcr/templates/pcr/run_detail.html:67
 msgid "Positive"
 msgstr "Positif"
 
-#: poresira/pcr/models/run.py poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/models/run.py:41 poresira/pcr/templates/pcr/run_detail.html:68
 msgid "Negative"
 msgstr "Négatif"
 
-#: poresira/pcr/models/run.py poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/models/run.py:42 poresira/pcr/templates/pcr/run_detail.html:69
 msgid "Inconclusive"
 msgstr "Non concluant"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:94
 msgid "assay"
 msgstr "test"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:97
 msgid "container"
 msgstr "support"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:100
 msgid "number of tubes"
 msgstr "nombre de tubes"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:100
 msgid "Only for PCR tubes."
 msgstr "Seulement pour les tubes PCR."
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:105
 msgid "date"
 msgstr "date"
 
-#: poresira/pcr/models/run.py poresira/sequencing/models/run.py
+#: poresira/pcr/models/run.py:112 poresira/sequencing/models/run.py:331
 msgid "performed by"
 msgstr "réalisé par"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:114
 msgid "thermocycler"
 msgstr "thermocycleur"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:115
 msgid "master mix lot"
 msgstr "lot du mélange réactionnel"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:116
 msgid "polymerase lot"
 msgstr "lot de polymérase"
 
-#: poresira/pcr/models/run.py poresira/sequencing/models/run.py
+#: poresira/pcr/models/run.py:118 poresira/sequencing/models/run.py:165
+#: poresira/sequencing/models/run.py:340
 msgid "reconstructed from a publication"
 msgstr "reconstitué d'après une publication"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:120
 msgid ""
 "Results come from a published table; date, layout and controls are unknown."
 msgstr ""
 "Les résultats viennent d'un tableau publié ; la date, la disposition et les "
 "témoins sont inconnus."
 
-#: poresira/pcr/models/run.py poresira/sequencing/models/run.py
+#: poresira/pcr/models/run.py:170 poresira/sequencing/models/run.py:397
 msgid "run"
 msgstr "passage"
 
-#: poresira/pcr/models/run.py poresira/samples/models/sample.py
+#: poresira/pcr/models/run.py:172 poresira/samples/models/sample.py:114
 msgid "position"
 msgstr "position"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:173
 msgid "role"
 msgstr "rôle"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:180
 msgid "template"
 msgstr "matrice"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:183
 msgid "template volume (µL)"
 msgstr "volume de matrice (µL)"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:186
 msgid "result"
 msgstr "résultat"
 
-#: poresira/pcr/models/run.py poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/pcr/models/run.py:189 poresira/pcr/templates/pcr/run_detail.html:95
+#: poresira/samples/templates/samples/sample_detail.html:122
 msgid "Ct"
 msgstr "Ct"
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:189
 msgid "qPCR only."
 msgstr "qPCR seulement."
 
-#: poresira/pcr/models/run.py
+#: poresira/pcr/models/run.py:191
 msgid "band size on gel (bp)"
 msgstr "taille de bande sur gel (pb)"
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:119
 msgid "Steps must go from the initial steps to the cycle to the final steps."
 msgstr ""
 "Les étapes doivent aller des étapes initiales au cycle puis aux étapes "
 "finales."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:122
 msgid "A program needs at least one step inside the cycle."
 msgstr "Un programme a besoin d'au moins une étape dans le cycle."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:150
 msgid "The ingredients add up to more than the reaction volume."
 msgstr "Les ingrédients dépassent le volume de réaction."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:176
 msgid "This primer is not a forward primer."
 msgstr "Cette amorce n'est pas une amorce sens."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:178
 msgid "This primer is not a reverse primer."
 msgstr "Cette amorce n'est pas une amorce antisens."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:181
 msgid "A voided primer, program or master mix cannot be used."
 msgstr ""
 "Une amorce, un programme ou un mélange réactionnel annulé ne peut pas être "
 "utilisé."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:206
 #, python-format
 msgid "%(position)s is not a well of a 96-well plate (A1 to H12)."
 msgstr "%(position)s n'est pas un puits d'une plaque 96 puits (A1 à H12)."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:212
 #, python-format
 msgid "%(position)s is not a tube of this run (1 to %(count)s)."
 msgstr "%(position)s n'est pas un tube de ce passage (1 à %(count)s)."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:230
 msgid "Every position of this run is already used."
 msgstr "Toutes les positions de ce passage sont déjà utilisées."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:249
 msgid "A voided assay cannot be used."
 msgstr "Un test annulé ne peut pas être utilisé."
 
-#: poresira/pcr/services.py poresira/sequencing/services.py
+#: poresira/pcr/services.py:260 poresira/sequencing/services.py:106
 msgid "A voided run cannot be changed."
 msgstr "Un passage annulé ne peut pas être modifié."
 
-#: poresira/pcr/services.py poresira/sequencing/services.py
+#: poresira/pcr/services.py:263 poresira/sequencing/services.py:109
 #, python-format
 msgid "This run is %(status)s: the change is not possible."
 msgstr "Ce passage est « %(status)s » : le changement est impossible."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:270
 msgid "A voided sample cannot be a template."
 msgstr "Un échantillon annulé ne peut pas servir de matrice."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:272
 msgid "The template must belong to the project of the run."
 msgstr "La matrice doit appartenir au projet du passage."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:275
 msgid "A living plant cannot be a template; use an extract of it."
 msgstr ""
 "Une plante vivante ne peut pas servir de matrice ; utilisez un extrait de "
 "cette plante."
 
-#: poresira/pcr/services.py poresira/sequencing/services.py
+#: poresira/pcr/services.py:278 poresira/sequencing/services.py:210
 msgid "This sample is used up or discarded."
 msgstr "Cet échantillon est épuisé ou éliminé."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:291
 #, python-format
 msgid "The master mix leaves room for %(room)s µL of template."
 msgstr "Le mélange réactionnel laisse la place à %(room)s µL de matrice."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:317
 #, python-format
 msgid "Position %(position)s of this run is already used."
 msgstr "La position %(position)s de ce passage est déjà utilisée."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:332
 msgid "Add at least one reaction before marking the run as performed."
 msgstr ""
 "Ajoutez au moins une réaction avant de marquer le passage comme réalisé."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:339
 msgid "Give the date of the run."
 msgstr "Indiquez la date du passage."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:341
 msgid "A run cannot take place in the future."
 msgstr "Un passage ne peut pas avoir lieu dans le futur."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:362
 msgid "A voided reaction cannot be changed."
 msgstr "Une réaction annulée ne peut pas être modifiée."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:364
 msgid "A recorded result cannot go back to pending."
 msgstr "Un résultat enregistré ne peut pas redevenir « en attente »."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:380
 msgid "Every reaction needs a result before the run is closed."
 msgstr "Chaque réaction doit avoir un résultat avant la clôture du passage."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:419
 msgid "Reconstructed from a publication: controls are unknown."
 msgstr "Reconstitué d'après une publication : les témoins sont inconnus."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:428
 #, python-format
 msgid "Positive control %(position)s did not amplify."
 msgstr "Le témoin positif %(position)s n'a pas amplifié."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:433
 #, python-format
 msgid "Control %(position)s is contaminated."
 msgstr "Le témoin %(position)s est contaminé."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:439
 msgid "No positive control."
 msgstr "Pas de témoin positif."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:441
 msgid "No no-template control."
 msgstr "Pas de témoin sans matrice."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:443
 msgid "A control has no result yet."
 msgstr "Un témoin n'a pas encore de résultat."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:462
 msgid "Void the reactions of this run first."
 msgstr "Annulez d'abord les réactions de ce passage."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:469
 msgid "An active assay still uses this primer."
 msgstr "Un test actif utilise encore cette amorce."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:471
 msgid "An active assay still uses this record."
 msgstr "Un test actif utilise encore cet enregistrement."
 
-#: poresira/pcr/services.py
+#: poresira/pcr/services.py:473
 msgid "Void the runs of this assay first."
 msgstr "Annulez d'abord les passages de ce test."
 
-#: poresira/pcr/templates/pcr/assay_list.html
-#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:3
+#: poresira/pcr/templates/pcr/assay_list.html:6
+#: poresira/pcr/templates/pcr/run_list.html:8
 msgid "Assays"
 msgstr "Tests"
 
-#: poresira/pcr/templates/pcr/assay_list.html poresira/pcr/urls.py
+#: poresira/pcr/templates/pcr/assay_list.html:7 poresira/pcr/urls.py:27
 msgid "New assay"
 msgstr "Nouvel essai"
 
-#: poresira/pcr/templates/pcr/assay_list.html
-#: poresira/pcr/templates/pcr/primer_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:11
+#: poresira/pcr/templates/pcr/primer_list.html:12
 msgid "Target"
 msgstr "Cible"
 
-#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:11
 msgid "Forward primer"
 msgstr "Amorce sens"
 
-#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:11
 msgid "Reverse primer"
 msgstr "Amorce antisens"
 
-#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:12
 msgid "Cycling program"
 msgstr "Programme de cycles"
 
-#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:12
 msgid "Master mix"
 msgstr "Mélange réactionnel"
 
-#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:12
 msgid "RT"
 msgstr "RT"
 
-#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:12
 msgid "Amplicon (bp)"
 msgstr "Amplicon (pb)"
 
-#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:20
 msgid "Yes"
 msgstr "Oui"
 
-#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:20
 msgid "No"
 msgstr "Non"
 
-#: poresira/pcr/templates/pcr/assay_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:24
 msgid "No assays yet."
 msgstr "Aucun test pour le moment."
 
-#: poresira/pcr/templates/pcr/assay_list.html
-#: poresira/pcr/templates/pcr/master_mix_list.html
-#: poresira/pcr/templates/pcr/primer_list.html
-#: poresira/pcr/templates/pcr/program_list.html
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/pcr/templates/pcr/assay_list.html:28
+#: poresira/pcr/templates/pcr/master_mix_list.html:25
+#: poresira/pcr/templates/pcr/primer_list.html:25
+#: poresira/pcr/templates/pcr/program_list.html:25
+#: poresira/pcr/templates/pcr/run_detail.html:7
+#: poresira/pcr/templates/pcr/run_list.html:3
+#: poresira/pcr/templates/pcr/run_list.html:6
 msgid "PCR runs"
 msgstr "Passages PCR"
 
-#: poresira/pcr/templates/pcr/master_mix_list.html
-#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/pcr/templates/pcr/master_mix_list.html:3
+#: poresira/pcr/templates/pcr/master_mix_list.html:6
+#: poresira/pcr/templates/pcr/run_list.html:11
 msgid "Master mixes"
 msgstr "Mélanges réactionnels"
 
-#: poresira/pcr/templates/pcr/master_mix_list.html poresira/pcr/urls.py
+#: poresira/pcr/templates/pcr/master_mix_list.html:7 poresira/pcr/urls.py:59
 msgid "New master mix"
 msgstr "Nouveau mélange réactionnel"
 
-#: poresira/pcr/templates/pcr/master_mix_list.html
+#: poresira/pcr/templates/pcr/master_mix_list.html:11
 #, python-format
 msgid "%(volume)s µL per reaction"
 msgstr "%(volume)s µL par réaction"
 
-#: poresira/pcr/templates/pcr/master_mix_list.html
+#: poresira/pcr/templates/pcr/master_mix_list.html:13
 msgid "Ingredient"
 msgstr "Ingrédient"
 
-#: poresira/pcr/templates/pcr/master_mix_list.html
+#: poresira/pcr/templates/pcr/master_mix_list.html:13
 msgid "Concentration"
 msgstr "Concentration"
 
-#: poresira/pcr/templates/pcr/master_mix_list.html
+#: poresira/pcr/templates/pcr/master_mix_list.html:13
 msgid "Volume per reaction (µL)"
 msgstr "Volume par réaction (µL)"
 
-#: poresira/pcr/templates/pcr/master_mix_list.html
+#: poresira/pcr/templates/pcr/master_mix_list.html:23
 msgid "No master mixes yet."
 msgstr "Aucun mélange réactionnel pour le moment."
 
-#: poresira/pcr/templates/pcr/primer_list.html
-#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/pcr/templates/pcr/primer_list.html:3
+#: poresira/pcr/templates/pcr/primer_list.html:6
+#: poresira/pcr/templates/pcr/run_list.html:9
 msgid "Primers"
 msgstr "Amorces"
 
-#: poresira/pcr/templates/pcr/primer_list.html poresira/pcr/urls.py
+#: poresira/pcr/templates/pcr/primer_list.html:7 poresira/pcr/urls.py:37
 msgid "New primer"
 msgstr "Nouvelle amorce"
 
-#: poresira/pcr/templates/pcr/primer_list.html
+#: poresira/pcr/templates/pcr/primer_list.html:11
 msgid "Sequence (5'→3')"
 msgstr "Séquence (5'→3')"
 
-#: poresira/pcr/templates/pcr/primer_list.html
+#: poresira/pcr/templates/pcr/primer_list.html:11
 msgid "Length"
 msgstr "Longueur"
 
-#: poresira/pcr/templates/pcr/primer_list.html
+#: poresira/pcr/templates/pcr/primer_list.html:12
 msgid "Direction"
 msgstr "Sens"
 
-#: poresira/pcr/templates/pcr/primer_list.html
+#: poresira/pcr/templates/pcr/primer_list.html:21
 msgid "No primers yet."
 msgstr "Aucune amorce pour le moment."
 
-#: poresira/pcr/templates/pcr/program_list.html
-#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/pcr/templates/pcr/program_list.html:3
+#: poresira/pcr/templates/pcr/program_list.html:6
+#: poresira/pcr/templates/pcr/run_list.html:10
 msgid "Cycling programs"
 msgstr "Programmes de cycles"
 
-#: poresira/pcr/templates/pcr/program_list.html poresira/pcr/urls.py
+#: poresira/pcr/templates/pcr/program_list.html:7 poresira/pcr/urls.py:47
 msgid "New cycling program"
 msgstr "Nouveau programme de cycles"
 
-#: poresira/pcr/templates/pcr/program_list.html
+#: poresira/pcr/templates/pcr/program_list.html:11
 #, python-format
 msgid "%(cycles)s cycles"
 msgstr "%(cycles)s cycles"
 
-#: poresira/pcr/templates/pcr/program_list.html
+#: poresira/pcr/templates/pcr/program_list.html:13
 msgid "Stage"
 msgstr "Phase"
 
-#: poresira/pcr/templates/pcr/program_list.html
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/pcr/templates/pcr/program_list.html:13
+#: poresira/samples/templates/samples/_sample_results.html:5
+#: poresira/samples/templates/samples/event_detail.html:30
+#: poresira/sequencing/templates/sequencing/library_detail.html:43
+#: poresira/sequencing/templates/sequencing/run_detail.html:67
 msgid "Label"
 msgstr "Étiquette"
 
-#: poresira/pcr/templates/pcr/program_list.html
+#: poresira/pcr/templates/pcr/program_list.html:13
 msgid "Temperature (°C)"
 msgstr "Température (°C)"
 
-#: poresira/pcr/templates/pcr/program_list.html
+#: poresira/pcr/templates/pcr/program_list.html:13
 msgid "Duration (s)"
 msgstr "Durée (s)"
 
-#: poresira/pcr/templates/pcr/program_list.html
+#: poresira/pcr/templates/pcr/program_list.html:23
 msgid "No programs yet."
 msgstr "Aucun programme pour le moment."
 
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/pcr/templates/pcr/run_detail.html:15
+#: poresira/pcr/templates/pcr/run_list.html:36
+#: poresira/samples/templates/samples/sample_detail.html:128
+#: poresira/sequencing/templates/sequencing/library_detail.html:14
+#: poresira/sequencing/templates/sequencing/library_list.html:21
+#: poresira/sequencing/templates/sequencing/run_detail.html:14
+#: poresira/sequencing/templates/sequencing/run_list.html:21
 msgid "Reconstructed"
 msgstr "Reconstitué"
 
-#: poresira/pcr/templates/pcr/run_detail.html poresira/pcr/views.py
+#: poresira/pcr/templates/pcr/run_detail.html:19 poresira/pcr/views.py:253
 msgid "Add a reaction"
 msgstr "Ajouter une réaction"
 
-#: poresira/pcr/templates/pcr/run_detail.html poresira/pcr/views.py
+#: poresira/pcr/templates/pcr/run_detail.html:20 poresira/pcr/views.py:278
 msgid "Mark as performed"
 msgstr "Marquer comme réalisé"
 
-#: poresira/pcr/templates/pcr/run_detail.html poresira/pcr/views.py
+#: poresira/pcr/templates/pcr/run_detail.html:22 poresira/pcr/views.py:305
 msgid "Close"
 msgstr "Clore"
 
-#: poresira/pcr/templates/pcr/run_detail.html poresira/pcr/views.py
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/views.py
+#: poresira/pcr/templates/pcr/run_detail.html:24 poresira/pcr/views.py:314
+#: poresira/sequencing/templates/sequencing/run_detail.html:24
+#: poresira/sequencing/views.py:495
 msgid "Reopen"
 msgstr "Rouvrir"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:39
 msgid "Controls valid: the results can be trusted."
 msgstr "Témoins valides : les résultats sont fiables."
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:41
 msgid "Controls failed: the run is invalid."
 msgstr "Témoins en échec : le passage est invalide."
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:44
 msgid "Validity not assessed."
 msgstr "Validité non évaluée."
 
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/pcr/templates/pcr/run_detail.html:54
+#: poresira/pcr/templates/pcr/run_list.html:29
 msgid "Container"
 msgstr "Support"
 
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:55
+#: poresira/pcr/templates/pcr/run_list.html:29
+#: poresira/storage/templates/storage/file_detail.html:47
 msgid "Date"
 msgstr "Date"
 
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:56
+#: poresira/sequencing/templates/sequencing/run_detail.html:48
 msgid "Performed by"
 msgstr "Réalisé par"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:57
 msgid "Thermocycler"
 msgstr "Thermocycleur"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:58
 msgid "Master mix lot"
 msgstr "Lot du mélange réactionnel"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:59
 msgid "Polymerase lot"
 msgstr "Lot de polymérase"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:64
 msgid "Summary"
 msgstr "Résumé"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:65
 #, python-format
 msgid "%(total)s reaction, %(positives)s positive."
 msgid_plural "%(total)s reactions, %(positives)s positive."
 msgstr[0] "%(total)s réaction, %(positives)s positive."
 msgstr[1] "%(total)s réactions, %(positives)s positives."
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:66
 msgid "positive control"
 msgstr "témoin positif"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:66
 msgid "no-template control"
 msgstr "témoin sans matrice"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:66
 msgid "extraction blank"
 msgstr "blanc d'extraction"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:74
 msgid "Tubes"
 msgstr "Tubes"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:74
 msgid "Plate"
 msgstr "Plaque"
 
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/pcr/templates/pcr/run_detail.html:91
+#: poresira/pcr/templates/pcr/run_list.html:29
 msgid "Reactions"
 msgstr "Réactions"
 
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:95
+#: poresira/pcr/templates/pcr/run_detail.html:108
+#: poresira/samples/templates/samples/sample_detail.html:122
 msgid "Result"
 msgstr "Résultat"
 
-#: poresira/pcr/templates/pcr/run_detail.html
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:95
+#: poresira/samples/templates/samples/sample_detail.html:122
 msgid "Band (bp)"
 msgstr "Bande (pb)"
 
-#: poresira/pcr/templates/pcr/run_detail.html
+#: poresira/pcr/templates/pcr/run_detail.html:113
 msgid "No reactions yet."
 msgstr "Aucune réaction pour le moment."
 
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/sequencing/templates/sequencing/run_list.html
-#: poresira/sequencing/urls.py
+#: poresira/pcr/templates/pcr/run_list.html:12
+#: poresira/sequencing/templates/sequencing/run_list.html:7
+#: poresira/sequencing/urls.py:18
 msgid "New run"
 msgstr "Nouveau passage"
 
-#: poresira/pcr/templates/pcr/run_list.html
-#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/pcr/templates/pcr/run_list.html:45
+#: poresira/sequencing/templates/sequencing/run_list.html:30
 msgid "No runs to show."
 msgstr "Aucun passage à afficher."
 
-#: poresira/pcr/templates/pcr/run_list.html
+#: poresira/pcr/templates/pcr/run_list.html:51
 #, python-format
 msgid "Page %(number)s of %(total)s (%(count)s runs)"
 msgstr "Page %(number)s sur %(total)s (%(count)s passages)"
 
-#: poresira/pcr/views.py poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/views.py
+#: poresira/pcr/views.py:188
+#: poresira/samples/templates/samples/sample_detail.html:121
+#: poresira/sequencing/views.py:396
 msgid "Run"
 msgstr "Passage"
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:196
 #, python-format
 msgid "Reaction %(position)s"
 msgstr "Réaction %(position)s"
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:222
 msgid "New PCR run"
 msgstr "Nouveau passage PCR"
 
-#: poresira/pcr/views.py poresira/samples/views.py poresira/sequencing/views.py
+#: poresira/pcr/views.py:223 poresira/samples/views.py:251
+#: poresira/samples/views.py:417 poresira/samples/views.py:442
+#: poresira/samples/views.py:500 poresira/sequencing/views.py:240
 msgid "Create"
 msgstr "Créer"
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:224
 msgid "PCR run planned."
 msgstr "Passage PCR planifié."
 
-#: poresira/pcr/views.py poresira/sequencing/views.py poresira/storage/views.py
+#: poresira/pcr/views.py:254 poresira/pcr/views.py:441
+#: poresira/sequencing/views.py:264 poresira/sequencing/views.py:630
+#: poresira/storage/views.py:262
 msgid "Add"
 msgstr "Ajouter"
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:255
 msgid "Reaction added."
 msgstr "Réaction ajoutée."
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:277
 msgid "Mark the run as performed"
 msgstr "Marquer le passage comme réalisé"
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:279
 msgid "Run marked as performed."
 msgstr "Passage marqué comme réalisé."
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:304
 msgid "Close the run"
 msgstr "Clore le passage"
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:306
 msgid "Run closed."
 msgstr "Passage clos."
 
-#: poresira/pcr/views.py poresira/sequencing/views.py
+#: poresira/pcr/views.py:313 poresira/sequencing/views.py:494
 msgid "Reopen the run"
 msgstr "Rouvrir le passage"
 
-#: poresira/pcr/views.py poresira/sequencing/views.py
+#: poresira/pcr/views.py:315 poresira/sequencing/views.py:496
 msgid "Run reopened."
 msgstr "Passage rouvert."
 
-#: poresira/pcr/views.py poresira/sequencing/views.py
+#: poresira/pcr/views.py:326 poresira/sequencing/views.py:507
 msgid "Void run"
 msgstr "Annuler le passage"
 
-#: poresira/pcr/views.py poresira/sequencing/views.py
+#: poresira/pcr/views.py:328 poresira/sequencing/views.py:509
 msgid "Run voided."
 msgstr "Passage annulé."
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:363
 msgid "Enter a result"
 msgstr "Saisir un résultat"
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:364
 msgid "Result saved."
 msgstr "Résultat enregistré."
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:385
 msgid "Void reaction"
 msgstr "Annuler la réaction"
 
-#: poresira/pcr/views.py
+#: poresira/pcr/views.py:387
 msgid "Reaction voided."
 msgstr "Réaction annulée."
 
-#: poresira/pcr/views.py poresira/sequencing/views.py
+#: poresira/pcr/views.py:442 poresira/sequencing/views.py:631
 msgid "Added."
 msgstr "Ajouté."
 
-#: poresira/samples/forms.py
+#: poresira/samples/forms.py:87
 msgid "Search"
 msgstr "Recherche"
 
-#: poresira/samples/forms.py
+#: poresira/samples/forms.py:88
 msgid "Identifier or label"
 msgstr "Identifiant ou étiquette"
 
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
+#: poresira/samples/forms.py:93 poresira/samples/forms.py:130
+#: poresira/samples/forms.py:238
+#: poresira/samples/templates/samples/_sample_results.html:5
+#: poresira/samples/templates/samples/event_detail.html:30
+#: poresira/sequencing/forms.py:210
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:12
 msgid "Type"
 msgstr "Type"
 
-#: poresira/samples/forms.py
+#: poresira/samples/forms.py:152
 msgid "Recorded in the audit log."
 msgstr "Enregistré dans le journal d'audit."
 
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/forms.py:163
+#: poresira/samples/templates/samples/_sample_results.html:6
+#: poresira/samples/templates/samples/sample_detail.html:44
 msgid "Storage location"
 msgstr "Emplacement de stockage"
 
-#: poresira/samples/forms.py
+#: poresira/samples/forms.py:164
 msgid "Not in storage"
 msgstr "Hors stockage"
 
-#: poresira/samples/forms.py
+#: poresira/samples/forms.py:169
 msgid "Grid position such as A1, for boxes with a grid."
 msgstr "Position dans la grille, comme A1, pour les boîtes à grille."
 
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/samples/forms.py:176
+#: poresira/samples/templates/samples/sample_detail.html:46
+#: poresira/samples/templates/samples/sample_detail.html:148
+#: poresira/sequencing/forms.py:102
+#: poresira/sequencing/templates/sequencing/library_detail.html:43
+#: poresira/sequencing/templates/sequencing/run_detail.html:67
 msgid "Barcode"
 msgstr "Code-barres"
 
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/forms.py:182 poresira/samples/forms.py:201
+#: poresira/samples/templates/samples/sample_detail.html:47
+#: poresira/samples/templates/samples/sample_detail.html:74
 msgid "Concentration (ng/µL)"
 msgstr "Concentration (ng/µL)"
 
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/forms.py:185
+#: poresira/samples/templates/samples/sample_detail.html:48
 msgid "Volume (µL)"
 msgstr "Volume (µL)"
 
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/forms.py:195
+#: poresira/samples/templates/samples/sample_detail.html:74
 msgid "Method"
 msgstr "Méthode"
 
-#: poresira/samples/forms.py poresira/samples/models/qc.py
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/forms.py:204 poresira/samples/models/qc.py:61
+#: poresira/samples/templates/samples/sample_detail.html:75
 msgid "A260/280"
 msgstr "A260/280"
 
-#: poresira/samples/forms.py poresira/samples/models/qc.py
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/forms.py:207 poresira/samples/models/qc.py:64
+#: poresira/samples/templates/samples/sample_detail.html:75
 msgid "A260/230"
 msgstr "A260/230"
 
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/forms.py:215
+#: poresira/samples/templates/samples/sample_detail.html:75
 msgid "Integrity number"
 msgstr "Indice d'intégrité"
 
-#: poresira/samples/forms.py
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/samples/forms.py:218
+#: poresira/samples/templates/samples/sample_detail.html:76
+#: poresira/storage/templates/storage/file_detail.html:47
 msgid "Outcome"
 msgstr "Résultat"
 
-#: poresira/samples/forms.py
+#: poresira/samples/forms.py:224
 msgid "Also set this concentration on the sample"
 msgstr "Appliquer aussi cette concentration à l'échantillon"
 
-#: poresira/samples/forms.py
+#: poresira/samples/forms.py:237
 msgid "Parent"
 msgstr "Parent"
 
-#: poresira/samples/models/collection.py
+#: poresira/samples/models/collection.py:33
 msgid "collection date"
 msgstr "date de collecte"
 
-#: poresira/samples/models/collection.py
+#: poresira/samples/models/collection.py:34
 msgid "country"
 msgstr "pays"
 
-#: poresira/samples/models/collection.py
+#: poresira/samples/models/collection.py:35
 msgid "region"
 msgstr "région"
 
-#: poresira/samples/models/collection.py
+#: poresira/samples/models/collection.py:36
 msgid "province"
 msgstr "province"
 
-#: poresira/samples/models/collection.py
+#: poresira/samples/models/collection.py:37
 msgid "locality"
 msgstr "localité"
 
-#: poresira/samples/models/collection.py
+#: poresira/samples/models/collection.py:38
 msgid "farm or field"
 msgstr "ferme ou champ"
 
-#: poresira/samples/models/collection.py
+#: poresira/samples/models/collection.py:40
 msgid "latitude"
 msgstr "latitude"
 
-#: poresira/samples/models/collection.py
+#: poresira/samples/models/collection.py:48
 msgid "longitude"
 msgstr "longitude"
 
-#: poresira/samples/models/collection.py
+#: poresira/samples/models/collection.py:55
 msgid "collector"
 msgstr "collecteur"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:16
 msgid "NanoDrop"
 msgstr "NanoDrop"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:17
 msgid "Qubit"
 msgstr "Qubit"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:18
 msgid "Qubit RNA IQ"
 msgstr "Qubit RNA IQ"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:19
 msgid "Gel electrophoresis"
 msgstr "Électrophorèse sur gel"
 
-#: poresira/samples/models/qc.py poresira/sequencing/models/reference.py
-#: poresira/storage/models/file.py
+#: poresira/samples/models/qc.py:20 poresira/sequencing/models/reference.py:27
+#: poresira/storage/models/file.py:30
 msgid "Other"
 msgstr "Autre"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:24
 msgid "Passed"
 msgstr "Conforme"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:26
 msgid "Not assessed"
 msgstr "Non évalué"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:47
 msgid "method"
 msgstr "méthode"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:48
 msgid "measured at"
 msgstr "mesuré le"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:55
 msgid "measured by"
 msgstr "mesuré par"
 
-#: poresira/samples/models/qc.py poresira/samples/models/sample.py
+#: poresira/samples/models/qc.py:58 poresira/samples/models/sample.py:116
 msgid "concentration (ng/µL)"
 msgstr "concentration (ng/µL)"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:67
 msgid "integrity number"
 msgstr "indice d'intégrité"
 
-#: poresira/samples/models/qc.py
+#: poresira/samples/models/qc.py:72
 msgid "RNA integrity score such as RIN, RQN or the Qubit IQ value."
 msgstr "Score d'intégrité de l'ARN : RIN, RQN ou valeur IQ de Qubit."
 
-#: poresira/samples/models/qc.py poresira/storage/models/file.py
+#: poresira/samples/models/qc.py:75 poresira/storage/models/file.py:232
 msgid "outcome"
 msgstr "résultat"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:17
 msgid "Field sample"
 msgstr "Échantillon de terrain"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:18
 msgid "Living plant"
 msgstr "Plante vivante"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:19
 msgid "DNA extract"
 msgstr "Extrait d'ADN"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:20
 msgid "RNA extract"
 msgstr "Extrait d'ARN"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:21
 msgid "Amplification product"
 msgstr "Produit d'amplification"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:35
 msgid "Registered"
 msgstr "Enregistré"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:36
 msgid "Stored"
 msgstr "Stocké"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:37
 msgid "In process"
 msgstr "En traitement"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:38
 msgid "Consumed"
 msgstr "Consommé"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:39
 msgid "Discarded"
 msgstr "Éliminé"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:74
 msgid "collection event"
 msgstr "événement de collecte"
 
-#: poresira/samples/models/sample.py poresira/samples/models/storage.py
+#: poresira/samples/models/sample.py:82 poresira/samples/models/storage.py:34
 msgid "parent"
 msgstr "parent"
 
-#: poresira/samples/models/sample.py poresira/samples/models/storage.py
-#: poresira/sequencing/models/run.py
+#: poresira/samples/models/sample.py:84 poresira/samples/models/storage.py:37
+#: poresira/sequencing/models/run.py:259
 msgid "type"
 msgstr "type"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:89
 msgid "The laboratory's own sample name, for example BFA266."
 msgstr "Nom d'échantillon propre au laboratoire, par exemple BFA266."
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:91
 msgid "host species"
 msgstr "espèce hôte"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:92
 msgid "host NCBI taxon ID"
 msgstr "identifiant de taxon NCBI de l'hôte"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:93
 msgid "host variety"
 msgstr "variété de l'hôte"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:95
 msgid "symptom score"
 msgstr "score de symptômes"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:99
 msgid ""
 "Symptom severity on the 1 to 9 scale of the International Potato Center."
 msgstr ""
 "Gravité des symptômes sur l'échelle de 1 à 9 du Centre international de la "
 "pomme de terre."
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:101
 msgid "symptoms"
 msgstr "symptômes"
 
-#: poresira/samples/models/sample.py poresira/sequencing/models/run.py
+#: poresira/samples/models/sample.py:105 poresira/sequencing/models/run.py:205
 msgid "barcode"
 msgstr "code-barres"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:112
 msgid "storage location"
 msgstr "emplacement de stockage"
 
-#: poresira/samples/models/sample.py
+#: poresira/samples/models/sample.py:119
 msgid "volume (µL)"
 msgstr "volume (µL)"
 
-#: poresira/samples/models/sequence.py
+#: poresira/samples/models/sequence.py:14
 msgid "Linear"
 msgstr "Linéaire"
 
-#: poresira/samples/models/sequence.py
+#: poresira/samples/models/sequence.py:15
 msgid "Circular"
 msgstr "Circulaire"
 
-#: poresira/samples/models/sequence.py
+#: poresira/samples/models/sequence.py:39
 msgid "The material that was sequenced."
 msgstr "Le matériel qui a été séquencé."
 
-#: poresira/samples/models/sequence.py
+#: poresira/samples/models/sequence.py:42
 msgid "version"
 msgstr "version"
 
-#: poresira/samples/models/sequence.py
+#: poresira/samples/models/sequence.py:43
 msgid "organism"
 msgstr "organisme"
 
-#: poresira/samples/models/sequence.py
+#: poresira/samples/models/sequence.py:44
 msgid "isolate"
 msgstr "isolat"
 
-#: poresira/samples/models/sequence.py
+#: poresira/samples/models/sequence.py:45
 msgid "length (bp)"
 msgstr "longueur (pb)"
 
-#: poresira/samples/models/sequence.py
+#: poresira/samples/models/sequence.py:46
 msgid "topology"
 msgstr "topologie"
 
-#: poresira/samples/models/sequence.py
+#: poresira/samples/models/sequence.py:47
 msgid "assembly method"
 msgstr "méthode d'assemblage"
 
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py:12
 msgid "Room"
 msgstr "Pièce"
 
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py:13
 msgid "Freezer"
 msgstr "Congélateur"
 
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py:14
 msgid "Refrigerator"
 msgstr "Réfrigérateur"
 
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py:15
 msgid "Cabinet"
 msgstr "Armoire"
 
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py:16
 msgid "Shelf"
 msgstr "Étagère"
 
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py:17
 msgid "Rack"
 msgstr "Portoir"
 
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py:18
 msgid "Box"
 msgstr "Boîte"
 
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py:39
 msgid "nominal temperature (°C)"
 msgstr "température nominale (°C)"
 
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py:41
 msgid "grid rows"
 msgstr "lignes de la grille"
 
-#: poresira/samples/models/storage.py
+#: poresira/samples/models/storage.py:42
 msgid "grid columns"
 msgstr "colonnes de la grille"
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:184
 msgid "A voided sample cannot be used as a parent."
 msgstr "Un échantillon annulé ne peut pas servir de parent."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:187
 #, python-format
 msgid "A %(parent_kind)s cannot give a %(kind)s."
 msgstr "Un(e) %(parent_kind)s ne peut pas donner un(e) %(kind)s."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:222
 msgid "A position needs a storage location."
 msgstr "Une position nécessite un emplacement de stockage."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:225
 #, python-format
 msgid "%(location)s has no grid of positions."
 msgstr "%(location)s n'a pas de grille de positions."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:230
 #, python-format
 msgid "%(position)s is not a position such as A1."
 msgstr "%(position)s n'est pas une position du type A1."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:235
 #, python-format
 msgid ""
 "%(position)s is outside the %(rows)s x %(columns)s grid of %(location)s."
@@ -2804,1104 +2916,1108 @@ msgstr ""
 "%(position)s est en dehors de la grille %(rows)s x %(columns)s de "
 "%(location)s."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:262
 msgid "A voided sample cannot be moved."
 msgstr "Un échantillon annulé ne peut pas être déplacé."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:264
 msgid "A voided storage location cannot be used."
 msgstr "Un emplacement de stockage annulé ne peut pas être utilisé."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:270
 #, python-format
 msgid "Position %(position)s of %(location)s already holds %(sample)s."
 msgstr "La position %(position)s de %(location)s contient déjà %(sample)s."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:283
 #, python-format
 msgid "Position %(position)s of %(location)s was just taken."
 msgstr "La position %(position)s de %(location)s vient d'être prise."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:296
 msgid "A voided sample cannot be changed."
 msgstr "Un échantillon annulé ne peut pas être modifié."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:321
 #, python-format
 msgid "Concentration from %(method)s measurement of %(date)s"
 msgstr "Concentration issue de la mesure %(method)s du %(date)s"
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:347
 msgid "A grid has at most 26 rows (A to Z)."
 msgstr "Une grille a au plus 26 lignes (A à Z)."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:362
 msgid "Void the derivatives of this sample first."
 msgstr "Annulez d'abord les dérivés de cet échantillon."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:364
 msgid "Void the sequences of this sample first."
 msgstr "Annulez d'abord les séquences de cet échantillon."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:366
 msgid "Void the PCR reactions of this sample first."
 msgstr "Annulez d'abord les réactions PCR de cet échantillon."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:368
 msgid "Remove this sample from its sequencing libraries first."
 msgstr "Retirez d'abord cet échantillon de ses bibliothèques de séquençage."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:371
 msgid "Void the samples of this collection event first."
 msgstr "Annulez d'abord les échantillons de cet événement de collecte."
 
-#: poresira/samples/services.py
+#: poresira/samples/services.py:376
 msgid "This location still contains active locations or samples."
 msgstr ""
 "Cet emplacement contient encore des emplacements ou des échantillons actifs."
 
-#: poresira/samples/templates/samples/_sample_results.html
-#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/_sample_results.html:21
+#: poresira/samples/templates/samples/event_detail.html:38
 msgid "No samples to show."
 msgstr "Aucun échantillon à afficher."
 
-#: poresira/samples/templates/samples/_sample_results.html
+#: poresira/samples/templates/samples/_sample_results.html:27
 #, python-format
 msgid "Page %(number)s of %(total)s (%(count)s samples)"
 msgstr "Page %(number)s sur %(total)s (%(count)s échantillons)"
 
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/views.py
+#: poresira/samples/templates/samples/event_detail.html:13
+#: poresira/samples/views.py:441
 msgid "Register a field sample"
 msgstr "Enregistrer un échantillon de terrain"
 
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/event_list.html
+#: poresira/samples/templates/samples/event_detail.html:17
+#: poresira/samples/templates/samples/event_list.html:11
 msgid "Collection date"
 msgstr "Date de collecte"
 
-#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_detail.html:18
 msgid "Country"
 msgstr "Pays"
 
-#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_detail.html:19
 msgid "Region"
 msgstr "Région"
 
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/event_list.html
+#: poresira/samples/templates/samples/event_detail.html:20
+#: poresira/samples/templates/samples/event_list.html:11
 msgid "Province"
 msgstr "Province"
 
-#: poresira/samples/templates/samples/event_detail.html
-#: poresira/samples/templates/samples/event_list.html
+#: poresira/samples/templates/samples/event_detail.html:21
+#: poresira/samples/templates/samples/event_list.html:12
 msgid "Locality"
 msgstr "Localité"
 
-#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_detail.html:22
 msgid "Farm or field"
 msgstr "Ferme ou champ"
 
-#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_detail.html:23
 msgid "Latitude"
 msgstr "Latitude"
 
-#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_detail.html:23
 msgid "Longitude"
 msgstr "Longitude"
 
-#: poresira/samples/templates/samples/event_detail.html
+#: poresira/samples/templates/samples/event_detail.html:25
 msgid "Collector"
 msgstr "Collecteur"
 
-#: poresira/samples/templates/samples/event_list.html poresira/samples/views.py
+#: poresira/samples/templates/samples/event_list.html:7
+#: poresira/samples/views.py:416
 msgid "New collection event"
 msgstr "Nouvel événement de collecte"
 
-#: poresira/samples/templates/samples/event_list.html
+#: poresira/samples/templates/samples/event_list.html:23
 msgid "No collection events to show."
 msgstr "Aucun événement de collecte à afficher."
 
-#: poresira/samples/templates/samples/form.html
-msgid "Cancel"
-msgstr "Annuler"
-
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:18
 msgid "Derive"
 msgstr "Dériver"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:19
 msgid "Move"
 msgstr "Déplacer"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:20
 msgid "Status and quantities"
 msgstr "Statut et quantités"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:21
 msgid "Measure"
 msgstr "Mesurer"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:22
 msgid "GenBank sequence"
 msgstr "Séquence GenBank"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:23
 msgid "Edit"
 msgstr "Modifier"
 
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/samples/urls.py
+#: poresira/samples/templates/samples/sample_detail.html:42
+#: poresira/samples/urls.py:16
 msgid "Collection event"
 msgstr "Événement de collecte"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:49
 msgid "Host species"
 msgstr "Espèce hôte"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:50
 msgid "Symptom score"
 msgstr "Score de symptômes"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:51
 msgid "Symptoms"
 msgstr "Symptômes"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:57
 msgid "Lineage"
 msgstr "Lignée"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:71
 msgid "Measurements"
 msgstr "Mesures"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:74
 msgid "Measured at"
 msgstr "Mesuré le"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:91
 msgid "No measurements yet."
 msgstr "Aucune mesure pour le moment."
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:97
 msgid "Sequences"
 msgstr "Séquences"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:100
 msgid "Organism"
 msgstr "Organisme"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:100
 msgid "Length (bp)"
 msgstr "Longueur (pb)"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:101
 msgid "Topology"
 msgstr "Topologie"
 
-#: poresira/samples/templates/samples/sample_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:118
 msgid "PCR results"
 msgstr "Résultats PCR"
 
-#: poresira/samples/templates/samples/sample_detail.html
-#: poresira/sequencing/templates/sequencing/_tabs.html
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
-#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/samples/templates/samples/sample_detail.html:148
+#: poresira/sequencing/templates/sequencing/_tabs.html:3
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:13
+#: poresira/sequencing/templates/sequencing/library_detail.html:60
 msgid "Runs"
 msgstr "Passages"
 
-#: poresira/samples/templates/samples/sample_list.html poresira/samples/urls.py
+#: poresira/samples/templates/samples/sample_list.html:7
+#: poresira/samples/urls.py:15
 msgid "New sample"
 msgstr "Nouvel échantillon"
 
-#: poresira/samples/templates/samples/storage_tree.html
-#: poresira/samples/views.py
+#: poresira/samples/templates/samples/storage_tree.html:7
+#: poresira/samples/views.py:499
 msgid "New storage location"
 msgstr "Nouvel emplacement de stockage"
 
-#: poresira/samples/templates/samples/storage_tree.html
+#: poresira/samples/templates/samples/storage_tree.html:14
 #, python-format
 msgid "%(counter)s sample"
 msgid_plural "%(counter)s samples"
 msgstr[0] "%(counter)s échantillon"
 msgstr[1] "%(counter)s échantillons"
 
-#: poresira/samples/templates/samples/storage_tree.html
+#: poresira/samples/templates/samples/storage_tree.html:17
 msgid "No storage locations yet."
 msgstr "Aucun emplacement de stockage pour le moment."
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:61
 msgid "Save"
 msgstr "Enregistrer"
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:98
 msgid "Continue"
 msgstr "Continuer"
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:238
 msgid "Edit description"
 msgstr "Modifier la description"
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:239 poresira/samples/views.py:294
 msgid "Sample updated."
 msgstr "Échantillon mis à jour."
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:250
 msgid "Derive a sample"
 msgstr "Dériver un échantillon"
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:252
 msgid "Derived sample created."
 msgstr "Échantillon dérivé créé."
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:275
 msgid "Move sample"
 msgstr "Déplacer l'échantillon"
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:276
 msgid "Sample moved."
 msgstr "Échantillon déplacé."
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:293
 msgid "Change status, barcode or quantities"
 msgstr "Modifier le statut, le code-barres ou les quantités"
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:314
 msgid "Record a measurement"
 msgstr "Enregistrer une mesure"
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:315
 msgid "Measurement recorded."
 msgstr "Mesure enregistrée."
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:333
 msgid "Record a GenBank sequence"
 msgstr "Enregistrer une séquence GenBank"
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:335
 msgid "Sequence recorded."
 msgstr "Séquence enregistrée."
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:344
 msgid "Void sample"
 msgstr "Annuler l'échantillon"
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:346
 msgid "Sample voided."
 msgstr "Échantillon annulé."
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:359
 msgid "Void measurement"
 msgstr "Annuler la mesure"
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:361
 msgid "Measurement voided."
 msgstr "Mesure annulée."
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:418
 msgid "Collection event created."
 msgstr "Événement de collecte créé."
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:443
 msgid "Field sample registered."
 msgstr "Échantillon de terrain enregistré."
 
-#: poresira/samples/views.py
+#: poresira/samples/views.py:501
 msgid "Storage location created."
 msgstr "Emplacement de stockage créé."
 
-#: poresira/sequencing/adapters.py
+#: poresira/sequencing/adapters.py:45
 msgid "A barcoding kit needs its barcode count."
 msgstr "Un kit à codes-barres a besoin de son nombre de codes-barres."
 
-#: poresira/sequencing/adapters.py
+#: poresira/sequencing/adapters.py:48
 msgid "A kit without barcodes has no barcode count."
 msgstr "Un kit sans codes-barres n'a pas de nombre de codes-barres."
 
-#: poresira/sequencing/adapters.py
+#: poresira/sequencing/adapters.py:56
 #, python-format
 msgid "%(value)s is not a barcode (use a number such as 7, NB07 or barcode07)."
 msgstr ""
 "%(value)s n'est pas un code-barres (utilisez un nombre comme 7, NB07 ou "
 "barcode07)."
 
-#: poresira/sequencing/adapters.py
+#: poresira/sequencing/adapters.py:67
 msgid "A flow cell ID has 5 to 20 letters and digits, such as PAW12345."
 msgstr ""
 "Un identifiant de cellule de flux compte de 5 à 20 lettres et chiffres, "
 "comme PAW12345."
 
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/_tabs.html
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/forms.py:71
+#: poresira/sequencing/templates/sequencing/_tabs.html:6
+#: poresira/sequencing/templates/sequencing/reference.html:3
 msgid "Kits and instruments"
 msgstr "Kits et appareils"
 
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
+#: poresira/sequencing/forms.py:79
+#: poresira/sequencing/templates/sequencing/library_detail.html:34
+#: poresira/sequencing/templates/sequencing/library_list.html:13
 msgid "Kit"
 msgstr "Kit"
 
-#: poresira/sequencing/forms.py
+#: poresira/sequencing/forms.py:93
 msgid "Not in the list? Add the kit in"
 msgstr "Absent de la liste ? Ajoutez le kit dans"
 
-#: poresira/sequencing/forms.py
+#: poresira/sequencing/forms.py:98
 msgid "Identifier or label of the DNA extract or RCA product."
 msgstr "Identifiant ou étiquette de l'extrait d'ADN ou du produit RCA."
 
-#: poresira/sequencing/forms.py
+#: poresira/sequencing/forms.py:103
 msgid "A number, NB07 or barcode07; empty only for a kit without barcodes."
 msgstr ""
 "Un numéro, NB07 ou barcode07 ; vide seulement pour un kit sans code-barres."
 
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/forms.py:106
+#: poresira/sequencing/templates/sequencing/library_detail.html:43
 msgid "Input (ng)"
 msgstr "Quantité engagée (ng)"
 
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/sequencing/forms.py:134
+#: poresira/sequencing/templates/sequencing/library_detail.html:62
+#: poresira/sequencing/templates/sequencing/run_detail.html:43
+#: poresira/sequencing/templates/sequencing/run_list.html:13
 msgid "Flow cell"
 msgstr "Cellule de flux"
 
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/forms.py:156
+#: poresira/sequencing/templates/sequencing/run_detail.html:58
+#: poresira/sequencing/templates/sequencing/run_detail.html:68
 msgid "Bases"
 msgstr "Bases"
 
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/forms.py:157
+#: poresira/sequencing/templates/sequencing/run_detail.html:68
 msgid "Read N50 (bp)"
 msgstr "N50 des lectures (pb)"
 
-#: poresira/sequencing/forms.py
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/forms.py:159
+#: poresira/sequencing/templates/sequencing/run_detail.html:68
 msgid "Mean quality (Q)"
 msgstr "Qualité moyenne (Q)"
 
-#: poresira/sequencing/forms.py
+#: poresira/sequencing/forms.py:167
 msgid "Required once the run is completed; recorded in the audit log."
 msgstr ""
 "Obligatoire une fois le passage terminé ; consignée dans le journal d'audit."
 
-#: poresira/sequencing/forms.py
+#: poresira/sequencing/forms.py:220
 msgid "Not in the list? Add the type in"
 msgstr "Absent de la liste ? Ajoutez le type dans"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:19
 msgid "Oxford Nanopore"
 msgstr "Oxford Nanopore"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:23
 msgid "Native barcoding"
 msgstr "Code-barres natif"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:24
 msgid "Rapid barcoding"
 msgstr "Code-barres rapide"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:25
 msgid "cDNA-PCR barcoding"
 msgstr "Code-barres ADNc-PCR"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:26
 msgid "Ligation (no barcodes)"
 msgstr "Ligation (sans code-barres)"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:35
+#: poresira/sequencing/models/reference.py:79
+#: poresira/sequencing/models/reference.py:115
 msgid "platform"
 msgstr "plateforme"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:37
 msgid "kit code"
 msgstr "code du kit"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:39
 msgid "chemistry"
 msgstr "chimie"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:41
 msgid "number of barcodes"
 msgstr "nombre de codes-barres"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:44
 msgid "Empty for a kit without barcodes."
 msgstr "Vide pour un kit sans code-barres."
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:81
 msgid "product code"
 msgstr "code produit"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:83
 msgid "pore type"
 msgstr "type de pore"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:85
 msgid "reusable"
 msgstr "réutilisable"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:87
 msgid ""
 "A reusable flow cell can be washed and loaded again (MinION, PromethION)."
 msgstr ""
 "Une cellule de flux réutilisable peut être lavée et rechargée (MinION, "
 "PromethION)."
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:118
 msgid "model"
 msgstr "modèle"
 
-#: poresira/sequencing/models/reference.py
+#: poresira/sequencing/models/reference.py:119
 msgid "serial number"
 msgstr "numéro de série"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:23
 msgid "Sealed"
 msgstr "Scellée"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:29
 msgid "Completed"
 msgstr "Terminé"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:30
 msgid "Aborted"
 msgstr "Abandonné"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:149
 msgid "kit"
 msgstr "kit"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:155
 msgid "date prepared"
 msgstr "date de préparation"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:162
 msgid "prepared by"
 msgstr "préparé par"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:167
 msgid "Barcodes and date come from a publication and may be unknown."
 msgstr ""
 "Les codes-barres et la date viennent d'une publication et peuvent être "
 "inconnus."
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:197 poresira/sequencing/models/run.py:294
 msgid "library"
 msgstr "bibliothèque"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:207
 msgid "input (ng)"
 msgstr "quantité engagée (ng)"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:257
 msgid "flow cell ID"
 msgstr "identifiant de la cellule de flux"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:261
 msgid "active pores at check"
 msgstr "pores actifs au contrôle"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:297
 msgid "flow cell"
 msgstr "cellule de flux"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:305
 msgid "instrument"
 msgstr "appareil"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:308
 msgid "active pores at start"
 msgstr "pores actifs au début"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:312
 msgid ""
 "Counted at the check before this run; a reused flow cell has fewer each time."
 msgstr ""
 "Comptés au contrôle avant ce passage ; une cellule réutilisée en a moins à "
 "chaque fois."
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:316
 msgid "run ID"
 msgstr "identifiant du passage"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:319
 msgid "The identifier given by the sequencer software."
 msgstr "L'identifiant donné par le logiciel du séquenceur."
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:324
 msgid "start date"
 msgstr "date de début"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:333
 msgid "acquisition software"
 msgstr "logiciel d'acquisition"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:334
 msgid "basecaller"
 msgstr "logiciel d'appel de bases"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:335
 msgid "basecaller version"
 msgstr "version du logiciel d'appel de bases"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:336
 msgid "basecalling model"
 msgstr "modèle d'appel de bases"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:337 poresira/sequencing/models/run.py:402
 msgid "reads"
 msgstr "lectures"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:338 poresira/sequencing/models/run.py:403
 msgid "bases"
 msgstr "bases"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:342
 msgid "Details come from a publication and may be unknown."
 msgstr "Les détails viennent d'une publication et peuvent être inconnus."
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:400
 msgid "member"
 msgstr "membre"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:404
 msgid "read N50 (bp)"
 msgstr "N50 des lectures (pb)"
 
-#: poresira/sequencing/models/run.py
+#: poresira/sequencing/models/run.py:406
 msgid "mean quality (Q)"
 msgstr "qualité moyenne (Q)"
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:96
 msgid "A voided library cannot be changed."
 msgstr "Une bibliothèque annulée ne peut pas être modifiée."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:99
 #, python-format
 msgid "This library is %(status)s: the change is not possible."
 msgstr "Cette bibliothèque est « %(status)s » : le changement est impossible."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:163
 msgid "A voided flow cell type cannot be used."
 msgstr "Un type de cellule de flux annulé ne peut pas être utilisé."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:183
 msgid "A voided kit cannot be used."
 msgstr "Un kit annulé ne peut pas être utilisé."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:188
 msgid "A library cannot be prepared in the future."
 msgstr "Une bibliothèque ne peut pas être préparée dans le futur."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:196
 msgid "A voided sample cannot be sequenced."
 msgstr "Un échantillon annulé ne peut pas être séquencé."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:199
 msgid "The sample must belong to the project of the library."
 msgstr "L'échantillon doit appartenir au projet de la bibliothèque."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:205
 msgid ""
 "Only DNA extracts, RNA extracts and amplification products are sequenced."
 msgstr ""
 "Seuls les extraits d'ADN, les extraits d'ARN et les produits d'amplification "
 "sont séquencés."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:217
 msgid "A barcode is required."
 msgstr "Un code-barres est obligatoire."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:220
 msgid "This kit has no barcodes."
 msgstr "Ce kit n'a pas de codes-barres."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:225
 #, python-format
 msgid "Barcode %(number)s is outside the kit (1 to %(count)s)."
 msgstr "Le code-barres %(number)s est hors du kit (1 à %(count)s)."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:232
 #, python-format
 msgid "Barcode %(number)s is already used in this library."
 msgstr "Le code-barres %(number)s est déjà utilisé dans cette bibliothèque."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:249
 msgid "This sample is already in the library."
 msgstr "Cet échantillon est déjà dans la bibliothèque."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:263
 msgid "Add at least one sample before sealing the library."
 msgstr "Ajoutez au moins un échantillon avant de sceller la bibliothèque."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:277
 msgid "This flow cell already has a run in progress."
 msgstr "Cette cellule de flux a déjà un passage en cours."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:280
 msgid "This flow cell is single-use and has already been used."
 msgstr "Cette cellule de flux est à usage unique et a déjà servi."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:290
 msgid "A voided flow cell cannot be used."
 msgstr "Une cellule de flux annulée ne peut pas être utilisée."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:294
 msgid "A voided instrument cannot be used."
 msgstr "Un appareil annulé ne peut pas être utilisé."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:296
 msgid "This instrument does not run this flow cell."
 msgstr "Cet appareil ne fait pas tourner cette cellule de flux."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:299
 msgid "This flow cell does not suit the kit of the library."
 msgstr "Cette cellule de flux ne convient pas au kit de la bibliothèque."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:325
 msgid "Give the start date of the run."
 msgstr "Indiquez la date de début du passage."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:327
 msgid "A run cannot start in the future."
 msgstr "Un passage ne peut pas commencer dans le futur."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:343
 msgid "Give the reason the run was aborted."
 msgstr "Indiquez pourquoi le passage a été abandonné."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:360
 msgid "This is not a sample of the library of the run."
 msgstr "Ce n'est pas un échantillon de la bibliothèque du passage."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:389
 msgid "Give the basecaller and its version."
 msgstr "Indiquez le logiciel d'appel de bases et sa version."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:392
 msgid "The reads of the samples exceed the reads of the run."
 msgstr "Les lectures des échantillons dépassent celles du passage."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:412
 msgid "This flow cell has another run in progress."
 msgstr "Cette cellule de flux a un autre passage en cours."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:425
 msgid "Void the members of this library first."
 msgstr "Annulez d'abord les membres de cette bibliothèque."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:427
 msgid "Void the runs of this library first."
 msgstr "Annulez d'abord les passages de cette bibliothèque."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:430
 msgid "Void the results of this sample first."
 msgstr "Annulez d'abord les résultats de cet échantillon."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:432
 msgid "The library of this sample is in use by a run."
 msgstr "La bibliothèque de cet échantillon est utilisée par un passage."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:435
 msgid "Void the results of this run first."
 msgstr "Annulez d'abord les résultats de ce passage."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:438
 msgid "An active run uses this flow cell."
 msgstr "Un passage actif utilise cette cellule de flux."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:441
 msgid "An active library uses this kit."
 msgstr "Une bibliothèque active utilise ce kit."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:444
 msgid "An active flow cell has this type."
 msgstr "Une cellule de flux active a ce type."
 
-#: poresira/sequencing/services.py
+#: poresira/sequencing/services.py:446
 msgid "An active run uses this instrument."
 msgstr "Un passage actif utilise cet appareil."
 
-#: poresira/sequencing/templates/sequencing/_tabs.html
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/library_list.html
+#: poresira/sequencing/templates/sequencing/_tabs.html:4
+#: poresira/sequencing/templates/sequencing/library_detail.html:7
+#: poresira/sequencing/templates/sequencing/library_list.html:3
 msgid "Libraries"
 msgstr "Bibliothèques"
 
-#: poresira/sequencing/templates/sequencing/_tabs.html
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
+#: poresira/sequencing/templates/sequencing/_tabs.html:5
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:3
 msgid "Flow cells"
 msgstr "Cellules de flux"
 
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
-#: poresira/sequencing/views.py
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:7
+#: poresira/sequencing/views.py:592
 msgid "Register a flow cell"
 msgstr "Enregistrer une cellule de flux"
 
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:12
 msgid "Flow cell ID"
 msgstr "Identifiant de la cellule"
 
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:12
+#: poresira/sequencing/templates/sequencing/reference.html:24
 msgid "Reuse"
 msgstr "Réutilisation"
 
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:13
 msgid "Active pores at check"
 msgstr "Pores actifs au contrôle"
 
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:13
 msgid "Last run"
 msgstr "Dernier passage"
 
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:20
+#: poresira/sequencing/templates/sequencing/reference.html:28
 msgid "Reusable"
 msgstr "Réutilisable"
 
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:20
+#: poresira/sequencing/templates/sequencing/reference.html:28
 msgid "Single-use"
 msgstr "Usage unique"
 
-#: poresira/sequencing/templates/sequencing/flow_cell_list.html
+#: poresira/sequencing/templates/sequencing/flow_cell_list.html:26
 msgid "No flow cells yet."
 msgstr "Aucune cellule de flux pour le moment."
 
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/views.py
+#: poresira/sequencing/templates/sequencing/library_detail.html:18
+#: poresira/sequencing/views.py:263
 msgid "Add a sample"
 msgstr "Ajouter un échantillon"
 
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/views.py
+#: poresira/sequencing/templates/sequencing/library_detail.html:19
+#: poresira/sequencing/views.py:282
 msgid "Seal"
 msgstr "Sceller"
 
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/views.py
+#: poresira/sequencing/templates/sequencing/library_detail.html:21
+#: poresira/sequencing/views.py:429
 msgid "Plan a run"
 msgstr "Planifier un passage"
 
-#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/library_detail.html:35
 msgid "Date prepared"
 msgstr "Date de préparation"
 
-#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/library_detail.html:36
 msgid "Prepared by"
 msgstr "Préparée par"
 
-#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/library_detail.html:40
 msgid "Samples and barcodes"
 msgstr "Échantillons et codes-barres"
 
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/views.py
+#: poresira/sequencing/templates/sequencing/library_detail.html:52
+#: poresira/sequencing/views.py:304
 msgid "Remove"
 msgstr "Retirer"
 
-#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/library_detail.html:55
 msgid "No samples yet."
 msgstr "Aucun échantillon pour le moment."
 
-#: poresira/sequencing/templates/sequencing/library_detail.html
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/sequencing/templates/sequencing/library_detail.html:62
+#: poresira/sequencing/templates/sequencing/run_detail.html:46
+#: poresira/sequencing/templates/sequencing/run_list.html:14
 msgid "Start date"
 msgstr "Date de début"
 
-#: poresira/sequencing/templates/sequencing/library_detail.html
+#: poresira/sequencing/templates/sequencing/library_detail.html:71
 msgid "Not sequenced yet."
 msgstr "Pas encore séquencée."
 
-#: poresira/sequencing/templates/sequencing/library_list.html
-#: poresira/sequencing/views.py
+#: poresira/sequencing/templates/sequencing/library_list.html:7
+#: poresira/sequencing/views.py:239
 msgid "New library"
 msgstr "Nouvelle bibliothèque"
 
-#: poresira/sequencing/templates/sequencing/library_list.html
+#: poresira/sequencing/templates/sequencing/library_list.html:29
 msgid "No libraries to show."
 msgstr "Aucune bibliothèque à afficher."
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:8
 msgid "Library kits"
 msgstr "Kits de préparation"
 
-#: poresira/sequencing/templates/sequencing/reference.html
-#: poresira/sequencing/urls.py
+#: poresira/sequencing/templates/sequencing/reference.html:9
+#: poresira/sequencing/urls.py:71
 msgid "New library kit"
 msgstr "Nouveau kit de préparation"
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:12
 msgid "Kit code"
 msgstr "Code du kit"
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:12
 msgid "Chemistry"
 msgstr "Chimie"
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:12
 msgid "Barcodes"
 msgstr "Codes-barres"
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:16
 msgid "No kits yet."
 msgstr "Aucun kit pour le moment."
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:20
 msgid "Flow cell types"
 msgstr "Types de cellule de flux"
 
-#: poresira/sequencing/templates/sequencing/reference.html
-#: poresira/sequencing/urls.py
+#: poresira/sequencing/templates/sequencing/reference.html:21
+#: poresira/sequencing/urls.py:80
 msgid "New flow cell type"
 msgstr "Nouveau type de cellule de flux"
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:24
 msgid "Product code"
 msgstr "Code produit"
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:24
 msgid "Pore type"
 msgstr "Type de pore"
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:29
 msgid "No flow cell types yet."
 msgstr "Aucun type de cellule de flux pour le moment."
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:33
 msgid "Instruments"
 msgstr "Appareils"
 
-#: poresira/sequencing/templates/sequencing/reference.html
-#: poresira/sequencing/urls.py
+#: poresira/sequencing/templates/sequencing/reference.html:34
+#: poresira/sequencing/urls.py:89
 msgid "New instrument"
 msgstr "Nouvel appareil"
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:37
 msgid "Serial number"
 msgstr "Numéro de série"
 
-#: poresira/sequencing/templates/sequencing/reference.html
+#: poresira/sequencing/templates/sequencing/reference.html:41
 msgid "No instruments yet."
 msgstr "Aucun appareil pour le moment."
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/views.py
+#: poresira/sequencing/templates/sequencing/run_detail.html:18
+#: poresira/sequencing/views.py:452
 msgid "Start"
 msgstr "Démarrer"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/views.py
+#: poresira/sequencing/templates/sequencing/run_detail.html:19
+#: poresira/sequencing/templates/sequencing/run_detail.html:22
+#: poresira/sequencing/views.py:483
 msgid "Abort"
 msgstr "Abandonner"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/views.py
+#: poresira/sequencing/templates/sequencing/run_detail.html:21
+#: poresira/sequencing/views.py:468
 msgid "Complete"
 msgstr "Terminer"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html:43
 msgid "single-use"
 msgstr "usage unique"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html:44
 msgid "Instrument"
 msgstr "Appareil"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html:45
 msgid "Active pores at start"
 msgstr "Pores actifs au début"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
-#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/sequencing/templates/sequencing/run_detail.html:47
+#: poresira/sequencing/templates/sequencing/run_list.html:14
 msgid "Run ID"
 msgstr "Identifiant du passage"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html:54
 msgid "Acquisition software"
 msgstr "Logiciel d'acquisition"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html:55
 msgid "Basecaller"
 msgstr "Logiciel d'appel de bases"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html:56
 msgid "Basecalling model"
 msgstr "Modèle d'appel de bases"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html:64
 msgid "Reads per sample"
 msgstr "Lectures par échantillon"
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html:81
 msgid "No samples."
 msgstr "Aucun échantillon."
 
-#: poresira/sequencing/templates/sequencing/run_detail.html
+#: poresira/sequencing/templates/sequencing/run_detail.html:87
 msgid "Other runs of this flow cell"
 msgstr "Autres passages de cette cellule"
 
-#: poresira/sequencing/templates/sequencing/run_list.html
+#: poresira/sequencing/templates/sequencing/run_list.html:3
 msgid "Sequencing runs"
 msgstr "Passages de séquençage"
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:241
 msgid "Library created."
 msgstr "Bibliothèque créée."
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:265
 msgid "Sample added."
 msgstr "Échantillon ajouté."
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:281
 msgid "Seal the library"
 msgstr "Sceller la bibliothèque"
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:283
 msgid "Library sealed."
 msgstr "Bibliothèque scellée."
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:291
 msgid "Void library"
 msgstr "Annuler la bibliothèque"
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:293
 msgid "Library voided."
 msgstr "Bibliothèque annulée."
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:303
 msgid "Remove sample"
 msgstr "Retirer l'échantillon"
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:305
 msgid "Sample removed from the library."
 msgstr "Échantillon retiré de la bibliothèque."
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:430
 msgid "Plan"
 msgstr "Planifier"
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:431
 msgid "Run planned."
 msgstr "Passage planifié."
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:451
 msgid "Start the run"
 msgstr "Démarrer le passage"
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:453
 msgid "Run started."
 msgstr "Passage démarré."
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:467
 msgid "Complete the run"
 msgstr "Terminer le passage"
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:469
 msgid "Run completed."
 msgstr "Passage terminé."
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:482
 msgid "Abort the run"
 msgstr "Abandonner le passage"
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:484
 msgid "Run aborted."
 msgstr "Passage abandonné."
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:521
 msgid "Enter the reads"
 msgstr "Saisir les lectures"
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:522
 msgid "Reads saved."
 msgstr "Lectures enregistrées."
 
-#: poresira/sequencing/views.py poresira/storage/views.py
+#: poresira/sequencing/views.py:593 poresira/storage/views.py:156
 msgid "Register"
 msgstr "Enregistrer"
 
-#: poresira/sequencing/views.py
+#: poresira/sequencing/views.py:594
 msgid "Flow cell registered."
 msgstr "Cellule de flux enregistrée."
 
-#: poresira/storage/forms.py
+#: poresira/storage/forms.py:34
 msgid "Path contains"
 msgstr "Le chemin contient"
 
-#: poresira/storage/forms.py
-#: poresira/storage/templates/storage/file_detail.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/storage/forms.py:41 poresira/storage/forms.py:61
+#: poresira/storage/templates/storage/file_detail.html:33
+#: poresira/storage/templates/storage/file_list.html:26
 msgid "Backend"
 msgstr "Emplacement"
 
-#: poresira/storage/forms.py poresira/storage/templates/storage/_files.html
-#: poresira/storage/templates/storage/file_detail.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/storage/forms.py:45 poresira/storage/forms.py:85
+#: poresira/storage/templates/storage/_files.html:10
+#: poresira/storage/templates/storage/file_detail.html:39
+#: poresira/storage/templates/storage/file_list.html:26
 msgid "Tier"
 msgstr "Niveau"
 
-#: poresira/storage/forms.py poresira/storage/templates/storage/_files.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/storage/forms.py:46
+#: poresira/storage/templates/storage/_files.html:10
+#: poresira/storage/templates/storage/file_list.html:26
 msgid "Integrity"
 msgstr "Intégrité"
 
-#: poresira/storage/forms.py
-#: poresira/storage/templates/storage/file_detail.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/storage/forms.py:63
+#: poresira/storage/templates/storage/file_detail.html:34
+#: poresira/storage/templates/storage/file_list.html:25
 msgid "Path"
 msgstr "Chemin"
 
-#: poresira/storage/forms.py
+#: poresira/storage/forms.py:64
 msgid "Relative to the root of the backend, such as runs/run1/reads.fastq.gz."
 msgstr ""
 "Relatif à la racine de l'emplacement, par exemple runs/run1/reads.fastq.gz."
 
-#: poresira/storage/forms.py
+#: poresira/storage/forms.py:69
 msgid "Detect from the name"
 msgstr "Déduire du nom"
 
-#: poresira/storage/forms.py
+#: poresira/storage/forms.py:77
 msgid "Size (bytes)"
 msgstr "Taille (octets)"
 
-#: poresira/storage/forms.py
+#: poresira/storage/forms.py:78
 msgid "Only for an offline medium, which cannot be read here."
 msgstr "Seulement pour un support hors ligne, qui ne peut pas être lu ici."
 
-#: poresira/storage/forms.py poresira/storage/models/file.py
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/forms.py:80 poresira/storage/models/file.py:99
+#: poresira/storage/templates/storage/file_detail.html:37
 msgid "SHA-256"
 msgstr "SHA-256"
 
-#: poresira/storage/forms.py poresira/storage/models/file.py
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/forms.py:81 poresira/storage/models/file.py:100
+#: poresira/storage/templates/storage/file_detail.html:38
 msgid "MD5"
 msgstr "MD5"
 
-#: poresira/storage/models/backend.py
+#: poresira/storage/models/backend.py:14
 msgid "Local disk"
 msgstr "Disque local"
 
-#: poresira/storage/models/backend.py
+#: poresira/storage/models/backend.py:15
 msgid "Network share (mounted)"
 msgstr "Partage réseau (monté)"
 
-#: poresira/storage/models/backend.py
+#: poresira/storage/models/backend.py:16
 msgid "Offline medium (catalogued)"
 msgstr "Support hors ligne (catalogué)"
 
-#: poresira/storage/models/backend.py
+#: poresira/storage/models/backend.py:26
 msgid "root"
 msgstr "racine"
 
-#: poresira/storage/models/backend.py
+#: poresira/storage/models/backend.py:30
 msgid ""
 "Absolute directory of a disk or mounted share; the label of the medium when "
 "offline."
@@ -3909,302 +4025,304 @@ msgstr ""
 "Répertoire absolu d'un disque ou d'un partage monté ; étiquette du support "
 "s'il est hors ligne."
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:24
 msgid "POD5 (raw signal)"
 msgstr "POD5 (signal brut)"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:25
 msgid "FAST5 (raw signal)"
 msgstr "FAST5 (signal brut)"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:26
 msgid "FASTQ (reads)"
 msgstr "FASTQ (lectures)"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:27
 msgid "BAM (reads)"
 msgstr "BAM (lectures)"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:28
 msgid "Run report"
 msgstr "Rapport de passage"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:29
 msgid "Gel image"
 msgstr "Image de gel"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:34
 msgid "Hot"
 msgstr "Chaud"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:35
 msgid "Warm"
 msgstr "Tiède"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:36
 msgid "Cold"
 msgstr "Froid"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:40
 msgid "Not checked"
 msgstr "Non vérifié"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:41
 msgid "Intact"
 msgstr "Intact"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:42
 msgid "Changed"
 msgstr "Modifié"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:43
 msgid "Missing"
 msgstr "Absent"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:44
 msgid "Unreadable"
 msgstr "Illisible"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:90
 msgid "backend"
 msgstr "emplacement"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:93
 msgid "path"
 msgstr "chemin"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:95
 msgid "Relative to the root of the backend, with no leading slash."
 msgstr "Relatif à la racine de l'emplacement, sans barre oblique initiale."
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:98
 msgid "size (bytes)"
 msgstr "taille (octets)"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:101
 msgid "tier"
 msgstr "niveau"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:103
 msgid "integrity"
 msgstr "intégrité"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:105
 msgid "last checked"
 msgstr "dernière vérification"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:120
 msgid "PCR run"
 msgstr "passage PCR"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:136
 msgid "registered by"
 msgstr "enregistré par"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:223
 msgid "checked at"
 msgstr "vérifié le"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:230
 msgid "checked by"
 msgstr "vérifié par"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:233
 msgid "observed SHA-256"
 msgstr "SHA-256 observé"
 
-#: poresira/storage/models/file.py
+#: poresira/storage/models/file.py:235
 msgid "observed size (bytes)"
 msgstr "taille observée (octets)"
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:66
 msgid "Give the label of the medium."
 msgstr "Indiquez l’étiquette du support."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:69
 msgid "Give an absolute directory, such as /data/nanopore."
 msgstr "Indiquez un répertoire absolu, par exemple /data/nanopore."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:72
 msgid "This directory does not exist on this computer."
 msgstr "Ce répertoire n'existe pas sur cet ordinateur."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:105
 msgid "Give a path relative to the backend, without a leading slash or “..”."
 msgstr ""
 "Indiquez un chemin relatif à l'emplacement, sans barre oblique initiale ni "
 "« .. »."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:114
 msgid "Attach the file to one sequencing run, one PCR run or one sample."
 msgstr ""
 "Rattachez le fichier à un passage de séquençage, un passage PCR ou un "
 "échantillon."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:118
 msgid "A voided record cannot receive files."
 msgstr "Un enregistrement annulé ne peut pas recevoir de fichiers."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:120
 msgid "The record must belong to the project of the file."
 msgstr "L'enregistrement doit appartenir au projet du fichier."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:128
 #, python-format
 msgid "Give %(length)s hexadecimal characters."
 msgstr "Indiquez %(length)s caractères hexadécimaux."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:153
 msgid "A voided backend cannot be used."
 msgstr "Un emplacement annulé ne peut pas être utilisé."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:163
 msgid "No such file in this backend."
 msgstr "Aucun fichier de ce nom dans cet emplacement."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:165
 msgid "This file cannot be read."
 msgstr "Ce fichier ne peut pas être lu."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:170
 msgid "Give the size of the file."
 msgstr "Indiquez la taille du fichier."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:198
 msgid "A voided file cannot be checked."
 msgstr "Un fichier annulé ne peut pas être vérifié."
 
-#: poresira/storage/services.py poresira/storage/views.py
+#: poresira/storage/services.py:201 poresira/storage/views.py:209
 msgid "A file on an offline medium cannot be checked here."
 msgstr "Un fichier sur un support hors ligne ne peut pas être vérifié ici."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:233
 msgid "A voided file cannot be changed."
 msgstr "Un fichier annulé ne peut pas être modifié."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:235
 msgid "Unknown tier."
 msgstr "Niveau inconnu."
 
-#: poresira/storage/services.py
+#: poresira/storage/services.py:253
 msgid "Active files are registered in this backend."
 msgstr "Des fichiers actifs sont enregistrés dans cet emplacement."
 
-#: poresira/storage/templates/storage/_files.html poresira/storage/views.py
+#: poresira/storage/templates/storage/_files.html:6
+#: poresira/storage/views.py:155
 msgid "Register a file"
 msgstr "Enregistrer un fichier"
 
-#: poresira/storage/templates/storage/_files.html
+#: poresira/storage/templates/storage/_files.html:21
 msgid "No files registered."
 msgstr "Aucun fichier enregistré."
 
-#: poresira/storage/templates/storage/backend_list.html
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/storage/templates/storage/backend_list.html:3
+#: poresira/storage/templates/storage/backend_list.html:6
+#: poresira/storage/templates/storage/file_list.html:7
 msgid "Storage backends"
 msgstr "Emplacements de stockage"
 
-#: poresira/storage/templates/storage/backend_list.html
-#: poresira/storage/views.py
+#: poresira/storage/templates/storage/backend_list.html:7
+#: poresira/storage/views.py:261
 msgid "New storage backend"
 msgstr "Nouvel emplacement de stockage"
 
-#: poresira/storage/templates/storage/backend_list.html
+#: poresira/storage/templates/storage/backend_list.html:10
 msgid "Root"
 msgstr "Racine"
 
-#: poresira/storage/templates/storage/backend_list.html
+#: poresira/storage/templates/storage/backend_list.html:16
 msgid "No backends yet. Add one with the button above."
 msgstr ""
 "Aucun emplacement pour le moment. Ajoutez-en un avec le bouton ci-dessus."
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:15
 msgid "Check now"
 msgstr "Vérifier maintenant"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:16
 msgid "Change tier"
 msgstr "Changer de niveau"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:28
 msgid "The file on disk no longer matches what was recorded."
 msgstr "Le fichier sur le disque ne correspond plus à ce qui a été enregistré."
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:31
 msgid "Belongs to"
 msgstr "Appartient à"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:32
 msgid "Produced by"
 msgstr "Produit par"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:36
 msgid "bytes"
 msgstr "octets"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:40
 msgid "Last checked"
 msgstr "Dernière vérification"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:41
 msgid "Registered by"
 msgstr "Enregistré par"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:45
 msgid "Checks"
 msgstr "Vérifications"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:47
 msgid "Checked by"
 msgstr "Vérifié par"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:47
 msgid "Observed size (bytes)"
 msgstr "Taille observée (octets)"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:52
 msgid "Scheduled"
 msgstr "Planifiée"
 
-#: poresira/storage/templates/storage/file_detail.html
+#: poresira/storage/templates/storage/file_detail.html:56
 msgid "Not checked since it was registered."
 msgstr "Pas vérifié depuis son enregistrement."
 
-#: poresira/storage/templates/storage/file_list.html
+#: poresira/storage/templates/storage/file_list.html:39
 msgid "No files to show."
 msgstr "Aucun fichier à afficher."
 
-#: poresira/storage/views.py
+#: poresira/storage/views.py:157
 msgid "File registered."
 msgstr "Fichier enregistré."
 
-#: poresira/storage/views.py
+#: poresira/storage/views.py:198
 msgid "Check the file"
 msgstr "Vérifier le fichier"
 
-#: poresira/storage/views.py
+#: poresira/storage/views.py:199
 msgid "Check"
 msgstr "Vérifier"
 
-#: poresira/storage/views.py
+#: poresira/storage/views.py:200
 msgid "Check started: reload this page in a moment."
 msgstr "Vérification lancée : rechargez cette page dans un instant."
 
-#: poresira/storage/views.py
+#: poresira/storage/views.py:215
 msgid "Change the tier"
 msgstr "Changer le niveau"
 
-#: poresira/storage/views.py
+#: poresira/storage/views.py:216
 msgid "Tier changed."
 msgstr "Niveau modifié."
 
-#: poresira/storage/views.py
+#: poresira/storage/views.py:232
 msgid "Void file"
 msgstr "Annuler le fichier"
 
-#: poresira/storage/views.py
+#: poresira/storage/views.py:234
 msgid "File voided."
 msgstr "Fichier annulé."
 
-#: poresira/storage/views.py
+#: poresira/storage/views.py:263
 msgid "Storage backend added."
 msgstr "Emplacement de stockage ajouté."

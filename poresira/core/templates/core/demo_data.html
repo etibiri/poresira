@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}{% load i18n %}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+{% block title %}{% trans "Load demo data" %} · PoreSira{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Load demo data" %}</h1>
+<p>{% trans "Adds a sweetpotato project rebuilt from published studies, with its samples, PCR runs, sequencing and public accessions, and four demo accounts that cannot sign in." %}</p>
+<p class="text-danger">{% trans "Records cannot be deleted: once loaded, the demo data stays in this database. Do not use this on a production database." %}</p>
+<form method="post">{% csrf_token %}
+  <button class="btn btn-primary">{% trans "Load demo data" %}</button>
+  <a class="btn btn-link" href="{% url 'project-list' %}">{% trans "Cancel" %}</a>
+</form>
+{% endblock %}

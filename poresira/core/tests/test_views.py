@@ -200,3 +200,23 @@ def test_the_logo_is_on_the_login_page_and_the_brand_and_icons_in_every_page(cli
     assert 'class="brand-pore"' in page and 'class="brand-sira"' in page
     for name in ("poresira-logo.jpg", "favicon.png", "favicon.ico", "apple-touch-icon.png"):
         assert finders.find(f"img/{name}"), name
+
+
+def test_only_administrators_see_the_demo_data_page(client, member):
+    assert client.get(reverse("demo-data")).status_code == 403
+    assert client.post(reverse("demo-data")).status_code == 403
+    assert "demo-data" not in client.get(reverse("project-list")).content.decode()
+
+
+def test_administrator_loads_demo_data_from_the_interface(client):
+    from poresira.core.models import Project
+
+    admin = UserFactory(role=GlobalRole.ADMINISTRATOR)
+    client.force_login(admin)
+
+    assert client.get(reverse("demo-data")).status_code == 200
+    response = client.post(reverse("demo-data"))
+
+    assert response.status_code == 302
+    assert Project.objects.filter(code="DEMO-SPBF").exists()
+    assert client.post(reverse("demo-data"), follow=True).status_code == 200
